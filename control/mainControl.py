@@ -10,4 +10,5 @@ class StudiousFunc:
         self.testBackend()
     
     def testBackend(self):
+        wgs.label.setText("UR GAY")
         print("Hello World")
