@@ -7,3 +7,7 @@ class StudiousFunc:
     def __init__(self, widgets: ViewControl):
         global wgs
         wgs = widgets
+        self.testBackend()
+    
+    def testBackend(self):
+        print("Hello World")
