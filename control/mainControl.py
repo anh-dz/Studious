@@ -7,4 +7,3 @@ class StudiousFunc:
     def __init__(self, widgets: ViewControl):
         global wgs
         wgs = widgets
-        self.widgets = widgets
