@@ -4,11 +4,11 @@ from PyQt6.QtGui import *
 from main import *
 
 class StudiousFunc:
-    def __init__(self, widgets: ViewControl):
+    def __init__(self, widgets):
+        super().__init__()
         global wgs
         wgs = widgets
-        self.testBackend()
+        wgs.btn_lB_pom.clicked.connect(self.testBackend)
     
     def testBackend(self):
-        wgs.label.setText("UR GAY")
         print("Hello World")
