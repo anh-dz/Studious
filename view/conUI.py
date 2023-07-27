@@ -12,42 +12,34 @@ class ViewControl(QMainWindow):
         # Connect the button click signal to the function
         self.ui.btn_lB_menu.clicked.connect(self.Side_Menu_Def_0)
         self.Side_Menu_Def_0()
-    
-    def paintEvent(self, event):
-        painter = QPainter(self)
-        # Load the background image
-        image_path = 'assert/background.jpeg'
-        pixmap = QPixmap(image_path)
-        painter.drawPixmap(0, 0, self.width(), self.height(), pixmap)
-
 
     def Side_Menu_Def_0(self):
-        if self.ui.wg_leftBar.width() <= 50:
+        if self.ui.wg_leftBar.width() <= 70:
             self.animation1 = QPropertyAnimation(self.ui.wg_leftBar, b"maximumWidth")
             self.animation1.setDuration(500)
-            self.animation1.setStartValue(40)
-            self.animation1.setEndValue(200)
+            self.animation1.setStartValue(44)
+            self.animation1.setEndValue(150)
             self.animation1.setEasingCurve(QEasingCurve.Type.InOutSine)
             self.animation1.start()
 
             self.animation2 = QPropertyAnimation(self.ui.wg_leftBar, b"minimumWidth")
             self.animation2.setDuration(500)
-            self.animation2.setStartValue(40)
-            self.animation2.setEndValue(200)
+            self.animation2.setStartValue(44)
+            self.animation2.setEndValue(150)
             self.animation2.setEasingCurve(QEasingCurve.Type.InOutSine)
             self.animation2.start()
 
         else:
             self.animation1 = QPropertyAnimation(self.ui.wg_leftBar, b"maximumWidth")
             self.animation1.setDuration(500)
-            self.animation1.setStartValue(200)
-            self.animation1.setEndValue(40)
+            self.animation1.setStartValue(150)
+            self.animation1.setEndValue(44)
             self.animation1.setEasingCurve(QEasingCurve.Type.InOutSine)
             self.animation1.start()
 
             self.animation2 = QPropertyAnimation(self.ui.wg_leftBar, b"minimumWidth")
             self.animation2.setDuration(500)
-            self.animation2.setStartValue(200)
-            self.animation2.setEndValue(40)
+            self.animation2.setStartValue(150)
+            self.animation2.setEndValue(44)
             self.animation2.setEasingCurve(QEasingCurve.Type.InOutSine)
             self.animation2.start()

@@ -6,21 +6,57 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>511</height>
+    <width>810</width>
+    <height>560</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>810</width>
+    <height>560</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>810</width>
+    <height>560</height>
+   </size>
+  </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Studious</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>810</width>
+     <height>560</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>810</width>
+     <height>560</height>
+    </size>
+   </property>
    <widget class="QWidget" name="wg_leftBar" native="true">
     <property name="geometry">
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>211</width>
-      <height>511</height>
+      <width>150</width>
+      <height>561</height>
      </rect>
     </property>
     <property name="minimumSize">
@@ -36,380 +72,539 @@
      </size>
     </property>
     <property name="styleSheet">
-     <string notr="true">QWidget {
-	background-color: rgba(255, 255, 255, 10);
-	color: rgb(255, 255, 255);
-	border:none;
+     <string notr="true">* {
+	background-color: rgba(52, 22, 85, 70%);
+	color: rgb(249, 245, 246);
 }
 QPushButton{
-	color: rgb(57, 62, 70);
+	background-color: transparent;
+	background: none;
 	font: 18pt &quot;Arial&quot;;
 	border: 0px;
-	text-align: left
+	text-align: left;
+	padding: 2px 7px;
 }
 QPushButton:hover{
-	background-color: rgb(191, 191, 191)
+	background-color: rgba(52, 22, 85, 100%);
 }</string>
     </property>
-    <layout class="QVBoxLayout" name="verticalLayout">
-     <item>
-      <layout class="QVBoxLayout" name="layout_leftBar">
-       <item>
-        <widget class="QPushButton" name="btn_lB_menu">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
-         <property name="text">
-          <string>  MENU</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normaloff>assert/pomodoro.png</normaloff>assert/pomodoro.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>32</width>
-           <height>32</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="btn_lB_pom">
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
-         <property name="text">
-          <string>Pomodoro</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normaloff>assert/pomodoro.png</normaloff>assert/pomodoro.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>32</width>
-           <height>32</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="btn_lB_task">
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
-         <property name="text">
-          <string>Nhiệm Vụ</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normaloff>assert/pomodoro.png</normaloff>assert/pomodoro.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>32</width>
-           <height>32</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="btn_lB_habit">
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
-         <property name="text">
-          <string>Thói Quen</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normaloff>assert/pomodoro.png</normaloff>assert/pomodoro.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>32</width>
-           <height>32</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="btn_lB_botChat">
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
-         <property name="text">
-          <string>BotChat</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normaloff>assert/pomodoro.png</normaloff>assert/pomodoro.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>32</width>
-           <height>32</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="btn_lB_flashCard">
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
-         <property name="text">
-          <string>FlashCard</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normaloff>assert/pomodoro.png</normaloff>assert/pomodoro.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>32</width>
-           <height>32</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="btn_lB_setting">
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
-         <property name="text">
-          <string>Cài Đặt</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normaloff>assert/pomodoro.png</normaloff>assert/pomodoro.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>32</width>
-           <height>32</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="btn_lB_about">
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
-         <property name="text">
-          <string>Giới Thiệu</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normaloff>assert/pomodoro.png</normaloff>assert/pomodoro.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>32</width>
-           <height>32</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-    </layout>
+    <widget class="QPushButton" name="btn_lB_menu">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>30</y>
+       <width>161</width>
+       <height>40</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>18</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>  MENU</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>assert/menu.png</normaloff>assert/menu.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>32</width>
+       <height>32</height>
+      </size>
+     </property>
+     <property name="checkable">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QWidget" name="layoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>1</x>
+       <y>85</y>
+       <width>151</width>
+       <height>366</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="layout_leftBar">
+      <item>
+       <widget class="QPushButton" name="btn_lB_pom">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>  Pomodoro</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>assert/pomodoro.png</normaloff>assert/pomodoro.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>32</width>
+          <height>32</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btn_lB_chart">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>  Thống kê</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>assert/chart.png</normaloff>assert/chart.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>32</width>
+          <height>32</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btn_lB_habit">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>  Thói Quen</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>assert/habit.png</normaloff>assert/habit.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>32</width>
+          <height>32</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btn_lB_botChat">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>  BotChat</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>assert/botchat.png</normaloff>assert/botchat.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>32</width>
+          <height>32</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btn_lB_flashCard">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>  FlashCard</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>assert/card.png</normaloff>assert/card.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>32</width>
+          <height>32</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btn_lB_setting">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>  Cài Đặt</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>assert/settings.png</normaloff>assert/settings.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>32</width>
+          <height>32</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btn_lB_about">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>  Giới Thiệu</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>assert/about.png</normaloff>assert/about.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>32</width>
+          <height>32</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
    </widget>
    <widget class="QStackedWidget" name="sW_main">
     <property name="geometry">
      <rect>
-      <x>250</x>
-      <y>20</y>
-      <width>531</width>
-      <height>471</height>
+      <x>40</x>
+      <y>0</y>
+      <width>771</width>
+      <height>561</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">*{
+	background-color: transparent;
+	background: none;
+}
+QToolButton{
+	border: 0px;
+}</string>
     </property>
     <widget class="QWidget" name="page_m_pom">
      <widget class="QLabel" name="lb_m_time">
       <property name="geometry">
        <rect>
-        <x>240</x>
-        <y>150</y>
-        <width>281</width>
-        <height>91</height>
+        <x>330</x>
+        <y>170</y>
+        <width>211</width>
+        <height>111</height>
        </rect>
       </property>
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
       <property name="styleSheet">
-       <string notr="true">font: 18pt &quot;Arial&quot;;</string>
+       <string notr="true">font: 50pt &quot;Arial&quot;;
+color: rgb(249, 245, 246);
+border: 0px;
+qproperty-alignment: 'AlignCenter';
+qproperty-margin: auto;</string>
       </property>
       <property name="text">
        <string>25:00</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="btn_m_startstop">
+     <widget class="QToolButton" name="btn_m_audio">
       <property name="geometry">
        <rect>
-        <x>220</x>
-        <y>260</y>
-        <width>140</width>
-        <height>42</height>
+        <x>680</x>
+        <y>50</y>
+        <width>51</width>
+        <height>51</height>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">QToolButton {
-	font: 18pt &quot;Arial&quot;;
-}
-QToolButton:hover {
-	color: red;
-}</string>
+       <string notr="true"/>
       </property>
       <property name="text">
-       <string>Bắt đầu</string>
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>assert/audio-on.png</normaloff>assert/audio-on.png</iconset>
       </property>
       <property name="iconSize">
        <size>
-        <width>32</width>
-        <height>32</height>
-       </size>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="btn_m_audio">
-      <property name="geometry">
-       <rect>
-        <x>390</x>
-        <y>30</y>
-        <width>140</width>
-        <height>42</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QToolButton {
-	font: 18pt &quot;Arial&quot;;
-}
-QToolButton:hover {
-	color: red;
-}</string>
-      </property>
-      <property name="text">
-       <string>Loa</string>
-      </property>
-      <property name="iconSize">
-       <size>
-        <width>32</width>
-        <height>32</height>
-       </size>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="btn_m_pin">
-      <property name="geometry">
-       <rect>
-        <x>60</x>
-        <y>40</y>
-        <width>140</width>
-        <height>42</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QToolButton {
-	font: 18pt &quot;Arial&quot;;
-}
-QToolButton:hover {
-	color: red;
-}</string>
-      </property>
-      <property name="text">
-       <string>Pin</string>
-      </property>
-      <property name="iconSize">
-       <size>
-        <width>32</width>
-        <height>32</height>
+        <width>50</width>
+        <height>50</height>
        </size>
       </property>
      </widget>
      <widget class="QLabel" name="lb_m_quote">
       <property name="geometry">
        <rect>
-        <x>120</x>
-        <y>360</y>
+        <x>140</x>
+        <y>450</y>
         <width>631</width>
         <height>91</height>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">font: 18pt &quot;Arial&quot;;</string>
+       <string notr="true">font: 18pt &quot;Arial&quot;;
+color: rgb(249, 245, 246);
+</string>
       </property>
       <property name="text">
        <string>CUỘC ĐỜI THẬT ĐẸP TUYỆT VỜI</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="btn_m_audio_2">
+     <widget class="QToolButton" name="btn_m_pin">
       <property name="geometry">
        <rect>
-        <x>629</x>
-        <y>400</y>
-        <width>91</width>
-        <height>42</height>
+        <x>140</x>
+        <y>50</y>
+        <width>51</width>
+        <height>51</height>
        </rect>
       </property>
-      <property name="styleSheet">
-       <string notr="true">QToolButton {
-	font: 18pt &quot;Arial&quot;;
-}
-QToolButton:hover {
-	color: red;
-}</string>
-      </property>
       <property name="text">
-       <string>FullScreen</string>
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>assert/pin.png</normaloff>assert/pin.png</iconset>
       </property>
       <property name="iconSize">
        <size>
-        <width>32</width>
-        <height>32</height>
+        <width>50</width>
+        <height>50</height>
        </size>
       </property>
      </widget>
-     <widget class="QPushButton" name="btn_m_next">
+     <widget class="QToolButton" name="btn_m_fs">
       <property name="geometry">
        <rect>
-        <x>390</x>
-        <y>260</y>
-        <width>140</width>
-        <height>42</height>
+        <x>700</x>
+        <y>490</y>
+        <width>51</width>
+        <height>51</height>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">QToolButton {
-	font: 18pt &quot;Arial&quot;;
-}
-QToolButton:hover {
-	color: red;
-}</string>
+       <string notr="true"/>
       </property>
       <property name="text">
-       <string>Phiên Tiếp</string>
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>assert/fs.png</normaloff>assert/fs.png</iconset>
       </property>
       <property name="iconSize">
        <size>
-        <width>32</width>
-        <height>32</height>
+        <width>50</width>
+        <height>50</height>
        </size>
       </property>
+     </widget>
+     <widget class="QWidget" name="horizontalLayoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>360</x>
+        <y>310</y>
+        <width>160</width>
+        <height>80</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QToolButton" name="btn_m_startstop">
+         <property name="maximumSize">
+          <size>
+           <width>51</width>
+           <height>51</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>assert/start.png</normaloff>assert/start.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="btn_m_next">
+         <property name="maximumSize">
+          <size>
+           <width>51</width>
+           <height>51</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>assert/next.png</normaloff>assert/next.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </widget>
     <widget class="QWidget" name="page_m_task"/>
    </widget>
+   <widget class="QLabel" name="Background">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>810</width>
+      <height>560</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>810</width>
+      <height>560</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>810</width>
+      <height>560</height>
+     </size>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
+    <property name="contextMenuPolicy">
+     <enum>Qt::NoContextMenu</enum>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-image: url(assert/Background.jpg);</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::NoFrame</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <property name="lineWidth">
+     <number>0</number>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <zorder>Background</zorder>
+   <zorder>sW_main</zorder>
+   <zorder>wg_leftBar</zorder>
   </widget>
  </widget>
  <resources>
