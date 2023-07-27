@@ -361,8 +361,8 @@ QToolButton{
      <widget class="QLabel" name="lb_m_time">
       <property name="geometry">
        <rect>
-        <x>330</x>
-        <y>170</y>
+        <x>280</x>
+        <y>190</y>
         <width>211</width>
         <height>111</height>
        </rect>
@@ -384,8 +384,8 @@ qproperty-margin: auto;</string>
      <widget class="QToolButton" name="btn_m_audio">
       <property name="geometry">
        <rect>
-        <x>680</x>
-        <y>50</y>
+        <x>690</x>
+        <y>40</y>
         <width>51</width>
         <height>51</height>
        </rect>
@@ -410,9 +410,9 @@ qproperty-margin: auto;</string>
      <widget class="QLabel" name="lb_m_quote">
       <property name="geometry">
        <rect>
-        <x>140</x>
+        <x>30</x>
         <y>450</y>
-        <width>631</width>
+        <width>661</width>
         <height>91</height>
        </rect>
       </property>
@@ -428,8 +428,8 @@ color: rgb(249, 245, 246);
      <widget class="QToolButton" name="btn_m_pin">
       <property name="geometry">
        <rect>
-        <x>140</x>
-        <y>50</y>
+        <x>30</x>
+        <y>40</y>
         <width>51</width>
         <height>51</height>
        </rect>
@@ -477,10 +477,10 @@ color: rgb(249, 245, 246);
      <widget class="QWidget" name="horizontalLayoutWidget">
       <property name="geometry">
        <rect>
-        <x>360</x>
+        <x>310</x>
         <y>310</y>
         <width>160</width>
-        <height>80</height>
+        <height>71</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout">
@@ -537,6 +537,26 @@ color: rgb(249, 245, 246);
         </widget>
        </item>
       </layout>
+     </widget>
+     <widget class="QComboBox" name="cB_m_task">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>140</y>
+        <width>161</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string>Học</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Làm việc</string>
+       </property>
+      </item>
      </widget>
     </widget>
     <widget class="QWidget" name="page_m_task"/>
