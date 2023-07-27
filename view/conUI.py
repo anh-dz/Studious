@@ -12,6 +12,14 @@ class ViewControl(QMainWindow):
         # Connect the button click signal to the function
         self.ui.btn_lB_menu.clicked.connect(self.Side_Menu_Def_0)
         self.Side_Menu_Def_0()
+    
+    def paintEvent(self, event):
+        painter = QPainter(self)
+        # Load the background image
+        image_path = 'assert/background.jpeg'
+        pixmap = QPixmap(image_path)
+        painter.drawPixmap(0, 0, self.width(), self.height(), pixmap)
+
 
     def Side_Menu_Def_0(self):
         if self.ui.wg_leftBar.width() <= 50:
