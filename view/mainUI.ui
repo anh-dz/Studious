@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>514</height>
+    <height>511</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,29 +17,45 @@
    <widget class="QWidget" name="wg_leftBar" native="true">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>200</width>
-      <height>491</height>
+      <x>0</x>
+      <y>0</y>
+      <width>211</width>
+      <height>511</height>
      </rect>
     </property>
     <property name="minimumSize">
      <size>
-      <width>200</width>
+      <width>0</width>
       <height>0</height>
      </size>
     </property>
     <property name="maximumSize">
      <size>
-      <width>200</width>
+      <width>16777215</width>
       <height>16777215</height>
      </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QWidget {
+	background-color: rgba(255, 255, 255, 10);
+	color: rgb(255, 255, 255);
+	border:none;
+}
+QPushButton{
+	color: rgb(57, 62, 70);
+	font: 18pt &quot;Arial&quot;;
+	border: 0px;
+	text-align: left
+}
+QPushButton:hover{
+	background-color: rgb(191, 191, 191)
+}</string>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
       <layout class="QVBoxLayout" name="layout_leftBar">
        <item>
-        <widget class="QToolButton" name="btn_lB_menu">
+        <widget class="QPushButton" name="btn_lB_menu">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -47,12 +63,7 @@
           </size>
          </property>
          <property name="styleSheet">
-          <string notr="true">QToolButton {
-	font: 18pt &quot;Arial&quot;;
-}
-QToolButton:hover {
-	color: red;
-}</string>
+          <string notr="true"/>
          </property>
          <property name="text">
           <string>  MENU</string>
@@ -67,20 +78,12 @@ QToolButton:hover {
            <height>32</height>
           </size>
          </property>
-         <property name="toolButtonStyle">
-          <enum>Qt::ToolButtonTextBesideIcon</enum>
-         </property>
         </widget>
        </item>
        <item>
-        <widget class="QToolButton" name="btn_lB_pom">
+        <widget class="QPushButton" name="btn_lB_pom">
          <property name="styleSheet">
-          <string notr="true">QToolButton {
-	font: 18pt &quot;Arial&quot;;
-}
-QToolButton:hover {
-	color: red;
-}</string>
+          <string notr="true"/>
          </property>
          <property name="text">
           <string>Pomodoro</string>
@@ -95,20 +98,12 @@ QToolButton:hover {
            <height>32</height>
           </size>
          </property>
-         <property name="toolButtonStyle">
-          <enum>Qt::ToolButtonTextBesideIcon</enum>
-         </property>
         </widget>
        </item>
        <item>
-        <widget class="QToolButton" name="btn_lB_task">
+        <widget class="QPushButton" name="btn_lB_task">
          <property name="styleSheet">
-          <string notr="true">QToolButton {
-	font: 18pt &quot;Arial&quot;;
-}
-QToolButton:hover {
-	color: red;
-}</string>
+          <string notr="true"/>
          </property>
          <property name="text">
           <string>Nhiệm Vụ</string>
@@ -123,20 +118,12 @@ QToolButton:hover {
            <height>32</height>
           </size>
          </property>
-         <property name="toolButtonStyle">
-          <enum>Qt::ToolButtonTextBesideIcon</enum>
-         </property>
         </widget>
        </item>
        <item>
-        <widget class="QToolButton" name="btn_lB_habit">
+        <widget class="QPushButton" name="btn_lB_habit">
          <property name="styleSheet">
-          <string notr="true">QToolButton {
-	font: 18pt &quot;Arial&quot;;
-}
-QToolButton:hover {
-	color: red;
-}</string>
+          <string notr="true"/>
          </property>
          <property name="text">
           <string>Thói Quen</string>
@@ -151,20 +138,12 @@ QToolButton:hover {
            <height>32</height>
           </size>
          </property>
-         <property name="toolButtonStyle">
-          <enum>Qt::ToolButtonTextBesideIcon</enum>
-         </property>
         </widget>
        </item>
        <item>
-        <widget class="QToolButton" name="btn_lB_botChat">
+        <widget class="QPushButton" name="btn_lB_botChat">
          <property name="styleSheet">
-          <string notr="true">QToolButton {
-	font: 18pt &quot;Arial&quot;;
-}
-QPushButton:hover {
-	color: red;
-}</string>
+          <string notr="true"/>
          </property>
          <property name="text">
           <string>BotChat</string>
@@ -179,20 +158,12 @@ QPushButton:hover {
            <height>32</height>
           </size>
          </property>
-         <property name="toolButtonStyle">
-          <enum>Qt::ToolButtonTextBesideIcon</enum>
-         </property>
         </widget>
        </item>
        <item>
-        <widget class="QToolButton" name="btn_lB_flashCard">
+        <widget class="QPushButton" name="btn_lB_flashCard">
          <property name="styleSheet">
-          <string notr="true">QToolButton {
-	font: 18pt &quot;Arial&quot;;
-}
-QPushButton:hover {
-	color: red;
-}</string>
+          <string notr="true"/>
          </property>
          <property name="text">
           <string>FlashCard</string>
@@ -207,20 +178,18 @@ QPushButton:hover {
            <height>32</height>
           </size>
          </property>
-         <property name="toolButtonStyle">
-          <enum>Qt::ToolButtonTextBesideIcon</enum>
-         </property>
         </widget>
        </item>
        <item>
-        <widget class="QToolButton" name="btn_lB_setting">
+        <widget class="QPushButton" name="btn_lB_setting">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>16777215</height>
+          </size>
+         </property>
          <property name="styleSheet">
-          <string notr="true">QToolButton {
-	font: 18pt &quot;Arial&quot;;
-}
-QPushButton:hover {
-	color: red;
-}</string>
+          <string notr="true"/>
          </property>
          <property name="text">
           <string>Cài Đặt</string>
@@ -235,20 +204,12 @@ QPushButton:hover {
            <height>32</height>
           </size>
          </property>
-         <property name="toolButtonStyle">
-          <enum>Qt::ToolButtonTextBesideIcon</enum>
-         </property>
         </widget>
        </item>
        <item>
-        <widget class="QToolButton" name="btn_lB_about">
+        <widget class="QPushButton" name="btn_lB_about">
          <property name="styleSheet">
-          <string notr="true">QToolButton {
-	font: 18pt &quot;Arial&quot;;
-}
-QPushButton:hover {
-	color: red;
-}</string>
+          <string notr="true"/>
          </property>
          <property name="text">
           <string>Giới Thiệu</string>
@@ -263,9 +224,6 @@ QPushButton:hover {
            <height>32</height>
           </size>
          </property>
-         <property name="toolButtonStyle">
-          <enum>Qt::ToolButtonTextBesideIcon</enum>
-         </property>
         </widget>
        </item>
       </layout>
@@ -275,9 +233,9 @@ QPushButton:hover {
    <widget class="QStackedWidget" name="sW_main">
     <property name="geometry">
      <rect>
-      <x>60</x>
+      <x>250</x>
       <y>20</y>
-      <width>721</width>
+      <width>531</width>
       <height>471</height>
      </rect>
     </property>
@@ -454,6 +412,8 @@ QToolButton:hover {
    </widget>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="../../EyeCare-Windows/Rebuild/qrc/icon.qrc"/>
+ </resources>
  <connections/>
 </ui>
