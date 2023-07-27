@@ -36,4 +36,4 @@ class Ui_MainWindow(object):
     def retranslateUi(self, Studious):
         _translate = QtCore.QCoreApplication.translate
         Studious.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label.setText(_translate("MainWindow", "UR GAY"))
+        # self.label.setText(_translate("MainWindow", "00:00"))
