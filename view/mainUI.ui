@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
+ <class>Studious</class>
  <widget class="QMainWindow" name="Studious">
   <property name="geometry">
    <rect>
@@ -14,36 +14,445 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="label">
+   <widget class="QWidget" name="wg_leftBar" native="true">
     <property name="geometry">
      <rect>
-      <x>260</x>
-      <y>170</y>
-      <width>341</width>
-      <height>111</height>
+      <x>10</x>
+      <y>10</y>
+      <width>200</width>
+      <height>491</height>
      </rect>
     </property>
-    <property name="font">
-     <font>
-      <pointsize>24</pointsize>
-     </font>
+    <property name="minimumSize">
+     <size>
+      <width>200</width>
+      <height>0</height>
+     </size>
     </property>
-    <property name="text">
-     <string>UR GAY</string>
+    <property name="maximumSize">
+     <size>
+      <width>200</width>
+      <height>16777215</height>
+     </size>
     </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <layout class="QVBoxLayout" name="layout_leftBar">
+       <item>
+        <widget class="QToolButton" name="btn_lB_menu">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QToolButton {
+	font: 18pt &quot;Arial&quot;;
+}
+QToolButton:hover {
+	color: red;
+}</string>
+         </property>
+         <property name="text">
+          <string>  MENU</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>assert/pomodoro.png</normaloff>assert/pomodoro.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="toolButtonStyle">
+          <enum>Qt::ToolButtonTextBesideIcon</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="btn_lB_pom">
+         <property name="styleSheet">
+          <string notr="true">QToolButton {
+	font: 18pt &quot;Arial&quot;;
+}
+QToolButton:hover {
+	color: red;
+}</string>
+         </property>
+         <property name="text">
+          <string>Pomodoro</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>assert/pomodoro.png</normaloff>assert/pomodoro.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="toolButtonStyle">
+          <enum>Qt::ToolButtonTextBesideIcon</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="btn_lB_task">
+         <property name="styleSheet">
+          <string notr="true">QToolButton {
+	font: 18pt &quot;Arial&quot;;
+}
+QToolButton:hover {
+	color: red;
+}</string>
+         </property>
+         <property name="text">
+          <string>Nhiệm Vụ</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>assert/pomodoro.png</normaloff>assert/pomodoro.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="toolButtonStyle">
+          <enum>Qt::ToolButtonTextBesideIcon</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="btn_lB_habit">
+         <property name="styleSheet">
+          <string notr="true">QToolButton {
+	font: 18pt &quot;Arial&quot;;
+}
+QToolButton:hover {
+	color: red;
+}</string>
+         </property>
+         <property name="text">
+          <string>Thói Quen</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>assert/pomodoro.png</normaloff>assert/pomodoro.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="toolButtonStyle">
+          <enum>Qt::ToolButtonTextBesideIcon</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="btn_lB_botChat">
+         <property name="styleSheet">
+          <string notr="true">QToolButton {
+	font: 18pt &quot;Arial&quot;;
+}
+QPushButton:hover {
+	color: red;
+}</string>
+         </property>
+         <property name="text">
+          <string>BotChat</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>assert/pomodoro.png</normaloff>assert/pomodoro.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="toolButtonStyle">
+          <enum>Qt::ToolButtonTextBesideIcon</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="btn_lB_flashCard">
+         <property name="styleSheet">
+          <string notr="true">QToolButton {
+	font: 18pt &quot;Arial&quot;;
+}
+QPushButton:hover {
+	color: red;
+}</string>
+         </property>
+         <property name="text">
+          <string>FlashCard</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>assert/pomodoro.png</normaloff>assert/pomodoro.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="toolButtonStyle">
+          <enum>Qt::ToolButtonTextBesideIcon</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="btn_lB_setting">
+         <property name="styleSheet">
+          <string notr="true">QToolButton {
+	font: 18pt &quot;Arial&quot;;
+}
+QPushButton:hover {
+	color: red;
+}</string>
+         </property>
+         <property name="text">
+          <string>Cài Đặt</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>assert/pomodoro.png</normaloff>assert/pomodoro.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="toolButtonStyle">
+          <enum>Qt::ToolButtonTextBesideIcon</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="btn_lB_about">
+         <property name="styleSheet">
+          <string notr="true">QToolButton {
+	font: 18pt &quot;Arial&quot;;
+}
+QPushButton:hover {
+	color: red;
+}</string>
+         </property>
+         <property name="text">
+          <string>Giới Thiệu</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>assert/pomodoro.png</normaloff>assert/pomodoro.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="toolButtonStyle">
+          <enum>Qt::ToolButtonTextBesideIcon</enum>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QStackedWidget" name="sW_main">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>20</y>
+      <width>721</width>
+      <height>471</height>
+     </rect>
+    </property>
+    <widget class="QWidget" name="page_m_pom">
+     <widget class="QLabel" name="lb_m_time">
+      <property name="geometry">
+       <rect>
+        <x>240</x>
+        <y>150</y>
+        <width>281</width>
+        <height>91</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 18pt &quot;Arial&quot;;</string>
+      </property>
+      <property name="text">
+       <string>25:00</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btn_m_startstop">
+      <property name="geometry">
+       <rect>
+        <x>220</x>
+        <y>260</y>
+        <width>140</width>
+        <height>42</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QToolButton {
+	font: 18pt &quot;Arial&quot;;
+}
+QToolButton:hover {
+	color: red;
+}</string>
+      </property>
+      <property name="text">
+       <string>Bắt đầu</string>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>32</width>
+        <height>32</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btn_m_audio">
+      <property name="geometry">
+       <rect>
+        <x>390</x>
+        <y>30</y>
+        <width>140</width>
+        <height>42</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QToolButton {
+	font: 18pt &quot;Arial&quot;;
+}
+QToolButton:hover {
+	color: red;
+}</string>
+      </property>
+      <property name="text">
+       <string>Loa</string>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>32</width>
+        <height>32</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btn_m_pin">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>40</y>
+        <width>140</width>
+        <height>42</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QToolButton {
+	font: 18pt &quot;Arial&quot;;
+}
+QToolButton:hover {
+	color: red;
+}</string>
+      </property>
+      <property name="text">
+       <string>Pin</string>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>32</width>
+        <height>32</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lb_m_quote">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>360</y>
+        <width>631</width>
+        <height>91</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 18pt &quot;Arial&quot;;</string>
+      </property>
+      <property name="text">
+       <string>CUỘC ĐỜI THẬT ĐẸP TUYỆT VỜI</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btn_m_audio_2">
+      <property name="geometry">
+       <rect>
+        <x>629</x>
+        <y>400</y>
+        <width>91</width>
+        <height>42</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QToolButton {
+	font: 18pt &quot;Arial&quot;;
+}
+QToolButton:hover {
+	color: red;
+}</string>
+      </property>
+      <property name="text">
+       <string>FullScreen</string>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>32</width>
+        <height>32</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btn_m_next">
+      <property name="geometry">
+       <rect>
+        <x>390</x>
+        <y>260</y>
+        <width>140</width>
+        <height>42</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QToolButton {
+	font: 18pt &quot;Arial&quot;;
+}
+QToolButton:hover {
+	color: red;
+}</string>
+      </property>
+      <property name="text">
+       <string>Phiên Tiếp</string>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>32</width>
+        <height>32</height>
+       </size>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="page_m_task"/>
    </widget>
   </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>800</width>
-     <height>24</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
  <connections/>

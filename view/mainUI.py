@@ -9,31 +9,209 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
 
 
-class Ui_MainWindow(object):
+class Ui_Studious(object):
     def setupUi(self, Studious):
         Studious.setObjectName("Studious")
-        Studious.setGeometry(QtCore.QRect(0, 0, 800, 514))
+        Studious.resize(800, 514)
         self.centralwidget = QtWidgets.QWidget(parent=Studious)
         self.centralwidget.setObjectName("centralwidget")
-        self.label = QtWidgets.QLabel(parent=self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(260, 170, 341, 111))
-        font = QtGui.QFont()
-        font.setPointSize(24)
-        self.label.setFont(font)
-        self.label.setObjectName("label")
+        self.wg_leftBar = QtWidgets.QWidget(parent=self.centralwidget)
+        self.wg_leftBar.setGeometry(QtCore.QRect(10, 10, 200, 491))
+        self.wg_leftBar.setMinimumSize(QtCore.QSize(200, 0))
+        self.wg_leftBar.setMaximumSize(QtCore.QSize(200, 16777215))
+        self.wg_leftBar.setObjectName("wg_leftBar")
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.wg_leftBar)
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.layout_leftBar = QtWidgets.QVBoxLayout()
+        self.layout_leftBar.setObjectName("layout_leftBar")
+        self.btn_lB_menu = QtWidgets.QToolButton(parent=self.wg_leftBar)
+        self.btn_lB_menu.setMinimumSize(QtCore.QSize(0, 30))
+        self.btn_lB_menu.setStyleSheet("QToolButton {\n"
+"    font: 18pt \"Arial\";\n"
+"}\n"
+"QToolButton:hover {\n"
+"    color: red;\n"
+"}")
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("assert/pomodoro.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btn_lB_menu.setIcon(icon)
+        self.btn_lB_menu.setIconSize(QtCore.QSize(32, 32))
+        self.btn_lB_menu.setToolButtonStyle(QtCore.Qt.ToolButtonStyle.ToolButtonTextBesideIcon)
+        self.btn_lB_menu.setObjectName("btn_lB_menu")
+        self.layout_leftBar.addWidget(self.btn_lB_menu)
+        self.btn_lB_pom = QtWidgets.QToolButton(parent=self.wg_leftBar)
+        self.btn_lB_pom.setStyleSheet("QToolButton {\n"
+"    font: 18pt \"Arial\";\n"
+"}\n"
+"QToolButton:hover {\n"
+"    color: red;\n"
+"}")
+        self.btn_lB_pom.setIcon(icon)
+        self.btn_lB_pom.setIconSize(QtCore.QSize(32, 32))
+        self.btn_lB_pom.setToolButtonStyle(QtCore.Qt.ToolButtonStyle.ToolButtonTextBesideIcon)
+        self.btn_lB_pom.setObjectName("btn_lB_pom")
+        self.layout_leftBar.addWidget(self.btn_lB_pom)
+        self.btn_lB_task = QtWidgets.QToolButton(parent=self.wg_leftBar)
+        self.btn_lB_task.setStyleSheet("QToolButton {\n"
+"    font: 18pt \"Arial\";\n"
+"}\n"
+"QToolButton:hover {\n"
+"    color: red;\n"
+"}")
+        self.btn_lB_task.setIcon(icon)
+        self.btn_lB_task.setIconSize(QtCore.QSize(32, 32))
+        self.btn_lB_task.setToolButtonStyle(QtCore.Qt.ToolButtonStyle.ToolButtonTextBesideIcon)
+        self.btn_lB_task.setObjectName("btn_lB_task")
+        self.layout_leftBar.addWidget(self.btn_lB_task)
+        self.btn_lB_habit = QtWidgets.QToolButton(parent=self.wg_leftBar)
+        self.btn_lB_habit.setStyleSheet("QToolButton {\n"
+"    font: 18pt \"Arial\";\n"
+"}\n"
+"QToolButton:hover {\n"
+"    color: red;\n"
+"}")
+        self.btn_lB_habit.setIcon(icon)
+        self.btn_lB_habit.setIconSize(QtCore.QSize(32, 32))
+        self.btn_lB_habit.setToolButtonStyle(QtCore.Qt.ToolButtonStyle.ToolButtonTextBesideIcon)
+        self.btn_lB_habit.setObjectName("btn_lB_habit")
+        self.layout_leftBar.addWidget(self.btn_lB_habit)
+        self.btn_lB_botChat = QtWidgets.QToolButton(parent=self.wg_leftBar)
+        self.btn_lB_botChat.setStyleSheet("QToolButton {\n"
+"    font: 18pt \"Arial\";\n"
+"}\n"
+"QPushButton:hover {\n"
+"    color: red;\n"
+"}")
+        self.btn_lB_botChat.setIcon(icon)
+        self.btn_lB_botChat.setIconSize(QtCore.QSize(32, 32))
+        self.btn_lB_botChat.setToolButtonStyle(QtCore.Qt.ToolButtonStyle.ToolButtonTextBesideIcon)
+        self.btn_lB_botChat.setObjectName("btn_lB_botChat")
+        self.layout_leftBar.addWidget(self.btn_lB_botChat)
+        self.btn_lB_flashCard = QtWidgets.QToolButton(parent=self.wg_leftBar)
+        self.btn_lB_flashCard.setStyleSheet("QToolButton {\n"
+"    font: 18pt \"Arial\";\n"
+"}\n"
+"QPushButton:hover {\n"
+"    color: red;\n"
+"}")
+        self.btn_lB_flashCard.setIcon(icon)
+        self.btn_lB_flashCard.setIconSize(QtCore.QSize(32, 32))
+        self.btn_lB_flashCard.setToolButtonStyle(QtCore.Qt.ToolButtonStyle.ToolButtonTextBesideIcon)
+        self.btn_lB_flashCard.setObjectName("btn_lB_flashCard")
+        self.layout_leftBar.addWidget(self.btn_lB_flashCard)
+        self.btn_lB_setting = QtWidgets.QToolButton(parent=self.wg_leftBar)
+        self.btn_lB_setting.setStyleSheet("QToolButton {\n"
+"    font: 18pt \"Arial\";\n"
+"}\n"
+"QPushButton:hover {\n"
+"    color: red;\n"
+"}")
+        self.btn_lB_setting.setIcon(icon)
+        self.btn_lB_setting.setIconSize(QtCore.QSize(32, 32))
+        self.btn_lB_setting.setToolButtonStyle(QtCore.Qt.ToolButtonStyle.ToolButtonTextBesideIcon)
+        self.btn_lB_setting.setObjectName("btn_lB_setting")
+        self.layout_leftBar.addWidget(self.btn_lB_setting)
+        self.btn_lB_about = QtWidgets.QToolButton(parent=self.wg_leftBar)
+        self.btn_lB_about.setStyleSheet("QToolButton {\n"
+"    font: 18pt \"Arial\";\n"
+"}\n"
+"QPushButton:hover {\n"
+"    color: red;\n"
+"}")
+        self.btn_lB_about.setIcon(icon)
+        self.btn_lB_about.setIconSize(QtCore.QSize(32, 32))
+        self.btn_lB_about.setToolButtonStyle(QtCore.Qt.ToolButtonStyle.ToolButtonTextBesideIcon)
+        self.btn_lB_about.setObjectName("btn_lB_about")
+        self.layout_leftBar.addWidget(self.btn_lB_about)
+        self.verticalLayout.addLayout(self.layout_leftBar)
+        self.sW_main = QtWidgets.QStackedWidget(parent=self.centralwidget)
+        self.sW_main.setGeometry(QtCore.QRect(60, 20, 721, 471))
+        self.sW_main.setObjectName("sW_main")
+        self.page_m_pom = QtWidgets.QWidget()
+        self.page_m_pom.setObjectName("page_m_pom")
+        self.lb_m_time = QtWidgets.QLabel(parent=self.page_m_pom)
+        self.lb_m_time.setGeometry(QtCore.QRect(240, 150, 281, 91))
+        self.lb_m_time.setStyleSheet("font: 18pt \"Arial\";")
+        self.lb_m_time.setObjectName("lb_m_time")
+        self.btn_m_startstop = QtWidgets.QPushButton(parent=self.page_m_pom)
+        self.btn_m_startstop.setGeometry(QtCore.QRect(220, 260, 140, 42))
+        self.btn_m_startstop.setStyleSheet("QToolButton {\n"
+"    font: 18pt \"Arial\";\n"
+"}\n"
+"QToolButton:hover {\n"
+"    color: red;\n"
+"}")
+        self.btn_m_startstop.setIconSize(QtCore.QSize(32, 32))
+        self.btn_m_startstop.setObjectName("btn_m_startstop")
+        self.btn_m_audio = QtWidgets.QPushButton(parent=self.page_m_pom)
+        self.btn_m_audio.setGeometry(QtCore.QRect(390, 30, 140, 42))
+        self.btn_m_audio.setStyleSheet("QToolButton {\n"
+"    font: 18pt \"Arial\";\n"
+"}\n"
+"QToolButton:hover {\n"
+"    color: red;\n"
+"}")
+        self.btn_m_audio.setIconSize(QtCore.QSize(32, 32))
+        self.btn_m_audio.setObjectName("btn_m_audio")
+        self.btn_m_pin = QtWidgets.QPushButton(parent=self.page_m_pom)
+        self.btn_m_pin.setGeometry(QtCore.QRect(60, 40, 140, 42))
+        self.btn_m_pin.setStyleSheet("QToolButton {\n"
+"    font: 18pt \"Arial\";\n"
+"}\n"
+"QToolButton:hover {\n"
+"    color: red;\n"
+"}")
+        self.btn_m_pin.setIconSize(QtCore.QSize(32, 32))
+        self.btn_m_pin.setObjectName("btn_m_pin")
+        self.lb_m_quote = QtWidgets.QLabel(parent=self.page_m_pom)
+        self.lb_m_quote.setGeometry(QtCore.QRect(120, 360, 631, 91))
+        self.lb_m_quote.setStyleSheet("font: 18pt \"Arial\";")
+        self.lb_m_quote.setObjectName("lb_m_quote")
+        self.btn_m_audio_2 = QtWidgets.QPushButton(parent=self.page_m_pom)
+        self.btn_m_audio_2.setGeometry(QtCore.QRect(629, 400, 91, 42))
+        self.btn_m_audio_2.setStyleSheet("QToolButton {\n"
+"    font: 18pt \"Arial\";\n"
+"}\n"
+"QToolButton:hover {\n"
+"    color: red;\n"
+"}")
+        self.btn_m_audio_2.setIconSize(QtCore.QSize(32, 32))
+        self.btn_m_audio_2.setObjectName("btn_m_audio_2")
+        self.btn_m_next = QtWidgets.QPushButton(parent=self.page_m_pom)
+        self.btn_m_next.setGeometry(QtCore.QRect(390, 260, 140, 42))
+        self.btn_m_next.setStyleSheet("QToolButton {\n"
+"    font: 18pt \"Arial\";\n"
+"}\n"
+"QToolButton:hover {\n"
+"    color: red;\n"
+"}")
+        self.btn_m_next.setIconSize(QtCore.QSize(32, 32))
+        self.btn_m_next.setObjectName("btn_m_next")
+        self.sW_main.addWidget(self.page_m_pom)
+        self.page_m_task = QtWidgets.QWidget()
+        self.page_m_task.setObjectName("page_m_task")
+        self.sW_main.addWidget(self.page_m_task)
         Studious.setCentralWidget(self.centralwidget)
-        self.menubar = QtWidgets.QMenuBar(parent=Studious)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 24))
-        self.menubar.setObjectName("menubar")
-        Studious.setMenuBar(self.menubar)
-        self.statusbar = QtWidgets.QStatusBar(parent=Studious)
-        self.statusbar.setObjectName("statusbar")
-        Studious.setStatusBar(self.statusbar)
 
         self.retranslateUi(Studious)
         QtCore.QMetaObject.connectSlotsByName(Studious)
 
     def retranslateUi(self, Studious):
         _translate = QtCore.QCoreApplication.translate
-        Studious.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        # self.label.setText(_translate("MainWindow", "00:00"))
+        Studious.setWindowTitle(_translate("Studious", "MainWindow"))
+        self.btn_lB_menu.setText(_translate("Studious", "  MENU"))
+        self.btn_lB_pom.setText(_translate("Studious", "Pomodoro"))
+        self.btn_lB_task.setText(_translate("Studious", "Nhiệm Vụ"))
+        self.btn_lB_habit.setText(_translate("Studious", "Thói Quen"))
+        self.btn_lB_botChat.setText(_translate("Studious", "BotChat"))
+        self.btn_lB_flashCard.setText(_translate("Studious", "FlashCard"))
+        self.btn_lB_setting.setText(_translate("Studious", "Cài Đặt"))
+        self.btn_lB_about.setText(_translate("Studious", "Giới Thiệu"))
+        self.lb_m_time.setText(_translate("Studious", "25:00"))
+        self.btn_m_startstop.setText(_translate("Studious", "Bắt đầu"))
+        self.btn_m_audio.setText(_translate("Studious", "Loa"))
+        self.btn_m_pin.setText(_translate("Studious", "Pin"))
+        self.lb_m_quote.setText(_translate("Studious", "CUỘC ĐỜI THẬT ĐẸP TUYỆT VỜI"))
+        self.btn_m_audio_2.setText(_translate("Studious", "FullScreen"))
+        self.btn_m_next.setText(_translate("Studious", "Phiên Tiếp"))

@@ -5,14 +5,17 @@ from main import *
 import time
 
 class StudiousFunc:
-    def __init__(self, widgets: ViewControl):
+    def __init__(self, widgets):
+        super().__init__()
         global wgs
         wgs = widgets
-        self.countdown = countdown()
-        self.countdown.start_timer()
+        wgs.btn_lB_pom.clicked.connect(self.testBackend)
+
     
     def testBackend(self):
+        wgs.label.setText("UR GAY")
         self.countdown = countdown()
+        self.countdown.start_timer()
         print("Hello World")
 
 class countdown:
