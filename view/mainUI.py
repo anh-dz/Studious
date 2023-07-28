@@ -150,7 +150,7 @@ class Ui_Studious(object):
         self.page_m_pom = QtWidgets.QWidget()
         self.page_m_pom.setObjectName("page_m_pom")
         self.lb_m_time = QtWidgets.QLabel(parent=self.page_m_pom)
-        self.lb_m_time.setGeometry(QtCore.QRect(280, 190, 211, 111))
+        self.lb_m_time.setGeometry(QtCore.QRect(280, 200, 211, 111))
         self.lb_m_time.setLayoutDirection(QtCore.Qt.LayoutDirection.LeftToRight)
         self.lb_m_time.setStyleSheet("font: 50pt \"Arial\";\n"
 "color: rgb(249, 245, 246);\n"
@@ -168,13 +168,14 @@ class Ui_Studious(object):
         self.btn_m_audio.setIconSize(QtCore.QSize(50, 50))
         self.btn_m_audio.setObjectName("btn_m_audio")
         self.lb_m_quote = QtWidgets.QLabel(parent=self.page_m_pom)
-        self.lb_m_quote.setGeometry(QtCore.QRect(30, 450, 661, 91))
+        self.lb_m_quote.setGeometry(QtCore.QRect(40, 450, 661, 91))
         self.lb_m_quote.setStyleSheet("font: 18pt \"Arial\";\n"
 "color: rgb(249, 245, 246);\n"
-"")
+"padding: 2px 7px;")
+        self.lb_m_quote.setWordWrap(True)
         self.lb_m_quote.setObjectName("lb_m_quote")
         self.btn_m_pin = QtWidgets.QToolButton(parent=self.page_m_pom)
-        self.btn_m_pin.setGeometry(QtCore.QRect(30, 40, 51, 51))
+        self.btn_m_pin.setGeometry(QtCore.QRect(630, 40, 51, 51))
         self.btn_m_pin.setText("")
         icon9 = QtGui.QIcon()
         icon9.addPixmap(QtGui.QPixmap("assert/pin.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
@@ -191,7 +192,7 @@ class Ui_Studious(object):
         self.btn_m_fs.setIconSize(QtCore.QSize(50, 50))
         self.btn_m_fs.setObjectName("btn_m_fs")
         self.horizontalLayoutWidget = QtWidgets.QWidget(parent=self.page_m_pom)
-        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(310, 310, 160, 71))
+        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(310, 320, 160, 71))
         self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
@@ -217,7 +218,36 @@ class Ui_Studious(object):
         self.btn_m_next.setObjectName("btn_m_next")
         self.horizontalLayout.addWidget(self.btn_m_next)
         self.cB_m_task = QtWidgets.QComboBox(parent=self.page_m_pom)
-        self.cB_m_task.setGeometry(QtCore.QRect(310, 140, 161, 61))
+        self.cB_m_task.setGeometry(QtCore.QRect(270, 150, 251, 31))
+        self.cB_m_task.setStyleSheet("QComboBox{\n"
+"    background-color: rgba(52, 22, 85, 50%);\n"
+"    border-radius: 5px;\n"
+"    padding: 5px;\n"
+"    padding-left: 10px;\n"
+"    color: rgb(249, 245, 246);\n"
+"    font: 14pt \"Arial\";\n"
+"}\n"
+"QComboBox:hover{\n"
+"\n"
+"}\n"
+"QComboBox::drop-down {\n"
+"    subcontrol-origin: padding;\n"
+"    subcontrol-position: top right;\n"
+"    width: 25px; \n"
+"    border-left-width: 3px;\n"
+"    border-left-style: solid;\n"
+"    border-top-right-radius: 3px;\n"
+"    border-bottom-right-radius: 3px;    \n"
+"    background-image: url(assert/drop-down-24);\n"
+"    background-position: center;\n"
+"    background-repeat: no-reperat;\n"
+" }\n"
+"QComboBox QAbstractItemView {\n"
+"    color: rgb(255, 121, 198);    \n"
+"    background-color: rgb(33, 37, 43);\n"
+"    padding: 10px;\n"
+"    selection-background-color: rgb(39, 44, 54);\n"
+"}")
         self.cB_m_task.setObjectName("cB_m_task")
         self.cB_m_task.addItem("")
         self.cB_m_task.addItem("")
@@ -238,7 +268,7 @@ class Ui_Studious(object):
         self.Background.setFocusPolicy(QtCore.Qt.FocusPolicy.NoFocus)
         self.Background.setContextMenuPolicy(QtCore.Qt.ContextMenuPolicy.NoContextMenu)
         self.Background.setAutoFillBackground(False)
-        self.Background.setStyleSheet("border-image: url(assert/Background.jpg);")
+        self.Background.setStyleSheet("border-image: url(assert/background.jpg);")
         self.Background.setFrameShape(QtWidgets.QFrame.Shape.NoFrame)
         self.Background.setFrameShadow(QtWidgets.QFrame.Shadow.Plain)
         self.Background.setLineWidth(0)
@@ -247,8 +277,8 @@ class Ui_Studious(object):
         self.Background.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeading|QtCore.Qt.AlignmentFlag.AlignLeft|QtCore.Qt.AlignmentFlag.AlignVCenter)
         self.Background.setObjectName("Background")
         self.Background.raise_()
-        self.sW_main.raise_()
         self.wg_leftBar.raise_()
+        self.sW_main.raise_()
         Studious.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(Studious)

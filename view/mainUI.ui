@@ -362,7 +362,7 @@ QToolButton{
       <property name="geometry">
        <rect>
         <x>280</x>
-        <y>190</y>
+        <y>200</y>
         <width>211</width>
         <height>111</height>
        </rect>
@@ -410,7 +410,7 @@ qproperty-margin: auto;</string>
      <widget class="QLabel" name="lb_m_quote">
       <property name="geometry">
        <rect>
-        <x>30</x>
+        <x>40</x>
         <y>450</y>
         <width>661</width>
         <height>91</height>
@@ -419,16 +419,19 @@ qproperty-margin: auto;</string>
       <property name="styleSheet">
        <string notr="true">font: 18pt &quot;Arial&quot;;
 color: rgb(249, 245, 246);
-</string>
+padding: 2px 7px;</string>
       </property>
       <property name="text">
        <string>CUỘC ĐỜI THẬT ĐẸP TUYỆT VỜI</string>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
       </property>
      </widget>
      <widget class="QToolButton" name="btn_m_pin">
       <property name="geometry">
        <rect>
-        <x>30</x>
+        <x>630</x>
         <y>40</y>
         <width>51</width>
         <height>51</height>
@@ -478,7 +481,7 @@ color: rgb(249, 245, 246);
       <property name="geometry">
        <rect>
         <x>310</x>
-        <y>310</y>
+        <y>320</y>
         <width>160</width>
         <height>71</height>
        </rect>
@@ -541,11 +544,41 @@ color: rgb(249, 245, 246);
      <widget class="QComboBox" name="cB_m_task">
       <property name="geometry">
        <rect>
-        <x>310</x>
-        <y>140</y>
-        <width>161</width>
-        <height>61</height>
+        <x>270</x>
+        <y>150</y>
+        <width>251</width>
+        <height>31</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QComboBox{
+	background-color: rgba(52, 22, 85, 50%);
+	border-radius: 5px;
+	padding: 5px;
+	padding-left: 10px;
+	color: rgb(249, 245, 246);
+	font: 14pt &quot;Arial&quot;;
+}
+QComboBox:hover{
+
+}
+QComboBox::drop-down {
+	subcontrol-origin: padding;
+	subcontrol-position: top right;
+	width: 25px; 
+	border-left-width: 3px;
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;	
+	background-image: url(assert/drop-down-24);
+	background-position: center;
+	background-repeat: no-reperat;
+ }
+QComboBox QAbstractItemView {
+	color: rgb(255, 121, 198);	
+	background-color: rgb(33, 37, 43);
+	padding: 10px;
+	selection-background-color: rgb(39, 44, 54);
+}</string>
       </property>
       <item>
        <property name="text">
@@ -601,7 +634,7 @@ color: rgb(249, 245, 246);
      <bool>false</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-image: url(assert/Background.jpg);</string>
+     <string notr="true">border-image: url(assert/background.jpg);</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::NoFrame</enum>
@@ -623,12 +656,10 @@ color: rgb(249, 245, 246);
     </property>
    </widget>
    <zorder>Background</zorder>
-   <zorder>sW_main</zorder>
    <zorder>wg_leftBar</zorder>
+   <zorder>sW_main</zorder>
   </widget>
  </widget>
- <resources>
-  <include location="../../EyeCare-Windows/Rebuild/qrc/icon.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
