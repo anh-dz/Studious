@@ -36,6 +36,10 @@ class StudiousFunc:
         self.media_player.setSource(self.media_content)
         self.onoff_audio()
 
+        #Turn on pinDialog
+        wgs.btn_m_pin.clicked.connect(DialogFunc)
+        
+
     def start_clock(self):
         if self.clock_onoff == False:
             self.clock_onoff = True
@@ -58,6 +62,12 @@ class StudiousFunc:
             self.media_player.stop()
             self.music_onoff = True
 
+
+class DialogFunc:
+    def __init__(self):
+        global Pwgs
+        Pwgs = Ui_Dialog()
+        Pwgs.show()
 class countdown:
     def __init__(self):
         self.mtime = 25
@@ -81,6 +91,10 @@ class countdown:
             # Format the remaining time as MM:SS
             minutes, seconds = divmod(self.time_left, 60)
             wgs.lb_m_time.setText(f"{minutes:02}:{seconds:02}")
+            try:    Pwgs.lb_time.setText(f"{minutes:02}:{seconds:02}")
+            except: pass
         else:
             self.timer.stop()
             wgs.lb_m_time.setText("00:00")
+            try:    Pwgs.lb_time.setText("00:00")
+            except: pass

@@ -9,7 +9,10 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
 
 
-class Ui_Dialog(object):
+class Ui_Dialog(QtWidgets.QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.setupUi(self)
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(653, 219)
@@ -31,6 +34,6 @@ class Ui_Dialog(object):
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
+        Dialog.setWindowTitle(_translate("Dialog", "PinDialog"))
         self.lb_task.setText(_translate("Dialog", "TASK"))
         self.lb_time.setText(_translate("Dialog", "TIME"))
