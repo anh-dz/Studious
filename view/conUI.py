@@ -3,12 +3,17 @@ from PyQt6.QtWidgets import *
 from PyQt6.QtGui import *
 from . mainUI import Ui_Studious
 
-def create_colored_icon(color):
-    '''
-        Example: create_colored_icon(QColor('white')
-    '''
+def create_colored_icon(color, radius=8):
     pixmap = QPixmap(16, 16)
-    pixmap.fill(color)
+    pixmap.fill(QColor(0, 0, 0, 0))
+    painter = QPainter(pixmap)
+    painter.setRenderHint(QPainter.RenderHint.Antialiasing)
+    rounded_rect = pixmap.rect().adjusted(1, 1, -1, -1)
+    painter.setBrush(color)
+    painter.setPen(Qt.PenStyle.NoPen)
+    painter.drawRoundedRect(rounded_rect, radius, radius)
+    painter.end()
+
     return QIcon(pixmap)
 
 class ViewControl(QMainWindow):
@@ -16,6 +21,14 @@ class ViewControl(QMainWindow):
         super().__init__()
         self.ui = Ui_Studious()
         self.ui.setupUi(self)
+
+        self.ui.btn_lB_1.clicked.connect(lambda: self.ui.sW_main.setCurrentIndex(0))
+        self.ui.btn_lB_2.clicked.connect(lambda: self.ui.sW_main.setCurrentIndex(1))
+        self.ui.btn_lB_3.clicked.connect(lambda: self.ui.sW_main.setCurrentIndex(2))
+        self.ui.btn_lB_4.clicked.connect(lambda: self.ui.sW_main.setCurrentIndex(3))
+        self.ui.btn_lB_5.clicked.connect(lambda: self.ui.sW_main.setCurrentIndex(4))
+        self.ui.btn_lB_6.clicked.connect(lambda: self.ui.sW_main.setCurrentIndex(5))
+        self.ui.btn_lB_7.clicked.connect(lambda: self.ui.sW_main.setCurrentIndex(6))
 
         self.ui.btn_lB_menu.clicked.connect(self.Side_Menu_Def_0)
         self.Side_Menu_Def_0()

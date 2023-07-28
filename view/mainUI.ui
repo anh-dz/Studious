@@ -149,7 +149,7 @@ QPushButton:hover{
      </property>
      <layout class="QVBoxLayout" name="layout_leftBar">
       <item>
-       <widget class="QPushButton" name="btn_lB_pom">
+       <widget class="QPushButton" name="btn_lB_1">
         <property name="minimumSize">
          <size>
           <width>0</width>
@@ -175,7 +175,7 @@ QPushButton:hover{
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="btn_lB_chart">
+       <widget class="QPushButton" name="btn_lB_2">
         <property name="minimumSize">
          <size>
           <width>0</width>
@@ -201,7 +201,7 @@ QPushButton:hover{
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="btn_lB_habit">
+       <widget class="QPushButton" name="btn_lB_3">
         <property name="minimumSize">
          <size>
           <width>0</width>
@@ -227,7 +227,7 @@ QPushButton:hover{
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="btn_lB_botChat">
+       <widget class="QPushButton" name="btn_lB_4">
         <property name="minimumSize">
          <size>
           <width>0</width>
@@ -253,7 +253,7 @@ QPushButton:hover{
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="btn_lB_flashCard">
+       <widget class="QPushButton" name="btn_lB_5">
         <property name="minimumSize">
          <size>
           <width>0</width>
@@ -279,7 +279,7 @@ QPushButton:hover{
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="btn_lB_setting">
+       <widget class="QPushButton" name="btn_lB_6">
         <property name="minimumSize">
          <size>
           <width>0</width>
@@ -311,7 +311,7 @@ QPushButton:hover{
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="btn_lB_about">
+       <widget class="QPushButton" name="btn_lB_7">
         <property name="minimumSize">
          <size>
           <width>0</width>
@@ -356,6 +356,9 @@ QPushButton:hover{
 QToolButton{
 	border: 0px;
 }</string>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
     </property>
     <widget class="QWidget" name="page_m_pom">
      <widget class="QLabel" name="lb_m_time">
@@ -592,7 +595,12 @@ QComboBox QAbstractItemView {
       </item>
      </widget>
     </widget>
-    <widget class="QWidget" name="page_m_task"/>
+    <widget class="QWidget" name="page_m_2"/>
+    <widget class="QWidget" name="page_m_3"/>
+    <widget class="QWidget" name="page_m_4"/>
+    <widget class="QWidget" name="page_m_5"/>
+    <widget class="QWidget" name="page_m_6"/>
+    <widget class="QWidget" name="page_m_7"/>
    </widget>
    <widget class="QLabel" name="Background">
     <property name="enabled">
@@ -656,8 +664,8 @@ QComboBox QAbstractItemView {
     </property>
    </widget>
    <zorder>Background</zorder>
-   <zorder>wg_leftBar</zorder>
    <zorder>sW_main</zorder>
+   <zorder>wg_leftBar</zorder>
   </widget>
  </widget>
  <resources/>
