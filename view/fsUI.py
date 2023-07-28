@@ -41,9 +41,3 @@ class StudiousFS(QWidget):
         self.setLayout(layout)
 
         self.showFullScreen()
-
-
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    ex = StudiousFS()
-    sys.exit(app.exec()) 
