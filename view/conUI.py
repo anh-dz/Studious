@@ -18,9 +18,28 @@ class ViewControl(QMainWindow):
         self.ui.btn_lB_6.clicked.connect(lambda: self.ui.sW_main.setCurrentIndex(5))
         self.ui.btn_lB_7.clicked.connect(lambda: self.ui.sW_main.setCurrentIndex(6))
 
+        self.checkM = False
+        self.audioM = False
+        self.ui.btn_m_startstop.clicked.connect(self.changeIconM)
+        self.ui.btn_m_audio.clicked.connect(self.changeAudioM)
+
         self.ui.btn_lB_menu.clicked.connect(self.Side_Menu_Def_0)
         self.Side_Menu_Def_0()
         self.testComboBoxColor()
+    
+    def changeIconM(self):
+        if self.checkM:
+            self.ui.btn_m_startstop.setIcon(QIcon("assert/start.png"))
+        else:
+            self.ui.btn_m_startstop.setIcon(QIcon("assert/pause.png"))
+        self.checkM = not self.checkM
+    
+    def changeAudioM(self):
+        if self.audioM:
+            self.ui.btn_m_audio.setIcon(QIcon("assert/audio-on.png"))
+        else:
+            self.ui.btn_m_audio.setIcon(QIcon("assert/audio-off.png"))
+        self.audioM = not self.audioM
 
     def Side_Menu_Def_0(self):
         if self.ui.wg_leftBar.width() <= 70:
