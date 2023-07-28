@@ -4,7 +4,7 @@ from PyQt6.QtGui import *
 from PyQt6.QtMultimedia import *
 from main import *
 from random import choice
-import sys
+from view import *
 
 class StudiousFunc:
     def __init__(self, widgets):
@@ -28,21 +28,19 @@ class StudiousFunc:
 
         #Turn on/off music in app
         wgs.btn_m_audio.clicked.connect(self.onoff_audio)
-        self.media_content = QUrl.fromLocalFile('.\\assert\\music.wav')
-        self.media_player = QSoundEffect()
-        self.media_player.setSource(self.media_content)
-        self.media_player.setLoopCount(-2) # possible bug: QSoundEffect::Infinite cannot be used in setLoopCount
+        self.media_content = QUrl.fromLocalFile('.\\assert\\music.mp3')
         self.music_onoff = True
-        self.media_player.setVolume(1)
+        self.media_player = QMediaPlayer()
+        self.audio = QAudioOutput()
+        self.media_player.setAudioOutput(self.audio)
+        self.media_player.setSource(self.media_content)
         self.onoff_audio()
-    
+
     def start_clock(self):
         if self.clock_onoff == False:
-            print("Start")
             self.clock_onoff = True
             self.countdown.start_timer()
         elif self.clock_onoff == True:
-            print("Stop")
             self.clock_onoff = False
             self.countdown.stop_timer()
     
@@ -58,6 +56,7 @@ class StudiousFunc:
         elif self.music_onoff == False:
             print("stop")
             self.media_player.stop()
+            self.music_onoff = True
 
 class countdown:
     def __init__(self):
