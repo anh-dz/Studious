@@ -3,3 +3,4 @@
 from . mainUI import *
 from . conUI import *
 from . pinDialog import *
+from . fsUI import *
