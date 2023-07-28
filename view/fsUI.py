@@ -52,7 +52,7 @@ class StudiousFS(QWidget):
         self.cB_task.setObjectName("self.cB_task")
 
         self.lb_time = QLabel("25:00", self)
-        self.lb_time.setStyleSheet("font: 72pt \"Arial\";\n"
+        self.lb_time.setStyleSheet("font: 128pt \"Arial\";\n"
 "color: rgb(249, 245, 246);\n"
 "border: 0px;\n"
 "qproperty-alignment: \'AlignCenter\';\n"
@@ -102,14 +102,14 @@ class StudiousFS(QWidget):
         self.btn_audio.setIconSize(QSize(72, 72))
 
         self.bottomQuote = QLabel("bottomQuote", self)
-        self.bottomQuote.setStyleSheet("font: 36pt \"Arial\";\n"
+        self.bottomQuote.setStyleSheet("font: 32pt \"Arial\";\n"
 "color: rgb(249, 245, 246);\n"
 "border: 0px;\n"
 "qproperty-alignment: \'AlignCenter\';\n"
 "qproperty-margin: auto;")
         self.bottomQuote.setWordWrap(True)
 
-        self.bottomQuote.setGeometry(QRect(10, self.y-220, self.x-20, 200))
+        self.bottomQuote.setGeometry(QRect(10, self.y-200, self.x-20, 180))
 
         # self.cB_task.addItem(create_colored_icon(QColor('blue')), "Học")
 
