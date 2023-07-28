@@ -607,6 +607,17 @@ QComboBox QAbstractItemView {
 	color: rgb(249, 245, 246);
 	font: 14pt &quot;Arial&quot;;
 }
+QDateEdit::drop-down {
+	subcontrol-origin: padding;
+	subcontrol-position: top right;
+	width: 25px; 
+	border-left-width: 3px;
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;	
+	background-image: url(assert/drop-down-24);
+	background-position: center;
+	background-repeat: no-reperat;
+ }
 QPushButton{
 	background-color: rgba(52, 22, 85, 70%);
 	color: rgb(249, 245, 246);
@@ -658,6 +669,16 @@ QPushButton:hover{
         <day>1</day>
        </datetime>
       </property>
+      <property name="minimumDate">
+       <date>
+        <year>2023</year>
+        <month>1</month>
+        <day>1</day>
+       </date>
+      </property>
+      <property name="calendarPopup">
+       <bool>true</bool>
+      </property>
      </widget>
      <widget class="QDateEdit" name="dateTo">
       <property name="geometry">
@@ -674,9 +695,19 @@ QPushButton:hover{
         <minute>0</minute>
         <second>0</second>
         <year>2023</year>
+        <month>9</month>
+        <day>14</day>
+       </datetime>
+      </property>
+      <property name="minimumDate">
+       <date>
+        <year>2023</year>
         <month>1</month>
         <day>1</day>
-       </datetime>
+       </date>
+      </property>
+      <property name="calendarPopup">
+       <bool>true</bool>
       </property>
      </widget>
      <widget class="QLabel" name="LB_FROM">

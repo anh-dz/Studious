@@ -262,6 +262,17 @@ class Ui_Studious(object):
 "    color: rgb(249, 245, 246);\n"
 "    font: 14pt \"Arial\";\n"
 "}\n"
+"QDateEdit::drop-down {\n"
+"    subcontrol-origin: padding;\n"
+"    subcontrol-position: top right;\n"
+"    width: 25px; \n"
+"    border-left-width: 3px;\n"
+"    border-top-right-radius: 3px;\n"
+"    border-bottom-right-radius: 3px;    \n"
+"    background-image: url(assert/drop-down-24);\n"
+"    background-position: center;\n"
+"    background-repeat: no-reperat;\n"
+" }\n"
 "QPushButton{\n"
 "    background-color: rgba(52, 22, 85, 70%);\n"
 "    color: rgb(249, 245, 246);\n"
@@ -283,10 +294,14 @@ class Ui_Studious(object):
         self.dateFrom = QtWidgets.QDateEdit(parent=self.page_m_2)
         self.dateFrom.setGeometry(QtCore.QRect(160, 30, 131, 31))
         self.dateFrom.setDateTime(QtCore.QDateTime(QtCore.QDate(2023, 1, 1), QtCore.QTime(0, 0, 0)))
+        self.dateFrom.setMinimumDate(QtCore.QDate(2023, 1, 1))
+        self.dateFrom.setCalendarPopup(True)
         self.dateFrom.setObjectName("dateFrom")
         self.dateTo = QtWidgets.QDateEdit(parent=self.page_m_2)
         self.dateTo.setGeometry(QtCore.QRect(350, 30, 131, 31))
-        self.dateTo.setDateTime(QtCore.QDateTime(QtCore.QDate(2023, 1, 1), QtCore.QTime(0, 0, 0)))
+        self.dateTo.setDateTime(QtCore.QDateTime(QtCore.QDate(2023, 9, 14), QtCore.QTime(0, 0, 0)))
+        self.dateTo.setMinimumDate(QtCore.QDate(2023, 1, 1))
+        self.dateTo.setCalendarPopup(True)
         self.dateTo.setObjectName("dateTo")
         self.LB_FROM = QtWidgets.QLabel(parent=self.page_m_2)
         self.LB_FROM.setGeometry(QtCore.QRect(130, 30, 31, 31))
