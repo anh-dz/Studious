@@ -15,7 +15,7 @@ class Ui_Dialog(QtWidgets.QMainWindow):
         self.setupUi(self)
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(653, 219)
+        Dialog.setFixedSize(653, 219)
         Dialog.setStyleSheet("background-color: rgb(33, 37, 43);\n"
 "color: rgb(249, 245, 246);\n"
 "font: 18pt \"Arial\";\n"
