@@ -265,7 +265,7 @@ class Ui_Studious(object):
 "QPushButton{\n"
 "    background-color: rgba(52, 22, 85, 70%);\n"
 "    color: rgb(249, 245, 246);\n"
-"    font: 13pt \"Arial\";\n"
+"    font: 14pt \"Arial\";\n"
 "    border-radius: 5px;\n"
 "    text-align: left;\n"
 "    padding: 2px 7px;\n"
@@ -295,7 +295,7 @@ class Ui_Studious(object):
         self.LB_TO.setGeometry(QtCore.QRect(310, 30, 41, 31))
         self.LB_TO.setObjectName("LB_TO")
         self.btn_m_delChart = QtWidgets.QPushButton(parent=self.page_m_2)
-        self.btn_m_delChart.setGeometry(QtCore.QRect(640, 29, 111, 32))
+        self.btn_m_delChart.setGeometry(QtCore.QRect(640, 29, 112, 32))
         self.btn_m_delChart.setMinimumSize(QtCore.QSize(0, 32))
         self.btn_m_delChart.setStyleSheet("")
         icon13 = QtGui.QIcon()
