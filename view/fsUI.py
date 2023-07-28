@@ -102,13 +102,15 @@ class StudiousFS(QWidget):
         self.btn_audio.setIconSize(QSize(72, 72))
 
         self.bottomQuote = QLabel("bottomQuote", self)
-        self.bottomQuote.setStyleSheet("font: 48pt \"Arial\";\n"
+        self.bottomQuote.setStyleSheet("font: 36pt \"Arial\";\n"
 "color: rgb(249, 245, 246);\n"
 "border: 0px;\n"
 "qproperty-alignment: \'AlignCenter\';\n"
 "qproperty-margin: auto;")
+        self.bottomQuote.setWordWrap(True)
 
-        main_layout = QVBoxLayout()
-        main_layout.addWidget(self.bottomQuote)
+        self.bottomQuote.setGeometry(QRect(10, self.y-220, self.x-20, 200))
+
+        # self.cB_task.addItem(create_colored_icon(QColor('blue')), "Học")
 
         self.showFullScreen()
