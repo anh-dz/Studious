@@ -147,21 +147,47 @@ class Ui_Studious(object):
 "}\n"
 "QToolButton{\n"
 "    border: 0px;\n"
+"}\n"
+"QComboBox{\n"
+"    background-color: rgba(52, 22, 85, 50%);\n"
+"    border-radius: 5px;\n"
+"    padding: 5px;\n"
+"    padding-left: 10px;\n"
+"    color: rgb(249, 245, 246);\n"
+"    font: 14pt \"Arial\";\n"
+"}\n"
+"QComboBox::drop-down {\n"
+"    subcontrol-origin: padding;\n"
+"    subcontrol-position: top right;\n"
+"    width: 25px; \n"
+"    border-left-width: 3px;\n"
+"    border-top-right-radius: 3px;\n"
+"    border-bottom-right-radius: 3px;    \n"
+"    background-image: url(assert/drop-down-24);\n"
+"    background-position: center;\n"
+"    background-repeat: no-reperat;\n"
+" }\n"
+"QComboBox QAbstractItemView {\n"
+"    color: rgb(255, 121, 198);    \n"
+"    background-color: rgb(33, 37, 43);\n"
+"    padding: 10px;\n"
+"    selection-background-color: rgb(39, 44, 54);\n"
 "}")
         self.sW_main.setObjectName("sW_main")
         self.page_m_pom = QtWidgets.QWidget()
+        self.page_m_pom.setStyleSheet("QLabel{\n"
+"    font: 63pt \"Arial\";\n"
+"    qproperty-alignment: \'AlignCenter\';\n"
+"    qproperty-margin: auto;\n"
+"}")
         self.page_m_pom.setObjectName("page_m_pom")
         self.lb_m_time = QtWidgets.QLabel(parent=self.page_m_pom)
-        self.lb_m_time.setGeometry(QtCore.QRect(280, 200, 211, 111))
+        self.lb_m_time.setGeometry(QtCore.QRect(240, 180, 311, 141))
         self.lb_m_time.setLayoutDirection(QtCore.Qt.LayoutDirection.LeftToRight)
-        self.lb_m_time.setStyleSheet("font: 50pt \"Arial\";\n"
-"color: rgb(249, 245, 246);\n"
-"border: 0px;\n"
-"qproperty-alignment: \'AlignCenter\';\n"
-"qproperty-margin: auto;")
+        self.lb_m_time.setStyleSheet("color: rgb(249, 245, 246);")
         self.lb_m_time.setObjectName("lb_m_time")
         self.btn_m_audio = QtWidgets.QToolButton(parent=self.page_m_pom)
-        self.btn_m_audio.setGeometry(QtCore.QRect(690, 40, 51, 51))
+        self.btn_m_audio.setGeometry(QtCore.QRect(690, 30, 51, 51))
         self.btn_m_audio.setStyleSheet("")
         self.btn_m_audio.setText("")
         icon8 = QtGui.QIcon()
@@ -177,7 +203,7 @@ class Ui_Studious(object):
         self.lb_m_quote.setWordWrap(True)
         self.lb_m_quote.setObjectName("lb_m_quote")
         self.btn_m_pin = QtWidgets.QToolButton(parent=self.page_m_pom)
-        self.btn_m_pin.setGeometry(QtCore.QRect(630, 40, 51, 51))
+        self.btn_m_pin.setGeometry(QtCore.QRect(630, 30, 51, 51))
         self.btn_m_pin.setText("")
         icon9 = QtGui.QIcon()
         icon9.addPixmap(QtGui.QPixmap("assert/pin.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
@@ -194,7 +220,7 @@ class Ui_Studious(object):
         self.btn_m_fs.setIconSize(QtCore.QSize(50, 50))
         self.btn_m_fs.setObjectName("btn_m_fs")
         self.horizontalLayoutWidget = QtWidgets.QWidget(parent=self.page_m_pom)
-        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(310, 320, 160, 71))
+        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(310, 330, 160, 71))
         self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
@@ -220,41 +246,17 @@ class Ui_Studious(object):
         self.btn_m_next.setObjectName("btn_m_next")
         self.horizontalLayout.addWidget(self.btn_m_next)
         self.cB_m_task = QtWidgets.QComboBox(parent=self.page_m_pom)
-        self.cB_m_task.setGeometry(QtCore.QRect(270, 150, 251, 31))
-        self.cB_m_task.setStyleSheet("QComboBox{\n"
-"    background-color: rgba(52, 22, 85, 50%);\n"
-"    border-radius: 5px;\n"
-"    padding: 5px;\n"
-"    padding-left: 10px;\n"
-"    color: rgb(249, 245, 246);\n"
-"    font: 14pt \"Arial\";\n"
-"}\n"
-"QComboBox:hover{\n"
-"\n"
-"}\n"
-"QComboBox::drop-down {\n"
-"    subcontrol-origin: padding;\n"
-"    subcontrol-position: top right;\n"
-"    width: 25px; \n"
-"    border-left-width: 3px;\n"
-"    border-top-right-radius: 3px;\n"
-"    border-bottom-right-radius: 3px;    \n"
-"    background-image: url(assert/drop-down-24);\n"
-"    background-position: center;\n"
-"    background-repeat: no-reperat;\n"
-" }\n"
-"QComboBox QAbstractItemView {\n"
-"    color: rgb(255, 121, 198);    \n"
-"    background-color: rgb(33, 37, 43);\n"
-"    padding: 10px;\n"
-"    selection-background-color: rgb(39, 44, 54);\n"
-"}")
+        self.cB_m_task.setGeometry(QtCore.QRect(270, 130, 251, 31))
+        self.cB_m_task.setStyleSheet("")
         self.cB_m_task.setObjectName("cB_m_task")
         self.cB_m_task.addItem("")
         self.cB_m_task.addItem("")
         self.sW_main.addWidget(self.page_m_pom)
         self.page_m_2 = QtWidgets.QWidget()
-        self.page_m_2.setStyleSheet("QDateEdit{\n"
+        self.page_m_2.setStyleSheet("* {\n"
+"    font: 18pt \"Arial\";\n"
+"}\n"
+"QDateEdit{\n"
 "    background-color: rgba(52, 22, 85, 50%);\n"
 "    border-radius: 5px;\n"
 "    padding: 5px;\n"
@@ -292,7 +294,7 @@ class Ui_Studious(object):
         self.pieChart.setGeometry(QtCore.QRect(449, 109, 301, 371))
         self.pieChart.setObjectName("pieChart")
         self.dateFrom = QtWidgets.QDateEdit(parent=self.page_m_2)
-        self.dateFrom.setGeometry(QtCore.QRect(160, 30, 131, 31))
+        self.dateFrom.setGeometry(QtCore.QRect(170, 30, 131, 31))
         self.dateFrom.setDateTime(QtCore.QDateTime(QtCore.QDate(2023, 1, 1), QtCore.QTime(0, 0, 0)))
         self.dateFrom.setMinimumDate(QtCore.QDate(2023, 1, 1))
         self.dateFrom.setCalendarPopup(True)
