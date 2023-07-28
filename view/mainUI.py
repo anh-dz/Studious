@@ -142,6 +142,8 @@ class Ui_Studious(object):
         self.sW_main.setStyleSheet("*{\n"
 "    background-color: transparent;\n"
 "    background: none;\n"
+"    color: rgb(249, 245, 246);\n"
+"    font: 18pt \"Arial\";\n"
 "}\n"
 "QToolButton{\n"
 "    border: 0px;\n"
@@ -253,6 +255,48 @@ class Ui_Studious(object):
         self.sW_main.addWidget(self.page_m_pom)
         self.page_m_2 = QtWidgets.QWidget()
         self.page_m_2.setObjectName("page_m_2")
+        self.columnChart = QtWidgets.QWidget(parent=self.page_m_2)
+        self.columnChart.setGeometry(QtCore.QRect(20, 110, 411, 371))
+        self.columnChart.setObjectName("columnChart")
+        self.pieChart = QtWidgets.QWidget(parent=self.page_m_2)
+        self.pieChart.setGeometry(QtCore.QRect(449, 109, 301, 371))
+        self.pieChart.setObjectName("pieChart")
+        self.dateFrom = QtWidgets.QDateEdit(parent=self.page_m_2)
+        self.dateFrom.setGeometry(QtCore.QRect(160, 30, 111, 31))
+        self.dateFrom.setObjectName("dateFrom")
+        self.dateTo = QtWidgets.QDateEdit(parent=self.page_m_2)
+        self.dateTo.setGeometry(QtCore.QRect(340, 30, 111, 31))
+        self.dateTo.setObjectName("dateTo")
+        self.LB_FROM = QtWidgets.QLabel(parent=self.page_m_2)
+        self.LB_FROM.setGeometry(QtCore.QRect(130, 30, 31, 31))
+        self.LB_FROM.setObjectName("LB_FROM")
+        self.LB_TO = QtWidgets.QLabel(parent=self.page_m_2)
+        self.LB_TO.setGeometry(QtCore.QRect(300, 30, 41, 31))
+        self.LB_TO.setObjectName("LB_TO")
+        self.btn_lB_8 = QtWidgets.QPushButton(parent=self.page_m_2)
+        self.btn_lB_8.setGeometry(QtCore.QRect(630, 30, 121, 40))
+        self.btn_lB_8.setMinimumSize(QtCore.QSize(0, 40))
+        self.btn_lB_8.setStyleSheet("QPushButton{\n"
+"    background-color: rgba(52, 22, 85, 70%);\n"
+"    color: rgb(249, 245, 246);\n"
+"    font: 14pt \"Arial\";\n"
+"    border-radius: 5px;\n"
+"    text-align: left;\n"
+"    padding: 2px 7px;\n"
+"}\n"
+"QPushButton:hover{\n"
+"    background-color: rgba(52, 22, 85, 100%);\n"
+"}")
+        icon13 = QtGui.QIcon()
+        icon13.addPixmap(QtGui.QPixmap("assert/del.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btn_lB_8.setIcon(icon13)
+        self.btn_lB_8.setIconSize(QtCore.QSize(24, 24))
+        self.btn_lB_8.setObjectName("btn_lB_8")
+        self.label = QtWidgets.QLabel(parent=self.page_m_2)
+        self.label.setGeometry(QtCore.QRect(180, 510, 391, 31))
+        self.label.setStyleSheet("color: rgb(249, 245, 246);\n"
+"font: 18pt \"Arial\";")
+        self.label.setObjectName("label")
         self.sW_main.addWidget(self.page_m_2)
         self.page_m_3 = QtWidgets.QWidget()
         self.page_m_3.setObjectName("page_m_3")
@@ -314,3 +358,7 @@ class Ui_Studious(object):
         self.lb_m_quote.setText(_translate("Studious", "CUỘC ĐỜI THẬT ĐẸP TUYỆT VỜI"))
         self.cB_m_task.setItemText(0, _translate("Studious", "Học"))
         self.cB_m_task.setItemText(1, _translate("Studious", "Làm việc"))
+        self.LB_FROM.setText(_translate("Studious", "Từ"))
+        self.LB_TO.setText(_translate("Studious", "Đến"))
+        self.btn_lB_8.setText(_translate("Studious", "Xoá dữ liệu"))
+        self.label.setText(_translate("Studious", "Bạn đã sử dụng Pomodoro 1 giờ ngày hôm nay"))
