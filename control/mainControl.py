@@ -5,6 +5,8 @@ from PyQt6.QtMultimedia import *
 from main import *
 from random import choice
 from view import *
+import sys
+import time
 
 class StudiousFunc:
     def __init__(self, widgets):
@@ -108,7 +110,7 @@ class StudiousFunc:
         Fwgs.btn_next.clicked.connect(self.next_clock)
         Fwgs.btn_audio.clicked.connect(self.onoff_audio)
         Fwgs.cB_task.setCurrentText(wgs.cB_m_task.currentText())
-        Fwgs.btn_fs.clicked.connect(self.fs.close)
+        Fwgs.btn_fs.clicked.connect(self.fs.close_fs)
         Fwgs.bottomQuote.setText(self.qoutes)
 
 
@@ -120,16 +122,17 @@ class DialogFunc:
         Pwgs.lb_task.setText(wgs.cB_m_task.currentText())
         Pwgs.show()
 
+
 class fullScreenFunc:
     def __init__(self):
+        super().__init__()
         global Fwgs
         Fwgs = StudiousFS()
         Fwgs.setWindowFlags(Fwgs.windowFlags() | Qt.WindowType.WindowStaysOnTopHint)
         Fwgs.showFullScreen()
         Fwgs.show()
-    def close(self):
-        print("a")
-        self.close()
+    def close_fs(self):
+        Fwgs.close()
 
 class countdown:
     def __init__(self, work_time:int, rest_time:int):
