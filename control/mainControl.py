@@ -123,11 +123,11 @@ class DialogFunc:
         Pwgs.show()
 
 
-class fullScreenFunc:
+class fullScreenFunc(StudiousFS):
     def __init__(self):
         super().__init__()
         global Fwgs
-        Fwgs = StudiousFS()
+        Fwgs = self
         Fwgs.setWindowFlags(Fwgs.windowFlags() | Qt.WindowType.WindowStaysOnTopHint)
         Fwgs.showFullScreen()
         Fwgs.show()
