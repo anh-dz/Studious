@@ -35,6 +35,10 @@ class StudiousFunc:
         self.music_onoff = True
         self.media_player.setVolume(1)
         self.onoff_audio()
+
+        #Turn fullscren in app
+        wgs.btn_m_fs.clicked.connect(self.onoff_fullscreen)
+        self.fullscreen_onoff = True
     
     def start_clock(self):
         if self.clock_onoff == False:
@@ -58,10 +62,18 @@ class StudiousFunc:
         elif self.music_onoff == False:
             print("stop")
             self.media_player.stop()
+    
+    def onoff_fullscreen(self):
+        if self.fullscreen_onoff == True:
+            wgs.showFullScreen()
+            self.fullscreen_onoff = False
+        elif self.fullscreen_onoff == False:
+            wgs.showNormal()
+            self.fullscreen_onoff = True
 
 class countdown:
     def __init__(self):
-        self.mtime = 25
+        self.mtime = 5
         wgs.lb_m_time.setText(f"{self.mtime}:00")
         self.start_time = self.mtime*60
         self.time_left = self.start_time
