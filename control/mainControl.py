@@ -15,7 +15,12 @@ class StudiousFunc:
         #random qoutes and print in app
         list_quotes = ["Chúng ta có thể gặp nhiều thất bại nhưng chúng ta không được bị đánh bại – Maya Angelou",
                        "Tất cả những sự khó khăn thường là để chuẩn bị cho những người bình thường một số phận phi thường – C.S. Lewis",
-                       "Mọi người sẽ quên những gì bạn nói, quên những gì bạn đã làm, nhưng họ sẽ không bao giờ quên cảm xúc mà bạn mang lại cho họ – Maya Angelou."]
+                        "Không ai trở nên nghèo khó bằng việc chia sẻ và cho đi – Anne Frank",
+                        "Không một hành động tử tế nào, dù nhỏ đến đâu, lại bị lãng phí – Aesop",
+                        "Lúc này nếu ngủ bạn sẽ có một giấc mơ. Nhưng lúc này nếu học bạn sẽ giải thích được giấc mơ.",
+                        "Mỗi ngày, hãy làm một việc khiến bạn cảm thấy sợ hãi. Chắc chắn bạn có thể chiến thắng nó.",
+                        "Người có lòng tin vào chính mình sẽ có được lòng tin của người khác. – Ngạn ngữ Do Thái.",
+                        "Hãy làm những gì bạn có thể với tất cả những gì bạn có – Theodore Roosevelt."]
         self.qoutes = choice(list_quotes)
         wgs.lb_m_quote.setText(self.qoutes)
 
