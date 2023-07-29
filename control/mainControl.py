@@ -110,7 +110,7 @@ class StudiousFunc:
         Fwgs.btn_next.clicked.connect(self.next_clock)
         Fwgs.btn_audio.clicked.connect(self.onoff_audio)
         Fwgs.cB_task.setCurrentText(wgs.cB_m_task.currentText())
-        Fwgs.btn_fs.clicked.connect(self.fs.close_fs)
+        Fwgs.btn_exit.clicked.connect(lambda: print("Huy lỏd non vl fix dễ vl") or Fwgs.close())
         Fwgs.bottomQuote.setText(self.qoutes)
 
 
@@ -129,8 +129,8 @@ class fullScreenFunc(StudiousFS):
         global Fwgs
         Fwgs = self
         Fwgs.setWindowFlags(Fwgs.windowFlags() | Qt.WindowType.WindowStaysOnTopHint)
-        Fwgs.showFullScreen()
         Fwgs.show()
+
     def close_fs(self):
         Fwgs.close()
 
