@@ -444,13 +444,13 @@ QComboBox QAbstractItemView {
       <property name="geometry">
        <rect>
         <x>40</x>
-        <y>450</y>
-        <width>661</width>
-        <height>91</height>
+        <y>442</y>
+        <width>662</width>
+        <height>120</height>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">font: 18pt &quot;Arial&quot;;
+       <string notr="true">font: 16pt &quot;Arial&quot;;
 color: rgb(249, 245, 246);
 padding: 2px 7px;</string>
       </property>

@@ -104,7 +104,7 @@ class StudiousFS(QWidget):
         self.btn_audio.setIconSize(QSize(72, 72))
 
         self.bottomQuote = QLabel("bottomQuote", self)
-        self.bottomQuote.setStyleSheet("font: 32pt \"Arial\";\n"
+        self.bottomQuote.setStyleSheet("font: 26pt \"Arial\";\n"
 "color: rgb(249, 245, 246);\n"
 "border: 0px;\n"
 "qproperty-alignment: \'AlignCenter\';\n"

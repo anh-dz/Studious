@@ -1,7 +1,10 @@
-import sys
+import sys, os
 from PyQt6.QtWidgets import QApplication
 from view import *
 from control import *
+
+os.environ["QT_FONT_DPI"] = "72" # MACOS DPI
+os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"
 
 class MainApp(QApplication):
     def __init__(self, argv):
