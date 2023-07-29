@@ -118,7 +118,7 @@ class DialogFunc:
     def __init__(self):
         global Pwgs
         Pwgs = Ui_Dialog()
-        Pwgs.setWindowFlags(Pwgs.windowFlags() | Qt.WindowType.WindowStaysOnTopHint)
+        Pwgs.setWindowFlag(Qt.WindowType.WindowStaysOnTopHint)
         Pwgs.lb_task.setText(wgs.cB_m_task.currentText())
         Pwgs.show()
 
@@ -128,7 +128,8 @@ class fullScreenFunc(StudiousFS):
         super().__init__()
         global Fwgs
         Fwgs = self
-        Fwgs.setWindowFlags(Fwgs.windowFlags() | Qt.WindowType.WindowStaysOnTopHint)
+        Fwgs.setWindowFlag(Qt.WindowType.WindowStaysOnTopHint)
+        Fwgs.setWindowFlag(Qt.WindowType.FramelessWindowHint)
         Fwgs.show()
 
     def close_fs(self):
