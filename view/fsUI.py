@@ -50,8 +50,8 @@ class StudiousFS(QWidget):
 "    selection-background-color: rgb(39, 44, 54);\n"
 "}")
         self.cB_task.setObjectName("self.cB_task")
-        self.cB_task.addItem("Học")
-        self.cB_task.addItem("Làm việc")
+        self.cB_task.addItem(create_colored_icon(QColor('blue')), "Học")
+        self.cB_task.addItem(create_colored_icon(QColor('red')), "Làm việc")
 
         self.lb_time = QLabel("25:00", self)
         self.lb_time.setStyleSheet("font: 128pt \"Arial\";\n"

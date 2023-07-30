@@ -2,17 +2,20 @@ from PyQt6.QtCore import *
 from PyQt6.QtWidgets import *
 from PyQt6.QtGui import *
 from PyQt6.QtMultimedia import *
-from main import *
 from random import choice
+from main import *
 from view import *
-import sys
-import time
+from . createFileStartup import *
 
 class StudiousFunc:
     def __init__(self, widgets):
         super().__init__()
         global wgs
         wgs = widgets
+
+        #check data file and dump data
+        self.default_file = default_file()
+        print(self.default_file.data_time)
 
         #random qoutes and print in app
         list_quotes = ["Chúng ta có thể gặp nhiều thất bại nhưng chúng ta không được bị đánh bại – Maya Angelou",
@@ -71,6 +74,18 @@ class StudiousFunc:
     
     def next_clock(self):
         self.countdown.next_timer()
+        if self.countdown.work_or_rest == False: 
+            wgs.lb_m_time.setStyleSheet('color: rgb(251, 238, 172)')
+            try:    Fwgs.lb_time.setStyleSheet('color: rgb(251, 238, 172)')
+            except: pass
+            try:    Pwgs.lb_time.setStyleSheet('color: rgb(251, 238, 172)')
+            except: pass
+        else:   
+            wgs.lb_m_time.setStyleSheet('color: rgb(255, 255, 255)')
+            try:    Fwgs.lb_time.setStyleSheet('color: rgb(255, 255, 255)')
+            except: pass
+            try:    Pwgs.lb_time.setStyleSheet('color: rgb(255, 255, 255)')
+            except: pass
         self.clock_onoff = False
         wgs.cB_m_task.setEnabled(True)
         self.mtime = self.countdown.mtime
@@ -82,11 +97,9 @@ class StudiousFunc:
 
     def onoff_audio(self):
         if self.music_onoff:
-            print("start")
             self.media_player.play()
             self.music_onoff = False
         elif self.music_onoff == False:
-            print("stop")
             self.media_player.stop()
             self.music_onoff = True
     
@@ -100,11 +113,13 @@ class StudiousFunc:
     
     def start_dialog(self):
         self.diaLog = DialogFunc()
+        if not self.countdown.work_or_rest:    Pwgs.lb_time.setStyleSheet('color: rgb(251, 238, 172)')
         Pwgs.lb_time.setText(f"{self.mtime}:00")
 
     def start_fs(self):
         self.fs = fullScreenFunc()
         Fwgs.cB_task.currentIndexChanged.connect(self.on_combobox_changed)
+        if not self.countdown.work_or_rest:    Fwgs.lb_time.setStyleSheet('color: rgb(251, 238, 172)')
         Fwgs.lb_time.setText(f"{self.countdown.mtime}:00")
         Fwgs.btn_startstop.clicked.connect(self.start_clock)
         Fwgs.btn_next.clicked.connect(self.next_clock)
@@ -165,14 +180,11 @@ class countdown:
             # Format the remaining time as MM:SS
             self.minutes, self.seconds = divmod(self.time_left, 60)
             wgs.lb_m_time.setText(f"{self.minutes:02}:{self.seconds:02}")
-            wgs.lb_m_time.setStyleSheet('color: rgb(251, 238, 172)')
             try:    
                 Pwgs.lb_time.setText(f"{self.minutes:02}:{self.seconds:02}")
-                Pwgs.lb_m_time.setStyleSheet('color: rgb(251, 238, 172)')
             except: pass
             try:    
                 Fwgs.lb_time.setText(f"{self.minutes:02}:{self.seconds:02}")
-                Fwgs.lb_time.setStyleSheet('color: rgb(251, 238, 172)')
             except: pass
         else:
             self.timer.stop()
@@ -184,9 +196,11 @@ class countdown:
         if self.work_or_rest == True:
             self.work_or_rest = False
             self.mtime = self.rtime
-            print("False")
         else:
             self.work_or_rest = True
             self.mtime = self.wtime
             print("True")
+            try:    Fwgs.lb_time.setStyleSheet('color: rgb(255, 255, 255)')
+            except: pass
         self.time_left = self.mtime*60
+
