@@ -196,8 +196,8 @@ class Ui_Studious(object):
         self.btn_m_audio.setIconSize(QtCore.QSize(50, 50))
         self.btn_m_audio.setObjectName("btn_m_audio")
         self.lb_m_quote = QtWidgets.QLabel(parent=self.page_m_pom)
-        self.lb_m_quote.setGeometry(QtCore.QRect(40, 450, 661, 91))
-        self.lb_m_quote.setStyleSheet("font: 18pt \"Arial\";\n"
+        self.lb_m_quote.setGeometry(QtCore.QRect(40, 442, 662, 120))
+        self.lb_m_quote.setStyleSheet("font: 16pt \"Arial\";\n"
 "color: rgb(249, 245, 246);\n"
 "padding: 2px 7px;")
         self.lb_m_quote.setWordWrap(True)
