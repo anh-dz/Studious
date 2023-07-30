@@ -4,7 +4,7 @@ from PyQt6.QtGui import *
 from PyQt6.QtMultimedia import *
 from main import *
 from random import choice
-import sys
+from view import *
 
 class StudiousFunc:
     def __init__(self, widgets):
@@ -28,25 +28,23 @@ class StudiousFunc:
 
         #Turn on/off music in app
         wgs.btn_m_audio.clicked.connect(self.onoff_audio)
-        self.media_content = QUrl.fromLocalFile('.\\assert\\music.wav')
-        self.media_player = QSoundEffect()
-        self.media_player.setSource(self.media_content)
-        self.media_player.setLoopCount(-2) # possible bug: QSoundEffect::Infinite cannot be used in setLoopCount
+        self.media_content = QUrl.fromLocalFile('.\\assert\\music.mp3')
         self.music_onoff = True
-        self.media_player.setVolume(1)
+        self.media_player = QMediaPlayer()
+        self.audio = QAudioOutput()
+        self.media_player.setAudioOutput(self.audio)
+        self.media_player.setSource(self.media_content)
         self.onoff_audio()
 
-        #Turn fullscren in app
-        wgs.btn_m_fs.clicked.connect(self.onoff_fullscreen)
-        self.fullscreen_onoff = True
-    
+        #Turn on pinDialog
+        wgs.btn_m_pin.clicked.connect(DialogFunc)
+        
+
     def start_clock(self):
         if self.clock_onoff == False:
-            print("Start")
             self.clock_onoff = True
             self.countdown.start_timer()
         elif self.clock_onoff == True:
-            print("Stop")
             self.clock_onoff = False
             self.countdown.stop_timer()
     
@@ -62,15 +60,14 @@ class StudiousFunc:
         elif self.music_onoff == False:
             print("stop")
             self.media_player.stop()
-    
-    def onoff_fullscreen(self):
-        if self.fullscreen_onoff == True:
-            wgs.showFullScreen()
-            self.fullscreen_onoff = False
-        elif self.fullscreen_onoff == False:
-            wgs.showNormal()
-            self.fullscreen_onoff = True
+            self.music_onoff = True
 
+
+class DialogFunc:
+    def __init__(self):
+        global Pwgs
+        Pwgs = Ui_Dialog()
+        Pwgs.show()
 class countdown:
     def __init__(self):
         self.mtime = 5
@@ -94,6 +91,10 @@ class countdown:
             # Format the remaining time as MM:SS
             minutes, seconds = divmod(self.time_left, 60)
             wgs.lb_m_time.setText(f"{minutes:02}:{seconds:02}")
+            try:    Pwgs.lb_time.setText(f"{minutes:02}:{seconds:02}")
+            except: pass
         else:
             self.timer.stop()
             wgs.lb_m_time.setText("00:00")
+            try:    Pwgs.lb_time.setText("00:00")
+            except: pass

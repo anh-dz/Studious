@@ -73,93 +73,121 @@ class Ui_Studious(object):
         self.layout_leftBar = QtWidgets.QVBoxLayout(self.layoutWidget)
         self.layout_leftBar.setContentsMargins(0, 0, 0, 0)
         self.layout_leftBar.setObjectName("layout_leftBar")
-        self.btn_lB_pom = QtWidgets.QPushButton(parent=self.layoutWidget)
-        self.btn_lB_pom.setMinimumSize(QtCore.QSize(0, 40))
-        self.btn_lB_pom.setStyleSheet("")
+        self.btn_lB_1 = QtWidgets.QPushButton(parent=self.layoutWidget)
+        self.btn_lB_1.setMinimumSize(QtCore.QSize(0, 40))
+        self.btn_lB_1.setStyleSheet("")
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap("assert/pomodoro.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.btn_lB_pom.setIcon(icon1)
-        self.btn_lB_pom.setIconSize(QtCore.QSize(32, 32))
-        self.btn_lB_pom.setObjectName("btn_lB_pom")
-        self.layout_leftBar.addWidget(self.btn_lB_pom)
-        self.btn_lB_chart = QtWidgets.QPushButton(parent=self.layoutWidget)
-        self.btn_lB_chart.setMinimumSize(QtCore.QSize(0, 40))
-        self.btn_lB_chart.setStyleSheet("")
+        self.btn_lB_1.setIcon(icon1)
+        self.btn_lB_1.setIconSize(QtCore.QSize(32, 32))
+        self.btn_lB_1.setObjectName("btn_lB_1")
+        self.layout_leftBar.addWidget(self.btn_lB_1)
+        self.btn_lB_2 = QtWidgets.QPushButton(parent=self.layoutWidget)
+        self.btn_lB_2.setMinimumSize(QtCore.QSize(0, 40))
+        self.btn_lB_2.setStyleSheet("")
         icon2 = QtGui.QIcon()
         icon2.addPixmap(QtGui.QPixmap("assert/chart.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.btn_lB_chart.setIcon(icon2)
-        self.btn_lB_chart.setIconSize(QtCore.QSize(32, 32))
-        self.btn_lB_chart.setObjectName("btn_lB_chart")
-        self.layout_leftBar.addWidget(self.btn_lB_chart)
-        self.btn_lB_habit = QtWidgets.QPushButton(parent=self.layoutWidget)
-        self.btn_lB_habit.setMinimumSize(QtCore.QSize(0, 40))
-        self.btn_lB_habit.setStyleSheet("")
+        self.btn_lB_2.setIcon(icon2)
+        self.btn_lB_2.setIconSize(QtCore.QSize(32, 32))
+        self.btn_lB_2.setObjectName("btn_lB_2")
+        self.layout_leftBar.addWidget(self.btn_lB_2)
+        self.btn_lB_3 = QtWidgets.QPushButton(parent=self.layoutWidget)
+        self.btn_lB_3.setMinimumSize(QtCore.QSize(0, 40))
+        self.btn_lB_3.setStyleSheet("")
         icon3 = QtGui.QIcon()
         icon3.addPixmap(QtGui.QPixmap("assert/habit.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.btn_lB_habit.setIcon(icon3)
-        self.btn_lB_habit.setIconSize(QtCore.QSize(32, 32))
-        self.btn_lB_habit.setObjectName("btn_lB_habit")
-        self.layout_leftBar.addWidget(self.btn_lB_habit)
-        self.btn_lB_botChat = QtWidgets.QPushButton(parent=self.layoutWidget)
-        self.btn_lB_botChat.setMinimumSize(QtCore.QSize(0, 40))
-        self.btn_lB_botChat.setStyleSheet("")
+        self.btn_lB_3.setIcon(icon3)
+        self.btn_lB_3.setIconSize(QtCore.QSize(32, 32))
+        self.btn_lB_3.setObjectName("btn_lB_3")
+        self.layout_leftBar.addWidget(self.btn_lB_3)
+        self.btn_lB_4 = QtWidgets.QPushButton(parent=self.layoutWidget)
+        self.btn_lB_4.setMinimumSize(QtCore.QSize(0, 40))
+        self.btn_lB_4.setStyleSheet("")
         icon4 = QtGui.QIcon()
         icon4.addPixmap(QtGui.QPixmap("assert/botchat.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.btn_lB_botChat.setIcon(icon4)
-        self.btn_lB_botChat.setIconSize(QtCore.QSize(32, 32))
-        self.btn_lB_botChat.setObjectName("btn_lB_botChat")
-        self.layout_leftBar.addWidget(self.btn_lB_botChat)
-        self.btn_lB_flashCard = QtWidgets.QPushButton(parent=self.layoutWidget)
-        self.btn_lB_flashCard.setMinimumSize(QtCore.QSize(0, 40))
-        self.btn_lB_flashCard.setStyleSheet("")
+        self.btn_lB_4.setIcon(icon4)
+        self.btn_lB_4.setIconSize(QtCore.QSize(32, 32))
+        self.btn_lB_4.setObjectName("btn_lB_4")
+        self.layout_leftBar.addWidget(self.btn_lB_4)
+        self.btn_lB_5 = QtWidgets.QPushButton(parent=self.layoutWidget)
+        self.btn_lB_5.setMinimumSize(QtCore.QSize(0, 40))
+        self.btn_lB_5.setStyleSheet("")
         icon5 = QtGui.QIcon()
         icon5.addPixmap(QtGui.QPixmap("assert/card.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.btn_lB_flashCard.setIcon(icon5)
-        self.btn_lB_flashCard.setIconSize(QtCore.QSize(32, 32))
-        self.btn_lB_flashCard.setObjectName("btn_lB_flashCard")
-        self.layout_leftBar.addWidget(self.btn_lB_flashCard)
-        self.btn_lB_setting = QtWidgets.QPushButton(parent=self.layoutWidget)
-        self.btn_lB_setting.setMinimumSize(QtCore.QSize(0, 40))
-        self.btn_lB_setting.setMaximumSize(QtCore.QSize(16777215, 16777215))
-        self.btn_lB_setting.setStyleSheet("")
+        self.btn_lB_5.setIcon(icon5)
+        self.btn_lB_5.setIconSize(QtCore.QSize(32, 32))
+        self.btn_lB_5.setObjectName("btn_lB_5")
+        self.layout_leftBar.addWidget(self.btn_lB_5)
+        self.btn_lB_6 = QtWidgets.QPushButton(parent=self.layoutWidget)
+        self.btn_lB_6.setMinimumSize(QtCore.QSize(0, 40))
+        self.btn_lB_6.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        self.btn_lB_6.setStyleSheet("")
         icon6 = QtGui.QIcon()
         icon6.addPixmap(QtGui.QPixmap("assert/settings.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.btn_lB_setting.setIcon(icon6)
-        self.btn_lB_setting.setIconSize(QtCore.QSize(32, 32))
-        self.btn_lB_setting.setObjectName("btn_lB_setting")
-        self.layout_leftBar.addWidget(self.btn_lB_setting)
-        self.btn_lB_about = QtWidgets.QPushButton(parent=self.layoutWidget)
-        self.btn_lB_about.setMinimumSize(QtCore.QSize(0, 40))
-        self.btn_lB_about.setStyleSheet("")
+        self.btn_lB_6.setIcon(icon6)
+        self.btn_lB_6.setIconSize(QtCore.QSize(32, 32))
+        self.btn_lB_6.setObjectName("btn_lB_6")
+        self.layout_leftBar.addWidget(self.btn_lB_6)
+        self.btn_lB_7 = QtWidgets.QPushButton(parent=self.layoutWidget)
+        self.btn_lB_7.setMinimumSize(QtCore.QSize(0, 40))
+        self.btn_lB_7.setStyleSheet("")
         icon7 = QtGui.QIcon()
         icon7.addPixmap(QtGui.QPixmap("assert/about.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.btn_lB_about.setIcon(icon7)
-        self.btn_lB_about.setIconSize(QtCore.QSize(32, 32))
-        self.btn_lB_about.setObjectName("btn_lB_about")
-        self.layout_leftBar.addWidget(self.btn_lB_about)
+        self.btn_lB_7.setIcon(icon7)
+        self.btn_lB_7.setIconSize(QtCore.QSize(32, 32))
+        self.btn_lB_7.setObjectName("btn_lB_7")
+        self.layout_leftBar.addWidget(self.btn_lB_7)
         self.sW_main = QtWidgets.QStackedWidget(parent=self.centralwidget)
         self.sW_main.setGeometry(QtCore.QRect(40, 0, 771, 561))
         self.sW_main.setStyleSheet("*{\n"
 "    background-color: transparent;\n"
 "    background: none;\n"
+"    color: rgb(249, 245, 246);\n"
+"    font: 18pt \"Arial\";\n"
 "}\n"
 "QToolButton{\n"
 "    border: 0px;\n"
+"}\n"
+"QComboBox{\n"
+"    background-color: rgba(52, 22, 85, 50%);\n"
+"    border-radius: 5px;\n"
+"    padding: 5px;\n"
+"    padding-left: 10px;\n"
+"    color: rgb(249, 245, 246);\n"
+"    font: 14pt \"Arial\";\n"
+"}\n"
+"QComboBox::drop-down {\n"
+"    subcontrol-origin: padding;\n"
+"    subcontrol-position: top right;\n"
+"    width: 25px; \n"
+"    border-left-width: 3px;\n"
+"    border-top-right-radius: 3px;\n"
+"    border-bottom-right-radius: 3px;    \n"
+"    background-image: url(assert/drop-down-24);\n"
+"    background-position: center;\n"
+"    background-repeat: no-reperat;\n"
+" }\n"
+"QComboBox QAbstractItemView {\n"
+"    color: rgb(255, 121, 198);    \n"
+"    background-color: rgb(33, 37, 43);\n"
+"    padding: 10px;\n"
+"    selection-background-color: rgb(39, 44, 54);\n"
 "}")
         self.sW_main.setObjectName("sW_main")
         self.page_m_pom = QtWidgets.QWidget()
+        self.page_m_pom.setStyleSheet("QLabel{\n"
+"    font: 63pt \"Arial\";\n"
+"    qproperty-alignment: \'AlignCenter\';\n"
+"    qproperty-margin: auto;\n"
+"}")
         self.page_m_pom.setObjectName("page_m_pom")
         self.lb_m_time = QtWidgets.QLabel(parent=self.page_m_pom)
-        self.lb_m_time.setGeometry(QtCore.QRect(280, 190, 211, 111))
+        self.lb_m_time.setGeometry(QtCore.QRect(240, 180, 311, 141))
         self.lb_m_time.setLayoutDirection(QtCore.Qt.LayoutDirection.LeftToRight)
-        self.lb_m_time.setStyleSheet("font: 50pt \"Arial\";\n"
-"color: rgb(249, 245, 246);\n"
-"border: 0px;\n"
-"qproperty-alignment: \'AlignCenter\';\n"
-"qproperty-margin: auto;")
+        self.lb_m_time.setStyleSheet("color: rgb(249, 245, 246);")
         self.lb_m_time.setObjectName("lb_m_time")
         self.btn_m_audio = QtWidgets.QToolButton(parent=self.page_m_pom)
-        self.btn_m_audio.setGeometry(QtCore.QRect(690, 40, 51, 51))
+        self.btn_m_audio.setGeometry(QtCore.QRect(690, 30, 51, 51))
         self.btn_m_audio.setStyleSheet("")
         self.btn_m_audio.setText("")
         icon8 = QtGui.QIcon()
@@ -168,13 +196,14 @@ class Ui_Studious(object):
         self.btn_m_audio.setIconSize(QtCore.QSize(50, 50))
         self.btn_m_audio.setObjectName("btn_m_audio")
         self.lb_m_quote = QtWidgets.QLabel(parent=self.page_m_pom)
-        self.lb_m_quote.setGeometry(QtCore.QRect(30, 450, 661, 91))
+        self.lb_m_quote.setGeometry(QtCore.QRect(40, 450, 661, 91))
         self.lb_m_quote.setStyleSheet("font: 18pt \"Arial\";\n"
 "color: rgb(249, 245, 246);\n"
-"")
+"padding: 2px 7px;")
+        self.lb_m_quote.setWordWrap(True)
         self.lb_m_quote.setObjectName("lb_m_quote")
         self.btn_m_pin = QtWidgets.QToolButton(parent=self.page_m_pom)
-        self.btn_m_pin.setGeometry(QtCore.QRect(30, 40, 51, 51))
+        self.btn_m_pin.setGeometry(QtCore.QRect(630, 30, 51, 51))
         self.btn_m_pin.setText("")
         icon9 = QtGui.QIcon()
         icon9.addPixmap(QtGui.QPixmap("assert/pin.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
@@ -191,7 +220,7 @@ class Ui_Studious(object):
         self.btn_m_fs.setIconSize(QtCore.QSize(50, 50))
         self.btn_m_fs.setObjectName("btn_m_fs")
         self.horizontalLayoutWidget = QtWidgets.QWidget(parent=self.page_m_pom)
-        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(310, 310, 160, 71))
+        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(310, 330, 160, 71))
         self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
@@ -217,14 +246,101 @@ class Ui_Studious(object):
         self.btn_m_next.setObjectName("btn_m_next")
         self.horizontalLayout.addWidget(self.btn_m_next)
         self.cB_m_task = QtWidgets.QComboBox(parent=self.page_m_pom)
-        self.cB_m_task.setGeometry(QtCore.QRect(310, 140, 161, 61))
+        self.cB_m_task.setGeometry(QtCore.QRect(270, 130, 251, 31))
+        self.cB_m_task.setStyleSheet("")
         self.cB_m_task.setObjectName("cB_m_task")
         self.cB_m_task.addItem("")
         self.cB_m_task.addItem("")
         self.sW_main.addWidget(self.page_m_pom)
-        self.page_m_task = QtWidgets.QWidget()
-        self.page_m_task.setObjectName("page_m_task")
-        self.sW_main.addWidget(self.page_m_task)
+        self.page_m_2 = QtWidgets.QWidget()
+        self.page_m_2.setStyleSheet("* {\n"
+"    font: 18pt \"Arial\";\n"
+"}\n"
+"QDateEdit{\n"
+"    background-color: rgba(52, 22, 85, 50%);\n"
+"    border-radius: 5px;\n"
+"    padding: 5px;\n"
+"    padding-left: 10px;\n"
+"    color: rgb(249, 245, 246);\n"
+"    font: 14pt \"Arial\";\n"
+"}\n"
+"QDateEdit::drop-down {\n"
+"    subcontrol-origin: padding;\n"
+"    subcontrol-position: top right;\n"
+"    width: 25px; \n"
+"    border-left-width: 3px;\n"
+"    border-top-right-radius: 3px;\n"
+"    border-bottom-right-radius: 3px;    \n"
+"    background-image: url(assert/drop-down-24);\n"
+"    background-position: center;\n"
+"    background-repeat: no-reperat;\n"
+" }\n"
+"QPushButton{\n"
+"    background-color: rgba(52, 22, 85, 70%);\n"
+"    color: rgb(249, 245, 246);\n"
+"    font: 14pt \"Arial\";\n"
+"    border-radius: 5px;\n"
+"    text-align: left;\n"
+"    padding: 2px 7px;\n"
+"}\n"
+"QPushButton:hover{\n"
+"    background-color: rgba(52, 22, 85, 100%);\n"
+"}")
+        self.page_m_2.setObjectName("page_m_2")
+        self.columnChart = QtWidgets.QWidget(parent=self.page_m_2)
+        self.columnChart.setGeometry(QtCore.QRect(20, 110, 411, 371))
+        self.columnChart.setObjectName("columnChart")
+        self.pieChart = QtWidgets.QWidget(parent=self.page_m_2)
+        self.pieChart.setGeometry(QtCore.QRect(449, 109, 301, 371))
+        self.pieChart.setObjectName("pieChart")
+        self.dateFrom = QtWidgets.QDateEdit(parent=self.page_m_2)
+        self.dateFrom.setGeometry(QtCore.QRect(170, 30, 131, 31))
+        self.dateFrom.setDateTime(QtCore.QDateTime(QtCore.QDate(2023, 1, 1), QtCore.QTime(0, 0, 0)))
+        self.dateFrom.setMinimumDate(QtCore.QDate(2023, 1, 1))
+        self.dateFrom.setCalendarPopup(True)
+        self.dateFrom.setObjectName("dateFrom")
+        self.dateTo = QtWidgets.QDateEdit(parent=self.page_m_2)
+        self.dateTo.setGeometry(QtCore.QRect(350, 30, 131, 31))
+        self.dateTo.setDateTime(QtCore.QDateTime(QtCore.QDate(2023, 9, 14), QtCore.QTime(0, 0, 0)))
+        self.dateTo.setMinimumDate(QtCore.QDate(2023, 1, 1))
+        self.dateTo.setCalendarPopup(True)
+        self.dateTo.setObjectName("dateTo")
+        self.LB_FROM = QtWidgets.QLabel(parent=self.page_m_2)
+        self.LB_FROM.setGeometry(QtCore.QRect(130, 30, 31, 31))
+        self.LB_FROM.setObjectName("LB_FROM")
+        self.LB_TO = QtWidgets.QLabel(parent=self.page_m_2)
+        self.LB_TO.setGeometry(QtCore.QRect(310, 30, 41, 31))
+        self.LB_TO.setObjectName("LB_TO")
+        self.btn_m_delChart = QtWidgets.QPushButton(parent=self.page_m_2)
+        self.btn_m_delChart.setGeometry(QtCore.QRect(640, 29, 112, 32))
+        self.btn_m_delChart.setMinimumSize(QtCore.QSize(0, 32))
+        self.btn_m_delChart.setStyleSheet("")
+        icon13 = QtGui.QIcon()
+        icon13.addPixmap(QtGui.QPixmap("assert/del.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btn_m_delChart.setIcon(icon13)
+        self.btn_m_delChart.setIconSize(QtCore.QSize(23, 23))
+        self.btn_m_delChart.setObjectName("btn_m_delChart")
+        self.label = QtWidgets.QLabel(parent=self.page_m_2)
+        self.label.setGeometry(QtCore.QRect(180, 510, 391, 31))
+        self.label.setStyleSheet("color: rgb(249, 245, 246);\n"
+"font: 18pt \"Arial\";")
+        self.label.setObjectName("label")
+        self.sW_main.addWidget(self.page_m_2)
+        self.page_m_3 = QtWidgets.QWidget()
+        self.page_m_3.setObjectName("page_m_3")
+        self.sW_main.addWidget(self.page_m_3)
+        self.page_m_4 = QtWidgets.QWidget()
+        self.page_m_4.setObjectName("page_m_4")
+        self.sW_main.addWidget(self.page_m_4)
+        self.page_m_5 = QtWidgets.QWidget()
+        self.page_m_5.setObjectName("page_m_5")
+        self.sW_main.addWidget(self.page_m_5)
+        self.page_m_6 = QtWidgets.QWidget()
+        self.page_m_6.setObjectName("page_m_6")
+        self.sW_main.addWidget(self.page_m_6)
+        self.page_m_7 = QtWidgets.QWidget()
+        self.page_m_7.setObjectName("page_m_7")
+        self.sW_main.addWidget(self.page_m_7)
         self.Background = QtWidgets.QLabel(parent=self.centralwidget)
         self.Background.setEnabled(True)
         self.Background.setGeometry(QtCore.QRect(0, 0, 810, 560))
@@ -238,7 +354,7 @@ class Ui_Studious(object):
         self.Background.setFocusPolicy(QtCore.Qt.FocusPolicy.NoFocus)
         self.Background.setContextMenuPolicy(QtCore.Qt.ContextMenuPolicy.NoContextMenu)
         self.Background.setAutoFillBackground(False)
-        self.Background.setStyleSheet("border-image: url(assert/Background.jpg);")
+        self.Background.setStyleSheet("border-image: url(assert/background.jpg);")
         self.Background.setFrameShape(QtWidgets.QFrame.Shape.NoFrame)
         self.Background.setFrameShadow(QtWidgets.QFrame.Shadow.Plain)
         self.Background.setLineWidth(0)
@@ -252,20 +368,25 @@ class Ui_Studious(object):
         Studious.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(Studious)
+        self.sW_main.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(Studious)
 
     def retranslateUi(self, Studious):
         _translate = QtCore.QCoreApplication.translate
         Studious.setWindowTitle(_translate("Studious", "Studious"))
         self.btn_lB_menu.setText(_translate("Studious", "  MENU"))
-        self.btn_lB_pom.setText(_translate("Studious", "  Pomodoro"))
-        self.btn_lB_chart.setText(_translate("Studious", "  Thống kê"))
-        self.btn_lB_habit.setText(_translate("Studious", "  Thói Quen"))
-        self.btn_lB_botChat.setText(_translate("Studious", "  BotChat"))
-        self.btn_lB_flashCard.setText(_translate("Studious", "  FlashCard"))
-        self.btn_lB_setting.setText(_translate("Studious", "  Cài Đặt"))
-        self.btn_lB_about.setText(_translate("Studious", "  Giới Thiệu"))
+        self.btn_lB_1.setText(_translate("Studious", "  Pomodoro"))
+        self.btn_lB_2.setText(_translate("Studious", "  Thống kê"))
+        self.btn_lB_3.setText(_translate("Studious", "  Thói Quen"))
+        self.btn_lB_4.setText(_translate("Studious", "  BotChat"))
+        self.btn_lB_5.setText(_translate("Studious", "  FlashCard"))
+        self.btn_lB_6.setText(_translate("Studious", "  Cài Đặt"))
+        self.btn_lB_7.setText(_translate("Studious", "  Giới Thiệu"))
         self.lb_m_time.setText(_translate("Studious", "25:00"))
         self.lb_m_quote.setText(_translate("Studious", "CUỘC ĐỜI THẬT ĐẸP TUYỆT VỜI"))
         self.cB_m_task.setItemText(0, _translate("Studious", "Học"))
         self.cB_m_task.setItemText(1, _translate("Studious", "Làm việc"))
+        self.LB_FROM.setText(_translate("Studious", "Từ"))
+        self.LB_TO.setText(_translate("Studious", "Đến"))
+        self.btn_m_delChart.setText(_translate("Studious", "Xoá dữ liệu"))
+        self.label.setText(_translate("Studious", "Bạn đã sử dụng Pomodoro 1 giờ ngày hôm nay"))
