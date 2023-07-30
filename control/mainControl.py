@@ -110,7 +110,7 @@ class StudiousFunc:
         Fwgs.btn_next.clicked.connect(self.next_clock)
         Fwgs.btn_audio.clicked.connect(self.onoff_audio)
         Fwgs.cB_task.setCurrentText(wgs.cB_m_task.currentText())
-        Fwgs.btn_exit.clicked.connect(lambda: print("Huy lỏd non vl fix dễ vl") or Fwgs.close())
+        Fwgs.btn_exit.clicked.connect(lambda: Fwgs.close())
         Fwgs.bottomQuote.setText(self.qoutes)
 
 
@@ -134,6 +134,12 @@ class fullScreenFunc(StudiousFS):
 
     def close_fs(self):
         Fwgs.close()
+
+    def focusOutEvent(self, event):
+        # Prevent the window from losing focus
+        self.activateWindow()
+
+        return super().event(event)
 
 class countdown:
     def __init__(self, work_time:int, rest_time:int):
@@ -159,9 +165,14 @@ class countdown:
             # Format the remaining time as MM:SS
             self.minutes, self.seconds = divmod(self.time_left, 60)
             wgs.lb_m_time.setText(f"{self.minutes:02}:{self.seconds:02}")
-            try:    Pwgs.lb_time.setText(f"{self.minutes:02}:{self.seconds:02}")
+            wgs.lb_m_time.setStyleSheet('color: rgb(251, 238, 172)')
+            try:    
+                Pwgs.lb_time.setText(f"{self.minutes:02}:{self.seconds:02}")
+                Pwgs.lb_m_time.setStyleSheet('color: rgb(251, 238, 172)')
             except: pass
-            try:    Fwgs.lb_time.setText(f"{self.minutes:02}:{self.seconds:02}")
+            try:    
+                Fwgs.lb_time.setText(f"{self.minutes:02}:{self.seconds:02}")
+                Fwgs.lb_time.setStyleSheet('color: rgb(251, 238, 172)')
             except: pass
         else:
             self.timer.stop()
