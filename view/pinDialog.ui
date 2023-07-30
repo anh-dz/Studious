@@ -11,7 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Studious - Pin Task </string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>assert/logo.png</normaloff>assert/logo.png</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(33, 37, 43);
@@ -25,9 +29,9 @@ qproperty-margin: auto;
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>40</y>
+     <y>10</y>
      <width>591</width>
-     <height>61</height>
+     <height>91</height>
     </rect>
    </property>
    <property name="text">
@@ -40,7 +44,7 @@ qproperty-margin: auto;
      <x>30</x>
      <y>120</y>
      <width>591</width>
-     <height>61</height>
+     <height>91</height>
     </rect>
    </property>
    <property name="text">
