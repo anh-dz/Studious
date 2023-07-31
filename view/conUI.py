@@ -74,5 +74,6 @@ class ViewControl(QMainWindow):
     
     def testComboBoxColor(self):
         self.ui.cB_m_task.clear()
-        self.ui.cB_m_task.addItem(create_colored_icon(QColor('blue')), "Học")
+        self.ui.cB_m_task.addItem(create_colored_icon(QColor('blue')), "Học Toán")
+        self.ui.cB_m_task.addItem(create_colored_icon(QColor('green')), "Học IELTS")
         self.ui.cB_m_task.addItem(create_colored_icon(QColor('red')), "Làm việc")

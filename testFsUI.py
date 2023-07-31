@@ -1,6 +1,6 @@
 
 import sys
-from fsUI import *
+from view.fsUI import *
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

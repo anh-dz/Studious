@@ -50,8 +50,6 @@ class StudiousFS(QWidget):
 "    selection-background-color: rgb(39, 44, 54);\n"
 "}")
         self.cB_task.setObjectName("self.cB_task")
-        self.cB_task.addItem(create_colored_icon(QColor('blue')), "Học")
-        self.cB_task.addItem(create_colored_icon(QColor('red')), "Làm việc")
 
         self.lb_time = QLabel("25:00", self)
         self.lb_time.setStyleSheet("font: 128pt \"Arial\";\n"
@@ -113,6 +111,8 @@ class StudiousFS(QWidget):
         self.btn_audio.setIcon(audioIcon)
         self.btn_audio.setIconSize(QSize(72, 72))
 
-        # self.cB_task.addItem(create_colored_icon(QColor('blue')), "Học")
+        self.cB_task.addItem(create_colored_icon(QColor('blue')), "Học Toán")
+        self.cB_task.addItem(create_colored_icon(QColor('green')), "Học IELTS")
+        self.cB_task.addItem(create_colored_icon(QColor('red')), "Làm việc")
 
         self.showFullScreen()

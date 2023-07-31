@@ -179,7 +179,7 @@ class Ui_Studious(object):
         self.sW_main.setObjectName("sW_main")
         self.page_m_pom = QtWidgets.QWidget()
         self.page_m_pom.setStyleSheet("QLabel{\n"
-"    font: 63pt \"Arial\";\n"
+"    font: 68pt \"Arial\";\n"
 "    qproperty-alignment: \'AlignCenter\';\n"
 "    qproperty-margin: auto;\n"
 "}")
@@ -259,25 +259,6 @@ class Ui_Studious(object):
         self.page_m_2.setStyleSheet("* {\n"
 "    font: 18pt \"Arial\";\n"
 "}\n"
-"QDateEdit{\n"
-"    background-color: rgba(52, 22, 85, 50%);\n"
-"    border-radius: 5px;\n"
-"    padding: 5px;\n"
-"    padding-left: 10px;\n"
-"    color: rgb(249, 245, 246);\n"
-"    font: 14pt \"Arial\";\n"
-"}\n"
-"QDateEdit::drop-down {\n"
-"    subcontrol-origin: padding;\n"
-"    subcontrol-position: top right;\n"
-"    width: 25px; \n"
-"    border-left-width: 3px;\n"
-"    border-top-right-radius: 3px;\n"
-"    border-bottom-right-radius: 3px;    \n"
-"    background-image: url(assert/drop-down-24);\n"
-"    background-position: center;\n"
-"    background-repeat: no-reperat;\n"
-" }\n"
 "QPushButton{\n"
 "    background-color: rgba(52, 22, 85, 70%);\n"
 "    color: rgb(249, 245, 246);\n"
@@ -291,29 +272,19 @@ class Ui_Studious(object):
 "}")
         self.page_m_2.setObjectName("page_m_2")
         self.columnChart = QtWidgets.QWidget(parent=self.page_m_2)
-        self.columnChart.setGeometry(QtCore.QRect(20, 110, 411, 371))
+        self.columnChart.setGeometry(QtCore.QRect(20, 90, 412, 392))
+        self.columnChart.setMinimumSize(QtCore.QSize(412, 392))
         self.columnChart.setObjectName("columnChart")
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.columnChart)
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout.setObjectName("verticalLayout")
         self.pieChart = QtWidgets.QWidget(parent=self.page_m_2)
-        self.pieChart.setGeometry(QtCore.QRect(449, 109, 301, 371))
+        self.pieChart.setGeometry(QtCore.QRect(449, 89, 302, 392))
+        self.pieChart.setMinimumSize(QtCore.QSize(302, 392))
         self.pieChart.setObjectName("pieChart")
-        self.dateFrom = QtWidgets.QDateEdit(parent=self.page_m_2)
-        self.dateFrom.setGeometry(QtCore.QRect(170, 30, 131, 31))
-        self.dateFrom.setDateTime(QtCore.QDateTime(QtCore.QDate(2023, 1, 1), QtCore.QTime(0, 0, 0)))
-        self.dateFrom.setMinimumDate(QtCore.QDate(2023, 1, 1))
-        self.dateFrom.setCalendarPopup(True)
-        self.dateFrom.setObjectName("dateFrom")
-        self.dateTo = QtWidgets.QDateEdit(parent=self.page_m_2)
-        self.dateTo.setGeometry(QtCore.QRect(350, 30, 131, 31))
-        self.dateTo.setDateTime(QtCore.QDateTime(QtCore.QDate(2023, 9, 14), QtCore.QTime(0, 0, 0)))
-        self.dateTo.setMinimumDate(QtCore.QDate(2023, 1, 1))
-        self.dateTo.setCalendarPopup(True)
-        self.dateTo.setObjectName("dateTo")
-        self.LB_FROM = QtWidgets.QLabel(parent=self.page_m_2)
-        self.LB_FROM.setGeometry(QtCore.QRect(130, 30, 31, 31))
-        self.LB_FROM.setObjectName("LB_FROM")
-        self.LB_TO = QtWidgets.QLabel(parent=self.page_m_2)
-        self.LB_TO.setGeometry(QtCore.QRect(310, 30, 41, 31))
-        self.LB_TO.setObjectName("LB_TO")
+        self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.pieChart)
+        self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.btn_m_delChart = QtWidgets.QPushButton(parent=self.page_m_2)
         self.btn_m_delChart.setGeometry(QtCore.QRect(640, 29, 112, 32))
         self.btn_m_delChart.setMinimumSize(QtCore.QSize(0, 32))
@@ -324,10 +295,19 @@ class Ui_Studious(object):
         self.btn_m_delChart.setIconSize(QtCore.QSize(23, 23))
         self.btn_m_delChart.setObjectName("btn_m_delChart")
         self.label = QtWidgets.QLabel(parent=self.page_m_2)
-        self.label.setGeometry(QtCore.QRect(180, 510, 391, 31))
+        self.label.setGeometry(QtCore.QRect(180, 500, 461, 41))
         self.label.setStyleSheet("color: rgb(249, 245, 246);\n"
 "font: 18pt \"Arial\";")
         self.label.setObjectName("label")
+        self.cB_chooseDate = QtWidgets.QComboBox(parent=self.page_m_2)
+        self.cB_chooseDate.setGeometry(QtCore.QRect(150, 30, 171, 31))
+        self.cB_chooseDate.setStyleSheet("")
+        self.cB_chooseDate.setObjectName("cB_chooseDate")
+        self.cB_chooseDate.addItem("")
+        self.cB_chooseDate.addItem("")
+        self.cB_chooseDate.addItem("")
+        self.cB_chooseDate.addItem("")
+        self.cB_chooseDate.addItem("")
         self.sW_main.addWidget(self.page_m_2)
         self.page_m_3 = QtWidgets.QWidget()
         self.page_m_3.setObjectName("page_m_3")
@@ -389,7 +369,10 @@ class Ui_Studious(object):
         self.lb_m_quote.setText(_translate("Studious", "CUỘC ĐỜI THẬT ĐẸP TUYỆT VỜI"))
         self.cB_m_task.setItemText(0, _translate("Studious", "Học"))
         self.cB_m_task.setItemText(1, _translate("Studious", "Làm việc"))
-        self.LB_FROM.setText(_translate("Studious", "Từ"))
-        self.LB_TO.setText(_translate("Studious", "Đến"))
         self.btn_m_delChart.setText(_translate("Studious", "Xoá dữ liệu"))
         self.label.setText(_translate("Studious", "Bạn đã sử dụng Pomodoro 1 giờ ngày hôm nay"))
+        self.cB_chooseDate.setItemText(0, _translate("Studious", "3 ngày"))
+        self.cB_chooseDate.setItemText(1, _translate("Studious", "7 ngày"))
+        self.cB_chooseDate.setItemText(2, _translate("Studious", "30 ngày"))
+        self.cB_chooseDate.setItemText(3, _translate("Studious", "90 ngày"))
+        self.cB_chooseDate.setItemText(4, _translate("Studious", "365 ngày"))

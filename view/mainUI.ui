@@ -394,7 +394,7 @@ QComboBox QAbstractItemView {
     <widget class="QWidget" name="page_m_pom">
      <property name="styleSheet">
       <string notr="true">QLabel{
-	font: 63pt &quot;Arial&quot;;
+	font: 68pt &quot;Arial&quot;;
 	qproperty-alignment: 'AlignCenter';
 	qproperty-margin: auto;
 }</string>
@@ -607,142 +607,51 @@ padding: 2px 7px;</string>
       <string notr="true">* {
 	font: 18pt &quot;Arial&quot;;
 }
-QDateEdit{
-	background-color: rgba(52, 22, 85, 50%);
-	border-radius: 5px;
-	padding: 5px;
-	padding-left: 10px;
-	color: rgb(249, 245, 246);
-	font: 14pt &quot;Arial&quot;;
-}
-QDateEdit::drop-down {
-	subcontrol-origin: padding;
-	subcontrol-position: top right;
-	width: 25px; 
-	border-left-width: 3px;
-	border-top-right-radius: 3px;
-	border-bottom-right-radius: 3px;	
-	background-image: url(assert/drop-down-24);
-	background-position: center;
-	background-repeat: no-reperat;
- }
 QPushButton{
-	background-color: rgba(52, 22, 85, 70%);
-	color: rgb(249, 245, 246);
-	font: 14pt &quot;Arial&quot;;
-	border-radius: 5px;
-	text-align: left;
-	padding: 2px 7px;
+    background-color: rgba(52, 22, 85, 70%);
+    color: rgb(249, 245, 246);
+    font: 14pt &quot;Arial&quot;;
+    border-radius: 5px;
+    text-align: left;
+    padding: 2px 7px;
 }
 QPushButton:hover{
-	background-color: rgba(52, 22, 85, 100%);
+    background-color: rgba(52, 22, 85, 100%);
 }</string>
      </property>
      <widget class="QWidget" name="columnChart" native="true">
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>110</y>
-        <width>411</width>
-        <height>371</height>
+        <y>90</y>
+        <width>412</width>
+        <height>392</height>
        </rect>
       </property>
+      <property name="minimumSize">
+       <size>
+        <width>412</width>
+        <height>392</height>
+       </size>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout"/>
      </widget>
      <widget class="QWidget" name="pieChart" native="true">
       <property name="geometry">
        <rect>
         <x>449</x>
-        <y>109</y>
-        <width>301</width>
-        <height>371</height>
+        <y>89</y>
+        <width>302</width>
+        <height>392</height>
        </rect>
       </property>
-     </widget>
-     <widget class="QDateEdit" name="dateFrom">
-      <property name="geometry">
-       <rect>
-        <x>170</x>
-        <y>30</y>
-        <width>131</width>
-        <height>31</height>
-       </rect>
+      <property name="minimumSize">
+       <size>
+        <width>302</width>
+        <height>392</height>
+       </size>
       </property>
-      <property name="dateTime">
-       <datetime>
-        <hour>0</hour>
-        <minute>0</minute>
-        <second>0</second>
-        <year>2023</year>
-        <month>1</month>
-        <day>1</day>
-       </datetime>
-      </property>
-      <property name="minimumDate">
-       <date>
-        <year>2023</year>
-        <month>1</month>
-        <day>1</day>
-       </date>
-      </property>
-      <property name="calendarPopup">
-       <bool>true</bool>
-      </property>
-     </widget>
-     <widget class="QDateEdit" name="dateTo">
-      <property name="geometry">
-       <rect>
-        <x>350</x>
-        <y>30</y>
-        <width>131</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="dateTime">
-       <datetime>
-        <hour>0</hour>
-        <minute>0</minute>
-        <second>0</second>
-        <year>2023</year>
-        <month>9</month>
-        <day>14</day>
-       </datetime>
-      </property>
-      <property name="minimumDate">
-       <date>
-        <year>2023</year>
-        <month>1</month>
-        <day>1</day>
-       </date>
-      </property>
-      <property name="calendarPopup">
-       <bool>true</bool>
-      </property>
-     </widget>
-     <widget class="QLabel" name="LB_FROM">
-      <property name="geometry">
-       <rect>
-        <x>130</x>
-        <y>30</y>
-        <width>31</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Từ</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="LB_TO">
-      <property name="geometry">
-       <rect>
-        <x>310</x>
-        <y>30</y>
-        <width>41</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Đến</string>
-      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_3"/>
      </widget>
      <widget class="QPushButton" name="btn_m_delChart">
       <property name="geometry">
@@ -780,9 +689,9 @@ QPushButton:hover{
       <property name="geometry">
        <rect>
         <x>180</x>
-        <y>510</y>
-        <width>391</width>
-        <height>31</height>
+        <y>500</y>
+        <width>461</width>
+        <height>41</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -792,6 +701,44 @@ font: 18pt &quot;Arial&quot;;</string>
       <property name="text">
        <string>Bạn đã sử dụng Pomodoro 1 giờ ngày hôm nay</string>
       </property>
+     </widget>
+     <widget class="QComboBox" name="cB_chooseDate">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>30</y>
+        <width>171</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <item>
+       <property name="text">
+        <string>3 ngày</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>7 ngày</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>30 ngày</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>90 ngày</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>365 ngày</string>
+       </property>
+      </item>
      </widget>
     </widget>
     <widget class="QWidget" name="page_m_3"/>
