@@ -15,7 +15,6 @@ class StudiousFunc:
 
         #check data file and dump data
         self.file = fileDataControl()
-        print(self.file.data_time)
 
         #random qoutes and print in app
         list_quotes = ["Chúng ta có thể gặp nhiều thất bại nhưng chúng ta không được bị đánh bại – Maya Angelou",
@@ -31,8 +30,7 @@ class StudiousFunc:
 
         #connect start/stop button with clock
         self.wtime, self.rtime = 25, 5
-        self.mtime = self.wtime
-        wgs.lb_m_time.setText(f"{self.mtime}:00")
+        wgs.lb_m_time.setText(f"{self.wtime}:00")
         wgs.btn_m_startstop.clicked.connect(self.start_clock)
         self.countdown = countdown(self.wtime, self.rtime)
         self.clock_onoff = False
@@ -61,29 +59,36 @@ class StudiousFunc:
         wgs.cB_m_task.currentIndexChanged.connect(self.on_combobox_changed)
 
         #Show notification
-        self.tray_icon = QSystemTrayIcon(self)
-        self.tray_menu = QMenu(self)
-        self.show_notification_action = QAction("Show Notification", self)
-        self.show_notification_action.triggered.connect(self.show_notification)
-        self.tray_menu.addAction(self.show_notification_action)
         
+
 
     #Func control app
     def start_clock(self):
         if self.clock_onoff == False:
             self.clock_onoff = True
             self.countdown.start_timer()
-            wgs.cB_m_task.setEnabled(not self.clock_onoff)
-        elif self.clock_onoff == True:
+            if self.countdown.work_or_rest == True:
+                wgs.cB_m_task.setEnabled(not self.countdown.work_or_rest)
+                try:
+                    Fwgs.cB_task.setEnabled(not self.countdown.work_or_rest)
+                except: pass
+            else:
+                wgs.cB_m_task.setEnabled(not self.countdown.work_or_rest)
+                try:
+                    Fwgs.cB_task.setEnabled(not self.countdown.work_or_rest)
+                except: pass
+        else:
             self.clock_onoff = False
-            self.countdown.stop_timer()
-            wgs.cB_m_task.setEnabled(not self.clock_onoff)
-    
+            self.countdown.stop_timer()    
     def next_clock(self):
-        self.countdown.next_timer()
-        if self.countdown.work_or_rest == False: 
+        if self.countdown.work_or_rest == True: 
             wgs.lb_m_time.setStyleSheet('color: rgb(251, 238, 172)')
-            try:    Fwgs.lb_time.setStyleSheet('color: rgb(251, 238, 172)')
+            self.file.dataTimeJson[self.file.ntime][wgs.cB_m_task.currentText()] += self.countdown.wtime-round(self.countdown.time_left/60)
+            self.file.writeDataTime()
+            wgs.cB_m_task.setEnabled(self.countdown.work_or_rest)
+            try:    
+                Fwgs.lb_time.setStyleSheet('color: rgb(251, 238, 172)')
+                Fwgs.cB_task.setEnabled(self.countdown.work_or_rest)
             except: pass
             try:    Pwgs.lb_time.setStyleSheet('color: rgb(251, 238, 172)')
             except: pass
@@ -93,15 +98,12 @@ class StudiousFunc:
             except: pass
             try:    Pwgs.lb_time.setStyleSheet('color: rgb(255, 255, 255)')
             except: pass
+        self.countdown.next_timer()
         self.clock_onoff = False
-        wgs.cB_m_task.setEnabled(True)
-        try:    Fwgs.cB_task.setEnabled(True)
+        wgs.lb_m_time.setText(f"{self.countdown.mtime}:00")
+        try: Pwgs.lb_time.setText(f"{self.countdown.mtime}:00")
         except: pass
-        self.mtime = self.countdown.mtime
-        wgs.lb_m_time.setText(f"{self.mtime}:00")
-        try: Pwgs.lb_time.setText(f"{self.mtime}:00")
-        except: pass
-        try: Fwgs.lb_time.setText(f"{self.mtime}:00")
+        try: Fwgs.lb_time.setText(f"{self.countdown.mtime}:00")
         except: pass
 
     def onoff_audio(self):
@@ -116,14 +118,14 @@ class StudiousFunc:
         try: selected_option = Fwgs.cB_task.currentText()
         except: selected_option = wgs.cB_m_task.currentText()
         try:
-            Pwgs.lb_task.setText(selected_option)
             wgs.cB_m_task.setCurrentText(selected_option)
+            Pwgs.lb_task.setText(selected_option)
         except: pass
     
     def start_dialog(self):
         self.diaLog = DialogFunc()
         if not self.countdown.work_or_rest:    Pwgs.lb_time.setStyleSheet('color: rgb(251, 238, 172)')
-        Pwgs.lb_time.setText(f"{self.mtime}:00")
+        Pwgs.lb_time.setText(f"{self.countdown.mtime}:00")
 
     def start_fs(self):
         self.fs = fullScreenFunc()
@@ -136,10 +138,8 @@ class StudiousFunc:
         Fwgs.cB_task.setCurrentText(wgs.cB_m_task.currentText())
         Fwgs.btn_exit.clicked.connect(lambda: Fwgs.close())
         Fwgs.bottomQuote.setText(self.qoutes)
+        Fwgs.cB_task.setEnabled(not self.clock_onoff)
 
-    def show_notification(self):
-        # Show a notification
-        self.tray_icon.showMessage("Notification", "This is a notification message.", QSystemTrayIcon.MessageIcon.Information)
 
 
 class DialogFunc:
@@ -212,7 +212,6 @@ class countdown:
         else:
             self.work_or_rest = True
             self.mtime = self.wtime
-            print("True")
             try:    Fwgs.lb_time.setStyleSheet('color: rgb(255, 255, 255)')
             except: pass
         self.time_left = self.mtime*60
