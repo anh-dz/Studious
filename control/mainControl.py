@@ -5,7 +5,7 @@ from PyQt6.QtMultimedia import *
 from random import choice
 from main import *
 from view import *
-from . createFileStartup import *
+from .fileDataControl import *
 
 class StudiousFunc:
     def __init__(self, widgets):
@@ -14,8 +14,8 @@ class StudiousFunc:
         wgs = widgets
 
         #check data file and dump data
-        self.default_file = default_file()
-        print(self.default_file.data_time)
+        self.file = fileDataControl()
+        print(self.file.data_time)
 
         #random qoutes and print in app
         list_quotes = ["Chúng ta có thể gặp nhiều thất bại nhưng chúng ta không được bị đánh bại – Maya Angelou",
@@ -88,6 +88,8 @@ class StudiousFunc:
             except: pass
         self.clock_onoff = False
         wgs.cB_m_task.setEnabled(True)
+        try:    Fwgs.cB_task.setEnabled(True)
+        except: pass
         self.mtime = self.countdown.mtime
         wgs.lb_m_time.setText(f"{self.mtime}:00")
         try: Pwgs.lb_time.setText(f"{self.mtime}:00")
