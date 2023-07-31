@@ -31,6 +31,10 @@
   <property name="windowTitle">
    <string>Studious</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>assert/logo.png</normaloff>assert/logo.png</iconset>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <property name="sizePolicy">
     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -357,30 +361,58 @@ QPushButton:hover{
 }
 QToolButton{
 	border: 0px;
+}
+QComboBox{
+	background-color: rgba(52, 22, 85, 50%);
+	border-radius: 5px;
+	padding: 5px;
+	padding-left: 10px;
+	color: rgb(249, 245, 246);
+	font: 14pt &quot;Arial&quot;;
+}
+QComboBox::drop-down {
+	subcontrol-origin: padding;
+	subcontrol-position: top right;
+	width: 25px; 
+	border-left-width: 3px;
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;	
+	background-image: url(assert/drop-down-24);
+	background-position: center;
+	background-repeat: no-reperat;
+ }
+QComboBox QAbstractItemView {
+	color: rgb(255, 121, 198);	
+	background-color: rgb(33, 37, 43);
+	padding: 10px;
+	selection-background-color: rgb(39, 44, 54);
 }</string>
     </property>
     <property name="currentIndex">
      <number>0</number>
     </property>
     <widget class="QWidget" name="page_m_pom">
+     <property name="styleSheet">
+      <string notr="true">QLabel{
+	font: 63pt &quot;Arial&quot;;
+	qproperty-alignment: 'AlignCenter';
+	qproperty-margin: auto;
+}</string>
+     </property>
      <widget class="QLabel" name="lb_m_time">
       <property name="geometry">
        <rect>
-        <x>280</x>
-        <y>200</y>
-        <width>211</width>
-        <height>111</height>
+        <x>240</x>
+        <y>180</y>
+        <width>311</width>
+        <height>141</height>
        </rect>
       </property>
       <property name="layoutDirection">
        <enum>Qt::LeftToRight</enum>
       </property>
       <property name="styleSheet">
-       <string notr="true">font: 50pt &quot;Arial&quot;;
-color: rgb(249, 245, 246);
-border: 0px;
-qproperty-alignment: 'AlignCenter';
-qproperty-margin: auto;</string>
+       <string notr="true">color: rgb(249, 245, 246);</string>
       </property>
       <property name="text">
        <string>25:00</string>
@@ -390,7 +422,7 @@ qproperty-margin: auto;</string>
       <property name="geometry">
        <rect>
         <x>690</x>
-        <y>40</y>
+        <y>30</y>
         <width>51</width>
         <height>51</height>
        </rect>
@@ -416,13 +448,13 @@ qproperty-margin: auto;</string>
       <property name="geometry">
        <rect>
         <x>40</x>
-        <y>450</y>
-        <width>661</width>
-        <height>91</height>
+        <y>442</y>
+        <width>662</width>
+        <height>120</height>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">font: 18pt &quot;Arial&quot;;
+       <string notr="true">font: 16pt &quot;Arial&quot;;
 color: rgb(249, 245, 246);
 padding: 2px 7px;</string>
       </property>
@@ -437,7 +469,7 @@ padding: 2px 7px;</string>
       <property name="geometry">
        <rect>
         <x>630</x>
-        <y>40</y>
+        <y>30</y>
         <width>51</width>
         <height>51</height>
        </rect>
@@ -486,7 +518,7 @@ padding: 2px 7px;</string>
       <property name="geometry">
        <rect>
         <x>310</x>
-        <y>320</y>
+        <y>330</y>
         <width>160</width>
         <height>71</height>
        </rect>
@@ -550,40 +582,13 @@ padding: 2px 7px;</string>
       <property name="geometry">
        <rect>
         <x>270</x>
-        <y>150</y>
+        <y>130</y>
         <width>251</width>
         <height>31</height>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">QComboBox{
-	background-color: rgba(52, 22, 85, 50%);
-	border-radius: 5px;
-	padding: 5px;
-	padding-left: 10px;
-	color: rgb(249, 245, 246);
-	font: 14pt &quot;Arial&quot;;
-}
-QComboBox:hover{
-
-}
-QComboBox::drop-down {
-	subcontrol-origin: padding;
-	subcontrol-position: top right;
-	width: 25px; 
-	border-left-width: 3px;
-	border-top-right-radius: 3px;
-	border-bottom-right-radius: 3px;	
-	background-image: url(assert/drop-down-24);
-	background-position: center;
-	background-repeat: no-reperat;
- }
-QComboBox QAbstractItemView {
-	color: rgb(255, 121, 198);	
-	background-color: rgb(33, 37, 43);
-	padding: 10px;
-	selection-background-color: rgb(39, 44, 54);
-}</string>
+       <string notr="true"/>
       </property>
       <item>
        <property name="text">
@@ -599,7 +604,10 @@ QComboBox QAbstractItemView {
     </widget>
     <widget class="QWidget" name="page_m_2">
      <property name="styleSheet">
-      <string notr="true">QDateEdit{
+      <string notr="true">* {
+	font: 18pt &quot;Arial&quot;;
+}
+QDateEdit{
 	background-color: rgba(52, 22, 85, 50%);
 	border-radius: 5px;
 	padding: 5px;
@@ -607,6 +615,17 @@ QComboBox QAbstractItemView {
 	color: rgb(249, 245, 246);
 	font: 14pt &quot;Arial&quot;;
 }
+QDateEdit::drop-down {
+	subcontrol-origin: padding;
+	subcontrol-position: top right;
+	width: 25px; 
+	border-left-width: 3px;
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;	
+	background-image: url(assert/drop-down-24);
+	background-position: center;
+	background-repeat: no-reperat;
+ }
 QPushButton{
 	background-color: rgba(52, 22, 85, 70%);
 	color: rgb(249, 245, 246);
@@ -642,7 +661,7 @@ QPushButton:hover{
      <widget class="QDateEdit" name="dateFrom">
       <property name="geometry">
        <rect>
-        <x>160</x>
+        <x>170</x>
         <y>30</y>
         <width>131</width>
         <height>31</height>
@@ -657,6 +676,16 @@ QPushButton:hover{
         <month>1</month>
         <day>1</day>
        </datetime>
+      </property>
+      <property name="minimumDate">
+       <date>
+        <year>2023</year>
+        <month>1</month>
+        <day>1</day>
+       </date>
+      </property>
+      <property name="calendarPopup">
+       <bool>true</bool>
       </property>
      </widget>
      <widget class="QDateEdit" name="dateTo">
@@ -674,9 +703,19 @@ QPushButton:hover{
         <minute>0</minute>
         <second>0</second>
         <year>2023</year>
+        <month>9</month>
+        <day>14</day>
+       </datetime>
+      </property>
+      <property name="minimumDate">
+       <date>
+        <year>2023</year>
         <month>1</month>
         <day>1</day>
-       </datetime>
+       </date>
+      </property>
+      <property name="calendarPopup">
+       <bool>true</bool>
       </property>
      </widget>
      <widget class="QLabel" name="LB_FROM">

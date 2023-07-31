@@ -13,9 +13,13 @@ class Ui_Dialog(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(653, 219)
+        Dialog.setFixedSize(653, 219)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("assert/logo.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        Dialog.setWindowIcon(icon)
         Dialog.setStyleSheet("background-color: rgb(33, 37, 43);\n"
 "color: rgb(249, 245, 246);\n"
 "font: 18pt \"Arial\";\n"
@@ -23,10 +27,10 @@ class Ui_Dialog(QtWidgets.QMainWindow):
 "qproperty-margin: auto;\n"
 "")
         self.lb_task = QtWidgets.QLabel(parent=Dialog)
-        self.lb_task.setGeometry(QtCore.QRect(30, 40, 591, 61))
+        self.lb_task.setGeometry(QtCore.QRect(30, 10, 591, 91))
         self.lb_task.setObjectName("lb_task")
         self.lb_time = QtWidgets.QLabel(parent=Dialog)
-        self.lb_time.setGeometry(QtCore.QRect(30, 120, 591, 61))
+        self.lb_time.setGeometry(QtCore.QRect(30, 120, 591, 91))
         self.lb_time.setObjectName("lb_time")
 
         self.retranslateUi(Dialog)
@@ -34,6 +38,6 @@ class Ui_Dialog(QtWidgets.QMainWindow):
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "PinDialog"))
+        Dialog.setWindowTitle(_translate("Dialog", "Studious - Pin Task "))
         self.lb_task.setText(_translate("Dialog", "TASK"))
         self.lb_time.setText(_translate("Dialog", "TIME"))
