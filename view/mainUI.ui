@@ -31,6 +31,10 @@
   <property name="windowTitle">
    <string>Studious</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>assert/logo.png</normaloff>assert/logo.png</iconset>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <property name="sizePolicy">
     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
