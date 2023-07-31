@@ -56,6 +56,13 @@ class StudiousFunc:
 
         #Change label task connect
         wgs.cB_m_task.currentIndexChanged.connect(self.on_combobox_changed)
+
+        #Show notification
+        self.tray_icon = QSystemTrayIcon(self)
+        self.tray_menu = QMenu(self)
+        self.show_notification_action = QAction("Show Notification", self)
+        self.show_notification_action.triggered.connect(self.show_notification)
+        self.tray_menu.addAction(self.show_notification_action)
         
 
     #Func control app
@@ -112,6 +119,10 @@ class StudiousFunc:
         Fwgs.cB_task.setCurrentText(wgs.cB_m_task.currentText())
         Fwgs.btn_fs.clicked.connect(self.fs.close_fs)
         Fwgs.bottomQuote.setText(self.qoutes)
+
+    def show_notification(self):
+        # Show a notification
+        self.tray_icon.showMessage("Notification", "This is a notification message.", QSystemTrayIcon.MessageIcon.Information)
 
 
 class DialogFunc:
