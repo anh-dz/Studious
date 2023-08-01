@@ -389,7 +389,7 @@ QComboBox QAbstractItemView {
 }</string>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="page_m_pom">
      <property name="styleSheet">
@@ -634,7 +634,6 @@ QPushButton:hover{
         <height>392</height>
        </size>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout"/>
      </widget>
      <widget class="QWidget" name="pieChart" native="true">
       <property name="geometry">
@@ -651,7 +650,6 @@ QPushButton:hover{
         <height>392</height>
        </size>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout_3"/>
      </widget>
      <widget class="QPushButton" name="btn_m_delChart">
       <property name="geometry">
@@ -740,6 +738,11 @@ font: 18pt &quot;Arial&quot;;</string>
        </property>
       </item>
      </widget>
+     <zorder>btn_m_delChart</zorder>
+     <zorder>label</zorder>
+     <zorder>cB_chooseDate</zorder>
+     <zorder>columnChart</zorder>
+     <zorder>pieChart</zorder>
     </widget>
     <widget class="QWidget" name="page_m_3"/>
     <widget class="QWidget" name="page_m_4"/>

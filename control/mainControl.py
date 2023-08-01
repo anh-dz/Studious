@@ -224,7 +224,7 @@ class countdown:
 
 class chart:
     def __init__(self) -> None:
-        wgs.columnChart = pg.PlotWidget()
+        self.myChart = pg.PlotWidget()
 
         self.load_data_and_plot()
     
@@ -234,7 +234,7 @@ class chart:
             data = json.load(f)
 
         # Create the line chart
-        wgs.columnChart.setBackground("w")  # Set the background color to white
+        self.myChart.setBackground("w")  # Set the background color to white
 
         # Plot three lines from the data
         pen_colors = ["b", "r", "g"]
@@ -243,36 +243,41 @@ class chart:
             x_data = list(range(len(data[key])))
             y_data = data[key]
             pen = pg.mkPen(pen_colors[i], width=2)
-            line = wgs.columnChart.plot(x_data, y_data, pen=pen, name=key)
+            line = self.myChart.plot(x_data, y_data, pen=pen, name=key)
             line.setSymbolBrush(pg.mkColor(pen_colors[i]))
             line.setSymbolPen(pg.mkPen('w', width=1))
             line.setSymbolSize(8)
 
         # Add axis labels and title
-        wgs.columnChart.setLabel("bottom", "X Axis")
-        wgs.columnChart.setLabel("left", "Y Axis")
-        wgs.columnChart.setTitle("Line Chart with Three Lines")
+        self.myChart.setLabel("bottom", "X Axis")
+        self.myChart.setLabel("left", "Y Axis")
+        self.myChart.setTitle("Line Chart with Three Lines")
 
         # Add a legend
-        legend = wgs.columnChart.addLegend()
+        legend = self.myChart.addLegend()
         for i, name in enumerate(line_names):
-            legend.addItem(wgs.columnChart.getPlotItem().listDataItems()[i], name)
+            legend.addItem(self.myChart.getPlotItem().listDataItems()[i], name)
 
         # Enable grid
-        wgs.columnChart.showGrid(x=True, y=True)
+        self.myChart.showGrid(x=True, y=True)
 
         # Enable mouse interaction (pan and zoom)
-        wgs.columnChart.setMouseEnabled(x=True, y=True)
+        self.myChart.setMouseEnabled(x=True, y=True)
 
         # Enable anti-aliasing for smoother lines
-        wgs.columnChart.setAntialiasing(True)
+        self.myChart.setAntialiasing(True)
 
         # Update the plot
-        wgs.columnChart.autoRange()
+        self.myChart.autoRange()
+
+        self.layout = QVBoxLayout(wgs.columnChart)
+        wgs.columnChart.setLayout(self.layout)
+
+        self.layout.addWidget(self.myChart)
 
     def resizeEvent(self, event):
         super().resizeEvent(event)
-        wgs.columnChart.autoRange()
+        self.myChart.autoRange()
 
     def lineChart(self):
         pass
