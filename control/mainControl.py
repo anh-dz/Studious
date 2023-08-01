@@ -275,10 +275,6 @@ class chart:
 
         self.layout.addWidget(self.myChart)
 
-    def resizeEvent(self, event):
-        super().resizeEvent(event)
-        self.myChart.autoRange()
-
     def lineChart(self):
         pass
     def circleChart(self):
