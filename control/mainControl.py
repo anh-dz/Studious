@@ -2,6 +2,9 @@ from PyQt6.QtCore import *
 from PyQt6.QtWidgets import *
 from PyQt6.QtGui import *
 from PyQt6.QtMultimedia import *
+import sys
+import json
+import pyqtgraph as pg
 from random import choice
 from main import *
 from view import *
@@ -60,6 +63,9 @@ class StudiousFunc:
 
         #Show notification
         
+
+        #Create chart
+        self.chart = chart()
 
 
     #Func control app
@@ -216,3 +222,59 @@ class countdown:
             except: pass
         self.time_left = self.mtime*60
 
+class chart:
+    def __init__(self) -> None:
+        wgs.columnChart = pg.PlotWidget()
+
+        self.load_data_and_plot()
+    
+    def load_data_and_plot(self):
+        # Load data from the JSON file
+        with open("data.json") as f:
+            data = json.load(f)
+
+        # Create the line chart
+        wgs.columnChart.setBackground("w")  # Set the background color to white
+
+        # Plot three lines from the data
+        pen_colors = ["b", "r", "g"]
+        line_names = list(data.keys())
+        for i, key in enumerate(data.keys()):
+            x_data = list(range(len(data[key])))
+            y_data = data[key]
+            pen = pg.mkPen(pen_colors[i], width=2)
+            line = wgs.columnChart.plot(x_data, y_data, pen=pen, name=key)
+            line.setSymbolBrush(pg.mkColor(pen_colors[i]))
+            line.setSymbolPen(pg.mkPen('w', width=1))
+            line.setSymbolSize(8)
+
+        # Add axis labels and title
+        wgs.columnChart.setLabel("bottom", "X Axis")
+        wgs.columnChart.setLabel("left", "Y Axis")
+        wgs.columnChart.setTitle("Line Chart with Three Lines")
+
+        # Add a legend
+        legend = wgs.columnChart.addLegend()
+        for i, name in enumerate(line_names):
+            legend.addItem(wgs.columnChart.getPlotItem().listDataItems()[i], name)
+
+        # Enable grid
+        wgs.columnChart.showGrid(x=True, y=True)
+
+        # Enable mouse interaction (pan and zoom)
+        wgs.columnChart.setMouseEnabled(x=True, y=True)
+
+        # Enable anti-aliasing for smoother lines
+        wgs.columnChart.setAntialiasing(True)
+
+        # Update the plot
+        wgs.columnChart.autoRange()
+
+    def resizeEvent(self, event):
+        super().resizeEvent(event)
+        wgs.columnChart.autoRange()
+
+    def lineChart(self):
+        pass
+    def circleChart(self):
+        pass

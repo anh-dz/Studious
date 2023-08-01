@@ -28,7 +28,7 @@ class fileDataControl:
                 ['Học', '0'],
                 ['Làm việc', '0']
             ]
-        dataTime = {f"{self.ntime}":{"Học":0, "Làm việc":0}}
+        dataTime = {f"{self.ntime}":{"Học Toán":0, "Học IELTS":0, "Làm việc":0}}
         with open('.\\data\\time.csv', 'w', newline='', encoding="utf-8") as csvfile:
             writer = csv.writer(csvfile)
 
@@ -44,7 +44,7 @@ class fileDataControl:
             self.dataTimeJson = json.load(jsonfile)
         if self.ntime not in self.dataTimeJson:
             with open(".\\data\\time.json", "w", encoding="utf-8") as jsonfile:
-                    self.dataTimeJson[f"{self.ntime}"] = {"Học":0, "Làm việc":0}
+                    self.dataTimeJson[f"{self.ntime}"] = {"Học Toán":0, "Học IELTS":0, "Làm việc":0}
                     json.dump(self.dataTimeJson, jsonfile,  ensure_ascii=False)
     
     def readDataTimeChart(self):
