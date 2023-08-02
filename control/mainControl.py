@@ -2,10 +2,11 @@ from PyQt6.QtCore import *
 from PyQt6.QtWidgets import *
 from PyQt6.QtGui import *
 from PyQt6.QtMultimedia import *
+from PyQt6.QtCharts import *
 import sys
 import json
-import pyqtgraph as pg
 from random import choice
+import datetime
 from main import *
 from view import *
 from .fileDataControl import *
@@ -47,9 +48,10 @@ class StudiousFunc:
         self.music_onoff = True
         self.media_player = QMediaPlayer()
         self.audio = QAudioOutput()
-        self.audio.setVolume(40)
+        self.audio.setVolume(0.2)
         self.media_player.setAudioOutput(self.audio)
         self.media_player.setSource(self.media_content)
+        self.media_player.loops
         self.onoff_audio()
 
         #Turn on pinDialog
@@ -66,7 +68,7 @@ class StudiousFunc:
 
         #Create chart
         self.chart = chart()
-
+        wgs.cB_chooseDate.currentIndexChanged.connect(self.chart.dataChange)
 
     #Func control app
     def start_clock(self):
@@ -189,8 +191,7 @@ class countdown:
         self.timer.start(1000)  # Update every second
 
     def stop_timer(self):
-        try: self.timer.disconnect()
-        except: pass
+        self.timer.disconnect()
 
     def update_countdown(self):
         self.time_left -= 1
@@ -206,8 +207,8 @@ class countdown:
                 Fwgs.lb_time.setText(f"{self.minutes:02}:{self.seconds:02}")
             except: pass
         else:
-            self.timer.stop()
             self.next_timer()
+            self.timer.stop()
 
     def next_timer(self):
         try: self.timer.disconnect()
@@ -224,57 +225,101 @@ class countdown:
 
 class chart:
     def __init__(self) -> None:
-        wgs.columnChart = pg.PlotWidget()
+        self.addChart = False
+        self.dataChange()
 
-        self.load_data_and_plot()
+    def dataChange(self):
+        if self.addChart:
+            wgs.columnChart.layout().removeWidget(self.colChart._chart_view)
+            wgs.pieChart.layout().removeWidget(self._chart_view)
+        current_date = datetime.datetime.now().date()
+        self.curentChoose = wgs.cB_chooseDate.currentText()
+        if self.curentChoose == "3 ngày":
+            self.time = []
+            for i in range(3, 0, -1):
+                delta = datetime.timedelta(days=i)
+                last_day = current_date - delta
+                self.time.append(last_day.strftime('%d/%m'))
+            self.totalTime = [4, 3, 5]
+            sum_percentrage = sum(self.totalTime)/100
+            self.detailTime = [[f"Học Toán ({round(6/sum_percentrage)}%)", 6], [f"Học IELTS ({round(1/sum_percentrage)}%)", 1], [f"Làm việc ({round(5/sum_percentrage)}%)", 5]]
+            self.columnChart()
+            self.circleChart()
+
+        if self.curentChoose == "7 ngày":
+            self.time = []
+            for i in range(7, 0, -1):
+                delta = datetime.timedelta(days=i)
+                last_day = current_date - delta
+                self.time.append(last_day.strftime('%d/%m'))
+            self.totalTime = [4, 3, 5, 6, 2, 4, 5]
+            sum_percentrage = sum(self.totalTime)/100
+            self.detailTime = [[f"Học Toán ({round(11/sum_percentrage)}%)", 11], [f"Học IELTS ({round(8/sum_percentrage)}%)", 8], [f"Làm việc ({round(10/sum_percentrage)}%)", 10]]
+            self.columnChart()
+            self.circleChart()
+
+        if self.curentChoose == "30 ngày":
+            self.time = []
+            for i in range(28, 6, -7):
+                delta = datetime.timedelta(days=i)
+                last_day = current_date - delta
+                self.time.append(f"{last_day.strftime('%d/%m')} - {(last_day + datetime.timedelta(days=7)).strftime('%d/%m')}")
+                print(f"{last_day.strftime('%d/%m')} - {(last_day + datetime.timedelta(days=7)).strftime('%d/%m')}")
+            self.totalTime = [25, 16, 20, 13]
+            sum_percentrage = sum(self.totalTime)/100
+            self.detailTime = [[f"Học Toán ({round(27/sum_percentrage)}%)", 27], [f"Học IELTS ({round(18/sum_percentrage)}%)", 17], [f"Làm việc ({round(40/sum_percentrage)}%)", 40]]
+            self.columnChart()
+            self.circleChart()
+
+    def columnChart(self):
+        self.colData = QBarSet("Tổng thời gian tập trung")
+
+        self.colData.append(self.totalTime)
+
+        self.colSerise = QBarSeries()
+        self.colSerise.append(self.colData)
+
+        self.colChart = QChart()
+        self.colChart.addSeries(self.colSerise)
+        self.colChart.setTitle(f"Biểu đồ so sánh tổng thời gian tập trung trong {self.curentChoose}")
+        self.colChart.setAnimationOptions(QChart.AnimationOption.SeriesAnimations)
+
+        self.colChart.categories = self.time
+        self.colChart.axis_x = QBarCategoryAxis()
+        self.colChart.axis_x.append(self.colChart.categories)
+        self.colChart.addAxis(self.colChart.axis_x, Qt.AlignmentFlag.AlignBottom)
+        self.colSerise.attachAxis(self.colChart.axis_x)
+
+        self.colChart.axis_y = QValueAxis()
+        self.colChart.axis_y.setRange(0, max(self.totalTime)+3)
+        self.colChart.addAxis(self.colChart.axis_y, Qt.AlignmentFlag.AlignLeft)
+        self.colSerise.attachAxis(self.colChart.axis_y)
+
+        self.colChart.legend().setVisible(True)
+        self.colChart.legend().setAlignment(Qt.AlignmentFlag.AlignBottom)
+
+        self.colChart._chart_view = QChartView(self.colChart)
+        self.colChart._chart_view.setRenderHint(QPainter.RenderHint.Antialiasing)
+
+        self.addChart = True
+        wgs.columnChart.layout().addWidget(self.colChart._chart_view)
     
-    def load_data_and_plot(self):
-        # Load data from the JSON file
-        with open("data.json") as f:
-            data = json.load(f)
-
-        # Create the line chart
-        wgs.columnChart.setBackground("w")  # Set the background color to white
-
-        # Plot three lines from the data
-        pen_colors = ["b", "r", "g"]
-        line_names = list(data.keys())
-        for i, key in enumerate(data.keys()):
-            x_data = list(range(len(data[key])))
-            y_data = data[key]
-            pen = pg.mkPen(pen_colors[i], width=2)
-            line = wgs.columnChart.plot(x_data, y_data, pen=pen, name=key)
-            line.setSymbolBrush(pg.mkColor(pen_colors[i]))
-            line.setSymbolPen(pg.mkPen('w', width=1))
-            line.setSymbolSize(8)
-
-        # Add axis labels and title
-        wgs.columnChart.setLabel("bottom", "X Axis")
-        wgs.columnChart.setLabel("left", "Y Axis")
-        wgs.columnChart.setTitle("Line Chart with Three Lines")
-
-        # Add a legend
-        legend = wgs.columnChart.addLegend()
-        for i, name in enumerate(line_names):
-            legend.addItem(wgs.columnChart.getPlotItem().listDataItems()[i], name)
-
-        # Enable grid
-        wgs.columnChart.showGrid(x=True, y=True)
-
-        # Enable mouse interaction (pan and zoom)
-        wgs.columnChart.setMouseEnabled(x=True, y=True)
-
-        # Enable anti-aliasing for smoother lines
-        wgs.columnChart.setAntialiasing(True)
-
-        # Update the plot
-        wgs.columnChart.autoRange()
-
-    def resizeEvent(self, event):
-        super().resizeEvent(event)
-        wgs.columnChart.autoRange()
-
-    def lineChart(self):
-        pass
     def circleChart(self):
-        pass
+        self.pieSerise = QPieSeries()
+        for i in self.detailTime:
+            self.pieSerise.append(i[0], i[1])
+        colors = [QColor("#66b266"), QColor("#3366cc"), QColor("#ff5050"), QColor("#ffff66")]
+        font = QFont("Arial", 10)
+        for i, slice in enumerate(self.pieSerise.slices()):
+            slice.setColor(colors[i % len(colors)])
+            slice.setLabelFont(font)
+
+        self.pieChart = QChart()
+        self.pieChart.setTitle("Biểu đồ so sánh phân bố nhiệm vụ")
+        self.pieChart.addSeries(self.pieSerise)
+        self._chart_view = QChartView(self.pieChart)
+        self.pieSerise.setLabelsVisible(True)
+        self.pieSerise.setUseOpenGL(True)
+
+        self.addChart = True
+        wgs.pieChart.layout().addWidget(self._chart_view)
