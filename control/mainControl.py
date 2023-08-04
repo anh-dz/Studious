@@ -242,7 +242,7 @@ class chart:
                 self.time.append(last_day.strftime('%d/%m'))
             self.totalTime = [4, 3, 5]
             sum_percentrage = sum(self.totalTime)/100
-            self.detailTime = [[f"Học Toán ({round(6/sum_percentrage)}%)", 6], [f"Học IELTS ({round(1/sum_percentrage)}%)", 1], [f"Làm việc ({round(5/sum_percentrage)}%)", 5]]
+            self.detailTime = [[f"Học Toán", 6], [f"Học IELTS", 1], [f"Làm việc", 5]]
             self.columnChart()
             self.circleChart()
 
@@ -254,7 +254,7 @@ class chart:
                 self.time.append(last_day.strftime('%d/%m'))
             self.totalTime = [4, 3, 5, 6, 2, 4, 5]
             sum_percentrage = sum(self.totalTime)/100
-            self.detailTime = [[f"Học Toán ({round(11/sum_percentrage)}%)", 11], [f"Học IELTS ({round(8/sum_percentrage)}%)", 8], [f"Làm việc ({round(10/sum_percentrage)}%)", 10]]
+            self.detailTime = [[f"Học Toán", 11], [f"Học IELTS", 8], [f"Làm việc", 10]]
             self.columnChart()
             self.circleChart()
 
@@ -267,13 +267,13 @@ class chart:
                 print(f"{last_day.strftime('%d/%m')} - {(last_day + datetime.timedelta(days=7)).strftime('%d/%m')}")
             self.totalTime = [25, 16, 20, 13]
             sum_percentrage = sum(self.totalTime)/100
-            self.detailTime = [[f"Học Toán ({round(27/sum_percentrage)}%)", 27], [f"Học IELTS ({round(18/sum_percentrage)}%)", 17], [f"Làm việc ({round(40/sum_percentrage)}%)", 40]]
+            self.detailTime = [[f"Học Toán", 27], [f"Học IELTS", 17], [f"Làm việc", 40]]
             self.columnChart()
             self.circleChart()
 
     def columnChart(self):
         self.colData = QBarSet("Tổng thời gian tập trung")
-
+        self.colData.setLabelFont(QFont("Arial", 12))
         self.colData.append(self.totalTime)
 
         self.colSerise = QBarSeries()
@@ -282,6 +282,7 @@ class chart:
         self.colChart = QChart()
         self.colChart.addSeries(self.colSerise)
         self.colChart.setTitle(f"Biểu đồ so sánh tổng thời gian tập trung trong {self.curentChoose}")
+        self.colChart.setTitleFont(QFont("Arial", 12))
         self.colChart.setAnimationOptions(QChart.AnimationOption.SeriesAnimations)
 
         self.colChart.categories = self.time
@@ -310,14 +311,26 @@ class chart:
             self.pieSerise.append(i[0], i[1])
         colors = [QColor("#66b266"), QColor("#3366cc"), QColor("#ff5050"), QColor("#ffff66")]
         font = QFont("Arial", 10)
+        self.pieSerise.setLabelsPosition(QPieSlice.LabelPosition.LabelInsideNormal)
         for i, slice in enumerate(self.pieSerise.slices()):
-            slice.setColor(colors[i % len(colors)])
+            slice.setLabel("{:.2f}%".format(100 * slice.percentage()))
+            slice.setColor(colors[i])
             slice.setLabelFont(font)
+            slice.setLabelColor(QColor("#000000"))
 
         self.pieChart = QChart()
+        self.pieChart.legend()
         self.pieChart.setTitle("Biểu đồ so sánh phân bố nhiệm vụ")
+        self.pieChart.setTitleFont(QFont("Arial", 12))
         self.pieChart.addSeries(self.pieSerise)
+
+        for i, data in enumerate(self.detailTime):
+            self.pieChart.legend().markers(self.pieSerise)[i].setLabel(data[0])
+            self.pieChart.legend().markers(self.pieSerise)[i].setFont(QFont("Arial", 11))
+        self.pieChart.legend().setAlignment(Qt.AlignmentFlag.AlignBottom)
+
         self._chart_view = QChartView(self.pieChart)
+        self._chart_view.setRenderHint(QPainter.RenderHint.Antialiasing)
         self.pieSerise.setLabelsVisible(True)
         self.pieSerise.setUseOpenGL(True)
 
