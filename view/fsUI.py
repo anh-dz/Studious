@@ -51,7 +51,7 @@ class StudiousFS(QWidget):
 "}")
         self.cB_task.setObjectName("self.cB_task")
 
-        self.lb_time = QLabel("25:00", self)
+        self.lb_time = QLabel(self)
         self.lb_time.setStyleSheet("font: 128pt \"Arial\";\n"
 "color: rgb(249, 245, 246);\n"
 "border: 0px;\n"

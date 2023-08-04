@@ -46,7 +46,7 @@ class StudiousFunc:
 
         #Turn on/off music in app
         wgs.btn_m_audio.clicked.connect(self.onoff_audio)
-        self.bg_music = QUrl.fromLocalFile('.\\assert\\music\\music.mp3')
+        self.bg_music = QUrl.fromLocalFile('assert/music/music.mp3')
         self.music_onoff = True
         self.media_player = QMediaPlayer()
         self.audio = QAudioOutput()
@@ -78,10 +78,12 @@ class StudiousFunc:
     def start_clock(self):
         if self.clock_onoff == False:
             self.clock_onoff = True
-            self.qthread = audioFunc(QThread,'.\\assert\\music\\start.mp3')
+            self.qthread = audioFunc(QThread,'assert/music/pause.mp3')
             self.qthread.start()
             self.countdown.start_timer()
             wgs.btn_m_startstop.setIcon(QIcon("assert/pause.png"))
+            try: Fwgs.btn_startstop.setIcon(QIcon("assert/pause.png"))
+            except: pass
             if self.countdown.work_or_rest == True:
                 wgs.cB_m_task.setEnabled(not self.countdown.work_or_rest)
                 try:
@@ -94,14 +96,18 @@ class StudiousFunc:
                 except: pass
         else:
             self.clock_onoff = False
-            self.qthread = audioFunc(QThread,'.\\assert\\music\\pause.mp3')
+            self.qthread = audioFunc(QThread,'assert/music/unpause.mp3')
             self.qthread.start()
             wgs.btn_m_startstop.setIcon(QIcon("assert/start.png"))
+            try: Fwgs.btn_startstop.setIcon(QIcon("assert/start.png"))
+            except: pass
             self.countdown.stop_timer()    
 
     def next_clock(self):
         wgs.btn_m_startstop.setIcon(QIcon("assert/start.png"))
-        self.qthread = audioFunc(QThread,'.\\assert\\music\\end.mp3')
+        try: Fwgs.btn_startstop.setIcon(QIcon("assert/start.png"))
+        except: pass
+        self.qthread = audioFunc(QThread,'assert/music/end.mp3')
         self.qthread.start()
         if self.countdown.work_or_rest == True: 
             wgs.lb_m_time.setStyleSheet('color: rgb(251, 238, 172)')
@@ -109,16 +115,24 @@ class StudiousFunc:
             self.file.writeDataTime()
             wgs.cB_m_task.setEnabled(self.countdown.work_or_rest)
             try:    
-                Fwgs.lb_time.setStyleSheet('color: rgb(251, 238, 172)')
+                Fwgs.lb_time.setStyleSheet("font: 128pt \"Arial\";\n"
+"color: rgb(251, 238, 172);\n"
+"border: 0px;\n"
+"qproperty-alignment: \'AlignCenter\';\n"
+"qproperty-margin: auto;")
                 Fwgs.cB_task.setEnabled(self.countdown.work_or_rest)
             except: pass
             try:    Pwgs.lb_time.setStyleSheet('color: rgb(251, 238, 172)')
             except: pass
-        else:   
-            wgs.lb_m_time.setStyleSheet('color: rgb(255, 255, 255)')
-            try:    Fwgs.lb_time.setStyleSheet('color: rgb(255, 255, 255)')
+        else:
+            wgs.lb_m_time.setStyleSheet('rgb(249, 245, 246)')
+            try:    Fwgs.lb_time.setStyleSheet("font: 128pt \"Arial\";\n"
+"color: rgb(249, 245, 246);\n"
+"border: 0px;\n"
+"qproperty-alignment: \'AlignCenter\';\n"
+"qproperty-margin: auto;")
             except: pass
-            try:    Pwgs.lb_time.setStyleSheet('color: rgb(255, 255, 255)')
+            try:    Pwgs.lb_time.setStyleSheet('rgb(249, 245, 246)')
             except: pass
         self.countdown.next_timer()
         self.clock_onoff = False
@@ -132,10 +146,14 @@ class StudiousFunc:
         if self.music_onoff:
             self.media_player.play()
             wgs.btn_m_audio.setIcon(QIcon("assert/audio-on.png"))
+            try: Fwgs.btn_audio.setIcon(QIcon("assert/audio-on.png"))
+            except: pass
             self.music_onoff = False
         elif self.music_onoff == False:
             self.media_player.pause()
             wgs.btn_m_audio.setIcon(QIcon("assert/audio-off.png"))
+            try: Fwgs.btn_audio.setIcon(QIcon("assert/audio-off.png"))
+            except: pass
             self.music_onoff = True
     
     def on_combobox_changed(self):
@@ -154,7 +172,16 @@ class StudiousFunc:
     def start_fs(self):
         self.fs = fullScreenFunc()
         Fwgs.cB_task.currentIndexChanged.connect(self.on_combobox_changed)
-        if not self.countdown.work_or_rest:    Fwgs.lb_time.setStyleSheet('color: rgb(251, 238, 172)')
+        if not self.countdown.work_or_rest:
+            Fwgs.lb_time.setStyleSheet("font: 128pt \"Arial\";\n"
+"color: rgb(251, 238, 172);\n"
+"border: 0px;\n"
+"qproperty-alignment: \'AlignCenter\';\n"
+"qproperty-margin: auto;")
+        if self.clock_onoff:
+            Fwgs.btn_startstop.setIcon(QIcon("assert/pause.png"))
+        if self.music_onoff:
+            Fwgs.btn_audio.setIcon(QIcon("assert/audio-off.png"))
         Fwgs.lb_time.setText(f"{self.countdown.mtime}:00")
         Fwgs.btn_startstop.clicked.connect(self.start_clock)
         Fwgs.btn_next.clicked.connect(self.next_clock)
@@ -251,7 +278,11 @@ class countdown:
         else:
             self.work_or_rest = True
             self.mtime = self.wtime
-            try:    Fwgs.lb_time.setStyleSheet('color: rgb(255, 255, 255)')
+            try: Fwgs.lb_time.setStyleSheet("font: 128pt \"Arial\";\n"
+"color: rgb(249, 245, 246);\n"
+"border: 0px;\n"
+"qproperty-alignment: \'AlignCenter\';\n"
+"qproperty-margin: auto;")
             except: pass
         self.time_left = self.mtime*60
 
