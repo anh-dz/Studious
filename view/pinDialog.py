@@ -21,7 +21,7 @@ class Ui_Dialog(QtWidgets.QMainWindow):
         Dialog.setWindowIcon(icon)
         Dialog.setStyleSheet("background-color: rgb(33, 37, 43);\n"
 "color: rgb(249, 245, 246);\n"
-"font: 18pt \"Arial\";\n"
+"font: 20pt \"Arial\";\n"
 "qproperty-alignment: \'AlignCenter\';\n"
 "qproperty-margin: auto;\n"
 "")

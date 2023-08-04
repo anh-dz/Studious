@@ -16,8 +16,10 @@ from .fileDataControl import *
 class StudiousFunc:
     def __init__(self, widgets):
         super().__init__()
-        global wgs
+        global wgs, isFwgsOn, isPwgsOn
         wgs = widgets
+        isFwgsOn = False
+        isPwgsOn = False
 
         #check data file and dump data
         self.file = fileDataControl()
@@ -82,31 +84,29 @@ class StudiousFunc:
             self.qthread.start()
             self.countdown.start_timer()
             wgs.btn_m_startstop.setIcon(QIcon("assert/pause.png"))
-            try: Fwgs.btn_startstop.setIcon(QIcon("assert/pause.png"))
-            except: pass
+            if isFwgsOn:
+                Fwgs.btn_startstop.setIcon(QIcon("assert/pause.png"))
             if self.countdown.work_or_rest == True:
                 wgs.cB_m_task.setEnabled(not self.countdown.work_or_rest)
-                try:
+                if isFwgsOn:
                     Fwgs.cB_task.setEnabled(not self.countdown.work_or_rest)
-                except: pass
             else:
                 wgs.cB_m_task.setEnabled(not self.countdown.work_or_rest)
-                try:
+                if isFwgsOn:
                     Fwgs.cB_task.setEnabled(not self.countdown.work_or_rest)
-                except: pass
         else:
             self.clock_onoff = False
             self.qthread = audioFunc(QThread,'assert/music/unpause.mp3')
             self.qthread.start()
             wgs.btn_m_startstop.setIcon(QIcon("assert/start.png"))
-            try: Fwgs.btn_startstop.setIcon(QIcon("assert/start.png"))
-            except: pass
+            if isFwgsOn:
+                Fwgs.btn_startstop.setIcon(QIcon("assert/start.png"))
             self.countdown.stop_timer()    
 
     def next_clock(self):
         wgs.btn_m_startstop.setIcon(QIcon("assert/start.png"))
-        try: Fwgs.btn_startstop.setIcon(QIcon("assert/start.png"))
-        except: pass
+        if isFwgsOn:
+            Fwgs.btn_startstop.setIcon(QIcon("assert/start.png"))
         self.qthread = audioFunc(QThread,'assert/music/end.mp3')
         self.qthread.start()
         if self.countdown.work_or_rest == True: 
@@ -114,55 +114,55 @@ class StudiousFunc:
             self.file.dataTimeJson[self.file.ntime][wgs.cB_m_task.currentText()] += self.countdown.wtime-round(self.countdown.time_left/60)
             self.file.writeDataTime()
             wgs.cB_m_task.setEnabled(self.countdown.work_or_rest)
-            try:    
+            if isFwgsOn:    
                 Fwgs.lb_time.setStyleSheet("font: 128pt \"Arial\";\n"
 "color: rgb(251, 238, 172);\n"
 "border: 0px;\n"
 "qproperty-alignment: \'AlignCenter\';\n"
 "qproperty-margin: auto;")
                 Fwgs.cB_task.setEnabled(self.countdown.work_or_rest)
-            except: pass
-            try:    Pwgs.lb_time.setStyleSheet('color: rgb(251, 238, 172)')
-            except: pass
+            if isPwgsOn:
+                Pwgs.lb_time.setStyleSheet('color: rgb(251, 238, 172)')
         else:
-            wgs.lb_m_time.setStyleSheet('rgb(249, 245, 246)')
-            try:    Fwgs.lb_time.setStyleSheet("font: 128pt \"Arial\";\n"
+            wgs.lb_m_time.setStyleSheet('color: rgb(249, 245, 246)')
+            if isFwgsOn:
+                Fwgs.lb_time.setStyleSheet("font: 128pt \"Arial\";\n"
 "color: rgb(249, 245, 246);\n"
 "border: 0px;\n"
 "qproperty-alignment: \'AlignCenter\';\n"
 "qproperty-margin: auto;")
-            except: pass
-            try:    Pwgs.lb_time.setStyleSheet('rgb(249, 245, 246)')
-            except: pass
+            if isPwgsOn:
+                Pwgs.lb_time.setStyleSheet('rgb(249, 245, 246)')
         self.countdown.next_timer()
         self.clock_onoff = False
         wgs.lb_m_time.setText(f"{self.countdown.mtime}:00")
-        try: Pwgs.lb_time.setText(f"{self.countdown.mtime}:00")
-        except: pass
-        try: Fwgs.lb_time.setText(f"{self.countdown.mtime}:00")
-        except: pass
+        if isPwgsOn:
+            Pwgs.lb_time.setText(f"{self.countdown.mtime}:00")
+        if isFwgsOn:
+            Fwgs.lb_time.setText(f"{self.countdown.mtime}:00")
 
     def onoff_audio(self):
         if self.music_onoff:
             self.media_player.play()
             wgs.btn_m_audio.setIcon(QIcon("assert/audio-on.png"))
-            try: Fwgs.btn_audio.setIcon(QIcon("assert/audio-on.png"))
-            except: pass
+            if isFwgsOn:
+                Fwgs.btn_audio.setIcon(QIcon("assert/audio-on.png"))
             self.music_onoff = False
         elif self.music_onoff == False:
             self.media_player.pause()
             wgs.btn_m_audio.setIcon(QIcon("assert/audio-off.png"))
-            try: Fwgs.btn_audio.setIcon(QIcon("assert/audio-off.png"))
-            except: pass
+            if isFwgsOn:
+                Fwgs.btn_audio.setIcon(QIcon("assert/audio-off.png"))
             self.music_onoff = True
     
     def on_combobox_changed(self):
-        try: selected_option = Fwgs.cB_task.currentText()
-        except: selected_option = wgs.cB_m_task.currentText()
-        try:
-            wgs.cB_m_task.setCurrentText(selected_option)
+        if isFwgsOn:
+            selected_option = Fwgs.cB_task.currentText()
+        else:
+            selected_option = wgs.cB_m_task.currentText()
+        wgs.cB_m_task.setCurrentText(selected_option)
+        if isPwgsOn:
             Pwgs.lb_task.setText(selected_option)
-        except: pass
     
     def start_dialog(self):
         self.diaLog = DialogFunc()
@@ -211,23 +211,32 @@ class audioFunc(QThread):
 
 class DialogFunc:
     def __init__(self):
-        global Pwgs
+        global Pwgs, isPwgsOn
         Pwgs = Ui_Dialog()
         Pwgs.setWindowFlag(Qt.WindowType.WindowStaysOnTopHint)
         Pwgs.lb_task.setText(wgs.cB_m_task.currentText())
         Pwgs.show()
-
+        isPwgsOn = True
+    
+    def closeEvent(self, event):
+        global isPwgsOn
+        isPwgsOn = False
+        Pwgs.close()
 
 class fullScreenFunc(StudiousFS):
     def __init__(self):
+        global isFwgsOn
         super().__init__()
         global Fwgs
         Fwgs = self
         Fwgs.setWindowFlag(Qt.WindowType.WindowStaysOnTopHint)
         Fwgs.setWindowFlag(Qt.WindowType.FramelessWindowHint)
         Fwgs.show()
+        isFwgsOn = True
 
-    def close_fs(self):
+    def closeEvent(self, event):
+        global isFwgsOn
+        isFwgsOn = False
         Fwgs.close()
 
     def focusOutEvent(self, event):
@@ -259,12 +268,10 @@ class countdown:
             # Format the remaining time as MM:SS
             self.minutes, self.seconds = divmod(self.time_left, 60)
             wgs.lb_m_time.setText(f"{self.minutes:02}:{self.seconds:02}")
-            try:    
+            if isPwgsOn:
                 Pwgs.lb_time.setText(f"{self.minutes:02}:{self.seconds:02}")
-            except: pass
-            try:    
+            if isFwgsOn:
                 Fwgs.lb_time.setText(f"{self.minutes:02}:{self.seconds:02}")
-            except: pass
         else:
             self.next_timer()
             self.timer.stop()
@@ -278,12 +285,12 @@ class countdown:
         else:
             self.work_or_rest = True
             self.mtime = self.wtime
-            try: Fwgs.lb_time.setStyleSheet("font: 128pt \"Arial\";\n"
+            if isFwgsOn:
+                Fwgs.lb_time.setStyleSheet("font: 128pt \"Arial\";\n"
 "color: rgb(249, 245, 246);\n"
 "border: 0px;\n"
 "qproperty-alignment: \'AlignCenter\';\n"
 "qproperty-margin: auto;")
-            except: pass
         self.time_left = self.mtime*60
 
 class chart:
