@@ -1,4 +1,6 @@
+import typing
 from PyQt6.QtCore import *
+from PyQt6.QtCore import QObject
 from PyQt6.QtWidgets import *
 from PyQt6.QtGui import *
 from PyQt6.QtMultimedia import *
@@ -44,14 +46,14 @@ class StudiousFunc:
 
         #Turn on/off music in app
         wgs.btn_m_audio.clicked.connect(self.onoff_audio)
-        self.media_content = QUrl.fromLocalFile('.\\assert\\music.mp3')
+        self.bg_music = QUrl.fromLocalFile('.\\assert\\music\\music.mp3')
         self.music_onoff = True
         self.media_player = QMediaPlayer()
         self.audio = QAudioOutput()
-        self.audio.setVolume(0.2)
+        self.audio.setVolume(1)
         self.media_player.setAudioOutput(self.audio)
-        self.media_player.setSource(self.media_content)
-        self.media_player.loops
+        self.media_player.setSource(self.bg_music)
+        self.media_player.setLoops(24)
         self.onoff_audio()
 
         #Turn on pinDialog
@@ -70,10 +72,14 @@ class StudiousFunc:
         self.chart = chart()
         wgs.cB_chooseDate.currentIndexChanged.connect(self.chart.dataChange)
 
+
+
     #Func control app
     def start_clock(self):
         if self.clock_onoff == False:
             self.clock_onoff = True
+            self.qthread = audioFunc(QThread,'.\\assert\\music\\start.mp3')
+            self.qthread.start()
             self.countdown.start_timer()
             wgs.btn_m_startstop.setIcon(QIcon("assert/pause.png"))
             if self.countdown.work_or_rest == True:
@@ -88,10 +94,15 @@ class StudiousFunc:
                 except: pass
         else:
             self.clock_onoff = False
+            self.qthread = audioFunc(QThread,'.\\assert\\music\\pause.mp3')
+            self.qthread.start()
             wgs.btn_m_startstop.setIcon(QIcon("assert/start.png"))
             self.countdown.stop_timer()    
+
     def next_clock(self):
         wgs.btn_m_startstop.setIcon(QIcon("assert/start.png"))
+        self.qthread = audioFunc(QThread,'.\\assert\\music\\end.mp3')
+        self.qthread.start()
         if self.countdown.work_or_rest == True: 
             wgs.lb_m_time.setStyleSheet('color: rgb(251, 238, 172)')
             self.file.dataTimeJson[self.file.ntime][wgs.cB_m_task.currentText()] += self.countdown.wtime-round(self.countdown.time_left/60)
@@ -123,7 +134,7 @@ class StudiousFunc:
             wgs.btn_m_audio.setIcon(QIcon("assert/audio-on.png"))
             self.music_onoff = False
         elif self.music_onoff == False:
-            self.media_player.stop()
+            self.media_player.pause()
             wgs.btn_m_audio.setIcon(QIcon("assert/audio-off.png"))
             self.music_onoff = True
     
@@ -154,6 +165,22 @@ class StudiousFunc:
         Fwgs.cB_task.setEnabled(not self.clock_onoff)
 
 
+class audioFunc(QThread):
+    finished = pyqtSignal()
+    progress = pyqtSignal(int)
+
+    def __init__(self, parent: QObject, path) -> None:
+        super().__init__()
+        self.path = path
+
+    def run(self):
+        self._media_content = QUrl.fromLocalFile(self.path)
+        self._media_player = QMediaPlayer()
+        self._audio = QAudioOutput()
+        self._audio.setVolume(1)
+        self._media_player.setAudioOutput(self._audio)
+        self._media_player.setSource(self._media_content)
+        self._media_player.play()
 
 class DialogFunc:
     def __init__(self):
