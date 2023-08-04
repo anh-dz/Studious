@@ -332,7 +332,6 @@ class chart:
         self._chart_view = QChartView(self.pieChart)
         self._chart_view.setRenderHint(QPainter.RenderHint.Antialiasing)
         self.pieSerise.setLabelsVisible(True)
-        self.pieSerise.setUseOpenGL(True)
 
         self.addChart = True
         wgs.pieChart.layout().addWidget(self._chart_view)
