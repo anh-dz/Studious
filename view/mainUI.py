@@ -12,14 +12,14 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_Studious(object):
     def setupUi(self, Studious):
         Studious.setObjectName("Studious")
-        Studious.resize(810, 560)
+        Studious.resize(820, 560)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(Studious.sizePolicy().hasHeightForWidth())
         Studious.setSizePolicy(sizePolicy)
-        Studious.setMinimumSize(QtCore.QSize(810, 560))
-        Studious.setMaximumSize(QtCore.QSize(810, 560))
+        Studious.setMinimumSize(QtCore.QSize(820, 560))
+        Studious.setMaximumSize(QtCore.QSize(820, 560))
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("assert/logo.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         Studious.setWindowIcon(icon)
@@ -29,8 +29,8 @@ class Ui_Studious(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.centralwidget.sizePolicy().hasHeightForWidth())
         self.centralwidget.setSizePolicy(sizePolicy)
-        self.centralwidget.setMinimumSize(QtCore.QSize(810, 560))
-        self.centralwidget.setMaximumSize(QtCore.QSize(810, 560))
+        self.centralwidget.setMinimumSize(QtCore.QSize(820, 560))
+        self.centralwidget.setMaximumSize(QtCore.QSize(820, 560))
         self.centralwidget.setObjectName("centralwidget")
         self.wg_leftBar = QtWidgets.QWidget(parent=self.centralwidget)
         self.wg_leftBar.setGeometry(QtCore.QRect(0, 0, 150, 561))
@@ -141,10 +141,9 @@ class Ui_Studious(object):
         self.btn_lB_7.setObjectName("btn_lB_7")
         self.layout_leftBar.addWidget(self.btn_lB_7)
         self.sW_main = QtWidgets.QStackedWidget(parent=self.centralwidget)
-        self.sW_main.setGeometry(QtCore.QRect(40, 0, 771, 561))
-        self.sW_main.setStyleSheet("*{\n"
+        self.sW_main.setGeometry(QtCore.QRect(40, 0, 781, 561))
+        self.sW_main.setStyleSheet("* {\n"
 "    background-color: transparent;\n"
-"    background: none;\n"
 "    color: rgb(249, 245, 246);\n"
 "    font: 18pt \"Arial\";\n"
 "}\n"
@@ -179,18 +178,18 @@ class Ui_Studious(object):
         self.sW_main.setObjectName("sW_main")
         self.page_m_pom = QtWidgets.QWidget()
         self.page_m_pom.setStyleSheet("QLabel{\n"
-"    font: 68pt \"Arial\";\n"
+"    font: 72pt \"Arial\";\n"
 "    qproperty-alignment: \'AlignCenter\';\n"
 "    qproperty-margin: auto;\n"
 "}")
         self.page_m_pom.setObjectName("page_m_pom")
         self.lb_m_time = QtWidgets.QLabel(parent=self.page_m_pom)
-        self.lb_m_time.setGeometry(QtCore.QRect(240, 180, 311, 141))
+        self.lb_m_time.setGeometry(QtCore.QRect(245, 180, 311, 141))
         self.lb_m_time.setLayoutDirection(QtCore.Qt.LayoutDirection.LeftToRight)
         self.lb_m_time.setStyleSheet("color: rgb(249, 245, 246);")
         self.lb_m_time.setObjectName("lb_m_time")
         self.btn_m_audio = QtWidgets.QToolButton(parent=self.page_m_pom)
-        self.btn_m_audio.setGeometry(QtCore.QRect(690, 30, 51, 51))
+        self.btn_m_audio.setGeometry(QtCore.QRect(710, 30, 51, 51))
         self.btn_m_audio.setStyleSheet("")
         self.btn_m_audio.setText("")
         icon9 = QtGui.QIcon()
@@ -206,7 +205,7 @@ class Ui_Studious(object):
         self.lb_m_quote.setWordWrap(True)
         self.lb_m_quote.setObjectName("lb_m_quote")
         self.btn_m_pin = QtWidgets.QToolButton(parent=self.page_m_pom)
-        self.btn_m_pin.setGeometry(QtCore.QRect(630, 30, 51, 51))
+        self.btn_m_pin.setGeometry(QtCore.QRect(650, 30, 51, 51))
         self.btn_m_pin.setText("")
         icon10 = QtGui.QIcon()
         icon10.addPixmap(QtGui.QPixmap("assert/pin.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
@@ -223,7 +222,7 @@ class Ui_Studious(object):
         self.btn_m_fs.setIconSize(QtCore.QSize(50, 50))
         self.btn_m_fs.setObjectName("btn_m_fs")
         self.horizontalLayoutWidget = QtWidgets.QWidget(parent=self.page_m_pom)
-        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(310, 330, 160, 71))
+        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(320, 330, 160, 71))
         self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
@@ -249,7 +248,7 @@ class Ui_Studious(object):
         self.btn_m_next.setObjectName("btn_m_next")
         self.horizontalLayout.addWidget(self.btn_m_next)
         self.cB_m_task = QtWidgets.QComboBox(parent=self.page_m_pom)
-        self.cB_m_task.setGeometry(QtCore.QRect(270, 130, 251, 31))
+        self.cB_m_task.setGeometry(QtCore.QRect(273, 130, 251, 31))
         self.cB_m_task.setStyleSheet("")
         self.cB_m_task.setObjectName("cB_m_task")
         self.cB_m_task.addItem("")
@@ -258,6 +257,7 @@ class Ui_Studious(object):
         self.page_m_2 = QtWidgets.QWidget()
         self.page_m_2.setStyleSheet("* {\n"
 "    font: 18pt \"Arial\";\n"
+"    border: 0px;\n"
 "}\n"
 "QPushButton{\n"
 "    background-color: rgba(52, 22, 85, 70%);\n"
@@ -275,18 +275,20 @@ class Ui_Studious(object):
         self.columnChart.setGeometry(QtCore.QRect(20, 90, 412, 392))
         self.columnChart.setMinimumSize(QtCore.QSize(412, 392))
         self.columnChart.setObjectName("columnChart")
-        self.verticalLayout = QtWidgets.QVBoxLayout(self.columnChart)
-        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
-        self.verticalLayout.setObjectName("verticalLayout")
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.columnChart)
+        self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_2.setSpacing(0)
+        self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.pieChart = QtWidgets.QWidget(parent=self.page_m_2)
-        self.pieChart.setGeometry(QtCore.QRect(449, 89, 302, 392))
-        self.pieChart.setMinimumSize(QtCore.QSize(302, 392))
+        self.pieChart.setGeometry(QtCore.QRect(439, 89, 331, 392))
+        self.pieChart.setMinimumSize(QtCore.QSize(331, 392))
         self.pieChart.setObjectName("pieChart")
-        self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.pieChart)
-        self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
-        self.verticalLayout_3.setObjectName("verticalLayout_3")
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.pieChart)
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout.setSpacing(0)
+        self.verticalLayout.setObjectName("verticalLayout")
         self.btn_m_delChart = QtWidgets.QPushButton(parent=self.page_m_2)
-        self.btn_m_delChart.setGeometry(QtCore.QRect(640, 29, 112, 32))
+        self.btn_m_delChart.setGeometry(QtCore.QRect(650, 29, 112, 32))
         self.btn_m_delChart.setMinimumSize(QtCore.QSize(0, 32))
         self.btn_m_delChart.setStyleSheet("")
         icon14 = QtGui.QIcon()
@@ -296,11 +298,11 @@ class Ui_Studious(object):
         self.btn_m_delChart.setObjectName("btn_m_delChart")
         self.label = QtWidgets.QLabel(parent=self.page_m_2)
         self.label.setGeometry(QtCore.QRect(180, 500, 461, 41))
-        self.label.setStyleSheet("color: rgb(249, 245, 246);\n"
+        self.label.setStyleSheet("color: rgb(249, 243, 246);\n"
 "font: 18pt \"Arial\";")
         self.label.setObjectName("label")
         self.cB_chooseDate = QtWidgets.QComboBox(parent=self.page_m_2)
-        self.cB_chooseDate.setGeometry(QtCore.QRect(150, 30, 171, 31))
+        self.cB_chooseDate.setGeometry(QtCore.QRect(160, 30, 171, 31))
         self.cB_chooseDate.setStyleSheet("")
         self.cB_chooseDate.setObjectName("cB_chooseDate")
         self.cB_chooseDate.addItem("")
@@ -308,6 +310,11 @@ class Ui_Studious(object):
         self.cB_chooseDate.addItem("")
         self.cB_chooseDate.addItem("")
         self.cB_chooseDate.addItem("")
+        self.btn_m_delChart.raise_()
+        self.label.raise_()
+        self.cB_chooseDate.raise_()
+        self.pieChart.raise_()
+        self.columnChart.raise_()
         self.sW_main.addWidget(self.page_m_2)
         self.page_m_3 = QtWidgets.QWidget()
         self.page_m_3.setObjectName("page_m_3")
@@ -326,14 +333,14 @@ class Ui_Studious(object):
         self.sW_main.addWidget(self.page_m_7)
         self.Background = QtWidgets.QLabel(parent=self.centralwidget)
         self.Background.setEnabled(True)
-        self.Background.setGeometry(QtCore.QRect(0, 0, 810, 560))
+        self.Background.setGeometry(QtCore.QRect(0, 0, 820, 560))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.Background.sizePolicy().hasHeightForWidth())
         self.Background.setSizePolicy(sizePolicy)
-        self.Background.setMinimumSize(QtCore.QSize(810, 560))
-        self.Background.setMaximumSize(QtCore.QSize(810, 560))
+        self.Background.setMinimumSize(QtCore.QSize(820, 560))
+        self.Background.setMaximumSize(QtCore.QSize(820, 560))
         self.Background.setFocusPolicy(QtCore.Qt.FocusPolicy.NoFocus)
         self.Background.setContextMenuPolicy(QtCore.Qt.ContextMenuPolicy.NoContextMenu)
         self.Background.setAutoFillBackground(False)

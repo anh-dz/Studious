@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>810</width>
+    <width>820</width>
     <height>560</height>
    </rect>
   </property>
@@ -18,13 +18,13 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>810</width>
+    <width>820</width>
     <height>560</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>810</width>
+    <width>820</width>
     <height>560</height>
    </size>
   </property>
@@ -44,13 +44,13 @@
    </property>
    <property name="minimumSize">
     <size>
-     <width>810</width>
+     <width>820</width>
      <height>560</height>
     </size>
    </property>
    <property name="maximumSize">
     <size>
-     <width>810</width>
+     <width>820</width>
      <height>560</height>
     </size>
    </property>
@@ -348,14 +348,13 @@ QPushButton:hover{
      <rect>
       <x>40</x>
       <y>0</y>
-      <width>771</width>
+      <width>781</width>
       <height>561</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">*{
+     <string notr="true">* {
 	background-color: transparent;
-	background: none;
 	color: rgb(249, 245, 246);
 	font: 18pt &quot;Arial&quot;;
 }
@@ -389,12 +388,12 @@ QComboBox QAbstractItemView {
 }</string>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="page_m_pom">
      <property name="styleSheet">
       <string notr="true">QLabel{
-	font: 68pt &quot;Arial&quot;;
+	font: 72pt &quot;Arial&quot;;
 	qproperty-alignment: 'AlignCenter';
 	qproperty-margin: auto;
 }</string>
@@ -402,7 +401,7 @@ QComboBox QAbstractItemView {
      <widget class="QLabel" name="lb_m_time">
       <property name="geometry">
        <rect>
-        <x>240</x>
+        <x>243</x>
         <y>180</y>
         <width>311</width>
         <height>141</height>
@@ -421,7 +420,7 @@ QComboBox QAbstractItemView {
      <widget class="QToolButton" name="btn_m_audio">
       <property name="geometry">
        <rect>
-        <x>690</x>
+        <x>710</x>
         <y>30</y>
         <width>51</width>
         <height>51</height>
@@ -468,7 +467,7 @@ padding: 2px 7px;</string>
      <widget class="QToolButton" name="btn_m_pin">
       <property name="geometry">
        <rect>
-        <x>630</x>
+        <x>650</x>
         <y>30</y>
         <width>51</width>
         <height>51</height>
@@ -517,7 +516,7 @@ padding: 2px 7px;</string>
      <widget class="QWidget" name="horizontalLayoutWidget">
       <property name="geometry">
        <rect>
-        <x>310</x>
+        <x>320</x>
         <y>330</y>
         <width>160</width>
         <height>71</height>
@@ -581,7 +580,7 @@ padding: 2px 7px;</string>
      <widget class="QComboBox" name="cB_m_task">
       <property name="geometry">
        <rect>
-        <x>270</x>
+        <x>273</x>
         <y>130</y>
         <width>251</width>
         <height>31</height>
@@ -606,6 +605,7 @@ padding: 2px 7px;</string>
      <property name="styleSheet">
       <string notr="true">* {
 	font: 18pt &quot;Arial&quot;;
+	border: 0px;
 }
 QPushButton{
     background-color: rgba(52, 22, 85, 70%);
@@ -634,27 +634,61 @@ QPushButton:hover{
         <height>392</height>
        </size>
       </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+      </layout>
      </widget>
      <widget class="QWidget" name="pieChart" native="true">
       <property name="geometry">
        <rect>
-        <x>449</x>
+        <x>439</x>
         <y>89</y>
-        <width>302</width>
+        <width>331</width>
         <height>392</height>
        </rect>
       </property>
       <property name="minimumSize">
        <size>
-        <width>302</width>
+        <width>331</width>
         <height>392</height>
        </size>
       </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+      </layout>
      </widget>
      <widget class="QPushButton" name="btn_m_delChart">
       <property name="geometry">
        <rect>
-        <x>640</x>
+        <x>650</x>
         <y>29</y>
         <width>112</width>
         <height>32</height>
@@ -703,7 +737,7 @@ font: 18pt &quot;Arial&quot;;</string>
      <widget class="QComboBox" name="cB_chooseDate">
       <property name="geometry">
        <rect>
-        <x>150</x>
+        <x>160</x>
         <y>30</y>
         <width>171</width>
         <height>31</height>
@@ -741,8 +775,8 @@ font: 18pt &quot;Arial&quot;;</string>
      <zorder>btn_m_delChart</zorder>
      <zorder>label</zorder>
      <zorder>cB_chooseDate</zorder>
-     <zorder>columnChart</zorder>
      <zorder>pieChart</zorder>
+     <zorder>columnChart</zorder>
     </widget>
     <widget class="QWidget" name="page_m_3"/>
     <widget class="QWidget" name="page_m_4"/>
@@ -758,7 +792,7 @@ font: 18pt &quot;Arial&quot;;</string>
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>810</width>
+      <width>820</width>
       <height>560</height>
      </rect>
     </property>
@@ -770,13 +804,13 @@ font: 18pt &quot;Arial&quot;;</string>
     </property>
     <property name="minimumSize">
      <size>
-      <width>810</width>
+      <width>820</width>
       <height>560</height>
      </size>
     </property>
     <property name="maximumSize">
      <size>
-      <width>810</width>
+      <width>820</width>
       <height>560</height>
      </size>
     </property>
