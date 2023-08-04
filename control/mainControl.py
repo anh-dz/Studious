@@ -75,6 +75,7 @@ class StudiousFunc:
         if self.clock_onoff == False:
             self.clock_onoff = True
             self.countdown.start_timer()
+            wgs.btn_m_startstop.setIcon(QIcon("assert/pause.png"))
             if self.countdown.work_or_rest == True:
                 wgs.cB_m_task.setEnabled(not self.countdown.work_or_rest)
                 try:
@@ -87,8 +88,10 @@ class StudiousFunc:
                 except: pass
         else:
             self.clock_onoff = False
+            wgs.btn_m_startstop.setIcon(QIcon("assert/start.png"))
             self.countdown.stop_timer()    
     def next_clock(self):
+        wgs.btn_m_startstop.setIcon(QIcon("assert/start.png"))
         if self.countdown.work_or_rest == True: 
             wgs.lb_m_time.setStyleSheet('color: rgb(251, 238, 172)')
             self.file.dataTimeJson[self.file.ntime][wgs.cB_m_task.currentText()] += self.countdown.wtime-round(self.countdown.time_left/60)
@@ -117,9 +120,11 @@ class StudiousFunc:
     def onoff_audio(self):
         if self.music_onoff:
             self.media_player.play()
+            wgs.btn_m_audio.setIcon(QIcon("assert/audio-on.png"))
             self.music_onoff = False
         elif self.music_onoff == False:
             self.media_player.stop()
+            wgs.btn_m_audio.setIcon(QIcon("assert/audio-off.png"))
             self.music_onoff = True
     
     def on_combobox_changed(self):
