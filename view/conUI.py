@@ -22,7 +22,7 @@ class ViewControl(QMainWindow):
         self.ui.btn_lB_7.clicked.connect(lambda: self.ui.sW_main.setCurrentIndex(6))
 
         self.ui.btn_lB_menu.clicked.connect(self.Side_Menu_Def_0)
-        self.Side_Menu_Def_0()
+        self.ui.wg_leftBar.setGeometry(QRect(0, 0, 44, 561))
 
         self.testComboBoxColor()
 
