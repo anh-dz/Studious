@@ -316,7 +316,7 @@ class chart:
             self.columnChart()
             self.circleChart()
 
-        if self.curentChoose == "7 ngày":
+        elif self.curentChoose == "7 ngày":
             self.time = []
             for i in range(7, 0, -1):
                 delta = datetime.timedelta(days=i)
@@ -328,7 +328,7 @@ class chart:
             self.columnChart()
             self.circleChart()
 
-        if self.curentChoose == "30 ngày":
+        elif self.curentChoose == "30 ngày":
             self.time = []
             for i in range(28, 6, -7):
                 delta = datetime.timedelta(days=i)
