@@ -3,6 +3,10 @@ import json
 from os import path, remove, makedirs
 import time, datetime
 
+with open("data/quotes.txt", "r") as f:
+    res = f.readlines()
+    list_quotes = [i.strip() for i in res]
+
 class fileDataControl:
     def __init__(self):
         self.ntime = datetime.datetime.now()
