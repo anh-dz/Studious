@@ -184,7 +184,7 @@ class Ui_Studious(object):
 "}")
         self.page_m_pom.setObjectName("page_m_pom")
         self.lb_m_time = QtWidgets.QLabel(parent=self.page_m_pom)
-        self.lb_m_time.setGeometry(QtCore.QRect(245, 180, 311, 141))
+        self.lb_m_time.setGeometry(QtCore.QRect(243, 180, 311, 141))
         self.lb_m_time.setLayoutDirection(QtCore.Qt.LayoutDirection.LeftToRight)
         self.lb_m_time.setStyleSheet("color: rgb(249, 245, 246);")
         self.lb_m_time.setObjectName("lb_m_time")
@@ -298,7 +298,7 @@ class Ui_Studious(object):
         self.btn_m_delChart.setObjectName("btn_m_delChart")
         self.label = QtWidgets.QLabel(parent=self.page_m_2)
         self.label.setGeometry(QtCore.QRect(180, 500, 461, 41))
-        self.label.setStyleSheet("color: rgb(249, 243, 246);\n"
+        self.label.setStyleSheet("color: rgb(249, 245, 246);\n"
 "font: 18pt \"Arial\";")
         self.label.setObjectName("label")
         self.cB_chooseDate = QtWidgets.QComboBox(parent=self.page_m_2)
@@ -352,8 +352,15 @@ class Ui_Studious(object):
         self.Background.setScaledContents(True)
         self.Background.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeading|QtCore.Qt.AlignmentFlag.AlignLeft|QtCore.Qt.AlignmentFlag.AlignVCenter)
         self.Background.setObjectName("Background")
+        self.pushButton = QtWidgets.QPushButton(parent=self.centralwidget)
+        self.pushButton.setGeometry(QtCore.QRect(0, 0, 820, 560))
+        self.pushButton.setStyleSheet("background-color: rgba(70, 69, 140, 50%);\n"
+"border: 0px;")
+        self.pushButton.setText("")
+        self.pushButton.setObjectName("pushButton")
         self.Background.raise_()
         self.sW_main.raise_()
+        self.pushButton.raise_()
         self.wg_leftBar.raise_()
         Studious.setCentralWidget(self.centralwidget)
 

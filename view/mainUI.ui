@@ -845,8 +845,26 @@ font: 18pt &quot;Arial&quot;;</string>
      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
     </property>
    </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>820</width>
+      <height>560</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(70, 69, 140, 50%);
+border: 0px;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
    <zorder>Background</zorder>
    <zorder>sW_main</zorder>
+   <zorder>pushButton</zorder>
    <zorder>wg_leftBar</zorder>
   </widget>
  </widget>

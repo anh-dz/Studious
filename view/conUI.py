@@ -10,6 +10,9 @@ class ViewControl(QMainWindow):
         self.ui = Ui_Studious()
         self.ui.setupUi(self)
 
+        self.ui.pushButton.hide()
+        self.ui.pushButton.clicked.connect(self.Side_Menu_Def_0)
+
         self.ui.btn_lB_1.clicked.connect(lambda: self.ui.sW_main.setCurrentIndex(0))
         self.ui.btn_lB_2.clicked.connect(lambda: self.ui.sW_main.setCurrentIndex(1))
         self.ui.btn_lB_3.clicked.connect(lambda: self.ui.sW_main.setCurrentIndex(2))
@@ -56,7 +59,7 @@ class ViewControl(QMainWindow):
             self.animation2.setEndValue(150)
             self.animation2.setEasingCurve(QEasingCurve.Type.InOutSine)
             self.animation2.start()
-
+            self.ui.pushButton.show()
         else:
             self.animation1 = QPropertyAnimation(self.ui.wg_leftBar, b"maximumWidth")
             self.animation1.setDuration(500)
@@ -71,6 +74,7 @@ class ViewControl(QMainWindow):
             self.animation2.setEndValue(44)
             self.animation2.setEasingCurve(QEasingCurve.Type.InOutSine)
             self.animation2.start()
+            self.ui.pushButton.hide()
     
     def testComboBoxColor(self):
         self.ui.cB_m_task.clear()
