@@ -3,7 +3,7 @@ import json
 from os import path, remove, makedirs
 import time, datetime
 
-with open("data/quotes.txt", "r") as f:
+with open("data/quotes.txt", "r", encoding="utf-8") as f:
     res = f.readlines()
     list_quotes = [i.strip() for i in res]
 

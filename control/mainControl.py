@@ -29,7 +29,7 @@ class StudiousFunc:
         wgs.lb_m_quote.setText(self.qoutes)
 
         #connect start/stop button with clock
-        self.wtime, self.rtime = 25, 5
+        self.wtime, self.rtime = 1, 5
         wgs.lb_m_time.setText(f"{self.wtime}:00")
         wgs.btn_m_startstop.clicked.connect(self.start_clock)
         self.countdown = countdown(self.wtime, self.rtime)
@@ -132,6 +132,7 @@ class StudiousFunc:
             Pwgs.lb_time.setText(f"{self.countdown.mtime}:00")
         if isFwgsOn:
             Fwgs.lb_time.setText(f"{self.countdown.mtime}:00")
+
 
     def onoff_audio(self):
         if self.music_onoff:
@@ -251,7 +252,7 @@ class countdown:
         self.timer.start(1000)  # Update every second
 
     def stop_timer(self):
-        self.timer.disconnect()
+        self.timer.stop()
 
     def update_countdown(self):
         self.time_left -= 1
@@ -266,24 +267,27 @@ class countdown:
                 Fwgs.lb_time.setText(f"{self.minutes:02}:{self.seconds:02}")
         else:
             self.next_timer()
-            self.timer.stop()
 
     def next_timer(self):
-        try: self.timer.disconnect()
-        except: pass
-        if self.work_or_rest == True:
-            self.work_or_rest = False
-            self.mtime = self.rtime
+        if self.time_left == -1:
+            self.time_left = self.mtime*60
+            wgs.btn_m_next.click()
         else:
-            self.work_or_rest = True
-            self.mtime = self.wtime
-            if isFwgsOn:
-                Fwgs.lb_time.setStyleSheet("font: 128pt \"Arial\";\n"
-"color: rgb(249, 245, 246);\n"
-"border: 0px;\n"
-"qproperty-alignment: \'AlignCenter\';\n"
-"qproperty-margin: auto;")
-        self.time_left = self.mtime*60
+            try: self.timer.disconnect()
+            except: pass
+            if self.work_or_rest == True:
+                self.work_or_rest = False
+                self.mtime = self.rtime
+            else:
+                self.work_or_rest = True
+                self.mtime = self.wtime
+                if isFwgsOn:
+                    Fwgs.lb_time.setStyleSheet("font: 128pt \"Arial\";\n"
+    "color: rgb(249, 245, 246);\n"
+    "border: 0px;\n"
+    "qproperty-alignment: \'AlignCenter\';\n"
+    "qproperty-margin: auto;")
+            self.time_left = self.mtime*60
 
 class chart:
     def __init__(self) -> None:
