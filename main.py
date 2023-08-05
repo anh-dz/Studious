@@ -3,11 +3,11 @@ from PyQt6.QtWidgets import QApplication
 from view import *
 from control import *
 import os
-import ctypes
+# import ctypes
 
-if sys.platform == 'win32':
-    myappid = 'thedreamteam.studious.app' # arbitrary string
-    ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
+# if sys.platform == 'win32':
+#     myappid = 'thedreamteam.studious.app' # arbitrary string
+#     ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
 
 os.environ["QT_FONT_DPI"] = "72" # FIX Problem for High DPI and Scale above 100%
 os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"
