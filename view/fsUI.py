@@ -51,7 +51,7 @@ class StudiousFS(QWidget):
 "}")
         self.cB_task.setObjectName("self.cB_task")
 
-        self.lb_time = QLabel("25:00", self)
+        self.lb_time = QLabel(self)
         self.lb_time.setStyleSheet("font: 128pt \"Arial\";\n"
 "color: rgb(249, 245, 246);\n"
 "border: 0px;\n"
@@ -87,22 +87,8 @@ class StudiousFS(QWidget):
         # Set the layout for the main widget
         self.setLayout(layout)
 
-        self.btn_fs = QToolButton(self)
-        self.btn_fs.setGeometry(self.x - 80, self.y - 80, 75, 75)
-        fsIcon = QIcon()
-        fsIcon.addPixmap(QPixmap("assert/exit-full-screen.png"), QIcon.Mode.Normal, QIcon.State.Off)
-        self.btn_fs.setIcon(fsIcon)
-        self.btn_fs.setIconSize(QSize(72, 72))
-
-        self.btn_audio = QToolButton(self)
-        self.btn_audio.setGeometry(self.x - 80, 5, 75, 75)
-        audioIcon = QIcon()
-        audioIcon.addPixmap(QPixmap("assert/audio-on.png"), QIcon.Mode.Normal, QIcon.State.Off)
-        self.btn_audio.setIcon(audioIcon)
-        self.btn_audio.setIconSize(QSize(72, 72))
-
         self.bottomQuote = QLabel("bottomQuote", self)
-        self.bottomQuote.setStyleSheet("font: 32pt \"Arial\";\n"
+        self.bottomQuote.setStyleSheet("font: 26pt \"Arial\";\n"
 "color: rgb(249, 245, 246);\n"
 "border: 0px;\n"
 "qproperty-alignment: \'AlignCenter\';\n"
@@ -111,6 +97,22 @@ class StudiousFS(QWidget):
 
         self.bottomQuote.setGeometry(QRect(10, self.y-200, self.x-20, 180))
 
-        # self.cB_task.addItem(create_colored_icon(QColor('blue')), "Học")
+        self.btn_exit = QToolButton(self)
+        self.btn_exit.setGeometry(self.x - 80, self.y-80, 75, 75)
+        fsExit = QIcon()
+        fsExit.addPixmap(QPixmap("assert/exit-full-screen.png"), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btn_exit.setIcon(fsExit)
+        self.btn_exit.setIconSize(QSize(72, 72))
+
+        self.btn_audio = QToolButton(self)
+        self.btn_audio.setGeometry(self.x - 80, 5, 75, 75)
+        audioIcon = QIcon()
+        audioIcon.addPixmap(QPixmap("assert/audio-on.png"), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btn_audio.setIcon(audioIcon)
+        self.btn_audio.setIconSize(QSize(72, 72))
+
+        self.cB_task.addItem(create_colored_icon(QColor('blue')), "Học Toán")
+        self.cB_task.addItem(create_colored_icon(QColor('green')), "Học IELTS")
+        self.cB_task.addItem(create_colored_icon(QColor('red')), "Làm việc")
 
         self.showFullScreen()

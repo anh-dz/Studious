@@ -1,7 +1,16 @@
-import sys
+import sys, os
 from PyQt6.QtWidgets import QApplication
 from view import *
 from control import *
+import os
+# import ctypes
+
+# if sys.platform == 'win32':
+#     myappid = 'thedreamteam.studious.app' # arbitrary string
+#     ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
+
+os.environ["QT_FONT_DPI"] = "72" # DPI MACOS
+os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"
 
 class MainApp(QApplication):
     def __init__(self, argv):

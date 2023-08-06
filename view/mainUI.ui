@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>810</width>
+    <width>820</width>
     <height>560</height>
    </rect>
   </property>
@@ -18,18 +18,22 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>810</width>
+    <width>820</width>
     <height>560</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>810</width>
+    <width>820</width>
     <height>560</height>
    </size>
   </property>
   <property name="windowTitle">
    <string>Studious</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>assert/logo.png</normaloff>assert/logo.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="sizePolicy">
@@ -40,13 +44,13 @@
    </property>
    <property name="minimumSize">
     <size>
-     <width>810</width>
+     <width>820</width>
      <height>560</height>
     </size>
    </property>
    <property name="maximumSize">
     <size>
-     <width>810</width>
+     <width>820</width>
      <height>560</height>
     </size>
    </property>
@@ -344,43 +348,70 @@ QPushButton:hover{
      <rect>
       <x>40</x>
       <y>0</y>
-      <width>771</width>
+      <width>781</width>
       <height>561</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">*{
+     <string notr="true">* {
 	background-color: transparent;
-	background: none;
 	color: rgb(249, 245, 246);
 	font: 18pt &quot;Arial&quot;;
 }
 QToolButton{
 	border: 0px;
+}
+QComboBox{
+	background-color: rgba(52, 22, 85, 50%);
+	border-radius: 5px;
+	padding: 5px;
+	padding-left: 10px;
+	color: rgb(249, 245, 246);
+	font: 14pt &quot;Arial&quot;;
+}
+QComboBox::drop-down {
+	subcontrol-origin: padding;
+	subcontrol-position: top right;
+	width: 25px; 
+	border-left-width: 3px;
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;	
+	background-image: url(assert/drop-down-24);
+	background-position: center;
+	background-repeat: no-reperat;
+ }
+QComboBox QAbstractItemView {
+	color: rgb(255, 121, 198);	
+	background-color: rgb(33, 37, 43);
+	padding: 10px;
+	selection-background-color: rgb(39, 44, 54);
 }</string>
     </property>
     <property name="currentIndex">
      <number>0</number>
     </property>
     <widget class="QWidget" name="page_m_pom">
+     <property name="styleSheet">
+      <string notr="true">QLabel{
+	font: 72pt &quot;Arial&quot;;
+	qproperty-alignment: 'AlignCenter';
+	qproperty-margin: auto;
+}</string>
+     </property>
      <widget class="QLabel" name="lb_m_time">
       <property name="geometry">
        <rect>
-        <x>280</x>
-        <y>200</y>
-        <width>211</width>
-        <height>111</height>
+        <x>243</x>
+        <y>180</y>
+        <width>311</width>
+        <height>141</height>
        </rect>
       </property>
       <property name="layoutDirection">
        <enum>Qt::LeftToRight</enum>
       </property>
       <property name="styleSheet">
-       <string notr="true">font: 50pt &quot;Arial&quot;;
-color: rgb(249, 245, 246);
-border: 0px;
-qproperty-alignment: 'AlignCenter';
-qproperty-margin: auto;</string>
+       <string notr="true">color: rgb(249, 245, 246);</string>
       </property>
       <property name="text">
        <string>25:00</string>
@@ -389,8 +420,8 @@ qproperty-margin: auto;</string>
      <widget class="QToolButton" name="btn_m_audio">
       <property name="geometry">
        <rect>
-        <x>690</x>
-        <y>40</y>
+        <x>710</x>
+        <y>30</y>
         <width>51</width>
         <height>51</height>
        </rect>
@@ -416,13 +447,13 @@ qproperty-margin: auto;</string>
       <property name="geometry">
        <rect>
         <x>40</x>
-        <y>450</y>
-        <width>661</width>
-        <height>91</height>
+        <y>442</y>
+        <width>662</width>
+        <height>120</height>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">font: 18pt &quot;Arial&quot;;
+       <string notr="true">font: 16pt &quot;Arial&quot;;
 color: rgb(249, 245, 246);
 padding: 2px 7px;</string>
       </property>
@@ -436,8 +467,8 @@ padding: 2px 7px;</string>
      <widget class="QToolButton" name="btn_m_pin">
       <property name="geometry">
        <rect>
-        <x>630</x>
-        <y>40</y>
+        <x>650</x>
+        <y>30</y>
         <width>51</width>
         <height>51</height>
        </rect>
@@ -485,8 +516,8 @@ padding: 2px 7px;</string>
      <widget class="QWidget" name="horizontalLayoutWidget">
       <property name="geometry">
        <rect>
-        <x>310</x>
-        <y>320</y>
+        <x>320</x>
+        <y>330</y>
         <width>160</width>
         <height>71</height>
        </rect>
@@ -549,41 +580,14 @@ padding: 2px 7px;</string>
      <widget class="QComboBox" name="cB_m_task">
       <property name="geometry">
        <rect>
-        <x>270</x>
-        <y>150</y>
+        <x>273</x>
+        <y>130</y>
         <width>251</width>
         <height>31</height>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">QComboBox{
-	background-color: rgba(52, 22, 85, 50%);
-	border-radius: 5px;
-	padding: 5px;
-	padding-left: 10px;
-	color: rgb(249, 245, 246);
-	font: 14pt &quot;Arial&quot;;
-}
-QComboBox:hover{
-
-}
-QComboBox::drop-down {
-	subcontrol-origin: padding;
-	subcontrol-position: top right;
-	width: 25px; 
-	border-left-width: 3px;
-	border-top-right-radius: 3px;
-	border-bottom-right-radius: 3px;	
-	background-image: url(assert/drop-down-24);
-	background-position: center;
-	background-repeat: no-reperat;
- }
-QComboBox QAbstractItemView {
-	color: rgb(255, 121, 198);	
-	background-color: rgb(33, 37, 43);
-	padding: 10px;
-	selection-background-color: rgb(39, 44, 54);
-}</string>
+       <string notr="true"/>
       </property>
       <item>
        <property name="text">
@@ -599,116 +603,92 @@ QComboBox QAbstractItemView {
     </widget>
     <widget class="QWidget" name="page_m_2">
      <property name="styleSheet">
-      <string notr="true">QDateEdit{
-	background-color: rgba(52, 22, 85, 50%);
-	border-radius: 5px;
-	padding: 5px;
-	padding-left: 10px;
-	color: rgb(249, 245, 246);
-	font: 14pt &quot;Arial&quot;;
+      <string notr="true">* {
+	font: 18pt &quot;Arial&quot;;
+	border: 0px;
 }
 QPushButton{
-	background-color: rgba(52, 22, 85, 70%);
-	color: rgb(249, 245, 246);
-	font: 14pt &quot;Arial&quot;;
-	border-radius: 5px;
-	text-align: left;
-	padding: 2px 7px;
+    background-color: rgba(52, 22, 85, 70%);
+    color: rgb(249, 245, 246);
+    font: 14pt &quot;Arial&quot;;
+    border-radius: 5px;
+    text-align: left;
+    padding: 2px 7px;
 }
 QPushButton:hover{
-	background-color: rgba(52, 22, 85, 100%);
+    background-color: rgba(52, 22, 85, 100%);
 }</string>
      </property>
      <widget class="QWidget" name="columnChart" native="true">
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>110</y>
-        <width>411</width>
-        <height>371</height>
+        <y>90</y>
+        <width>412</width>
+        <height>392</height>
        </rect>
       </property>
+      <property name="minimumSize">
+       <size>
+        <width>412</width>
+        <height>392</height>
+       </size>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+      </layout>
      </widget>
      <widget class="QWidget" name="pieChart" native="true">
       <property name="geometry">
        <rect>
-        <x>449</x>
-        <y>109</y>
-        <width>301</width>
-        <height>371</height>
+        <x>439</x>
+        <y>89</y>
+        <width>331</width>
+        <height>392</height>
        </rect>
       </property>
-     </widget>
-     <widget class="QDateEdit" name="dateFrom">
-      <property name="geometry">
-       <rect>
-        <x>160</x>
-        <y>30</y>
-        <width>131</width>
-        <height>31</height>
-       </rect>
+      <property name="minimumSize">
+       <size>
+        <width>331</width>
+        <height>392</height>
+       </size>
       </property>
-      <property name="dateTime">
-       <datetime>
-        <hour>0</hour>
-        <minute>0</minute>
-        <second>0</second>
-        <year>2023</year>
-        <month>1</month>
-        <day>1</day>
-       </datetime>
-      </property>
-     </widget>
-     <widget class="QDateEdit" name="dateTo">
-      <property name="geometry">
-       <rect>
-        <x>350</x>
-        <y>30</y>
-        <width>131</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="dateTime">
-       <datetime>
-        <hour>0</hour>
-        <minute>0</minute>
-        <second>0</second>
-        <year>2023</year>
-        <month>1</month>
-        <day>1</day>
-       </datetime>
-      </property>
-     </widget>
-     <widget class="QLabel" name="LB_FROM">
-      <property name="geometry">
-       <rect>
-        <x>130</x>
-        <y>30</y>
-        <width>31</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Từ</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="LB_TO">
-      <property name="geometry">
-       <rect>
-        <x>310</x>
-        <y>30</y>
-        <width>41</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Đến</string>
-      </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+      </layout>
      </widget>
      <widget class="QPushButton" name="btn_m_delChart">
       <property name="geometry">
        <rect>
-        <x>640</x>
+        <x>650</x>
         <y>29</y>
         <width>112</width>
         <height>32</height>
@@ -741,9 +721,9 @@ QPushButton:hover{
       <property name="geometry">
        <rect>
         <x>180</x>
-        <y>510</y>
-        <width>391</width>
-        <height>31</height>
+        <y>500</y>
+        <width>461</width>
+        <height>41</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -754,6 +734,49 @@ font: 18pt &quot;Arial&quot;;</string>
        <string>Bạn đã sử dụng Pomodoro 1 giờ ngày hôm nay</string>
       </property>
      </widget>
+     <widget class="QComboBox" name="cB_chooseDate">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>30</y>
+        <width>171</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <item>
+       <property name="text">
+        <string>3 ngày</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>7 ngày</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>30 ngày</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>90 ngày</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>365 ngày</string>
+       </property>
+      </item>
+     </widget>
+     <zorder>btn_m_delChart</zorder>
+     <zorder>label</zorder>
+     <zorder>cB_chooseDate</zorder>
+     <zorder>pieChart</zorder>
+     <zorder>columnChart</zorder>
     </widget>
     <widget class="QWidget" name="page_m_3"/>
     <widget class="QWidget" name="page_m_4"/>
@@ -769,7 +792,7 @@ font: 18pt &quot;Arial&quot;;</string>
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>810</width>
+      <width>820</width>
       <height>560</height>
      </rect>
     </property>
@@ -781,13 +804,13 @@ font: 18pt &quot;Arial&quot;;</string>
     </property>
     <property name="minimumSize">
      <size>
-      <width>810</width>
+      <width>820</width>
       <height>560</height>
      </size>
     </property>
     <property name="maximumSize">
      <size>
-      <width>810</width>
+      <width>820</width>
       <height>560</height>
      </size>
     </property>
@@ -822,8 +845,26 @@ font: 18pt &quot;Arial&quot;;</string>
      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
     </property>
    </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>820</width>
+      <height>560</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(70, 69, 140, 50%);
+border: 0px;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
    <zorder>Background</zorder>
    <zorder>sW_main</zorder>
+   <zorder>pushButton</zorder>
    <zorder>wg_leftBar</zorder>
   </widget>
  </widget>

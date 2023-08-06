@@ -6,12 +6,16 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>653</width>
-    <height>219</height>
+    <width>480</width>
+    <height>88</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Studious - Pin Task </string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>assert/logo.png</normaloff>assert/logo.png</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(33, 37, 43);
@@ -24,10 +28,10 @@ qproperty-margin: auto;
   <widget class="QLabel" name="lb_task">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>40</y>
-     <width>591</width>
-     <height>61</height>
+     <x>0</x>
+     <y>0</y>
+     <width>240</width>
+     <height>90</height>
     </rect>
    </property>
    <property name="text">
@@ -37,10 +41,10 @@ qproperty-margin: auto;
   <widget class="QLabel" name="lb_time">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>120</y>
-     <width>591</width>
-     <height>61</height>
+     <x>240</x>
+     <y>0</y>
+     <width>240</width>
+     <height>90</height>
     </rect>
    </property>
    <property name="text">
