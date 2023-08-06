@@ -15,7 +15,7 @@ class Ui_Dialog(QtWidgets.QMainWindow):
         self.setupUi(self)
 
     def setupUi(self, Dialog):
-        Dialog.setFixedSize(537, 109)
+        Dialog.setFixedSize(480, 88)
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("assert/logo.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         Dialog.setWindowIcon(icon)
@@ -26,10 +26,10 @@ class Ui_Dialog(QtWidgets.QMainWindow):
 "qproperty-margin: auto;\n"
 "")
         self.lb_task = QtWidgets.QLabel(parent=Dialog)
-        self.lb_task.setGeometry(QtCore.QRect(0, 10, 261, 91))
+        self.lb_task.setGeometry(QtCore.QRect(0, -2, 240, 96))
         self.lb_task.setObjectName("lb_task")
         self.lb_time = QtWidgets.QLabel(parent=Dialog)
-        self.lb_time.setGeometry(QtCore.QRect(270, 10, 261, 91))
+        self.lb_time.setGeometry(QtCore.QRect(240, -2, 240, 96))
         self.lb_time.setObjectName("lb_time")
 
         self.retranslateUi(Dialog)

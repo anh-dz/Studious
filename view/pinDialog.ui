@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>537</width>
-    <height>109</height>
+    <width>480</width>
+    <height>88</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -29,9 +29,9 @@ qproperty-margin: auto;
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>10</y>
-     <width>261</width>
-     <height>91</height>
+     <y>0</y>
+     <width>240</width>
+     <height>90</height>
     </rect>
    </property>
    <property name="text">
@@ -41,10 +41,10 @@ qproperty-margin: auto;
   <widget class="QLabel" name="lb_time">
    <property name="geometry">
     <rect>
-     <x>270</x>
-     <y>10</y>
-     <width>261</width>
-     <height>91</height>
+     <x>240</x>
+     <y>0</y>
+     <width>240</width>
+     <height>90</height>
     </rect>
    </property>
    <property name="text">

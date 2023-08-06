@@ -24,12 +24,16 @@ class StudiousFunc:
         #check data file and dump data
         self.file = fileDataControl()
 
+        self.box = QMessageBox()
+        self.box.setWindowIcon(QIcon("assert/logo.png"))
+        self.box.setWindowTitle("Studious")
+
         #random qoutes and print in app
         self.qoutes = choice(list_quotes)
         wgs.lb_m_quote.setText(self.qoutes)
 
         #connect start/stop button with clock
-        self.wtime, self.rtime = 1, 5
+        self.wtime, self.rtime = 25, 5
         wgs.lb_m_time.setText(f"{self.wtime}:00")
         wgs.btn_m_startstop.clicked.connect(self.start_clock)
         self.countdown = countdown(self.wtime, self.rtime)
@@ -65,8 +69,19 @@ class StudiousFunc:
         #Create chart
         self.chart = chart()
         wgs.cB_chooseDate.currentIndexChanged.connect(self.chart.dataChange)
+        wgs.btn_m_delChart.clicked.connect(self.delChartcheck)
 
-
+    def delChartcheck(self):
+        self.box.setText("Bạn có chắc chắn?")
+        self.box.setStandardButtons(QMessageBox.StandardButton.Yes|QMessageBox.StandardButton.No)
+        buttonY = self.box.button(QMessageBox.StandardButton.Yes)
+        buttonY.setText('Có')
+        buttonN = self.box.button(QMessageBox.StandardButton.No)
+        buttonN.setText('Không')
+        self.box.exec()
+        if self.box.clickedButton() == buttonY:
+            return True
+        return False
 
     #Func control app
     def start_clock(self):
