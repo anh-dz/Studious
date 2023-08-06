@@ -1,7 +1,7 @@
 import csv
 import json
 from os import path, remove, makedirs
-import time, datetime
+import datetime
 
 with open("data/quotes.txt", "r", encoding="utf-8") as f:
     res = f.readlines()
