@@ -1,12 +1,9 @@
-import typing
 from PyQt6.QtCore import *
 from PyQt6.QtCore import QObject
 from PyQt6.QtWidgets import *
 from PyQt6.QtGui import *
 from PyQt6.QtMultimedia import *
 from PyQt6.QtCharts import *
-import sys
-import json
 from random import choice
 import datetime
 from main import *
