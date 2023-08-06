@@ -8,6 +8,7 @@ Tương thích hệ điều hành: Windows, MacOS, Linux <br>
 </ol>
 <br>
 <b>Cách chạy ứng dụng:</b> <br>
+<i>-> File main.py là file khởi chạy chương trình</i> <br>
 Trỏ vào thư mục Studious sau khi clone code về <br>
 Đối với macOS và Linux: Mở terminal -> python3 main.py <br>
 Đối với Windows: Mở cmd -> python main.py <br>
