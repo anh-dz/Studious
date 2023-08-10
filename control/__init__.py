@@ -1,2 +1,2 @@
-from . mainControl import *
+from . mainControl import StudiousFunc
 from .fileDataControl import *

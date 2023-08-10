@@ -13,10 +13,11 @@ from .fileDataControl import *
 class StudiousFunc:
     def __init__(self, widgets):
         super().__init__()
-        global wgs, isFwgsOn, isPwgsOn
+        global wgs
         wgs = widgets
-        isFwgsOn = False
-        isPwgsOn = False
+
+        self.isFwgsOn = False
+        self.isPwgsOn = False
 
         #check data file and dump data
         self.file = fileDataControl()
@@ -67,6 +68,17 @@ class StudiousFunc:
         self.chart = chart()
         wgs.cB_chooseDate.currentIndexChanged.connect(self.chart.dataChange)
         wgs.btn_m_delChart.clicked.connect(self.delChartcheck)
+    
+    def getWgsOn(self, wgs):
+        if wgs == 'Fwgs':
+            return self.isFwgsOn
+        return self.isPwgsOn
+    
+    def setWgsOn(self, wgs, check):
+        if wgs == 'Fwgs':
+            self.isFwgsOn = check
+            return
+        self.isPwgsOn = check
 
     def delChartcheck(self):
         self.box.setText("Bạn có chắc chắn?")
@@ -88,28 +100,28 @@ class StudiousFunc:
             self.qthread.start()
             self.countdown.start_timer()
             wgs.btn_m_startstop.setIcon(QIcon("assert/pause.png"))
-            if isFwgsOn:
+            if self.isFwgsOn:
                 Fwgs.btn_startstop.setIcon(QIcon("assert/pause.png"))
             if self.countdown.work_or_rest == True:
                 wgs.cB_m_task.setEnabled(not self.countdown.work_or_rest)
-                if isFwgsOn:
+                if self.isFwgsOn:
                     Fwgs.cB_task.setEnabled(not self.countdown.work_or_rest)
             else:
                 wgs.cB_m_task.setEnabled(not self.countdown.work_or_rest)
-                if isFwgsOn:
+                if self.isFwgsOn:
                     Fwgs.cB_task.setEnabled(not self.countdown.work_or_rest)
         else:
             self.clock_onoff = False
             self.qthread = audioFunc(QThread,'assert/music/unpause.mp3')
             self.qthread.start()
             wgs.btn_m_startstop.setIcon(QIcon("assert/start.png"))
-            if isFwgsOn:
+            if self.isFwgsOn:
                 Fwgs.btn_startstop.setIcon(QIcon("assert/start.png"))
             self.countdown.stop_timer()    
 
     def next_clock(self):
         wgs.btn_m_startstop.setIcon(QIcon("assert/start.png"))
-        if isFwgsOn:
+        if self.isFwgsOn:
             Fwgs.btn_startstop.setIcon(QIcon("assert/start.png"))
         self.qthread = audioFunc(QThread,'assert/music/end.mp3')
         self.qthread.start()
@@ -118,31 +130,31 @@ class StudiousFunc:
             self.file.dataTimeJson[self.file.ntime][wgs.cB_m_task.currentText()] += self.countdown.wtime-round(self.countdown.time_left/60)
             self.file.writeDataTime()
             wgs.cB_m_task.setEnabled(self.countdown.work_or_rest)
-            if isFwgsOn:    
+            if self.isFwgsOn:    
                 Fwgs.lb_time.setStyleSheet("font: 128pt \"Arial\";\n"
 "color: rgb(251, 238, 172);\n"
 "border: 0px;\n"
 "qproperty-alignment: \'AlignCenter\';\n"
 "qproperty-margin: auto;")
                 Fwgs.cB_task.setEnabled(self.countdown.work_or_rest)
-            if isPwgsOn:
+            if self.isPwgsOn:
                 Pwgs.lb_time.setStyleSheet('color: rgb(251, 238, 172)')
         else:
             wgs.lb_m_time.setStyleSheet('color: rgb(249, 245, 246)')
-            if isFwgsOn:
+            if self.isFwgsOn:
                 Fwgs.lb_time.setStyleSheet("font: 128pt \"Arial\";\n"
 "color: rgb(249, 245, 246);\n"
 "border: 0px;\n"
 "qproperty-alignment: \'AlignCenter\';\n"
 "qproperty-margin: auto;")
-            if isPwgsOn:
+            if self.isPwgsOn:
                 Pwgs.lb_time.setStyleSheet('rgb(249, 245, 246)')
         self.countdown.next_timer()
         self.clock_onoff = False
         wgs.lb_m_time.setText(f"{self.countdown.mtime}:00")
-        if isPwgsOn:
+        if self.isPwgsOn:
             Pwgs.lb_time.setText(f"{self.countdown.mtime}:00")
-        if isFwgsOn:
+        if self.isFwgsOn:
             Fwgs.lb_time.setText(f"{self.countdown.mtime}:00")
 
 
@@ -150,23 +162,23 @@ class StudiousFunc:
         if self.music_onoff:
             self.media_player.play()
             wgs.btn_m_audio.setIcon(QIcon("assert/audio-on.png"))
-            if isFwgsOn:
+            if self.isFwgsOn:
                 Fwgs.btn_audio.setIcon(QIcon("assert/audio-on.png"))
             self.music_onoff = False
         elif self.music_onoff == False:
             self.media_player.pause()
             wgs.btn_m_audio.setIcon(QIcon("assert/audio-off.png"))
-            if isFwgsOn:
+            if self.isFwgsOn:
                 Fwgs.btn_audio.setIcon(QIcon("assert/audio-off.png"))
             self.music_onoff = True
     
     def on_combobox_changed(self):
-        if isFwgsOn:
+        if self.isFwgsOn:
             selected_option = Fwgs.cB_task.currentText()
         else:
             selected_option = wgs.cB_m_task.currentText()
         wgs.cB_m_task.setCurrentText(selected_option)
-        if isPwgsOn:
+        if self.isPwgsOn:
             Pwgs.lb_task.setText(selected_option)
     
     def start_dialog(self):
@@ -196,49 +208,51 @@ class StudiousFunc:
         Fwgs.bottomQuote.setText(self.qoutes)
         Fwgs.cB_task.setEnabled(not self.clock_onoff)
 
+sFunc = obj.get()
 
-class AudioFunc(QThread):
-    def __init__(self, path):
+class audioFunc(QThread):
+    finished = pyqtSignal()
+    progress = pyqtSignal(int)
+
+    def __init__(self, parent: QObject, path) -> None:
         super().__init__()
         self.path = path
 
     def run(self):
-        media_content = QUrl.fromLocalFile(self.path)
-        media_player = QMediaPlayer()
-        audio_output = QAudioOutput()
-        
-        media_player.setAudioOutput(audio_output)
-        media_player.setSource(media_content)
-        media_player.play()
+        self._media_content = QUrl.fromLocalFile(self.path)
+        self._media_player = QMediaPlayer()
+        self._audio = QAudioOutput()
+        self._audio.setVolume(1)
+        self._media_player.setAudioOutput(self._audio)
+        self._media_player.setSource(self._media_content)
+        self._media_player.play()
 
 class DialogFunc:
     def __init__(self):
-        global Pwgs, isPwgsOn
+        global Pwgs
+        
         Pwgs = Ui_Dialog()
         Pwgs.setWindowFlag(Qt.WindowType.WindowStaysOnTopHint)
         Pwgs.lb_task.setText(wgs.cB_m_task.currentText())
         Pwgs.show()
-        isPwgsOn = True
+        sFunc.setWgsOn(wgs = 'Pwgs', check = True)
     
     def closeEvent(self, event):
-        global isPwgsOn
-        isPwgsOn = False
+        sFunc.setWgsOn(wgs = 'Pwgs', check = False)
         Pwgs.close()
 
 class fullScreenFunc(StudiousFS):
     def __init__(self):
-        global isFwgsOn
         super().__init__()
         global Fwgs
         Fwgs = self
         Fwgs.setWindowFlag(Qt.WindowType.WindowStaysOnTopHint)
         Fwgs.setWindowFlag(Qt.WindowType.FramelessWindowHint)
         Fwgs.show()
-        isFwgsOn = True
+        sFunc.setWgsOn(wgs = 'Fwgs', check = True)
 
     def closeEvent(self, event):
-        global isFwgsOn
-        isFwgsOn = False
+        sFunc.setWgsOn(wgs = 'Fwgs', check = False)
         Fwgs.close()
 
     def focusOutEvent(self, event):
@@ -270,9 +284,9 @@ class countdown:
             # Format the remaining time as MM:SS
             self.minutes, self.seconds = divmod(self.time_left, 60)
             wgs.lb_m_time.setText(f"{self.minutes:02}:{self.seconds:02}")
-            if isPwgsOn:
+            if sFunc.getWgsOn('Pwgs'):
                 Pwgs.lb_time.setText(f"{self.minutes:02}:{self.seconds:02}")
-            if isFwgsOn:
+            if sFunc.getWgsOn('Fwgs'):
                 Fwgs.lb_time.setText(f"{self.minutes:02}:{self.seconds:02}")
         else:
             self.next_timer()
@@ -290,7 +304,7 @@ class countdown:
             else:
                 self.work_or_rest = True
                 self.mtime = self.wtime
-                if isFwgsOn:
+                if sFunc.getWgsOn('Fwgs'):
                     Fwgs.lb_time.setStyleSheet("font: 128pt \"Arial\";\n"
     "color: rgb(249, 245, 246);\n"
     "border: 0px;\n"
