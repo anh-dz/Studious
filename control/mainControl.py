@@ -33,6 +33,7 @@ class StudiousFunc:
 
     def initialize_ui(self):
         wgs.lb_m_quote.setText(self.qoutes)
+        wgs.label.setText(self.file.totalTimeDay())
         wgs.lb_m_time.setText(f"{self.wtime}:00")
 
     def initialize_events(self):
@@ -106,8 +107,9 @@ class StudiousFunc:
         self.qthread.start()
         if self.countdown.work_or_rest: 
             wgs.lb_m_time.setStyleSheet('color: rgb(251, 238, 172)')
-            self.file.dataTimeJson[self.file.ntime][wgs.cB_m_task.currentText()] += self.countdown.wtime-round(self.countdown.time_left/60)
+            self.file.dataTimeJson[self.file.ntime][wgs.cB_m_task.currentText()] += round((self.countdown.wtime-self.countdown.time_left/60)/60, 1)
             self.file.writeDataTime()
+            wgs.label.setText(self.file.totalTimeDay())
             wgs.cB_m_task.setEnabled(self.countdown.work_or_rest)
             if isFwgsOn:    
                 Fwgs.lb_time.setStyleSheet("font: 128pt \"Arial\";\n"

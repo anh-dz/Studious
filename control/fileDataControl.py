@@ -12,22 +12,22 @@ class fileDataControl:
         self.ntime = self._ntime.strftime("%d/%m/%Y")
         if self.create_folder():  self.default_data()
         self.readDataTime()
+        self.lb = list(self.dataTimeJson[self.ntime].keys())
         
     def create_folder(self) -> bool:
-        if not path.exists(f"data"):
-            makedirs(f"data")
+        if not path.exists("data"):
+            makedirs("data")
             with open(f"data/time.json", "w") as f:
                 pass
             return True
-        
+        else:
+            if not path.exists("data/time.json"):
+                with open("data/time.json", 'w') as f:
+                    pass
+                return True
         return False
 
     def default_data(self):
-        chartDataTime = [
-                ['task name', 'time'],
-                ['Học', '0'],
-                ['Làm việc', '0']
-            ]
         dataTime = {f"{self.ntime}":{"Học Toán":0, "Học IELTS":0, "Làm việc":0}}
 
         with open('data/time.json', 'w', newline='', encoding="utf-8") as jsonfile:
@@ -45,6 +45,16 @@ class fileDataControl:
     def writeDataTime(self):
         with open('data/time.json', 'w', newline='', encoding="utf-8") as jsonfile:
             json.dump(self.dataTimeJson, jsonfile,  ensure_ascii=False)
+
+    def totalTimeDay(self):
+        _temp = []
+        for i in self.lb:
+            _temp.append(self.dataTimeJson[self.ntime][i])
+        s = sum(_temp)
+        if s < 1:
+            return f"Bạn đã sử dụng pomodoro được {round(s*60)} phút"
+        elif s == int(s):    return f"Bạn đã sử dụng pomodoro được {int(s)} giờ"
+        else:   return f"Bạn đã sử dụng pomodoro được {int(s)} giờ {round((s%1)*60)} phút"
 
     def dataChart(self, days: str):
         time = []

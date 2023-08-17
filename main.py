@@ -11,6 +11,8 @@ def main():
     model_obj = StudiousFunc(main_window.ui)
     main_window.show()
     app.exec()
+    model_obj.file.dataTimeJson[model_obj.file.ntime][main_window.ui.cB_m_task.currentText()] += round((model_obj.countdown.wtime-model_obj.countdown.time_left/60)/60, 1)
+    model_obj.file.writeDataTime()
 
 if __name__ == '__main__':
     main()
