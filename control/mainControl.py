@@ -1,12 +1,9 @@
-import typing
 from PyQt6.QtCore import *
 from PyQt6.QtCore import QObject
 from PyQt6.QtWidgets import *
 from PyQt6.QtGui import *
 from PyQt6.QtMultimedia import *
 from PyQt6.QtCharts import *
-import sys
-import json
 from random import choice
 import datetime
 from main import *
@@ -15,33 +12,40 @@ from .fileDataControl import *
 
 class StudiousFunc:
     def __init__(self, widgets):
-        super().__init__()
-        global wgs, isFwgsOn, isPwgsOn
+        global wgs
         wgs = widgets
+        self.initialize_variables()
+        self.initialize_ui()
+        self.initialize_events()
+
+    def initialize_variables(self):
+        global isFwgsOn, isPwgsOn
         isFwgsOn = False
         isPwgsOn = False
-
-        #check data file and dump data
         self.file = fileDataControl()
-
-        #random qoutes and print in app
         self.qoutes = choice(list_quotes)
-        wgs.lb_m_quote.setText(self.qoutes)
-
-        #connect start/stop button with clock
-        self.wtime, self.rtime = 25, 5
-        wgs.lb_m_time.setText(f"{self.wtime}:00")
-        wgs.btn_m_startstop.clicked.connect(self.start_clock)
-        self.countdown = countdown(self.wtime, self.rtime)
         self.clock_onoff = False
-
-        #Put clock to next session
-        wgs.btn_m_next.clicked.connect(self.next_clock)
-
-        #Turn on/off music in app
-        wgs.btn_m_audio.clicked.connect(self.onoff_audio)
-        self.bg_music = QUrl.fromLocalFile('assert/music/music.mp3')
         self.music_onoff = True
+        self.wtime, self.rtime = 25, 5
+        self.countdown = countdown(self.wtime, self.rtime)
+        self.create_media_player()
+        self.create_chart()
+
+    def initialize_ui(self):
+        wgs.lb_m_quote.setText(self.qoutes)
+        wgs.lb_m_time.setText(f"{self.wtime}:00")
+
+    def initialize_events(self):
+        wgs.btn_m_startstop.clicked.connect(self.start_clock)
+        wgs.btn_m_next.clicked.connect(self.next_clock)
+        wgs.btn_m_audio.clicked.connect(self.onoff_audio)
+        wgs.btn_m_pin.clicked.connect(self.start_dialog)
+        wgs.btn_m_fs.clicked.connect(self.start_fs)
+        wgs.cB_m_task.currentIndexChanged.connect(self.on_combobox_changed)
+        wgs.btn_m_delChart.clicked.connect(self.delChartcheck)
+
+    def create_media_player(self):
+        self.bg_music = QUrl.fromLocalFile('assert/music/music.mp3')
         self.media_player = QMediaPlayer()
         self.audio = QAudioOutput()
         self.audio.setVolume(1)
@@ -49,24 +53,23 @@ class StudiousFunc:
         self.media_player.setSource(self.bg_music)
         self.media_player.setLoops(24)
         self.onoff_audio()
-
-        #Turn on pinDialog
-        wgs.btn_m_pin.clicked.connect(self.start_dialog)
-
-        #Turn on full screen mode
-        wgs.btn_m_fs.clicked.connect(self.start_fs)
-
-        #Change label task connect
-        wgs.cB_m_task.currentIndexChanged.connect(self.on_combobox_changed)
-
-        #Show notification
         
-
-        #Create chart
+    def create_chart(self):
         self.chart = chart(self.file)
         wgs.cB_chooseDate.currentIndexChanged.connect(self.chart.dataChange)
+        wgs.btn_m_delChart.clicked.connect(self.delChartcheck)
 
-
+    def delChartcheck(self):
+        self.box.setText("Bạn có chắc chắn?")
+        self.box.setStandardButtons(QMessageBox.StandardButton.Yes|QMessageBox.StandardButton.No)
+        buttonY = self.box.button(QMessageBox.StandardButton.Yes)
+        buttonY.setText('Có')
+        buttonN = self.box.button(QMessageBox.StandardButton.No)
+        buttonN.setText('Không')
+        self.box.exec()
+        if self.box.clickedButton() == buttonY:
+            return True
+        return False
 
     #Func control app
     def start_clock(self):
@@ -101,7 +104,7 @@ class StudiousFunc:
             Fwgs.btn_startstop.setIcon(QIcon("assert/start.png"))
         self.qthread = audioFunc(QThread,'assert/music/end.mp3')
         self.qthread.start()
-        if self.countdown.work_or_rest == True: 
+        if self.countdown.work_or_rest: 
             wgs.lb_m_time.setStyleSheet('color: rgb(251, 238, 172)')
             self.file.dataTimeJson[self.file.ntime][wgs.cB_m_task.currentText()] += self.countdown.wtime-round(self.countdown.time_left/60)
             self.file.writeDataTime()
@@ -159,7 +162,8 @@ class StudiousFunc:
     
     def start_dialog(self):
         self.diaLog = DialogFunc()
-        if not self.countdown.work_or_rest:    Pwgs.lb_time.setStyleSheet('color: rgb(251, 238, 172)')
+        if not self.countdown.work_or_rest:
+            Pwgs.lb_time.setStyleSheet('color: rgb(251, 238, 172)')
         Pwgs.lb_time.setText(f"{self.countdown.mtime}:00")
 
     def start_fs(self):
@@ -275,7 +279,7 @@ class countdown:
         else:
             try: self.timer.disconnect()
             except: pass
-            if self.work_or_rest == True:
+            if self.work_or_rest:
                 self.work_or_rest = False
                 self.mtime = self.rtime
             else:
