@@ -258,7 +258,7 @@ class countdown:
         self.timer.start(1000)  # Update every second
 
     def stop_timer(self):
-        self.timer.stop()
+        self.timer.disconnect()
 
     def update_countdown(self):
         self.time_left -= 1
