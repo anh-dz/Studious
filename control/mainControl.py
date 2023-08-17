@@ -28,6 +28,7 @@ class StudiousFunc:
         self.music_onoff = True
         self.wtime, self.rtime = 25, 5
         self.countdown = countdown(self.wtime, self.rtime)
+        self.box = QMessageBox()
         self.create_media_player()
         self.create_chart()
 
