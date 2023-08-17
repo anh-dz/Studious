@@ -113,10 +113,10 @@ class StudiousFunc:
             wgs.cB_m_task.setEnabled(self.countdown.work_or_rest)
             if isFwgsOn:    
                 Fwgs.lb_time.setStyleSheet("font: 128pt \"Arial\";\n"
-"color: rgb(251, 238, 172);\n"
-"border: 0px;\n"
-"qproperty-alignment: \'AlignCenter\';\n"
-"qproperty-margin: auto;")
+                                            "color: rgb(251, 238, 172);\n"
+                                            "border: 0px;\n"
+                                            "qproperty-alignment: \'AlignCenter\';\n"
+                                            "qproperty-margin: auto;")
                 Fwgs.cB_task.setEnabled(self.countdown.work_or_rest)
             if isPwgsOn:
                 Pwgs.lb_time.setStyleSheet('color: rgb(251, 238, 172)')
@@ -137,7 +137,7 @@ class StudiousFunc:
             Pwgs.lb_time.setText(f"{self.countdown.mtime}:00")
         if isFwgsOn:
             Fwgs.lb_time.setText(f"{self.countdown.mtime}:00")
-
+        self.chart.dataChange()
 
     def onoff_audio(self):
         if self.music_onoff:
@@ -173,10 +173,10 @@ class StudiousFunc:
         Fwgs.cB_task.currentIndexChanged.connect(self.on_combobox_changed)
         if not self.countdown.work_or_rest:
             Fwgs.lb_time.setStyleSheet("font: 128pt \"Arial\";\n"
-"color: rgb(251, 238, 172);\n"
-"border: 0px;\n"
-"qproperty-alignment: \'AlignCenter\';\n"
-"qproperty-margin: auto;")
+                                    "color: rgb(251, 238, 172);\n"
+                                    "border: 0px;\n"
+                                    "qproperty-alignment: \'AlignCenter\';\n"
+                                    "qproperty-margin: auto;")
         if self.clock_onoff:
             Fwgs.btn_startstop.setIcon(QIcon("assert/pause.png"))
         if self.music_onoff:
