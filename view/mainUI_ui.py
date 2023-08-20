@@ -15,10 +15,11 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QComboBox, QFrame, QHBoxLayout,
-    QHeaderView, QLabel, QMainWindow, QPushButton,
-    QSizePolicy, QStackedWidget, QTableWidget, QTableWidgetItem,
-    QTextBrowser, QToolButton, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QFrame,
+    QHBoxLayout, QHeaderView, QLabel, QMainWindow,
+    QPushButton, QSizePolicy, QStackedWidget, QTableWidget,
+    QTableWidgetItem, QTextBrowser, QToolButton, QVBoxLayout,
+    QWidget)
 
 class Ui_Studious(object):
     def setupUi(self, Studious):
@@ -386,8 +387,35 @@ class Ui_Studious(object):
         self.page_m_6.setObjectName(u"page_m_6")
         self.label_3 = QLabel(self.page_m_6)
         self.label_3.setObjectName(u"label_3")
-        self.label_3.setGeometry(QRect(160, 40, 141, 61))
-        self.label_3.setStyleSheet(u"font: 40pt;")
+        self.label_3.setGeometry(QRect(140, 50, 161, 61))
+        self.label_3.setStyleSheet(u"font: 48pt;")
+        self.comboBox = QComboBox(self.page_m_6)
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.comboBox.setObjectName(u"comboBox")
+        self.comboBox.setGeometry(QRect(370, 140, 191, 41))
+        self.comboBox.setStyleSheet(u"font: 24pt;")
+        self.label_4 = QLabel(self.page_m_6)
+        self.label_4.setObjectName(u"label_4")
+        self.label_4.setGeometry(QRect(180, 130, 151, 61))
+        self.label_4.setStyleSheet(u"font: 24pt;")
+        self.checkBox = QCheckBox(self.page_m_6)
+        self.checkBox.setObjectName(u"checkBox")
+        self.checkBox.setGeometry(QRect(180, 200, 341, 51))
+        self.checkBox.setStyleSheet(u"font: 24pt;")
+        self.checkBox_2 = QCheckBox(self.page_m_6)
+        self.checkBox_2.setObjectName(u"checkBox_2")
+        self.checkBox_2.setGeometry(QRect(180, 270, 391, 51))
+        self.checkBox_2.setStyleSheet(u"font: 24pt;")
+        self.checkBox_3 = QCheckBox(self.page_m_6)
+        self.checkBox_3.setObjectName(u"checkBox_3")
+        self.checkBox_3.setGeometry(QRect(180, 350, 391, 51))
+        self.checkBox_3.setStyleSheet(u"font: 24pt;")
+        self.checkBox_4 = QCheckBox(self.page_m_6)
+        self.checkBox_4.setObjectName(u"checkBox_4")
+        self.checkBox_4.setGeometry(QRect(180, 420, 391, 50))
+        self.checkBox_4.setStyleSheet(u"font: 24pt;")
         self.sW_main.addWidget(self.page_m_6)
         self.page_m_7 = QWidget()
         self.page_m_7.setObjectName(u"page_m_7")
@@ -415,14 +443,14 @@ class Ui_Studious(object):
         self.pushButton.setStyleSheet(u"background-color: rgba(70, 69, 140, 40%);\n"
 "border: 0px;")
         Studious.setCentralWidget(self.centralwidget)
-        self.pushButton.raise_()
         self.Background.raise_()
         self.sW_main.raise_()
         self.wg_leftBar.raise_()
+        self.pushButton.raise_()
 
         self.retranslateUi(Studious)
 
-        self.sW_main.setCurrentIndex(5)
+        self.sW_main.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(Studious)
@@ -477,6 +505,15 @@ class Ui_Studious(object):
         ___qtablewidgetitem8.setText(QCoreApplication.translate("Studious", u"7", None));
         self.label_2.setText(QCoreApplication.translate("Studious", u"Th\u1ee9 2, ng\u00e0y 20/08/2023", None))
         self.label_3.setText(QCoreApplication.translate("Studious", u"C\u00e0i \u0111\u1eb7t", None))
+        self.comboBox.setItemText(0, QCoreApplication.translate("Studious", u"Baroque", None))
+        self.comboBox.setItemText(1, QCoreApplication.translate("Studious", u"Classical", None))
+        self.comboBox.setItemText(2, QCoreApplication.translate("Studious", u"Melody", None))
+
+        self.label_4.setText(QCoreApplication.translate("Studious", u"Th\u1ec3 lo\u1ea1i nh\u1ea1c", None))
+        self.checkBox.setText(QCoreApplication.translate("Studious", u"T\u1ef1 kh\u1edfi \u0111\u1ed9ng c\u00f9ng h\u1ec7 th\u1ed1ng", None))
+        self.checkBox_2.setText(QCoreApplication.translate("Studious", u"Th\u00f4ng b\u00e1o ngh\u1ec9 ng\u01a1i tr\u01b0\u1edbc 5 ph\u00fat", None))
+        self.checkBox_3.setText(QCoreApplication.translate("Studious", u"T\u1ef1 b\u1eaft \u0111\u1ea7u phi\u00ean ti\u1ebfp", None))
+        self.checkBox_4.setText(QCoreApplication.translate("Studious", u"Nh\u1ea5n Space \u0111\u1ec3 b\u1eaft \u0111\u1ea7u phi\u00ean ti\u1ebfp", None))
         self.Background.setText("")
         self.pushButton.setText("")
     # retranslateUi
