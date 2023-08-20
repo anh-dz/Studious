@@ -388,7 +388,7 @@ QComboBox QAbstractItemView {
 }</string>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>5</number>
     </property>
     <widget class="QWidget" name="page_m_pom">
      <property name="styleSheet">
@@ -877,7 +877,24 @@ font: 18pt &quot;Arial&quot;;</string>
     </widget>
     <widget class="QWidget" name="page_m_4"/>
     <widget class="QWidget" name="page_m_5"/>
-    <widget class="QWidget" name="page_m_6"/>
+    <widget class="QWidget" name="page_m_6">
+     <widget class="QLabel" name="label_3">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>40</y>
+        <width>141</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 40pt;</string>
+      </property>
+      <property name="text">
+       <string>Cài đặt</string>
+      </property>
+     </widget>
+    </widget>
     <widget class="QWidget" name="page_m_7"/>
    </widget>
    <widget class="QLabel" name="Background">

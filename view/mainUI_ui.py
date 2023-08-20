@@ -384,6 +384,10 @@ class Ui_Studious(object):
         self.sW_main.addWidget(self.page_m_5)
         self.page_m_6 = QWidget()
         self.page_m_6.setObjectName(u"page_m_6")
+        self.label_3 = QLabel(self.page_m_6)
+        self.label_3.setObjectName(u"label_3")
+        self.label_3.setGeometry(QRect(160, 40, 141, 61))
+        self.label_3.setStyleSheet(u"font: 40pt;")
         self.sW_main.addWidget(self.page_m_6)
         self.page_m_7 = QWidget()
         self.page_m_7.setObjectName(u"page_m_7")
@@ -418,7 +422,7 @@ class Ui_Studious(object):
 
         self.retranslateUi(Studious)
 
-        self.sW_main.setCurrentIndex(2)
+        self.sW_main.setCurrentIndex(5)
 
 
         QMetaObject.connectSlotsByName(Studious)
@@ -472,6 +476,7 @@ class Ui_Studious(object):
         ___qtablewidgetitem8 = self.tableWidget.verticalHeaderItem(6)
         ___qtablewidgetitem8.setText(QCoreApplication.translate("Studious", u"7", None));
         self.label_2.setText(QCoreApplication.translate("Studious", u"Th\u1ee9 2, ng\u00e0y 20/08/2023", None))
+        self.label_3.setText(QCoreApplication.translate("Studious", u"C\u00e0i \u0111\u1eb7t", None))
         self.Background.setText("")
         self.pushButton.setText("")
     # retranslateUi
