@@ -2,16 +2,7 @@ from PyQt6.QtCore import *
 from PyQt6.QtWidgets import *
 from PyQt6.QtGui import *
 from . mainUI import Ui_Studious
-from .colorFunc import create_colored_icon
-
-class comboCompanies(QComboBox):
-    def __init__(self, parent):
-        super().__init__(parent)
-        self.addItems(['Chưa hoàn thành', 'Đang làm', 'Đã hoàn thành'])
-        self.currentIndexChanged.connect(self.getComboValue)
-
-    def getComboValue(self):
-        print(self.currentText())
+from .colorFunc import *
 
 class ViewControl(QMainWindow):
     def __init__(self):
@@ -30,18 +21,16 @@ class ViewControl(QMainWindow):
         self.ui.btn_lB_1.clicked.connect(lambda: self.ui.sW_main.setCurrentIndex(0) or self.blur_effect.setBlurRadius(0))
         self.ui.btn_lB_2.clicked.connect(lambda: self.ui.sW_main.setCurrentIndex(1) or self.blur_effect.setBlurRadius(12))
         self.ui.btn_lB_3.clicked.connect(lambda: self.ui.sW_main.setCurrentIndex(2) or self.blur_effect.setBlurRadius(12))
-        self.ui.btn_lB_4.clicked.connect(lambda: self.ui.sW_main.setCurrentIndex(3))
-        self.ui.btn_lB_5.clicked.connect(lambda: self.ui.sW_main.setCurrentIndex(4))
-        self.ui.btn_lB_6.clicked.connect(lambda: self.ui.sW_main.setCurrentIndex(5))
-        self.ui.btn_lB_7.clicked.connect(lambda: self.ui.sW_main.setCurrentIndex(6))
+        self.ui.btn_lB_4.clicked.connect(lambda: self.ui.sW_main.setCurrentIndex(3) or self.blur_effect.setBlurRadius(12))
+        self.ui.btn_lB_5.clicked.connect(lambda: self.ui.sW_main.setCurrentIndex(4) or self.blur_effect.setBlurRadius(12))
+        self.ui.btn_lB_6.clicked.connect(lambda: self.ui.sW_main.setCurrentIndex(5) or self.blur_effect.setBlurRadius(12))
+        self.ui.btn_lB_7.clicked.connect(lambda: self.ui.sW_main.setCurrentIndex(6) or self.blur_effect.setBlurRadius(12))
 
         self.ui.btn_lB_menu.clicked.connect(self.toggleSideMenu)
 
         self.setupTableWidget()
 
         self.testComboBoxColor()
-
-        self.ui.textBrowser.setText("Mô tả chi tiết")
 
     def toggleSideMenu(self):
         target_width = 150 if self.ui.wg_leftBar.width() <= 70 else 44
@@ -69,5 +58,5 @@ class ViewControl(QMainWindow):
         self.ui.cB_m_task.addItem(create_colored_icon(QColor('red')), "Làm việc")
     
     def setupTableWidget(self):
-        combo = comboCompanies(self.ui.tableWidget)
-        self.ui.tableWidget.setCellWidget(0, 1, combo)
+        combo = comboCompanies(self.ui.tW_3_todoToday)
+        self.ui.tW_3_todoToday.setCellWidget(0, 1, combo)

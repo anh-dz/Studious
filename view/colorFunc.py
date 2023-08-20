@@ -14,3 +14,13 @@ def create_colored_icon(color, radius=8):
     painter.end()
 
     return QIcon(pixmap)
+
+class comboCompanies(QComboBox):
+    def __init__(self, parent):
+        super().__init__(parent)
+        self.setStyleSheet("font: 18pt;")
+        self.addItems(['Chưa hoàn thành', 'Đang làm', 'Đã hoàn thành'])
+        self.currentIndexChanged.connect(self.getComboValue)
+
+    def getComboValue(self):
+        print(self.currentText())

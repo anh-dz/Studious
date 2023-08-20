@@ -116,7 +116,7 @@ class Ui_Studious(object):
         self.btn_lB_5.setMinimumSize(QtCore.QSize(0, 40))
         self.btn_lB_5.setStyleSheet("")
         icon6 = QtGui.QIcon()
-        icon6.addPixmap(QtGui.QPixmap("assert/card.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon6.addPixmap(QtGui.QPixmap("assert/relax.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.btn_lB_5.setIcon(icon6)
         self.btn_lB_5.setIconSize(QtCore.QSize(32, 32))
         self.btn_lB_5.setObjectName("btn_lB_5")
@@ -174,6 +174,41 @@ class Ui_Studious(object):
 "    background-color: rgb(33, 37, 43);\n"
 "    padding: 10px;\n"
 "    selection-background-color: rgb(39, 44, 54);\n"
+"}\n"
+"QTableWidget {\n"
+"    background-color: rgba(52, 22, 85, 50%);\n"
+"    border: 0px;\n"
+"}\n"
+"QTableWidget::item {\n"
+"    padding: 7px;\n"
+"}\n"
+"QHeaderView::section {\n"
+"    background-color: rgba(52, 22, 85, 50%);\n"
+"    padding: 4px;\n"
+"    border: none;\n"
+"}\n"
+"QScrollBar:vertical {\n"
+"    border: 0px;\n"
+"    background:white;\n"
+"    width:5px;\n"
+"    border-radius: 5px;\n"
+"    margin: 0px;\n"
+"}\n"
+"QScrollBar::handle:vertical {\n"
+"    min-height: 0px;\n"
+"    border: 0px;\n"
+"    border-radius: 5px;\n"
+"    background-color: black;\n"
+"}\n"
+"QScrollBar::add-line:vertical {\n"
+"    height: 0px;\n"
+"    subcontrol-position: bottom;\n"
+"    subcontrol-origin: margin;\n"
+"}\n"
+"QScrollBar::sub-line:vertical {\n"
+"    height: 0px;\n"
+"    subcontrol-position: top;\n"
+"    subcontrol-origin: margin;\n"
 "}")
         self.sW_main.setObjectName("sW_main")
         self.page_m_pom = QtWidgets.QWidget()
@@ -319,79 +354,135 @@ class Ui_Studious(object):
         self.sW_main.addWidget(self.page_m_2)
         self.page_m_3 = QtWidgets.QWidget()
         self.page_m_3.setObjectName("page_m_3")
-        self.tableWidget = QtWidgets.QTableWidget(parent=self.page_m_3)
-        self.tableWidget.setGeometry(QtCore.QRect(60, 70, 641, 261))
-        self.tableWidget.setStyleSheet("")
-        self.tableWidget.setObjectName("tableWidget")
-        self.tableWidget.setColumnCount(2)
-        self.tableWidget.setRowCount(7)
+        self.lb_3_date = QtWidgets.QLabel(parent=self.page_m_3)
+        self.lb_3_date.setGeometry(QtCore.QRect(160, 30, 330, 40))
+        self.lb_3_date.setStyleSheet("font: 24pt;")
+        self.lb_3_date.setObjectName("lb_3_date")
+        self.LB = QtWidgets.QLabel(parent=self.page_m_3)
+        self.LB.setGeometry(QtCore.QRect(120, 380, 121, 31))
+        self.LB.setStyleSheet("font: 24pt;")
+        self.LB.setObjectName("LB")
+        self.textBrowser_3_des = QtWidgets.QTextBrowser(parent=self.page_m_3)
+        self.textBrowser_3_des.setGeometry(QtCore.QRect(60, 410, 661, 131))
+        self.textBrowser_3_des.setObjectName("textBrowser_3_des")
+        self.verticalLayoutWidget = QtWidgets.QWidget(parent=self.page_m_3)
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(60, 80, 671, 281))
+        self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
+        self.Table = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
+        self.Table.setContentsMargins(0, 0, 0, 0)
+        self.Table.setObjectName("Table")
+        self.tW_3_todoToday = QtWidgets.QTableWidget(parent=self.verticalLayoutWidget)
+        self.tW_3_todoToday.setStyleSheet("")
+        self.tW_3_todoToday.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.tW_3_todoToday.setEditTriggers(QtWidgets.QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.tW_3_todoToday.setProperty("showDropIndicator", False)
+        self.tW_3_todoToday.setGridStyle(QtCore.Qt.PenStyle.SolidLine)
+        self.tW_3_todoToday.setObjectName("tW_3_todoToday")
+        self.tW_3_todoToday.setColumnCount(2)
+        self.tW_3_todoToday.setRowCount(7)
         item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(0, item)
+        self.tW_3_todoToday.setVerticalHeaderItem(0, item)
         item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(1, item)
+        self.tW_3_todoToday.setVerticalHeaderItem(1, item)
         item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(2, item)
+        self.tW_3_todoToday.setVerticalHeaderItem(2, item)
         item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(3, item)
+        self.tW_3_todoToday.setVerticalHeaderItem(3, item)
         item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(4, item)
+        self.tW_3_todoToday.setVerticalHeaderItem(4, item)
         item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(5, item)
+        self.tW_3_todoToday.setVerticalHeaderItem(5, item)
         item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(6, item)
+        self.tW_3_todoToday.setVerticalHeaderItem(6, item)
         item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(0, item)
+        self.tW_3_todoToday.setHorizontalHeaderItem(0, item)
         item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(1, item)
-        self.tableWidget.horizontalHeader().setDefaultSectionSize(350)
-        self.tableWidget.horizontalHeader().setSortIndicatorShown(True)
-        self.tableWidget.horizontalHeader().setStretchLastSection(True)
-        self.label_2 = QtWidgets.QLabel(parent=self.page_m_3)
-        self.label_2.setGeometry(QtCore.QRect(160, 30, 211, 21))
-        self.label_2.setObjectName("label_2")
-        self.textBrowser = QtWidgets.QTextBrowser(parent=self.page_m_3)
-        self.textBrowser.setGeometry(QtCore.QRect(70, 371, 621, 231))
-        self.textBrowser.setObjectName("textBrowser")
+        self.tW_3_todoToday.setHorizontalHeaderItem(1, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tW_3_todoToday.setItem(0, 0, item)
+        self.tW_3_todoToday.horizontalHeader().setCascadingSectionResizes(True)
+        self.tW_3_todoToday.horizontalHeader().setDefaultSectionSize(320)
+        self.tW_3_todoToday.horizontalHeader().setMinimumSectionSize(80)
+        self.tW_3_todoToday.horizontalHeader().setSortIndicatorShown(False)
+        self.tW_3_todoToday.horizontalHeader().setStretchLastSection(True)
+        self.tW_3_todoToday.verticalHeader().setDefaultSectionSize(39)
+        self.tW_3_todoToday.verticalHeader().setMinimumSectionSize(39)
+        self.Table.addWidget(self.tW_3_todoToday)
+        self.lb_4_complete = QtWidgets.QLabel(parent=self.verticalLayoutWidget)
+        self.lb_4_complete.setStyleSheet("font: italic 18pt;\n"
+"color: rgb(255, 196, 54);")
+        self.lb_4_complete.setObjectName("lb_4_complete")
+        self.Table.addWidget(self.lb_4_complete)
+        self.btn_3_edit = QtWidgets.QToolButton(parent=self.page_m_3)
+        self.btn_3_edit.setGeometry(QtCore.QRect(710, 30, 40, 40))
+        self.btn_3_edit.setStyleSheet("")
+        self.btn_3_edit.setText("")
+        icon15 = QtGui.QIcon()
+        icon15.addPixmap(QtGui.QPixmap("assert/edit.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btn_3_edit.setIcon(icon15)
+        self.btn_3_edit.setIconSize(QtCore.QSize(32, 32))
+        self.btn_3_edit.setObjectName("btn_3_edit")
         self.sW_main.addWidget(self.page_m_3)
         self.page_m_4 = QtWidgets.QWidget()
         self.page_m_4.setObjectName("page_m_4")
         self.sW_main.addWidget(self.page_m_4)
         self.page_m_5 = QtWidgets.QWidget()
         self.page_m_5.setObjectName("page_m_5")
+        self.textBrowser_5_breath = QtWidgets.QTextBrowser(parent=self.page_m_5)
+        self.textBrowser_5_breath.setGeometry(QtCore.QRect(40, 50, 701, 401))
+        self.textBrowser_5_breath.setStyleSheet("color: white;")
+        self.textBrowser_5_breath.setObjectName("textBrowser_5_breath")
+        self.btn_5_start = QtWidgets.QPushButton(parent=self.page_m_5)
+        self.btn_5_start.setGeometry(QtCore.QRect(290, 471, 221, 51))
+        self.btn_5_start.setMinimumSize(QtCore.QSize(0, 32))
+        self.btn_5_start.setStyleSheet("QPushButton{\n"
+"    background-color: rgba(52, 22, 85, 70%);\n"
+"    color: rgb(249, 245, 246);\n"
+"    font: 24pt \"Arial\";\n"
+"    border-radius: 5px;\n"
+"    text-align: left;\n"
+"    padding: 2px 7px;\n"
+"}\n"
+"QPushButton:hover{\n"
+"    background-color: rgba(52, 22, 85, 100%);\n"
+"}")
+        self.btn_5_start.setIcon(icon6)
+        self.btn_5_start.setIconSize(QtCore.QSize(23, 23))
+        self.btn_5_start.setObjectName("btn_5_start")
         self.sW_main.addWidget(self.page_m_5)
         self.page_m_6 = QtWidgets.QWidget()
         self.page_m_6.setObjectName("page_m_6")
-        self.label_3 = QtWidgets.QLabel(parent=self.page_m_6)
-        self.label_3.setGeometry(QtCore.QRect(140, 50, 161, 61))
-        self.label_3.setStyleSheet("font: 48pt;")
-        self.label_3.setObjectName("label_3")
-        self.comboBox = QtWidgets.QComboBox(parent=self.page_m_6)
-        self.comboBox.setGeometry(QtCore.QRect(370, 140, 191, 41))
-        self.comboBox.setStyleSheet("font: 24pt;")
-        self.comboBox.setObjectName("comboBox")
-        self.comboBox.addItem("")
-        self.comboBox.addItem("")
-        self.comboBox.addItem("")
-        self.label_4 = QtWidgets.QLabel(parent=self.page_m_6)
-        self.label_4.setGeometry(QtCore.QRect(180, 130, 151, 61))
-        self.label_4.setStyleSheet("font: 24pt;")
-        self.label_4.setObjectName("label_4")
-        self.checkBox = QtWidgets.QCheckBox(parent=self.page_m_6)
-        self.checkBox.setGeometry(QtCore.QRect(180, 200, 341, 51))
-        self.checkBox.setStyleSheet("font: 24pt;")
-        self.checkBox.setObjectName("checkBox")
-        self.checkBox_2 = QtWidgets.QCheckBox(parent=self.page_m_6)
-        self.checkBox_2.setGeometry(QtCore.QRect(180, 270, 391, 51))
-        self.checkBox_2.setStyleSheet("font: 24pt;")
-        self.checkBox_2.setObjectName("checkBox_2")
-        self.checkBox_3 = QtWidgets.QCheckBox(parent=self.page_m_6)
-        self.checkBox_3.setGeometry(QtCore.QRect(180, 350, 391, 51))
-        self.checkBox_3.setStyleSheet("font: 24pt;")
-        self.checkBox_3.setObjectName("checkBox_3")
-        self.checkBox_4 = QtWidgets.QCheckBox(parent=self.page_m_6)
-        self.checkBox_4.setGeometry(QtCore.QRect(180, 420, 391, 50))
-        self.checkBox_4.setStyleSheet("font: 24pt;")
-        self.checkBox_4.setObjectName("checkBox_4")
+        self.LB_2 = QtWidgets.QLabel(parent=self.page_m_6)
+        self.LB_2.setGeometry(QtCore.QRect(140, 50, 191, 61))
+        self.LB_2.setStyleSheet("font: 48pt;")
+        self.LB_2.setObjectName("LB_2")
+        self.cB_6_select = QtWidgets.QComboBox(parent=self.page_m_6)
+        self.cB_6_select.setGeometry(QtCore.QRect(370, 140, 191, 41))
+        self.cB_6_select.setStyleSheet("font: 24pt;")
+        self.cB_6_select.setObjectName("cB_6_select")
+        self.cB_6_select.addItem("")
+        self.cB_6_select.addItem("")
+        self.cB_6_select.addItem("")
+        self.LB_3 = QtWidgets.QLabel(parent=self.page_m_6)
+        self.LB_3.setGeometry(QtCore.QRect(180, 130, 151, 61))
+        self.LB_3.setStyleSheet("font: 24pt;")
+        self.LB_3.setObjectName("LB_3")
+        self.checkBox_autostart = QtWidgets.QCheckBox(parent=self.page_m_6)
+        self.checkBox_autostart.setGeometry(QtCore.QRect(180, 200, 341, 51))
+        self.checkBox_autostart.setStyleSheet("font: 24pt;")
+        self.checkBox_autostart.setObjectName("checkBox_autostart")
+        self.checkBox_noti = QtWidgets.QCheckBox(parent=self.page_m_6)
+        self.checkBox_noti.setGeometry(QtCore.QRect(180, 270, 391, 51))
+        self.checkBox_noti.setStyleSheet("font: 24pt;")
+        self.checkBox_noti.setObjectName("checkBox_noti")
+        self.checkBox_autosession = QtWidgets.QCheckBox(parent=self.page_m_6)
+        self.checkBox_autosession.setGeometry(QtCore.QRect(180, 350, 391, 51))
+        self.checkBox_autosession.setStyleSheet("font: 24pt;")
+        self.checkBox_autosession.setObjectName("checkBox_autosession")
+        self.checkBox_space = QtWidgets.QCheckBox(parent=self.page_m_6)
+        self.checkBox_space.setGeometry(QtCore.QRect(180, 420, 391, 50))
+        self.checkBox_space.setStyleSheet("font: 24pt;")
+        self.checkBox_space.setObjectName("checkBox_space")
         self.sW_main.addWidget(self.page_m_6)
         self.page_m_7 = QtWidgets.QWidget()
         self.page_m_7.setObjectName("page_m_7")
@@ -439,9 +530,9 @@ class Ui_Studious(object):
         self.btn_lB_menu.setText(_translate("Studious", "  MENU"))
         self.btn_lB_1.setText(_translate("Studious", "  Pomodoro"))
         self.btn_lB_2.setText(_translate("Studious", "  Thống kê"))
-        self.btn_lB_3.setText(_translate("Studious", "  Thói Quen"))
+        self.btn_lB_3.setText(_translate("Studious", "  Công việc"))
         self.btn_lB_4.setText(_translate("Studious", "  BotChat"))
-        self.btn_lB_5.setText(_translate("Studious", "  FlashCard"))
+        self.btn_lB_5.setText(_translate("Studious", "  Thư giãn"))
         self.btn_lB_6.setText(_translate("Studious", "  Cài Đặt"))
         self.btn_lB_7.setText(_translate("Studious", "  Giới Thiệu"))
         self.lb_m_time.setText(_translate("Studious", "25:00"))
@@ -456,31 +547,61 @@ class Ui_Studious(object):
         self.cB_chooseDate.setItemText(3, _translate("Studious", "90 ngày"))
         self.cB_chooseDate.setItemText(4, _translate("Studious", "365 ngày"))
         self.cB_chooseDate.setItemText(5, _translate("Studious", "1 ngày"))
-        item = self.tableWidget.verticalHeaderItem(0)
+        self.lb_3_date.setText(_translate("Studious", "Thứ 2, ngày 20/08/2023"))
+        self.LB.setText(_translate("Studious", "Mô Tả"))
+        item = self.tW_3_todoToday.verticalHeaderItem(0)
         item.setText(_translate("Studious", "1"))
-        item = self.tableWidget.verticalHeaderItem(1)
+        item = self.tW_3_todoToday.verticalHeaderItem(1)
         item.setText(_translate("Studious", "2"))
-        item = self.tableWidget.verticalHeaderItem(2)
+        item = self.tW_3_todoToday.verticalHeaderItem(2)
         item.setText(_translate("Studious", "3"))
-        item = self.tableWidget.verticalHeaderItem(3)
+        item = self.tW_3_todoToday.verticalHeaderItem(3)
         item.setText(_translate("Studious", "4"))
-        item = self.tableWidget.verticalHeaderItem(4)
+        item = self.tW_3_todoToday.verticalHeaderItem(4)
         item.setText(_translate("Studious", "5"))
-        item = self.tableWidget.verticalHeaderItem(5)
+        item = self.tW_3_todoToday.verticalHeaderItem(5)
         item.setText(_translate("Studious", "6"))
-        item = self.tableWidget.verticalHeaderItem(6)
+        item = self.tW_3_todoToday.verticalHeaderItem(6)
         item.setText(_translate("Studious", "7"))
-        item = self.tableWidget.horizontalHeaderItem(0)
+        item = self.tW_3_todoToday.horizontalHeaderItem(0)
         item.setText(_translate("Studious", "Việc phải làm"))
-        item = self.tableWidget.horizontalHeaderItem(1)
+        item = self.tW_3_todoToday.horizontalHeaderItem(1)
         item.setText(_translate("Studious", "Trạng thái"))
-        self.label_2.setText(_translate("Studious", "Thứ 2, ngày 20/08/2023"))
-        self.label_3.setText(_translate("Studious", "Cài đặt"))
-        self.comboBox.setItemText(0, _translate("Studious", "Baroque"))
-        self.comboBox.setItemText(1, _translate("Studious", "Classical"))
-        self.comboBox.setItemText(2, _translate("Studious", "Melody"))
-        self.label_4.setText(_translate("Studious", "Thể loại nhạc"))
-        self.checkBox.setText(_translate("Studious", "Tự khởi động cùng hệ thống"))
-        self.checkBox_2.setText(_translate("Studious", "Thông báo nghỉ ngơi trước 5 phút"))
-        self.checkBox_3.setText(_translate("Studious", "Tự bắt đầu phiên tiếp"))
-        self.checkBox_4.setText(_translate("Studious", "Nhấn Space để bắt đầu phiên tiếp"))
+        __sortingEnabled = self.tW_3_todoToday.isSortingEnabled()
+        self.tW_3_todoToday.setSortingEnabled(False)
+        item = self.tW_3_todoToday.item(0, 0)
+        item.setText(_translate("Studious", "Học Toán"))
+        self.tW_3_todoToday.setSortingEnabled(__sortingEnabled)
+        self.lb_4_complete.setText(_translate("Studious", "     Tổng cộng: 7 Đã hoàn thành: 0 Chưa hoàn thành: 1 Đang làm: 0"))
+        self.textBrowser_5_breath.setHtml(_translate("Studious", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'Arial\'; font-size:18pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:transparent;\"><span style=\" font-family:\'Arial,Arial_EmbeddedFont,Arial_MSFontService,sans-serif\'; font-size:28pt; font-weight:600; color:#f7f2f6;\">Hít thở sâu đúng cách tốt như thế nào?</span><span style=\" font-family:\'Arial,Arial_EmbeddedFont,Arial_MSFontService,sans-serif\'; font-size:28pt; color:#f7f2f6;\"> </span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:transparent;\"><span style=\" font-family:\'Arial,Arial_EmbeddedFont,Arial_MSFontService,sans-serif\'; font-size:16pt; font-style:italic; color:#f7f2f6;\">Bài viết được tham vấn chuyên môn cùng Thạc sĩ, Bác sĩ Đặng Xuân Cường - Khoa Hồi sức cấp cứu - Bệnh viện đa khoa Quốc tế Vinmec Hải Phòng.</span><span style=\" font-family:\'Arial,Arial_EmbeddedFont,Arial_MSFontService,sans-serif\'; font-size:16pt; color:#f7f2f6;\"> </span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:transparent;\"><span style=\" font-family:\'Arial,Arial_EmbeddedFont,Arial_MSFontService,sans-serif\'; font-size:16pt; color:#f7f2f6;\">Hít thở là hoạt động cơ bản của con người. Đa số chúng ta hít thở một cách vô thức, không mấy ai chú ý đến kiểu thở của mình. Tuy nhiên, không giống như hoạt động co bóp của tim hay dạ dày, con người có thể điều khiển nhịp thở của bản thân. Hít thở là động tác quan trọng, khí oxy được hít vào để tạo ra năng lượng sau đó thải ra khí cacbonic. Hít thở đúng cách giúp cơ thể luôn cảm thấy tràn đầy năng lượng.Động tác hít thở sâu mang lại nhiều lợi ích không ngờ cho chúng ta như: </span></p>\n"
+"<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;\"><li style=\" font-family:\'Arial,Arial_MSFontService,sans-serif\'; font-size:16pt; color:#f7f2f6; background-color:transparent;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:24px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'Arial,Arial_EmbeddedFont,Arial_MSFontService,sans-serif\'; font-size:12px;\">Duy trì tinh thần tích cực, vui vẻ </span></li></ul>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:transparent;\"><span style=\" font-family:\'Arial,Arial_EmbeddedFont,Arial_MSFontService,sans-serif\'; font-size:16pt; color:#f7f2f6;\">Những bài tập thở sâu sẽ giúp bạn thư giãn tâm trí, giảm căng thẳng và cảm thấy cân bằng hơn. Nguyên nhân là do khi hít thở sâu đều đặn, hệ thần kinh phó giao cảm được kích hoạt, tăng sản xuất hóc môn tạo cảm giác dễ chịu. Với một tâm trạng tốt, cuộc sống của bạn sẽ trở nên hạnh phúc hơn. Lợi ích này không ghi nhận được khi duy trì các động tác thở nông, ngắn. </span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:transparent;\"><span style=\" font-family:\'Arial,Arial_EmbeddedFont,Arial_MSFontService,sans-serif\'; font-size:16pt; color:#f7f2f6;\">Vì thế khi có xung đột hay rắc rối, bạn nên dừng lại và hít thở sâu vài nhịp. Bạn sẽ cảm thấy bình tĩnh hơn để đưa ra các quyết định đúng đắn không khiến bản thân phải hối tiếc sau này. Những mối quan hệ tốt cũng nên được gìn giữ bằng cách áp dụng bí quyết này. </span></p>\n"
+"<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;\"><li style=\" font-family:\'Arial,Arial_MSFontService,sans-serif\'; font-size:16pt; color:#f7f2f6; background-color:transparent;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:24px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'Arial,Arial_EmbeddedFont,Arial_MSFontService,sans-serif\'; font-size:12px;\">Cải thiện hoạt động hệ tim mạch </span></li></ul>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:transparent;\"><span style=\" font-family:\'Arial,Arial_EmbeddedFont,Arial_MSFontService,sans-serif\'; font-size:16pt; color:#f7f2f6;\">Một điều rõ ràng đã được chứng minh là hít thở sâu tốt cho tim mạch. Tim được cung cấp nhiều khí oxy hơn, từ đó có thể luôn hoạt động tốt mà không bị quá tải. </span></p>\n"
+"<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;\"><li style=\" font-family:\'Arial,Arial_MSFontService,sans-serif\'; font-size:16pt; color:#f7f2f6; background-color:transparent;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:24px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'Arial,Arial_EmbeddedFont,Arial_MSFontService,sans-serif\'; font-size:12px;\">Tăng cường hệ miễn dịch và tiêu hoá </span></li></ul>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:transparent;\"><span style=\" font-family:\'Arial,Arial_EmbeddedFont,Arial_MSFontService,sans-serif\'; font-size:16pt; color:#f7f2f6;\">Hít một hơi thật sâu có tác dụng kích hoạt hệ thần kinh giao cảm, kích thích hệ miễn dịch khỏe mạnh. Lưu thông máu đến nuôi các cơ quan của hệ tiêu hoá được cải thiện, cung cấp đủ oxy đảm bảo vận hành tốt. </span></p>\n"
+"<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;\"><li style=\" font-family:\'Arial,Arial_MSFontService,sans-serif\'; font-size:16pt; color:#f7f2f6; background-color:transparent;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:24px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'Arial,Arial_EmbeddedFont,Arial_MSFontService,sans-serif\'; font-size:12px;\">Duy trì cân nặng hợp lý </span></li></ul>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:transparent;\"><span style=\" font-family:\'Arial,Arial_EmbeddedFont,Arial_MSFontService,sans-serif\'; font-size:16pt; color:#f7f2f6;\">Quá trình luyện tập thể lực có tác dụng đốt cháy năng lượng và tiêu hao chất béo dư thừa. Hít thở sâu là động tác cần có khi chúng ta tập thể dục, thúc đẩy nhanh hơn quá trình đốt cháy chất béo. </span></p>\n"
+"<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;\"><li style=\" font-family:\'Arial,Arial_MSFontService,sans-serif\'; font-size:16pt; color:#f7f2f6; background-color:transparent;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:24px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'Arial,Arial_EmbeddedFont,Arial_MSFontService,sans-serif\'; font-size:12px;\">Hình thành tư thế tốt cho khung xương </span></li></ul>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:transparent;\"><span style=\" font-family:\'Arial,Arial_EmbeddedFont,Arial_MSFontService,sans-serif\'; font-size:16pt; color:#f7f2f6;\">Tư thế sai có thể trực tiếp sinh ra cách thở sai. Khi hít thở sâu, phổi được lấp đầy bởi không khí, lồng ngực nở ra, cột sống thẳng lên, xương vai được mở ra phía sau giúp tạo ra một thư thế thẳng và đẹp. </span></p>\n"
+"<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;\"><li style=\" font-family:\'Arial,Arial_MSFontService,sans-serif\'; font-size:16pt; color:#f7f2f6; background-color:transparent;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:24px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'Arial,Arial_EmbeddedFont,Arial_MSFontService,sans-serif\'; font-size:12px;\">Kiểm soát cảm xúc </span></li></ul>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:transparent;\"><span style=\" font-family:\'Arial,Arial_EmbeddedFont,Arial_MSFontService,sans-serif\'; font-size:16pt; color:#f7f2f6;\">Cảm xúc và hơi thở có mối liên quan chặt chẽ với nhau. Khi giận, hơi thở trở nên sâu và dài. Ngược lại khi hồi hộp, lo lắng, nhịp thở có khuynh hướng trở nên dồn dập và nông hơn. Vì vậy, kiểm soát hơi thở đồng thời có thể giúp kiểm soát tư tưởng, tình cảm của bản thân. Hít thở sâu sẽ giúp bạn giữ được tư tưởng và suy nghĩ theo hướng tích cực, giảm lo âu, căng thẳng, nâng cao được chất lượng của cuộc sống. </span></p>\n"
+"<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;\"><li style=\" font-family:\'Arial,Arial_MSFontService,sans-serif\'; font-size:16pt; color:#f7f2f6; background-color:transparent;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:24px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'Arial,Arial_EmbeddedFont,Arial_MSFontService,sans-serif\'; font-size:12px;\">Giảm đau, giảm viêm </span></li></ul>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:transparent;\"><span style=\" font-family:\'Arial,Arial_EmbeddedFont,Arial_MSFontService,sans-serif\'; font-size:16pt; color:#f7f2f6;\">Ngày nay, hít thở sâu được xem như một biện pháp điều trị các chứng đau nhức thông thường. Hít thở đúng cách giúp cơ thể giải phóng endorphin, chất giảm đau tự nhiên, giảm lượng axit trong cơ thể, tăng cường đào thải các chất độc và giảm khả năng phát triển bệnh tật. Hít thở sâu còn có thể ngăn ngừa ung thư. </span></p></body></html>"))
+        self.btn_5_start.setText(_translate("Studious", "  Bắt đầu hít thở"))
+        self.LB_2.setText(_translate("Studious", "Cài đặt"))
+        self.cB_6_select.setItemText(0, _translate("Studious", "Baroque"))
+        self.cB_6_select.setItemText(1, _translate("Studious", "Classical"))
+        self.cB_6_select.setItemText(2, _translate("Studious", "Melody"))
+        self.LB_3.setText(_translate("Studious", "Thể loại nhạc"))
+        self.checkBox_autostart.setText(_translate("Studious", "  Tự khởi động cùng hệ thống"))
+        self.checkBox_noti.setText(_translate("Studious", "  Thông báo nghỉ ngơi trước 5 phút"))
+        self.checkBox_autosession.setText(_translate("Studious", "  Tự bắt đầu phiên tiếp"))
+        self.checkBox_space.setText(_translate("Studious", "  Nhấn Space để bắt đầu phiên tiếp"))
