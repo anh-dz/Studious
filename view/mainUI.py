@@ -425,8 +425,8 @@ class Ui_Studious(object):
         self.pushButton.setObjectName("pushButton")
         self.Background.raise_()
         self.sW_main.raise_()
-        self.wg_leftBar.raise_()
         self.pushButton.raise_()
+        self.wg_leftBar.raise_()
         Studious.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(Studious)

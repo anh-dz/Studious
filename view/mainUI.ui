@@ -1085,8 +1085,8 @@ border: 0px;</string>
    </widget>
    <zorder>Background</zorder>
    <zorder>sW_main</zorder>
-   <zorder>wg_leftBar</zorder>
    <zorder>pushButton</zorder>
+   <zorder>wg_leftBar</zorder>
   </widget>
  </widget>
  <resources/>
