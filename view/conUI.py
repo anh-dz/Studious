@@ -4,6 +4,15 @@ from PyQt6.QtGui import *
 from . mainUI import Ui_Studious
 from .colorFunc import create_colored_icon
 
+class comboCompanies(QComboBox):
+    def __init__(self, parent):
+        super().__init__(parent)
+        self.addItems(['Chưa hoàn thành', 'Đang làm', 'Đã hoàn thành'])
+        self.currentIndexChanged.connect(self.getComboValue)
+
+    def getComboValue(self):
+        print(self.currentText())
+
 class ViewControl(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -24,7 +33,11 @@ class ViewControl(QMainWindow):
         self.ui.btn_lB_menu.clicked.connect(self.Side_Menu_Def_0)
         self.ui.wg_leftBar.setGeometry(QRect(0, 0, 44, 561))
 
+        self.addColumnTwo()
+
         self.testComboBoxColor()
+
+        self.ui.textBrowser.setText("Mô tả chi tiết")
 
     def Side_Menu_Def_0(self):
         if self.ui.wg_leftBar.width() <= 70:
@@ -63,3 +76,7 @@ class ViewControl(QMainWindow):
         self.ui.cB_m_task.addItem(create_colored_icon(QColor('blue')), "Học Toán")
         self.ui.cB_m_task.addItem(create_colored_icon(QColor('green')), "Học IELTS")
         self.ui.cB_m_task.addItem(create_colored_icon(QColor('red')), "Làm việc")
+    
+    def addColumnTwo(self):
+        combo = comboCompanies(self.ui.tableWidget)
+        self.ui.tableWidget.setCellWidget(0, 1, combo)
