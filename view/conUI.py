@@ -31,6 +31,8 @@ class ViewControl(QMainWindow):
 
         self.setupTableWidget()
 
+        self.setupHTMLText()
+
         self.testComboBoxColor()
 
         self.testChat()
@@ -74,3 +76,8 @@ class ViewControl(QMainWindow):
     def setupTableWidget(self):
         combo = comboCompanies(self.ui.tW_3_todoToday)
         self.ui.tW_3_todoToday.setCellWidget(0, 1, combo)
+    
+    def setupHTMLText(self):
+        with open("data/breath.html", "r") as f:
+            breathHTML = f.read()
+            self.ui.tB_5_breath.setHtml(breathHTML)
