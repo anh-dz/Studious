@@ -1,8 +1,9 @@
 from PyQt6.QtCore import *
 from PyQt6.QtWidgets import *
 from PyQt6.QtGui import *
-from . mainUI import Ui_Studious
+from .mainUI import Ui_Studious
 from .colorFunc import *
+from .chatmessage import *
 
 class ViewControl(QMainWindow):
     def __init__(self):
@@ -31,6 +32,19 @@ class ViewControl(QMainWindow):
         self.setupTableWidget()
 
         self.testComboBoxColor()
+
+        self.testChat()
+    
+    def testChat(self):
+        self.model = ChatLogModel()
+        self.ui.LV_chatView.setModel(self.model)
+
+        message_delegate = DrawSpeechBubbleDelegate()
+        self.ui.LV_chatView.setItemDelegate(message_delegate)
+
+        self.model.appendMessage("Chào bạn, để sử dụng không giới hạn chức năng này, hãy mua Premium.", "chatbot")
+        self.model.appendMessage("Test user", "user")
+        self.model.appendMessage("Test bot", "chatbot")
 
     def toggleSideMenu(self):
         target_width = 150 if self.ui.wg_leftBar.width() <= 70 else 44

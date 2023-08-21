@@ -140,12 +140,48 @@ class Ui_Studious(object):
         self.btn_lB_7.setIconSize(QtCore.QSize(32, 32))
         self.btn_lB_7.setObjectName("btn_lB_7")
         self.layout_leftBar.addWidget(self.btn_lB_7)
+        self.btn_lB_ques = QtWidgets.QPushButton(parent=self.wg_leftBar)
+        self.btn_lB_ques.setGeometry(QtCore.QRect(0, 510, 41, 40))
+        self.btn_lB_ques.setMinimumSize(QtCore.QSize(0, 0))
+        self.btn_lB_ques.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(18)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.btn_lB_ques.setFont(font)
+        self.btn_lB_ques.setStyleSheet("QPushButton:hover{\n"
+"    background-color: transparent;\n"
+"}")
+        self.btn_lB_ques.setText("")
+        icon9 = QtGui.QIcon()
+        icon9.addPixmap(QtGui.QPixmap("assert/ques.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btn_lB_ques.setIcon(icon9)
+        self.btn_lB_ques.setIconSize(QtCore.QSize(32, 32))
+        self.btn_lB_ques.setCheckable(False)
+        self.btn_lB_ques.setObjectName("btn_lB_ques")
         self.sW_main = QtWidgets.QStackedWidget(parent=self.centralwidget)
         self.sW_main.setGeometry(QtCore.QRect(40, 0, 781, 561))
         self.sW_main.setStyleSheet("* {\n"
 "    background-color: transparent;\n"
 "    color: rgb(249, 245, 246);\n"
 "    font: 18pt \"Arial\";\n"
+"}\n"
+"QTextBrowser{\n"
+"    background-color: rgba(52, 22, 85, 70%);\n"
+"    border: 0px solid;\n"
+"    border-radius: 5px;\n"
+"}\n"
+"QListView{\n"
+"    background-color: rgba(52, 22, 85, 70%);\n"
+"    border: 0px solid;\n"
+"    border-radius: 5px;\n"
+"}\n"
+"QPlainTextEdit{\n"
+"    background-color: rgba(52, 22, 85, 70%);\n"
+"    border: 0px solid;\n"
+"    border-radius: 5px;\n"
 "}\n"
 "QToolButton{\n"
 "    border: 0px;\n"
@@ -227,9 +263,9 @@ class Ui_Studious(object):
         self.btn_m_audio.setGeometry(QtCore.QRect(710, 30, 51, 51))
         self.btn_m_audio.setStyleSheet("")
         self.btn_m_audio.setText("")
-        icon9 = QtGui.QIcon()
-        icon9.addPixmap(QtGui.QPixmap("assert/audio-on.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.btn_m_audio.setIcon(icon9)
+        icon10 = QtGui.QIcon()
+        icon10.addPixmap(QtGui.QPixmap("assert/audio-on.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btn_m_audio.setIcon(icon10)
         self.btn_m_audio.setIconSize(QtCore.QSize(50, 50))
         self.btn_m_audio.setObjectName("btn_m_audio")
         self.lb_m_quote = QtWidgets.QLabel(parent=self.page_m_pom)
@@ -242,18 +278,18 @@ class Ui_Studious(object):
         self.btn_m_pin = QtWidgets.QToolButton(parent=self.page_m_pom)
         self.btn_m_pin.setGeometry(QtCore.QRect(650, 30, 51, 51))
         self.btn_m_pin.setText("")
-        icon10 = QtGui.QIcon()
-        icon10.addPixmap(QtGui.QPixmap("assert/pin.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.btn_m_pin.setIcon(icon10)
+        icon11 = QtGui.QIcon()
+        icon11.addPixmap(QtGui.QPixmap("assert/pin.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btn_m_pin.setIcon(icon11)
         self.btn_m_pin.setIconSize(QtCore.QSize(50, 50))
         self.btn_m_pin.setObjectName("btn_m_pin")
         self.btn_m_fs = QtWidgets.QToolButton(parent=self.page_m_pom)
         self.btn_m_fs.setGeometry(QtCore.QRect(700, 490, 51, 51))
         self.btn_m_fs.setStyleSheet("")
         self.btn_m_fs.setText("")
-        icon11 = QtGui.QIcon()
-        icon11.addPixmap(QtGui.QPixmap("assert/fs.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.btn_m_fs.setIcon(icon11)
+        icon12 = QtGui.QIcon()
+        icon12.addPixmap(QtGui.QPixmap("assert/fs.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btn_m_fs.setIcon(icon12)
         self.btn_m_fs.setIconSize(QtCore.QSize(50, 50))
         self.btn_m_fs.setObjectName("btn_m_fs")
         self.horizontalLayoutWidget = QtWidgets.QWidget(parent=self.page_m_pom)
@@ -266,9 +302,9 @@ class Ui_Studious(object):
         self.btn_m_startstop.setMaximumSize(QtCore.QSize(51, 51))
         self.btn_m_startstop.setStyleSheet("")
         self.btn_m_startstop.setText("")
-        icon12 = QtGui.QIcon()
-        icon12.addPixmap(QtGui.QPixmap("assert/start.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.btn_m_startstop.setIcon(icon12)
+        icon13 = QtGui.QIcon()
+        icon13.addPixmap(QtGui.QPixmap("assert/start.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btn_m_startstop.setIcon(icon13)
         self.btn_m_startstop.setIconSize(QtCore.QSize(50, 50))
         self.btn_m_startstop.setObjectName("btn_m_startstop")
         self.horizontalLayout.addWidget(self.btn_m_startstop)
@@ -276,9 +312,9 @@ class Ui_Studious(object):
         self.btn_m_next.setMaximumSize(QtCore.QSize(51, 51))
         self.btn_m_next.setStyleSheet("")
         self.btn_m_next.setText("")
-        icon13 = QtGui.QIcon()
-        icon13.addPixmap(QtGui.QPixmap("assert/next.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.btn_m_next.setIcon(icon13)
+        icon14 = QtGui.QIcon()
+        icon14.addPixmap(QtGui.QPixmap("assert/next.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btn_m_next.setIcon(icon14)
         self.btn_m_next.setIconSize(QtCore.QSize(50, 50))
         self.btn_m_next.setObjectName("btn_m_next")
         self.horizontalLayout.addWidget(self.btn_m_next)
@@ -326,9 +362,9 @@ class Ui_Studious(object):
         self.btn_m_delChart.setGeometry(QtCore.QRect(650, 29, 112, 32))
         self.btn_m_delChart.setMinimumSize(QtCore.QSize(0, 32))
         self.btn_m_delChart.setStyleSheet("")
-        icon14 = QtGui.QIcon()
-        icon14.addPixmap(QtGui.QPixmap("assert/del.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.btn_m_delChart.setIcon(icon14)
+        icon15 = QtGui.QIcon()
+        icon15.addPixmap(QtGui.QPixmap("assert/del.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btn_m_delChart.setIcon(icon15)
         self.btn_m_delChart.setIconSize(QtCore.QSize(23, 23))
         self.btn_m_delChart.setObjectName("btn_m_delChart")
         self.label = QtWidgets.QLabel(parent=self.page_m_2)
@@ -417,23 +453,40 @@ class Ui_Studious(object):
         self.btn_3_edit.setGeometry(QtCore.QRect(710, 30, 40, 40))
         self.btn_3_edit.setStyleSheet("")
         self.btn_3_edit.setText("")
-        icon15 = QtGui.QIcon()
-        icon15.addPixmap(QtGui.QPixmap("assert/edit.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.btn_3_edit.setIcon(icon15)
+        icon16 = QtGui.QIcon()
+        icon16.addPixmap(QtGui.QPixmap("assert/edit.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btn_3_edit.setIcon(icon16)
         self.btn_3_edit.setIconSize(QtCore.QSize(32, 32))
         self.btn_3_edit.setObjectName("btn_3_edit")
         self.sW_main.addWidget(self.page_m_3)
         self.page_m_4 = QtWidgets.QWidget()
         self.page_m_4.setObjectName("page_m_4")
+        self.LV_chatView = QtWidgets.QListView(parent=self.page_m_4)
+        self.LV_chatView.setGeometry(QtCore.QRect(20, 30, 741, 451))
+        self.LV_chatView.setStyleSheet("")
+        self.LV_chatView.setObjectName("LV_chatView")
+        self.PtE_chatBot = QtWidgets.QPlainTextEdit(parent=self.page_m_4)
+        self.PtE_chatBot.setGeometry(QtCore.QRect(130, 500, 581, 51))
+        self.PtE_chatBot.setStyleSheet("")
+        self.PtE_chatBot.setObjectName("PtE_chatBot")
+        self.btn_4_send = QtWidgets.QToolButton(parent=self.page_m_4)
+        self.btn_4_send.setGeometry(QtCore.QRect(720, 500, 48, 48))
+        self.btn_4_send.setStyleSheet("")
+        self.btn_4_send.setText("")
+        icon17 = QtGui.QIcon()
+        icon17.addPixmap(QtGui.QPixmap("assert/send.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btn_4_send.setIcon(icon17)
+        self.btn_4_send.setIconSize(QtCore.QSize(48, 48))
+        self.btn_4_send.setObjectName("btn_4_send")
         self.sW_main.addWidget(self.page_m_4)
         self.page_m_5 = QtWidgets.QWidget()
         self.page_m_5.setObjectName("page_m_5")
-        self.textBrowser_5_breath = QtWidgets.QTextBrowser(parent=self.page_m_5)
-        self.textBrowser_5_breath.setGeometry(QtCore.QRect(40, 50, 701, 401))
-        self.textBrowser_5_breath.setStyleSheet("color: white;")
-        self.textBrowser_5_breath.setObjectName("textBrowser_5_breath")
+        self.tB_5_breath = QtWidgets.QTextBrowser(parent=self.page_m_5)
+        self.tB_5_breath.setGeometry(QtCore.QRect(40, 30, 705, 431))
+        self.tB_5_breath.setStyleSheet("color: white;")
+        self.tB_5_breath.setObjectName("tB_5_breath")
         self.btn_5_start = QtWidgets.QPushButton(parent=self.page_m_5)
-        self.btn_5_start.setGeometry(QtCore.QRect(290, 471, 221, 51))
+        self.btn_5_start.setGeometry(QtCore.QRect(290, 480, 221, 51))
         self.btn_5_start.setMinimumSize(QtCore.QSize(0, 32))
         self.btn_5_start.setStyleSheet("QPushButton{\n"
 "    background-color: rgba(52, 22, 85, 70%);\n"
@@ -453,7 +506,7 @@ class Ui_Studious(object):
         self.page_m_6 = QtWidgets.QWidget()
         self.page_m_6.setObjectName("page_m_6")
         self.LB_2 = QtWidgets.QLabel(parent=self.page_m_6)
-        self.LB_2.setGeometry(QtCore.QRect(140, 50, 191, 61))
+        self.LB_2.setGeometry(QtCore.QRect(130, 50, 191, 61))
         self.LB_2.setStyleSheet("font: 48pt;")
         self.LB_2.setObjectName("LB_2")
         self.cB_6_select = QtWidgets.QComboBox(parent=self.page_m_6)
@@ -486,6 +539,10 @@ class Ui_Studious(object):
         self.sW_main.addWidget(self.page_m_6)
         self.page_m_7 = QtWidgets.QWidget()
         self.page_m_7.setObjectName("page_m_7")
+        self.tB_7_about = QtWidgets.QTextBrowser(parent=self.page_m_7)
+        self.tB_7_about.setGeometry(QtCore.QRect(40, 30, 705, 501))
+        self.tB_7_about.setStyleSheet("color: white;")
+        self.tB_7_about.setObjectName("tB_7_about")
         self.sW_main.addWidget(self.page_m_7)
         self.Background = QtWidgets.QLabel(parent=self.centralwidget)
         self.Background.setEnabled(True)
@@ -573,28 +630,11 @@ class Ui_Studious(object):
         item.setText(_translate("Studious", "Học Toán"))
         self.tW_3_todoToday.setSortingEnabled(__sortingEnabled)
         self.lb_4_complete.setText(_translate("Studious", "     Tổng cộng: 7 Đã hoàn thành: 0 Chưa hoàn thành: 1 Đang làm: 0"))
-#         self.textBrowser_5_breath.setHtml(_translate("Studious", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-# "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-# "p, li { white-space: pre-wrap; }\n"
-# "</style></head><body style=\" font-family:\'Arial\'; font-size:18pt; font-weight:400; font-style:normal;\">\n"
-# "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:transparent;\"><span style=\" font-family:\'Arial,Arial_EmbeddedFont,Arial_MSFontService,sans-serif\'; font-size:28pt; font-weight:600; color:#f7f2f6;\">Hít thở sâu đúng cách tốt như thế nào?</span><span style=\" font-family:\'Arial,Arial_EmbeddedFont,Arial_MSFontService,sans-serif\'; font-size:28pt; color:#f7f2f6;\"> </span></p>\n"
-# "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:transparent;\"><span style=\" font-family:\'Arial,Arial_EmbeddedFont,Arial_MSFontService,sans-serif\'; font-size:16pt; font-style:italic; color:#f7f2f6;\">Bài viết được tham vấn chuyên môn cùng Thạc sĩ, Bác sĩ Đặng Xuân Cường - Khoa Hồi sức cấp cứu - Bệnh viện đa khoa Quốc tế Vinmec Hải Phòng.</span><span style=\" font-family:\'Arial,Arial_EmbeddedFont,Arial_MSFontService,sans-serif\'; font-size:16pt; color:#f7f2f6;\"> </span></p>\n"
-# "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:transparent;\"><span style=\" font-family:\'Arial,Arial_EmbeddedFont,Arial_MSFontService,sans-serif\'; font-size:16pt; color:#f7f2f6;\">Hít thở là hoạt động cơ bản của con người. Đa số chúng ta hít thở một cách vô thức, không mấy ai chú ý đến kiểu thở của mình. Tuy nhiên, không giống như hoạt động co bóp của tim hay dạ dày, con người có thể điều khiển nhịp thở của bản thân. Hít thở là động tác quan trọng, khí oxy được hít vào để tạo ra năng lượng sau đó thải ra khí cacbonic. Hít thở đúng cách giúp cơ thể luôn cảm thấy tràn đầy năng lượng.Động tác hít thở sâu mang lại nhiều lợi ích không ngờ cho chúng ta như: </span></p>\n"
-# "<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;\"><li style=\" font-family:\'Arial,Arial_MSFontService,sans-serif\'; font-size:16pt; color:#f7f2f6; background-color:transparent;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:24px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'Arial,Arial_EmbeddedFont,Arial_MSFontService,sans-serif\'; font-size:12px;\">Duy trì tinh thần tích cực, vui vẻ </span></li></ul>\n"
-# "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:transparent;\"><span style=\" font-family:\'Arial,Arial_EmbeddedFont,Arial_MSFontService,sans-serif\'; font-size:16pt; color:#f7f2f6;\">Những bài tập thở sâu sẽ giúp bạn thư giãn tâm trí, giảm căng thẳng và cảm thấy cân bằng hơn. Nguyên nhân là do khi hít thở sâu đều đặn, hệ thần kinh phó giao cảm được kích hoạt, tăng sản xuất hóc môn tạo cảm giác dễ chịu. Với một tâm trạng tốt, cuộc sống của bạn sẽ trở nên hạnh phúc hơn. Lợi ích này không ghi nhận được khi duy trì các động tác thở nông, ngắn. </span></p>\n"
-# "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:transparent;\"><span style=\" font-family:\'Arial,Arial_EmbeddedFont,Arial_MSFontService,sans-serif\'; font-size:16pt; color:#f7f2f6;\">Vì thế khi có xung đột hay rắc rối, bạn nên dừng lại và hít thở sâu vài nhịp. Bạn sẽ cảm thấy bình tĩnh hơn để đưa ra các quyết định đúng đắn không khiến bản thân phải hối tiếc sau này. Những mối quan hệ tốt cũng nên được gìn giữ bằng cách áp dụng bí quyết này. </span></p>\n"
-# "<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;\"><li style=\" font-family:\'Arial,Arial_MSFontService,sans-serif\'; font-size:16pt; color:#f7f2f6; background-color:transparent;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:24px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'Arial,Arial_EmbeddedFont,Arial_MSFontService,sans-serif\'; font-size:12px;\">Cải thiện hoạt động hệ tim mạch </span></li></ul>\n"
-# "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:transparent;\"><span style=\" font-family:\'Arial,Arial_EmbeddedFont,Arial_MSFontService,sans-serif\'; font-size:16pt; color:#f7f2f6;\">Một điều rõ ràng đã được chứng minh là hít thở sâu tốt cho tim mạch. Tim được cung cấp nhiều khí oxy hơn, từ đó có thể luôn hoạt động tốt mà không bị quá tải. </span></p>\n"
-# "<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;\"><li style=\" font-family:\'Arial,Arial_MSFontService,sans-serif\'; font-size:16pt; color:#f7f2f6; background-color:transparent;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:24px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'Arial,Arial_EmbeddedFont,Arial_MSFontService,sans-serif\'; font-size:12px;\">Tăng cường hệ miễn dịch và tiêu hoá </span></li></ul>\n"
-# "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:transparent;\"><span style=\" font-family:\'Arial,Arial_EmbeddedFont,Arial_MSFontService,sans-serif\'; font-size:16pt; color:#f7f2f6;\">Hít một hơi thật sâu có tác dụng kích hoạt hệ thần kinh giao cảm, kích thích hệ miễn dịch khỏe mạnh. Lưu thông máu đến nuôi các cơ quan của hệ tiêu hoá được cải thiện, cung cấp đủ oxy đảm bảo vận hành tốt. </span></p>\n"
-# "<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;\"><li style=\" font-family:\'Arial,Arial_MSFontService,sans-serif\'; font-size:16pt; color:#f7f2f6; background-color:transparent;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:24px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'Arial,Arial_EmbeddedFont,Arial_MSFontService,sans-serif\'; font-size:12px;\">Duy trì cân nặng hợp lý </span></li></ul>\n"
-# "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:transparent;\"><span style=\" font-family:\'Arial,Arial_EmbeddedFont,Arial_MSFontService,sans-serif\'; font-size:16pt; color:#f7f2f6;\">Quá trình luyện tập thể lực có tác dụng đốt cháy năng lượng và tiêu hao chất béo dư thừa. Hít thở sâu là động tác cần có khi chúng ta tập thể dục, thúc đẩy nhanh hơn quá trình đốt cháy chất béo. </span></p>\n"
-# "<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;\"><li style=\" font-family:\'Arial,Arial_MSFontService,sans-serif\'; font-size:16pt; color:#f7f2f6; background-color:transparent;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:24px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'Arial,Arial_EmbeddedFont,Arial_MSFontService,sans-serif\'; font-size:12px;\">Hình thành tư thế tốt cho khung xương </span></li></ul>\n"
-# "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:transparent;\"><span style=\" font-family:\'Arial,Arial_EmbeddedFont,Arial_MSFontService,sans-serif\'; font-size:16pt; color:#f7f2f6;\">Tư thế sai có thể trực tiếp sinh ra cách thở sai. Khi hít thở sâu, phổi được lấp đầy bởi không khí, lồng ngực nở ra, cột sống thẳng lên, xương vai được mở ra phía sau giúp tạo ra một thư thế thẳng và đẹp. </span></p>\n"
-# "<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;\"><li style=\" font-family:\'Arial,Arial_MSFontService,sans-serif\'; font-size:16pt; color:#f7f2f6; background-color:transparent;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:24px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'Arial,Arial_EmbeddedFont,Arial_MSFontService,sans-serif\'; font-size:12px;\">Kiểm soát cảm xúc </span></li></ul>\n"
-# "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:transparent;\"><span style=\" font-family:\'Arial,Arial_EmbeddedFont,Arial_MSFontService,sans-serif\'; font-size:16pt; color:#f7f2f6;\">Cảm xúc và hơi thở có mối liên quan chặt chẽ với nhau. Khi giận, hơi thở trở nên sâu và dài. Ngược lại khi hồi hộp, lo lắng, nhịp thở có khuynh hướng trở nên dồn dập và nông hơn. Vì vậy, kiểm soát hơi thở đồng thời có thể giúp kiểm soát tư tưởng, tình cảm của bản thân. Hít thở sâu sẽ giúp bạn giữ được tư tưởng và suy nghĩ theo hướng tích cực, giảm lo âu, căng thẳng, nâng cao được chất lượng của cuộc sống. </span></p>\n"
-# "<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;\"><li style=\" font-family:\'Arial,Arial_MSFontService,sans-serif\'; font-size:16pt; color:#f7f2f6; background-color:transparent;\" style=\" margin-top:0px; margin-bottom:0px; margin-left:24px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'Arial,Arial_EmbeddedFont,Arial_MSFontService,sans-serif\'; font-size:12px;\">Giảm đau, giảm viêm </span></li></ul>\n"
-# "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:transparent;\"><span style=\" font-family:\'Arial,Arial_EmbeddedFont,Arial_MSFontService,sans-serif\'; font-size:16pt; color:#f7f2f6;\">Ngày nay, hít thở sâu được xem như một biện pháp điều trị các chứng đau nhức thông thường. Hít thở đúng cách giúp cơ thể giải phóng endorphin, chất giảm đau tự nhiên, giảm lượng axit trong cơ thể, tăng cường đào thải các chất độc và giảm khả năng phát triển bệnh tật. Hít thở sâu còn có thể ngăn ngừa ung thư. </span></p></body></html>"))
+        self.tB_5_breath.setHtml(_translate("Studious", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'Arial\'; font-size:18pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:transparent;\"><br /></p></body></html>"))
         self.btn_5_start.setText(_translate("Studious", "  Bắt đầu hít thở"))
         self.LB_2.setText(_translate("Studious", "Cài đặt"))
         self.cB_6_select.setItemText(0, _translate("Studious", "Baroque"))
@@ -605,3 +645,8 @@ class Ui_Studious(object):
         self.checkBox_noti.setText(_translate("Studious", "  Thông báo nghỉ ngơi trước 5 phút"))
         self.checkBox_autosession.setText(_translate("Studious", "  Tự bắt đầu phiên tiếp"))
         self.checkBox_space.setText(_translate("Studious", "  Nhấn Space để bắt đầu phiên tiếp"))
+        self.tB_7_about.setHtml(_translate("Studious", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'Arial\'; font-size:18pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:transparent;\"><br /></p></body></html>"))
