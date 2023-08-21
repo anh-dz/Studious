@@ -906,9 +906,9 @@ font: 18pt &quot;Arial&quot;;</string>
       <property name="geometry">
        <rect>
         <x>120</x>
-        <y>380</y>
-        <width>121</width>
-        <height>31</height>
+        <y>375</y>
+        <width>120</width>
+        <height>30</height>
        </rect>
       </property>
       <property name="styleSheet">

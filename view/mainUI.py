@@ -395,7 +395,7 @@ class Ui_Studious(object):
         self.lb_3_date.setStyleSheet("font: 24pt;")
         self.lb_3_date.setObjectName("lb_3_date")
         self.LB = QtWidgets.QLabel(parent=self.page_m_3)
-        self.LB.setGeometry(QtCore.QRect(120, 380, 121, 31))
+        self.LB.setGeometry(QtCore.QRect(120, 375, 120, 30))
         self.LB.setStyleSheet("font: 24pt;")
         self.LB.setObjectName("LB")
         self.textBrowser_3_des = QtWidgets.QTextBrowser(parent=self.page_m_3)
