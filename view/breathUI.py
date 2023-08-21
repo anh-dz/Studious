@@ -55,7 +55,7 @@ class BreathingCircleAnimation(QWidget):
 
         self.inhale = True
         self.radius = 100
-        self.breath_duration = 3000  # Time in milliseconds for inhale/exhale
+        self.breath_duration = 4000  # Time in milliseconds for inhale/exhale
         self.elapsed_time = 0
         self.breath_count = 0  # Initialize breath count
         self.timer = QTimer(self)
@@ -98,16 +98,15 @@ class BreathingCircleAnimation(QWidget):
                 self.script_index = (self.script_index + 1) % len(self.scripts)
                 self.script_label.setText(self.scripts[self.script_index])
 
-        if self.radius >= 130:
+        if self.radius >= 140:
             self.inhale = False
         elif self.radius <= 100:
             self.inhale = True
 
         self.circle.setRect(-self.radius, -self.radius, 2 * self.radius, 2 * self.radius)
 
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    app.setStyle("Fusion")  # Use the Fusion style for a modern look
-    window = BreathingCircleAnimation()
-    window.show()
-    sys.exit(app.exec())
+# if __name__ == "__main__":
+#     app = QApplication(sys.argv)
+#     window = BreathingCircleAnimation()
+#     window.show()
+#     sys.exit(app.exec())
