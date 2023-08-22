@@ -73,7 +73,8 @@ class StudiousFunc:
         buttonN.setText('Không')
         self.box.exec()
         if self.box.clickedButton() == buttonY:
-            return True
+            self.file.default_data()
+            self.chart.dataChange()
         return False
 
     #Func control app

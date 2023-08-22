@@ -30,6 +30,8 @@ class fileDataControl:
     def default_data(self):
         dataTime = {f"{self.ntime}":{"Học Toán":0, "Học IELTS":0, "Làm việc":0}}
 
+        self.dataTimeJson = dataTime
+
         with open('data/time.json', 'w', newline='', encoding="utf-8") as jsonfile:
             json.dump(dataTime, jsonfile,  ensure_ascii=False)
 
