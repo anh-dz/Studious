@@ -7,3 +7,4 @@ from . fsUI import StudiousFS
 from . breathUI import BreathingCircleAnimation # Press button to breath
 from . weekDialog import Week_Dialog # Edit task in week
 from . chatmessage import ChatLogModel, DrawSpeechBubbleDelegate
+from . colorFunc import comboCompanies

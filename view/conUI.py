@@ -29,25 +29,9 @@ class ViewControl(QMainWindow):
 
         self.ui.btn_lB_menu.clicked.connect(self.toggleSideMenu)
 
-        self.setupTableWidget()
-
         self.setupHTMLText()
 
         self.testComboBoxColor()
-
-    #     self.testChat()
-    
-    # def testChat(self):
-    #     self.model = ChatLogModel()
-    #     self.ui.LV_chatView.setModel(self.model)
-
-    #     message_delegate = DrawSpeechBubbleDelegate()
-    #     self.ui.LV_chatView.setItemDelegate(message_delegate)
-
-    # def dumpChat(self, message):
-    #     self.model.appendMessage("Chào bạn, để sử dụng không giới hạn chức năng này, hãy mua Premium.", "chatbot")
-    #     self.model.appendMessage(message, "user")
-
 
     def toggleSideMenu(self):
         target_width = 150 if self.ui.wg_leftBar.width() <= 70 else 44
@@ -72,11 +56,7 @@ class ViewControl(QMainWindow):
         self.ui.cB_m_task.clear()
         self.ui.cB_m_task.addItem(create_colored_icon(QColor('blue')), "Học Toán")
         self.ui.cB_m_task.addItem(create_colored_icon(QColor('green')), "Học IELTS")
-        self.ui.cB_m_task.addItem(create_colored_icon(QColor('red')), "Làm việc")
-    
-    def setupTableWidget(self):
-        combo = comboCompanies(self.ui.tW_3_todoToday)
-        self.ui.tW_3_todoToday.setCellWidget(0, 1, combo)
+        self.ui.cB_m_task.addItem(create_colored_icon(QColor('red')), "Làm việc")       
     
     def setupHTMLText(self):
         with open("data/breath.html", "r", encoding="utf-8") as f:

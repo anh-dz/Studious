@@ -29,6 +29,11 @@ class StudiousFunc:
         self.wtime, self.rtime = 25, 5
         self.countdown = countdown(self.wtime, self.rtime)
         self.box = QMessageBox()
+
+        self.combo = comboCompanies(wgs.tW_3_todoToday)
+        wgs.tW_3_todoToday.setCellWidget(0, 1, self.combo)
+        wgs.tW_3_todoToday.item(0, 0).setText("Học Toán")
+
         self.create_media_player()
         self.create_chart()
         self.chatBot()
