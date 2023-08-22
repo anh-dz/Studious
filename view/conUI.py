@@ -78,6 +78,6 @@ class ViewControl(QMainWindow):
         self.ui.tW_3_todoToday.setCellWidget(0, 1, combo)
     
     def setupHTMLText(self):
-        with open("data/breath.html", "r") as f:
+        with open("data/breath.html", "r", encoding="utf-8") as f:
             breathHTML = f.read()
             self.ui.tB_5_breath.setHtml(breathHTML)

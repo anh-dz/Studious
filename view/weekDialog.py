@@ -9,7 +9,11 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
 
 
-class Week_Dialog(object):
+class Week_Dialog(QtWidgets.QDialog):
+    def __init__(self) -> None:
+        super().__init__()
+        self.setupUi(self)
+
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(790, 461)

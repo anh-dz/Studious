@@ -5,7 +5,7 @@ from PyQt6.QtGui import *
 from PyQt6.QtMultimedia import *
 from PyQt6.QtCharts import *
 from random import choice
-import datetime
+import requests
 from main import *
 from view import *
 from .fileDataControl import *
@@ -45,6 +45,8 @@ class StudiousFunc:
         wgs.btn_m_fs.clicked.connect(self.start_fs)
         wgs.cB_m_task.currentIndexChanged.connect(self.on_combobox_changed)
         wgs.btn_m_delChart.clicked.connect(self.delChartcheck)
+        wgs.btn_3_edit.clicked.connect(self.start_weekDialog)
+        wgs.btn_5_start.clicked.connect(self.start_breath)
 
     def create_media_player(self):
         self.bg_music = QUrl.fromLocalFile('assert/music/music.mp3')
@@ -191,6 +193,12 @@ class StudiousFunc:
         Fwgs.bottomQuote.setText(self.qoutes)
         Fwgs.cB_task.setEnabled(not self.clock_onoff)
 
+    def start_weekDialog(self):
+        self.wDialog = weekDialogFunc()
+
+    def start_breath(self):
+        self.breath = BreathingCircleAnimation()
+        self.breath.show()
 
 class audioFunc(QThread):
     finished = pyqtSignal()
@@ -244,6 +252,11 @@ class fullScreenFunc(StudiousFS):
         self.activateWindow()
 
         return super().event(event)
+    
+class weekDialogFunc:
+    def __init__(self) -> None:
+        self.wgt = Week_Dialog()
+        self.wgt.show()
 
 class countdown:
     def __init__(self, work_time:int, rest_time:int):
@@ -295,6 +308,36 @@ class countdown:
     "qproperty-alignment: \'AlignCenter\';\n"
     "qproperty-margin: auto;")
             self.time_left = self.mtime*60
+
+class chatBot:
+    def __init__(self) -> None:
+        wgs.PtE_chatBot.returnPressed.connect(self.handle_input)
+        self.history = []
+        self.api = "api key"
+
+    def handle_input(self):
+        user_input = wgs.PtE_chatBot.text()
+        self.history.append(f"User: {user_input}")
+
+        response = self.get_chatbot_response(user_input)
+        self.history.append(f"Chatbot: {response['choices'][0]['message']['content']}")
+
+        self.input_field.clear()
+
+    def get_chatbot_response(self, user_input):
+        prompt = "\n".join(self.history[-5:])  # Include some chat history as context
+
+        # Make a POST request to the OpenAI API
+        response = requests.post(
+            'https://api.openai.com/v1/engines/davinci-codex/completions',
+            json={
+                'prompt': prompt,
+                'max_tokens': 50
+            },
+            headers={'Authorization': self.api}
+        )
+
+        return response.json()
 
 class chart:
     def __init__(self, file) -> None:
