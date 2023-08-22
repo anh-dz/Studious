@@ -7,16 +7,18 @@ from . colorFunc import create_colored_icon
 class StudiousFS(QWidget):
     def __init__(self):
         super().__init__()
+        self.setWindowState(Qt.WindowState.WindowFullScreen)  # Set full-screen mode
+        self.setWindowFlags(Qt.WindowType.FramelessWindowHint)  # Hide window frame
+
         self.x = QApplication.primaryScreen().size().width()
         self.y = QApplication.primaryScreen().size().height()
 
         self.setWindowTitle("Studious Full Screen")
-        self.setGeometry(0, 0, self.x, self.y)
         self.setStyleSheet("QToolButton{border: 0px}")
 
         background_image = QPixmap("assert/background.jpg")
         background_label = QLabel(self)
-        background_label.setPixmap(background_image.scaled(self.size(), Qt.AspectRatioMode.IgnoreAspectRatio))
+        background_label.setPixmap(background_image.scaled(self.x, self.y))
         background_label.setGeometry(0, 0, self.x, self.y)
 
         self.cB_task = QComboBox(self)
@@ -114,5 +116,3 @@ class StudiousFS(QWidget):
         self.cB_task.addItem(create_colored_icon(QColor('blue')), "Học Toán")
         self.cB_task.addItem(create_colored_icon(QColor('green')), "Học IELTS")
         self.cB_task.addItem(create_colored_icon(QColor('red')), "Làm việc")
-
-        self.showFullScreen()
