@@ -237,13 +237,13 @@ class Ui_Studious(object):
 "    padding: 7px;\n"
 "}\n"
 "QHeaderView::section {\n"
-"    background-color: rgba(52, 22, 85, 50%);\n"
+"    background-color: rgb(52, 22, 85);\n"
 "    padding: 4px;\n"
 "    border: none;\n"
 "}\n"
 "QScrollBar:vertical {\n"
 "    border: 0px;\n"
-"    background:white;\n"
+"    background: white;\n"
 "    width:5px;\n"
 "    border-radius: 5px;\n"
 "    margin: 0px;\n"
@@ -262,9 +262,37 @@ class Ui_Studious(object):
 "QScrollBar::sub-line:vertical {\n"
 "    height: 0px;\n"
 "    subcontrol-position: top;\n"
-"    subcontrol-origin: marg"
-                        "in;\n"
-"}")
+"    subcontrol-origin: margin;\n"
+""
+                        "}\n"
+"\n"
+"QScrollBar:horizontal {\n"
+"    border: 0px;\n"
+"    background: white;\n"
+"    height: 5px;\n"
+"    border-radius: 5px;\n"
+"    margin: 0px;\n"
+"}\n"
+"\n"
+"QScrollBar::handle:horizontal {\n"
+"    min-width: 0px;\n"
+"    border: 0px;\n"
+"    border-radius: 5px;\n"
+"    background-color: black;\n"
+"}\n"
+"\n"
+"QScrollBar::add-line:horizontal {\n"
+"    width: 0px;\n"
+"    subcontrol-position: right;\n"
+"    subcontrol-origin: margin;\n"
+"}\n"
+"\n"
+"QScrollBar::sub-line:horizontal {\n"
+"    width: 0px;\n"
+"    subcontrol-position: left;\n"
+"    subcontrol-origin: margin;\n"
+"}\n"
+"")
         self.page_m_pom = QWidget()
         self.page_m_pom.setObjectName(u"page_m_pom")
         self.page_m_pom.setStyleSheet(u"QLabel{\n"
@@ -512,7 +540,7 @@ class Ui_Studious(object):
         self.page_m_5.setObjectName(u"page_m_5")
         self.tB_5_breath = QTextBrowser(self.page_m_5)
         self.tB_5_breath.setObjectName(u"tB_5_breath")
-        self.tB_5_breath.setGeometry(QRect(40, 30, 701, 431))
+        self.tB_5_breath.setGeometry(QRect(40, 30, 704, 432))
         self.tB_5_breath.setStyleSheet(u"color: white;")
         self.btn_5_start = QPushButton(self.page_m_5)
         self.btn_5_start.setObjectName(u"btn_5_start")
@@ -534,13 +562,14 @@ class Ui_Studious(object):
         self.sW_main.addWidget(self.page_m_5)
         self.page_m_6 = QWidget()
         self.page_m_6.setObjectName(u"page_m_6")
+        self.page_m_6.setStyleSheet(u"")
         self.LB_2 = QLabel(self.page_m_6)
         self.LB_2.setObjectName(u"LB_2")
         self.LB_2.setGeometry(QRect(130, 50, 191, 61))
         self.LB_2.setStyleSheet(u"font: 48pt;")
         self.sW_setting = QStackedWidget(self.page_m_6)
         self.sW_setting.setObjectName(u"sW_setting")
-        self.sW_setting.setGeometry(QRect(130, 110, 641, 441))
+        self.sW_setting.setGeometry(QRect(130, 110, 581, 441))
         self.page = QWidget()
         self.page.setObjectName(u"page")
         self.checkBox_space = QCheckBox(self.page)
@@ -570,20 +599,125 @@ class Ui_Studious(object):
         self.LB_3.setObjectName(u"LB_3")
         self.LB_3.setGeometry(QRect(50, 20, 151, 61))
         self.LB_3.setStyleSheet(u"font: 24pt;")
-        self.pushButton_2 = QPushButton(self.page)
-        self.pushButton_2.setObjectName(u"pushButton_2")
-        self.pushButton_2.setGeometry(QRect(480, 380, 113, 32))
         self.sW_setting.addWidget(self.page)
         self.page_2 = QWidget()
         self.page_2.setObjectName(u"page_2")
+        self.tableWidget = QTableWidget(self.page_2)
+        if (self.tableWidget.columnCount() < 3):
+            self.tableWidget.setColumnCount(3)
+        __qtablewidgetitem10 = QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(0, __qtablewidgetitem10)
+        __qtablewidgetitem11 = QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(1, __qtablewidgetitem11)
+        __qtablewidgetitem12 = QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(2, __qtablewidgetitem12)
+        if (self.tableWidget.rowCount() < 7):
+            self.tableWidget.setRowCount(7)
+        __qtablewidgetitem13 = QTableWidgetItem()
+        self.tableWidget.setVerticalHeaderItem(0, __qtablewidgetitem13)
+        __qtablewidgetitem14 = QTableWidgetItem()
+        self.tableWidget.setVerticalHeaderItem(1, __qtablewidgetitem14)
+        __qtablewidgetitem15 = QTableWidgetItem()
+        self.tableWidget.setVerticalHeaderItem(2, __qtablewidgetitem15)
+        __qtablewidgetitem16 = QTableWidgetItem()
+        self.tableWidget.setVerticalHeaderItem(3, __qtablewidgetitem16)
+        __qtablewidgetitem17 = QTableWidgetItem()
+        self.tableWidget.setVerticalHeaderItem(4, __qtablewidgetitem17)
+        __qtablewidgetitem18 = QTableWidgetItem()
+        self.tableWidget.setVerticalHeaderItem(5, __qtablewidgetitem18)
+        __qtablewidgetitem19 = QTableWidgetItem()
+        self.tableWidget.setVerticalHeaderItem(6, __qtablewidgetitem19)
+        __qtablewidgetitem20 = QTableWidgetItem()
+        self.tableWidget.setItem(0, 0, __qtablewidgetitem20)
+        __qtablewidgetitem21 = QTableWidgetItem()
+        self.tableWidget.setItem(0, 1, __qtablewidgetitem21)
+        __qtablewidgetitem22 = QTableWidgetItem()
+        self.tableWidget.setItem(0, 2, __qtablewidgetitem22)
+        __qtablewidgetitem23 = QTableWidgetItem()
+        self.tableWidget.setItem(1, 0, __qtablewidgetitem23)
+        __qtablewidgetitem24 = QTableWidgetItem()
+        self.tableWidget.setItem(1, 1, __qtablewidgetitem24)
+        __qtablewidgetitem25 = QTableWidgetItem()
+        self.tableWidget.setItem(1, 2, __qtablewidgetitem25)
+        __qtablewidgetitem26 = QTableWidgetItem()
+        self.tableWidget.setItem(2, 0, __qtablewidgetitem26)
+        __qtablewidgetitem27 = QTableWidgetItem()
+        self.tableWidget.setItem(2, 1, __qtablewidgetitem27)
+        __qtablewidgetitem28 = QTableWidgetItem()
+        self.tableWidget.setItem(2, 2, __qtablewidgetitem28)
+        __qtablewidgetitem29 = QTableWidgetItem()
+        self.tableWidget.setItem(3, 0, __qtablewidgetitem29)
+        __qtablewidgetitem30 = QTableWidgetItem()
+        self.tableWidget.setItem(3, 1, __qtablewidgetitem30)
+        __qtablewidgetitem31 = QTableWidgetItem()
+        self.tableWidget.setItem(3, 2, __qtablewidgetitem31)
+        __qtablewidgetitem32 = QTableWidgetItem()
+        self.tableWidget.setItem(4, 0, __qtablewidgetitem32)
+        __qtablewidgetitem33 = QTableWidgetItem()
+        self.tableWidget.setItem(4, 1, __qtablewidgetitem33)
+        __qtablewidgetitem34 = QTableWidgetItem()
+        self.tableWidget.setItem(4, 2, __qtablewidgetitem34)
+        __qtablewidgetitem35 = QTableWidgetItem()
+        self.tableWidget.setItem(5, 0, __qtablewidgetitem35)
+        __qtablewidgetitem36 = QTableWidgetItem()
+        self.tableWidget.setItem(5, 1, __qtablewidgetitem36)
+        __qtablewidgetitem37 = QTableWidgetItem()
+        self.tableWidget.setItem(5, 2, __qtablewidgetitem37)
+        __qtablewidgetitem38 = QTableWidgetItem()
+        self.tableWidget.setItem(6, 0, __qtablewidgetitem38)
+        __qtablewidgetitem39 = QTableWidgetItem()
+        self.tableWidget.setItem(6, 1, __qtablewidgetitem39)
+        __qtablewidgetitem40 = QTableWidgetItem()
+        self.tableWidget.setItem(6, 2, __qtablewidgetitem40)
+        self.tableWidget.setObjectName(u"tableWidget")
+        self.tableWidget.setGeometry(QRect(70, 30, 481, 251))
+        self.tableWidget.setGridStyle(Qt.SolidLine)
+        self.tableWidget.horizontalHeader().setCascadingSectionResizes(True)
+        self.tableWidget.horizontalHeader().setMinimumSectionSize(150)
+        self.tableWidget.horizontalHeader().setDefaultSectionSize(150)
+        self.tableWidget.horizontalHeader().setStretchLastSection(True)
+        self.tableWidget.verticalHeader().setCascadingSectionResizes(True)
+        self.tableWidget.verticalHeader().setMinimumSectionSize(30)
+        self.tableWidget.verticalHeader().setDefaultSectionSize(30)
+        self.tableWidget.verticalHeader().setStretchLastSection(True)
         self.sW_setting.addWidget(self.page_2)
+        self.btn_6_nextPage = QPushButton(self.page_m_6)
+        self.btn_6_nextPage.setObjectName(u"btn_6_nextPage")
+        self.btn_6_nextPage.setGeometry(QRect(710, 499, 61, 51))
+        self.btn_6_nextPage.setMinimumSize(QSize(0, 40))
+        self.btn_6_nextPage.setStyleSheet(u"QPushButton{\n"
+"	font: 48pt;\n"
+"}\n"
+"QPushButton::hover{\n"
+"	font: 52pt;\n"
+"}")
+        self.btn_6_nextPage.setIconSize(QSize(32, 32))
         self.sW_main.addWidget(self.page_m_6)
         self.page_m_7 = QWidget()
         self.page_m_7.setObjectName(u"page_m_7")
         self.tB_7_about = QTextBrowser(self.page_m_7)
         self.tB_7_about.setObjectName(u"tB_7_about")
-        self.tB_7_about.setGeometry(QRect(50, 30, 691, 501))
+        self.tB_7_about.setGeometry(QRect(40, 30, 704, 432))
         self.tB_7_about.setStyleSheet(u"color: white;")
+        self.btn_7_community = QPushButton(self.page_m_7)
+        self.btn_7_community.setObjectName(u"btn_7_community")
+        self.btn_7_community.setGeometry(QRect(290, 480, 221, 51))
+        self.btn_7_community.setMinimumSize(QSize(0, 32))
+        self.btn_7_community.setStyleSheet(u"QPushButton{\n"
+"    background-color: rgba(52, 22, 85, 70%);\n"
+"    color: rgb(249, 245, 246);\n"
+"    font: 24pt \"Arial\";\n"
+"    border-radius: 5px;\n"
+"    text-align: left;\n"
+"    padding: 2px 7px;\n"
+"}\n"
+"QPushButton:hover{\n"
+"    background-color: rgba(52, 22, 85, 100%);\n"
+"}")
+        icon19 = QIcon()
+        icon19.addFile(u"assert/community.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_7_community.setIcon(icon19)
+        self.btn_7_community.setIconSize(QSize(32, 32))
         self.sW_main.addWidget(self.page_m_7)
         self.Background = QLabel(self.centralwidget)
         self.Background.setObjectName(u"Background")
@@ -608,14 +742,15 @@ class Ui_Studious(object):
         self.pushButton.setStyleSheet(u"background-color: rgba(70, 69, 140, 40%);\n"
 "border: 0px;")
         Studious.setCentralWidget(self.centralwidget)
-        self.pushButton.raise_()
         self.Background.raise_()
         self.sW_main.raise_()
+        self.pushButton.raise_()
         self.wg_leftBar.raise_()
 
         self.retranslateUi(Studious)
 
         self.sW_main.setCurrentIndex(0)
+        self.sW_setting.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(Studious)
@@ -698,12 +833,72 @@ class Ui_Studious(object):
 
         self.checkBox_noti.setText(QCoreApplication.translate("Studious", u"  Th\u00f4ng b\u00e1o ngh\u1ec9 ng\u01a1i tr\u01b0\u1edbc 5 ph\u00fat", None))
         self.LB_3.setText(QCoreApplication.translate("Studious", u"Th\u1ec3 lo\u1ea1i nh\u1ea1c", None))
-        self.pushButton_2.setText(QCoreApplication.translate("Studious", u"--->", None))
+        ___qtablewidgetitem10 = self.tableWidget.horizontalHeaderItem(0)
+        ___qtablewidgetitem10.setText(QCoreApplication.translate("Studious", u"Nhi\u1ec7m v\u1ee5", None));
+        ___qtablewidgetitem11 = self.tableWidget.horizontalHeaderItem(1)
+        ___qtablewidgetitem11.setText(QCoreApplication.translate("Studious", u"Th\u1eddi gian h\u1ecdc", None));
+        ___qtablewidgetitem12 = self.tableWidget.horizontalHeaderItem(2)
+        ___qtablewidgetitem12.setText(QCoreApplication.translate("Studious", u"Th\u1eddi gian ngh\u1ec9", None));
+        ___qtablewidgetitem13 = self.tableWidget.verticalHeaderItem(0)
+        ___qtablewidgetitem13.setText(QCoreApplication.translate("Studious", u"1", None));
+        ___qtablewidgetitem14 = self.tableWidget.verticalHeaderItem(1)
+        ___qtablewidgetitem14.setText(QCoreApplication.translate("Studious", u"2", None));
+        ___qtablewidgetitem15 = self.tableWidget.verticalHeaderItem(2)
+        ___qtablewidgetitem15.setText(QCoreApplication.translate("Studious", u"3", None));
+        ___qtablewidgetitem16 = self.tableWidget.verticalHeaderItem(3)
+        ___qtablewidgetitem16.setText(QCoreApplication.translate("Studious", u"4", None));
+        ___qtablewidgetitem17 = self.tableWidget.verticalHeaderItem(4)
+        ___qtablewidgetitem17.setText(QCoreApplication.translate("Studious", u"5", None));
+        ___qtablewidgetitem18 = self.tableWidget.verticalHeaderItem(5)
+        ___qtablewidgetitem18.setText(QCoreApplication.translate("Studious", u"6", None));
+        ___qtablewidgetitem19 = self.tableWidget.verticalHeaderItem(6)
+        ___qtablewidgetitem19.setText(QCoreApplication.translate("Studious", u"7", None));
+
+        __sortingEnabled1 = self.tableWidget.isSortingEnabled()
+        self.tableWidget.setSortingEnabled(False)
+        ___qtablewidgetitem20 = self.tableWidget.item(0, 0)
+        ___qtablewidgetitem20.setText(QCoreApplication.translate("Studious", u"To\u00e1n", None));
+        ___qtablewidgetitem21 = self.tableWidget.item(0, 1)
+        ___qtablewidgetitem21.setText(QCoreApplication.translate("Studious", u"25", None));
+        ___qtablewidgetitem22 = self.tableWidget.item(0, 2)
+        ___qtablewidgetitem22.setText(QCoreApplication.translate("Studious", u"5", None));
+        ___qtablewidgetitem23 = self.tableWidget.item(1, 0)
+        ___qtablewidgetitem23.setText(QCoreApplication.translate("Studious", u"Ti\u1ebfng Anh", None));
+        ___qtablewidgetitem24 = self.tableWidget.item(1, 1)
+        ___qtablewidgetitem24.setText(QCoreApplication.translate("Studious", u"30", None));
+        ___qtablewidgetitem25 = self.tableWidget.item(1, 2)
+        ___qtablewidgetitem25.setText(QCoreApplication.translate("Studious", u"2", None));
+        ___qtablewidgetitem26 = self.tableWidget.item(2, 0)
+        ___qtablewidgetitem26.setText(QCoreApplication.translate("Studious", u"L\u00e0m vi\u1ec7c", None));
+        ___qtablewidgetitem27 = self.tableWidget.item(2, 1)
+        ___qtablewidgetitem27.setText(QCoreApplication.translate("Studious", u"60", None));
+        ___qtablewidgetitem28 = self.tableWidget.item(2, 2)
+        ___qtablewidgetitem28.setText(QCoreApplication.translate("Studious", u"5", None));
+        ___qtablewidgetitem29 = self.tableWidget.item(3, 1)
+        ___qtablewidgetitem29.setText(QCoreApplication.translate("Studious", u"25", None));
+        ___qtablewidgetitem30 = self.tableWidget.item(3, 2)
+        ___qtablewidgetitem30.setText(QCoreApplication.translate("Studious", u"5", None));
+        ___qtablewidgetitem31 = self.tableWidget.item(4, 1)
+        ___qtablewidgetitem31.setText(QCoreApplication.translate("Studious", u"25", None));
+        ___qtablewidgetitem32 = self.tableWidget.item(4, 2)
+        ___qtablewidgetitem32.setText(QCoreApplication.translate("Studious", u"5", None));
+        ___qtablewidgetitem33 = self.tableWidget.item(5, 1)
+        ___qtablewidgetitem33.setText(QCoreApplication.translate("Studious", u"25", None));
+        ___qtablewidgetitem34 = self.tableWidget.item(5, 2)
+        ___qtablewidgetitem34.setText(QCoreApplication.translate("Studious", u"5", None));
+        ___qtablewidgetitem35 = self.tableWidget.item(6, 1)
+        ___qtablewidgetitem35.setText(QCoreApplication.translate("Studious", u"25", None));
+        ___qtablewidgetitem36 = self.tableWidget.item(6, 2)
+        ___qtablewidgetitem36.setText(QCoreApplication.translate("Studious", u"5", None));
+        self.tableWidget.setSortingEnabled(__sortingEnabled1)
+
+        self.btn_6_nextPage.setText(QCoreApplication.translate("Studious", u"\ud83d\udc49", None))
         self.tB_7_about.setHtml(QCoreApplication.translate("Studious", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'Arial'; font-size:18pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:transparent;\"><br /></p></body></html>", None))
+        self.btn_7_community.setText(QCoreApplication.translate("Studious", u"  C\u1ed8NG \u0110\u1ed2NG", None))
         self.Background.setText("")
         self.pushButton.setText("")
     # retranslateUi

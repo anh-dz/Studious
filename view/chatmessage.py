@@ -32,11 +32,12 @@ class DrawSpeechBubbleDelegate(QStyledItemDelegate):
 
     def __init__(self):
         super().__init__()
-        self.image_offset = 5 # Horizontal offset for the image 
+        self.image_offset = 10 # Horizontal offset for the image 
         # The following variables are used when drawing the speech bubbles
-        self.side_offset, self.top_offset = 40, 5 
-        self.tail_offset_x, self.tail_offset_y = 30, 0
-        self.text_side_offset, self.text_top_offset = 50, 15
+        self.image_size = QSize(48, 48)
+        self.side_offset, self.top_offset = 70, 10 
+        self.tail_offset_x, self.tail_offset_y = 60, 0
+        self.text_side_offset, self.text_top_offset = 90, 20
 
     def paint(self, painter, option, index):
         """Reimplement the delegate's paint() function. Renders the delegate using the specified QPainter 
@@ -49,9 +50,10 @@ class DrawSpeechBubbleDelegate(QStyledItemDelegate):
 
         # Use user_or_chatbot value to select the image to display, the color of the pen and the
         # brush. Set the margins for speech bubble. Set the points for the speech bubble's tail.
+        # self.image_size.height() = 48 // 2 = 24
         if user_or_chatbot == "chatbot":
             image.load("assert/bot.png")
-            image_rect = QRect(QPoint(option.rect.left() + self.image_offset, option.rect.center().y() - 12), QSize(24, 24))
+            image_rect = QRect(QPoint(option.rect.left() + self.image_offset, option.rect.center().y() - 24), self.image_size)
             color = QColor("#C23373")
             bubble_margins = QMargins(self.side_offset, self.top_offset, self.side_offset, self.top_offset)
             tail_points = QPolygon([QPoint(option.rect.x() + self.tail_offset_x, option.rect.center().y()),
@@ -59,7 +61,7 @@ class DrawSpeechBubbleDelegate(QStyledItemDelegate):
                            QPoint(option.rect.x() + self.side_offset, option.rect.center().y() + 5)])
         elif user_or_chatbot == "user":
             image.load("assert/user.png")
-            image_rect = QRect(QPoint(option.rect.right() - self.image_offset - 24, option.rect.center().y() - 12), QSize(24, 24))
+            image_rect = QRect(QPoint(option.rect.right() - self.image_offset - self.image_size.width(), option.rect.center().y() - 24), self.image_size)
             color = QColor("#333333")
             bubble_margins = QMargins(self.side_offset, self.top_offset, self.side_offset, self.top_offset)
             tail_points = QPolygon([QPoint(option.rect.right() - self.tail_offset_x, option.rect.center().y()),
