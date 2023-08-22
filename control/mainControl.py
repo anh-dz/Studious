@@ -337,6 +337,7 @@ class chatBot:
     def handle_input(self):
         user_input = wgs.PtE_chatBot.toPlainText()
         self.model.appendMessage(user_input, "user")
+        wgs.PtE_chatBot.clear()
         response = self.get_chatbot_response(user_input)
         self.model.appendMessage(response, "chatbot")
 
