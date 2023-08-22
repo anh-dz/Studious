@@ -31,6 +31,7 @@ class StudiousFunc:
         self.box = QMessageBox()
         self.create_media_player()
         self.create_chart()
+        self.chatBot()
 
     def initialize_ui(self):
         wgs.lb_m_quote.setText(self.qoutes)
@@ -199,6 +200,9 @@ class StudiousFunc:
     def start_breath(self):
         self.breath = BreathingCircleAnimation()
         self.breath.show()
+    
+    def chatBot(self):
+        self.chat = chatBot()
 
 class audioFunc(QThread):
     finished = pyqtSignal()
@@ -309,35 +313,51 @@ class countdown:
     "qproperty-margin: auto;")
             self.time_left = self.mtime*60
 
+class KeyboardWidget(QWidget):
+    keyPressed = pyqtSignal(str)
+
+    def keyPressEvent(self, keyEvent):
+        self.keyPressed.emit(keyEvent.text())
+
 class chatBot:
     def __init__(self) -> None:
-        wgs.PtE_chatBot.returnPressed.connect(self.handle_input)
-        self.history = []
-        self.api = "api key"
+        wgs.btn_4_send.clicked.connect(self.handle_input)
+        self.api = 'dc5f122151msh883ed682cbadc9cp113b09jsn67cb02e5ab7d'
+        self.api_url = 'https://chatgpt-best-price.p.rapidapi.com/v1/chat/completions'
+        
+        self.model = ChatLogModel()
+        wgs.LV_chatView.setModel(self.model)
+
+        message_delegate = DrawSpeechBubbleDelegate()
+        wgs.LV_chatView.setItemDelegate(message_delegate)
+
+        self.model.appendMessage("Chào bạn, để sử dụng không giới hạn chức năng này, hãy mua Premium.", "chatbot")
 
     def handle_input(self):
-        user_input = wgs.PtE_chatBot.text()
-        self.history.append(f"User: {user_input}")
-
+        user_input = wgs.PtE_chatBot.toPlainText()
+        self.model.appendMessage(user_input, "user")
         response = self.get_chatbot_response(user_input)
-        self.history.append(f"Chatbot: {response['choices'][0]['message']['content']}")
-
-        self.input_field.clear()
+        self.model.appendMessage(response, "chatbot")
 
     def get_chatbot_response(self, user_input):
-        prompt = "\n".join(self.history[-5:])  # Include some chat history as context
+        headers = {
+            "content-type": "application/json",
+            "X-RapidAPI-Key": self.api,
+            "X-RapidAPI-Host": "chatgpt-best-price.p.rapidapi.com"
+        }
 
-        # Make a POST request to the OpenAI API
-        response = requests.post(
-            'https://api.openai.com/v1/engines/davinci-codex/completions',
-            json={
-                'prompt': prompt,
-                'max_tokens': 50
-            },
-            headers={'Authorization': self.api}
-        )
+        data = {
+            "model": "gpt-3.5-turbo",
+            "messages": [
+		{
+			"role": "user",
+			"content": "Hello, how are you?"
+		}
+	    ]
+        }
 
-        return response.json()
+        response = requests.post(self.api_url, json=data, headers=headers)
+        return response.json()["choices"][0]["message"]["content"]
 
 class chart:
     def __init__(self, file) -> None:

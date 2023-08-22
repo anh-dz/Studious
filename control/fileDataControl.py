@@ -72,7 +72,21 @@ class fileDataControl:
             if last_day not in datachart:
                 datachart.update({last_day:{"Học Toán":0, "Học IELTS":0, "Làm việc":0}})
 
-        if days == "3 ngày" or days == "7 ngày":
+        if days == "1 ngày":
+            for i in range(int(days.split(" ")[0])-1, -1, -1):
+                last_day = self._ntime - datetime.timedelta(days=i)
+                temp = []
+                for x in range(len(key)):
+                    _t = datachart[last_day.strftime('%d/%m/%Y')][key[x]]
+                    detailTime[x][1] += _t
+                    temp.append(_t)
+                    
+                time.append(last_day.strftime('%d/%m'))
+                totalTime.append(sum(temp))
+            
+            return [time, totalTime, detailTime]
+
+        elif days == "3 ngày" or days == "7 ngày":
             for i in range(int(days.split(" ")[0])-1, -1, -1):
                 last_day = self._ntime - datetime.timedelta(days=i)
                 temp = []
