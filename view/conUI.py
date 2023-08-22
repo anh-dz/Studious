@@ -27,11 +27,24 @@ class ViewControl(QMainWindow):
         self.ui.btn_lB_6.clicked.connect(lambda: self.ui.sW_main.setCurrentIndex(5) or self.blur_effect.setBlurRadius(12))
         self.ui.btn_lB_7.clicked.connect(lambda: self.ui.sW_main.setCurrentIndex(6) or self.blur_effect.setBlurRadius(12))
 
+        self.ui.btn_6_nextPage.clicked.connect(self.nextPage)
+        self.pageInt = 0
+
         self.ui.btn_lB_menu.clicked.connect(self.toggleSideMenu)
 
         self.setupHTMLText()
 
         self.testComboBoxColor()
+    
+    def nextPage(self):
+        if self.pageInt:
+            self.ui.btn_6_nextPage.setText("👉")
+            self.ui.sW_setting.setCurrentIndex(0)
+            self.pageInt = 0
+        else:
+            self.ui.btn_6_nextPage.setText("👈")
+            self.ui.sW_setting.setCurrentIndex(1)
+            self.pageInt = 1
 
     def toggleSideMenu(self):
         target_width = 150 if self.ui.wg_leftBar.width() <= 70 else 44

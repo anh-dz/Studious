@@ -219,13 +219,13 @@ class Ui_Studious(object):
 "    padding: 7px;\n"
 "}\n"
 "QHeaderView::section {\n"
-"    background-color: rgba(52, 22, 85, 50%);\n"
+"    background-color: rgb(52, 22, 85);\n"
 "    padding: 4px;\n"
 "    border: none;\n"
 "}\n"
 "QScrollBar:vertical {\n"
 "    border: 0px;\n"
-"    background:white;\n"
+"    background: white;\n"
 "    width:5px;\n"
 "    border-radius: 5px;\n"
 "    margin: 0px;\n"
@@ -245,7 +245,35 @@ class Ui_Studious(object):
 "    height: 0px;\n"
 "    subcontrol-position: top;\n"
 "    subcontrol-origin: margin;\n"
-"}")
+"}\n"
+"\n"
+"QScrollBar:horizontal {\n"
+"    border: 0px;\n"
+"    background: white;\n"
+"    height: 5px;\n"
+"    border-radius: 5px;\n"
+"    margin: 0px;\n"
+"}\n"
+"\n"
+"QScrollBar::handle:horizontal {\n"
+"    min-width: 0px;\n"
+"    border: 0px;\n"
+"    border-radius: 5px;\n"
+"    background-color: black;\n"
+"}\n"
+"\n"
+"QScrollBar::add-line:horizontal {\n"
+"    width: 0px;\n"
+"    subcontrol-position: right;\n"
+"    subcontrol-origin: margin;\n"
+"}\n"
+"\n"
+"QScrollBar::sub-line:horizontal {\n"
+"    width: 0px;\n"
+"    subcontrol-position: left;\n"
+"    subcontrol-origin: margin;\n"
+"}\n"
+"")
         self.sW_main.setObjectName("sW_main")
         self.page_m_pom = QtWidgets.QWidget()
         self.page_m_pom.setStyleSheet("QLabel{\n"
@@ -513,13 +541,14 @@ class Ui_Studious(object):
         self.btn_5_start.setObjectName("btn_5_start")
         self.sW_main.addWidget(self.page_m_5)
         self.page_m_6 = QtWidgets.QWidget()
+        self.page_m_6.setStyleSheet("")
         self.page_m_6.setObjectName("page_m_6")
         self.LB_2 = QtWidgets.QLabel(parent=self.page_m_6)
         self.LB_2.setGeometry(QtCore.QRect(130, 50, 191, 61))
         self.LB_2.setStyleSheet("font: 48pt;")
         self.LB_2.setObjectName("LB_2")
         self.sW_setting = QtWidgets.QStackedWidget(parent=self.page_m_6)
-        self.sW_setting.setGeometry(QtCore.QRect(130, 110, 641, 441))
+        self.sW_setting.setGeometry(QtCore.QRect(130, 110, 581, 441))
         self.sW_setting.setObjectName("sW_setting")
         self.page = QtWidgets.QWidget()
         self.page.setObjectName("page")
@@ -550,13 +579,97 @@ class Ui_Studious(object):
         self.LB_3.setGeometry(QtCore.QRect(50, 20, 151, 61))
         self.LB_3.setStyleSheet("font: 24pt;")
         self.LB_3.setObjectName("LB_3")
-        self.pushButton_2 = QtWidgets.QPushButton(parent=self.page)
-        self.pushButton_2.setGeometry(QtCore.QRect(480, 380, 113, 32))
-        self.pushButton_2.setObjectName("pushButton_2")
         self.sW_setting.addWidget(self.page)
         self.page_2 = QtWidgets.QWidget()
         self.page_2.setObjectName("page_2")
+        self.tableWidget = QtWidgets.QTableWidget(parent=self.page_2)
+        self.tableWidget.setGeometry(QtCore.QRect(70, 30, 481, 251))
+        self.tableWidget.setGridStyle(QtCore.Qt.PenStyle.SolidLine)
+        self.tableWidget.setObjectName("tableWidget")
+        self.tableWidget.setColumnCount(3)
+        self.tableWidget.setRowCount(7)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setVerticalHeaderItem(0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setVerticalHeaderItem(1, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setVerticalHeaderItem(2, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setVerticalHeaderItem(3, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setVerticalHeaderItem(4, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setVerticalHeaderItem(5, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setVerticalHeaderItem(6, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(1, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(2, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setItem(0, 0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setItem(0, 1, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setItem(0, 2, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setItem(1, 0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setItem(1, 1, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setItem(1, 2, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setItem(2, 0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setItem(2, 1, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setItem(2, 2, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setItem(3, 0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setItem(3, 1, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setItem(3, 2, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setItem(4, 0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setItem(4, 1, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setItem(4, 2, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setItem(5, 0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setItem(5, 1, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setItem(5, 2, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setItem(6, 0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setItem(6, 1, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setItem(6, 2, item)
+        self.tableWidget.horizontalHeader().setCascadingSectionResizes(True)
+        self.tableWidget.horizontalHeader().setDefaultSectionSize(150)
+        self.tableWidget.horizontalHeader().setMinimumSectionSize(150)
+        self.tableWidget.horizontalHeader().setStretchLastSection(True)
+        self.tableWidget.verticalHeader().setCascadingSectionResizes(True)
+        self.tableWidget.verticalHeader().setDefaultSectionSize(30)
+        self.tableWidget.verticalHeader().setMinimumSectionSize(30)
+        self.tableWidget.verticalHeader().setStretchLastSection(True)
         self.sW_setting.addWidget(self.page_2)
+        self.btn_6_nextPage = QtWidgets.QPushButton(parent=self.page_m_6)
+        self.btn_6_nextPage.setGeometry(QtCore.QRect(710, 499, 61, 51))
+        self.btn_6_nextPage.setMinimumSize(QtCore.QSize(0, 40))
+        self.btn_6_nextPage.setStyleSheet("QPushButton{\n"
+"    font: 48pt;\n"
+"}\n"
+"QPushButton::hover{\n"
+"    font: 52pt;\n"
+"}")
+        self.btn_6_nextPage.setIconSize(QtCore.QSize(32, 32))
+        self.btn_6_nextPage.setObjectName("btn_6_nextPage")
         self.sW_main.addWidget(self.page_m_6)
         self.page_m_7 = QtWidgets.QWidget()
         self.page_m_7.setObjectName("page_m_7")
@@ -592,14 +705,15 @@ class Ui_Studious(object):
 "border: 0px;")
         self.pushButton.setText("")
         self.pushButton.setObjectName("pushButton")
-        self.pushButton.raise_()
         self.Background.raise_()
         self.sW_main.raise_()
+        self.pushButton.raise_()
         self.wg_leftBar.raise_()
         Studious.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(Studious)
         self.sW_main.setCurrentIndex(0)
+        self.sW_setting.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(Studious)
 
     def retranslateUi(self, Studious):
@@ -666,7 +780,64 @@ class Ui_Studious(object):
         self.cB_6_select.setItemText(2, _translate("Studious", "Melody"))
         self.checkBox_noti.setText(_translate("Studious", "  Thông báo nghỉ ngơi trước 5 phút"))
         self.LB_3.setText(_translate("Studious", "Thể loại nhạc"))
-        self.pushButton_2.setText(_translate("Studious", "--->"))
+        item = self.tableWidget.verticalHeaderItem(0)
+        item.setText(_translate("Studious", "1"))
+        item = self.tableWidget.verticalHeaderItem(1)
+        item.setText(_translate("Studious", "2"))
+        item = self.tableWidget.verticalHeaderItem(2)
+        item.setText(_translate("Studious", "3"))
+        item = self.tableWidget.verticalHeaderItem(3)
+        item.setText(_translate("Studious", "4"))
+        item = self.tableWidget.verticalHeaderItem(4)
+        item.setText(_translate("Studious", "5"))
+        item = self.tableWidget.verticalHeaderItem(5)
+        item.setText(_translate("Studious", "6"))
+        item = self.tableWidget.verticalHeaderItem(6)
+        item.setText(_translate("Studious", "7"))
+        item = self.tableWidget.horizontalHeaderItem(0)
+        item.setText(_translate("Studious", "Nhiệm vụ"))
+        item = self.tableWidget.horizontalHeaderItem(1)
+        item.setText(_translate("Studious", "Thời gian học"))
+        item = self.tableWidget.horizontalHeaderItem(2)
+        item.setText(_translate("Studious", "Thời gian nghỉ"))
+        __sortingEnabled = self.tableWidget.isSortingEnabled()
+        self.tableWidget.setSortingEnabled(False)
+        item = self.tableWidget.item(0, 0)
+        item.setText(_translate("Studious", "Toán"))
+        item = self.tableWidget.item(0, 1)
+        item.setText(_translate("Studious", "25"))
+        item = self.tableWidget.item(0, 2)
+        item.setText(_translate("Studious", "5"))
+        item = self.tableWidget.item(1, 0)
+        item.setText(_translate("Studious", "Tiếng Anh"))
+        item = self.tableWidget.item(1, 1)
+        item.setText(_translate("Studious", "30"))
+        item = self.tableWidget.item(1, 2)
+        item.setText(_translate("Studious", "2"))
+        item = self.tableWidget.item(2, 0)
+        item.setText(_translate("Studious", "Làm việc"))
+        item = self.tableWidget.item(2, 1)
+        item.setText(_translate("Studious", "60"))
+        item = self.tableWidget.item(2, 2)
+        item.setText(_translate("Studious", "5"))
+        item = self.tableWidget.item(3, 1)
+        item.setText(_translate("Studious", "25"))
+        item = self.tableWidget.item(3, 2)
+        item.setText(_translate("Studious", "5"))
+        item = self.tableWidget.item(4, 1)
+        item.setText(_translate("Studious", "25"))
+        item = self.tableWidget.item(4, 2)
+        item.setText(_translate("Studious", "5"))
+        item = self.tableWidget.item(5, 1)
+        item.setText(_translate("Studious", "25"))
+        item = self.tableWidget.item(5, 2)
+        item.setText(_translate("Studious", "5"))
+        item = self.tableWidget.item(6, 1)
+        item.setText(_translate("Studious", "25"))
+        item = self.tableWidget.item(6, 2)
+        item.setText(_translate("Studious", "5"))
+        self.tableWidget.setSortingEnabled(__sortingEnabled)
+        self.btn_6_nextPage.setText(_translate("Studious", "👉"))
         self.tB_7_about.setHtml(_translate("Studious", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
