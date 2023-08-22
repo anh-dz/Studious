@@ -1,6 +1,8 @@
 import json
+import csv
 from os import path, remove, makedirs
 import datetime
+from PyQt6.QtWidgets import *
 
 with open("data/quotes.txt", "r", encoding="utf-8") as f:
     res = f.readlines()
@@ -19,10 +21,15 @@ class fileDataControl:
             makedirs("data")
             with open(f"data/time.json", "w") as f:
                 pass
+            with open(f"data/tableWeek.csv", "w") as f:
+                pass
             return True
         else:
             if not path.exists("data/time.json"):
                 with open("data/time.json", 'w') as f:
+                    pass
+            if not path.exists("data/tableWeek.csv"):
+                with open("data/tableWeek.csv", 'w') as f:
                     pass
                 return True
         return False
@@ -148,3 +155,49 @@ class fileDataControl:
                     temp = []
                     
             return [time, totalTime, detailTime]
+        
+    def dataTableWeek(self):
+        pass
+
+    def writeTableData(self, wgt):
+        num_rows = wgt.tableWidget.rowCount()
+        num_cols = wgt.tableWidget.columnCount()
+
+        self.table_data = [['Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun']]
+
+        for i in range(num_rows):
+            row_data = []
+            for j in range(num_cols):
+                item = wgt.tableWidget.item(i, j)
+                if item is not None:
+                    row_data.append(item.text())
+                else:
+                    row_data.append("")  # Handle empty cells
+            self.table_data.append(row_data)
+
+        
+        with open("data/tableWeek.csv" , mode="w", newline="", encoding="utf-8") as csv_file:
+            writer = csv.writer(csv_file)
+            
+            # Write each row of data to the CSV file
+            for row in self.table_data:
+                writer.writerow(row)
+
+    def readTableData(self):
+        self._table_data = []
+        with open("data/tableWeek.csv" , mode="r", encoding="utf-8") as csv_file:
+            reader = csv.reader(csv_file)
+            
+            # Read each row of data from the CSV file
+            for row in reader:
+                self._table_data.append(row)
+
+    def setTableData(self, wgt):
+        self.readTableData()
+        if self._table_data == "":
+            pass
+        else:
+            for i, row in enumerate(self._table_data):
+                for j, column in enumerate(row):
+                    item = QTableWidgetItem(column)
+                    wgt.tableWidget.setItem(i, j, item)

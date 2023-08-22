@@ -201,7 +201,8 @@ class StudiousFunc:
         Fwgs.cB_task.setEnabled(not self.clock_onoff)
 
     def start_weekDialog(self):
-        self.wDialog = weekDialogFunc()
+        self.wDialog = weekDialogFunc(self.file)
+
 
     def start_breath(self):
         self.breath = BreathingCircleAnimation()
@@ -264,8 +265,11 @@ class fullScreenFunc(StudiousFS):
         return super().event(event)
     
 class weekDialogFunc:
-    def __init__(self) -> None:
+    def __init__(self, file) -> None:
+        self.file = file
         self.wgt = Week_Dialog()
+        self.wgt.buttonBox.accepted.connect(lambda: self.file.writeTableData(self.wgt))
+        self.file.setTableData(self.wgt)
         self.wgt.show()
 
 class countdown:
@@ -358,7 +362,7 @@ class chatBot:
             "messages": [
 		{
 			"role": "user",
-			"content": "Hello, how are you?"
+			"content": user_input
 		}
 	    ]
         }
