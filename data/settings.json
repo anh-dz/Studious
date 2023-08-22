@@ -1,0 +1,13 @@
+{
+  "main": {
+    "sound": true,
+    "label": "blue"
+  },
+  "settings": {
+    "musicType" : 1,
+    "autostart": false,
+    "noti": false,
+    "autosession": false,
+    "space": false
+  }
+}

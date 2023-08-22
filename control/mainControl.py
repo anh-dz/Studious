@@ -5,44 +5,57 @@ from PyQt6.QtGui import *
 from PyQt6.QtMultimedia import *
 from PyQt6.QtCharts import *
 from random import choice
-import datetime
+import requests
 from main import *
 from view import *
 from .fileDataControl import *
 
 class StudiousFunc:
     def __init__(self, widgets):
-        super().__init__()
-        global wgs, isFwgsOn, isPwgsOn
+        global wgs
         wgs = widgets
+        self.initialize_variables()
+        self.initialize_ui()
+        self.initialize_events()
+
+    def initialize_variables(self):
+        global isFwgsOn, isPwgsOn
         isFwgsOn = False
         isPwgsOn = False
-
-        #check data file and dump data
         self.file = fileDataControl()
-
-        self.box = QMessageBox()
-        self.box.setWindowIcon(QIcon("assert/logo.png"))
-        self.box.setWindowTitle("Studious")
-
-        #random qoutes and print in app
         self.qoutes = choice(list_quotes)
-        wgs.lb_m_quote.setText(self.qoutes)
-
-        #connect start/stop button with clock
-        self.wtime, self.rtime = 25, 5
-        wgs.lb_m_time.setText(f"{self.wtime}:00")
-        wgs.btn_m_startstop.clicked.connect(self.start_clock)
-        self.countdown = countdown(self.wtime, self.rtime)
         self.clock_onoff = False
-
-        #Put clock to next session
-        wgs.btn_m_next.clicked.connect(self.next_clock)
-
-        #Turn on/off music in app
-        wgs.btn_m_audio.clicked.connect(self.onoff_audio)
-        self.bg_music = QUrl.fromLocalFile('assert/music/music.mp3')
         self.music_onoff = True
+        self.wtime, self.rtime = 25, 5
+        self.countdown = countdown(self.wtime, self.rtime)
+        self.box = QMessageBox()
+
+        self.combo = comboCompanies(wgs.tW_3_todoToday)
+        wgs.tW_3_todoToday.setCellWidget(0, 1, self.combo)
+        wgs.tW_3_todoToday.item(0, 0).setText("Học Toán")
+
+        self.create_media_player()
+        self.create_chart()
+        self.chatBot()
+
+    def initialize_ui(self):
+        wgs.lb_m_quote.setText(self.qoutes)
+        wgs.label.setText(self.file.totalTimeDay())
+        wgs.lb_m_time.setText(f"{self.wtime}:00")
+
+    def initialize_events(self):
+        wgs.btn_m_startstop.clicked.connect(self.start_clock)
+        wgs.btn_m_next.clicked.connect(self.next_clock)
+        wgs.btn_m_audio.clicked.connect(self.onoff_audio)
+        wgs.btn_m_pin.clicked.connect(self.start_dialog)
+        wgs.btn_m_fs.clicked.connect(self.start_fs)
+        wgs.cB_m_task.currentIndexChanged.connect(self.on_combobox_changed)
+        wgs.btn_m_delChart.clicked.connect(self.delChartcheck)
+        wgs.btn_3_edit.clicked.connect(self.start_weekDialog)
+        wgs.btn_5_start.clicked.connect(self.start_breath)
+
+    def create_media_player(self):
+        self.bg_music = QUrl.fromLocalFile('assert/music/music.mp3')
         self.media_player = QMediaPlayer()
         self.audio = QAudioOutput()
         self.audio.setVolume(1)
@@ -50,21 +63,9 @@ class StudiousFunc:
         self.media_player.setSource(self.bg_music)
         self.media_player.setLoops(24)
         self.onoff_audio()
-
-        #Turn on pinDialog
-        wgs.btn_m_pin.clicked.connect(self.start_dialog)
-
-        #Turn on full screen mode
-        wgs.btn_m_fs.clicked.connect(self.start_fs)
-
-        #Change label task connect
-        wgs.cB_m_task.currentIndexChanged.connect(self.on_combobox_changed)
-
-        #Show notification
         
-
-        #Create chart
-        self.chart = chart()
+    def create_chart(self):
+        self.chart = chart(self.file)
         wgs.cB_chooseDate.currentIndexChanged.connect(self.chart.dataChange)
         wgs.btn_m_delChart.clicked.connect(self.delChartcheck)
 
@@ -77,7 +78,8 @@ class StudiousFunc:
         buttonN.setText('Không')
         self.box.exec()
         if self.box.clickedButton() == buttonY:
-            return True
+            self.file.default_data()
+            self.chart.dataChange()
         return False
 
     #Func control app
@@ -113,17 +115,18 @@ class StudiousFunc:
             Fwgs.btn_startstop.setIcon(QIcon("assert/start.png"))
         self.qthread = audioFunc(QThread,'assert/music/end.mp3')
         self.qthread.start()
-        if self.countdown.work_or_rest == True: 
+        if self.countdown.work_or_rest: 
             wgs.lb_m_time.setStyleSheet('color: rgb(251, 238, 172)')
-            self.file.dataTimeJson[self.file.ntime][wgs.cB_m_task.currentText()] += self.countdown.wtime-round(self.countdown.time_left/60)
+            self.file.dataTimeJson[self.file.ntime][wgs.cB_m_task.currentText()] += round((self.countdown.wtime-self.countdown.time_left/60)/60, 1)
             self.file.writeDataTime()
+            wgs.label.setText(self.file.totalTimeDay())
             wgs.cB_m_task.setEnabled(self.countdown.work_or_rest)
             if isFwgsOn:    
                 Fwgs.lb_time.setStyleSheet("font: 128pt \"Arial\";\n"
-"color: rgb(251, 238, 172);\n"
-"border: 0px;\n"
-"qproperty-alignment: \'AlignCenter\';\n"
-"qproperty-margin: auto;")
+                                            "color: rgb(251, 238, 172);\n"
+                                            "border: 0px;\n"
+                                            "qproperty-alignment: \'AlignCenter\';\n"
+                                            "qproperty-margin: auto;")
                 Fwgs.cB_task.setEnabled(self.countdown.work_or_rest)
             if isPwgsOn:
                 Pwgs.lb_time.setStyleSheet('color: rgb(251, 238, 172)')
@@ -144,7 +147,7 @@ class StudiousFunc:
             Pwgs.lb_time.setText(f"{self.countdown.mtime}:00")
         if isFwgsOn:
             Fwgs.lb_time.setText(f"{self.countdown.mtime}:00")
-
+        self.chart.dataChange()
 
     def onoff_audio(self):
         if self.music_onoff:
@@ -171,7 +174,8 @@ class StudiousFunc:
     
     def start_dialog(self):
         self.diaLog = DialogFunc()
-        if not self.countdown.work_or_rest:    Pwgs.lb_time.setStyleSheet('color: rgb(251, 238, 172)')
+        if not self.countdown.work_or_rest:
+            Pwgs.lb_time.setStyleSheet('color: rgb(251, 238, 172)')
         Pwgs.lb_time.setText(f"{self.countdown.mtime}:00")
 
     def start_fs(self):
@@ -179,10 +183,10 @@ class StudiousFunc:
         Fwgs.cB_task.currentIndexChanged.connect(self.on_combobox_changed)
         if not self.countdown.work_or_rest:
             Fwgs.lb_time.setStyleSheet("font: 128pt \"Arial\";\n"
-"color: rgb(251, 238, 172);\n"
-"border: 0px;\n"
-"qproperty-alignment: \'AlignCenter\';\n"
-"qproperty-margin: auto;")
+                                    "color: rgb(251, 238, 172);\n"
+                                    "border: 0px;\n"
+                                    "qproperty-alignment: \'AlignCenter\';\n"
+                                    "qproperty-margin: auto;")
         if self.clock_onoff:
             Fwgs.btn_startstop.setIcon(QIcon("assert/pause.png"))
         if self.music_onoff:
@@ -196,6 +200,15 @@ class StudiousFunc:
         Fwgs.bottomQuote.setText(self.qoutes)
         Fwgs.cB_task.setEnabled(not self.clock_onoff)
 
+    def start_weekDialog(self):
+        self.wDialog = weekDialogFunc()
+
+    def start_breath(self):
+        self.breath = BreathingCircleAnimation()
+        self.breath.show()
+    
+    def chatBot(self):
+        self.chat = chatBot()
 
 class audioFunc(QThread):
     finished = pyqtSignal()
@@ -249,6 +262,11 @@ class fullScreenFunc(StudiousFS):
         self.activateWindow()
 
         return super().event(event)
+    
+class weekDialogFunc:
+    def __init__(self) -> None:
+        self.wgt = Week_Dialog()
+        self.wgt.show()
 
 class countdown:
     def __init__(self, work_time:int, rest_time:int):
@@ -264,7 +282,7 @@ class countdown:
         self.timer.start(1000)  # Update every second
 
     def stop_timer(self):
-        self.timer.stop()
+        self.timer.disconnect()
 
     def update_countdown(self):
         self.time_left -= 1
@@ -287,7 +305,7 @@ class countdown:
         else:
             try: self.timer.disconnect()
             except: pass
-            if self.work_or_rest == True:
+            if self.work_or_rest:
                 self.work_or_rest = False
                 self.mtime = self.rtime
             else:
@@ -301,8 +319,56 @@ class countdown:
     "qproperty-margin: auto;")
             self.time_left = self.mtime*60
 
-class chart:
+class KeyboardWidget(QWidget):
+    keyPressed = pyqtSignal(str)
+
+    def keyPressEvent(self, keyEvent):
+        self.keyPressed.emit(keyEvent.text())
+
+class chatBot:
     def __init__(self) -> None:
+        wgs.btn_4_send.clicked.connect(self.handle_input)
+        self.api = 'dc5f122151msh883ed682cbadc9cp113b09jsn67cb02e5ab7d'
+        self.api_url = 'https://chatgpt-best-price.p.rapidapi.com/v1/chat/completions'
+        
+        self.model = ChatLogModel()
+        wgs.LV_chatView.setModel(self.model)
+
+        message_delegate = DrawSpeechBubbleDelegate()
+        wgs.LV_chatView.setItemDelegate(message_delegate)
+
+        self.model.appendMessage("Chào bạn, để sử dụng không giới hạn chức năng này, hãy mua Premium.", "chatbot")
+
+    def handle_input(self):
+        user_input = wgs.PtE_chatBot.toPlainText()
+        self.model.appendMessage(user_input, "user")
+        wgs.PtE_chatBot.clear()
+        response = self.get_chatbot_response(user_input)
+        self.model.appendMessage(response, "chatbot")
+
+    def get_chatbot_response(self, user_input):
+        headers = {
+            "content-type": "application/json",
+            "X-RapidAPI-Key": self.api,
+            "X-RapidAPI-Host": "chatgpt-best-price.p.rapidapi.com"
+        }
+
+        data = {
+            "model": "gpt-3.5-turbo",
+            "messages": [
+		{
+			"role": "user",
+			"content": "Hello, how are you?"
+		}
+	    ]
+        }
+
+        response = requests.post(self.api_url, json=data, headers=headers)
+        return response.json()["choices"][0]["message"]["content"]
+
+class chart:
+    def __init__(self, file) -> None:
+        self.file = file
         self.addChart = False
         self.dataChange()
 
@@ -310,44 +376,10 @@ class chart:
         if self.addChart:
             wgs.columnChart.layout().removeWidget(self.colChart._chart_view)
             wgs.pieChart.layout().removeWidget(self._chart_view)
-        current_date = datetime.datetime.now().date()
         self.curentChoose = wgs.cB_chooseDate.currentText()
-        if self.curentChoose == "3 ngày":
-            self.time = []
-            for i in range(3, 0, -1):
-                delta = datetime.timedelta(days=i)
-                last_day = current_date - delta
-                self.time.append(last_day.strftime('%d/%m'))
-            self.totalTime = [4, 3, 5]
-            sum_percentrage = sum(self.totalTime)/100
-            self.detailTime = [[f"Học Toán", 6], [f"Học IELTS", 1], [f"Làm việc", 5]]
-            self.columnChart()
-            self.circleChart()
-
-        elif self.curentChoose == "7 ngày":
-            self.time = []
-            for i in range(7, 0, -1):
-                delta = datetime.timedelta(days=i)
-                last_day = current_date - delta
-                self.time.append(last_day.strftime('%d/%m'))
-            self.totalTime = [4, 3, 5, 6, 2, 4, 5]
-            sum_percentrage = sum(self.totalTime)/100
-            self.detailTime = [[f"Học Toán", 11], [f"Học IELTS", 8], [f"Làm việc", 10]]
-            self.columnChart()
-            self.circleChart()
-
-        elif self.curentChoose == "30 ngày":
-            self.time = []
-            for i in range(28, 6, -7):
-                delta = datetime.timedelta(days=i)
-                last_day = current_date - delta
-                self.time.append(f"{last_day.strftime('%d/%m')} - {(last_day + datetime.timedelta(days=7)).strftime('%d/%m')}")
-                print(f"{last_day.strftime('%d/%m')} - {(last_day + datetime.timedelta(days=7)).strftime('%d/%m')}")
-            self.totalTime = [25, 16, 20, 13]
-            sum_percentrage = sum(self.totalTime)/100
-            self.detailTime = [[f"Học Toán", 27], [f"Học IELTS", 17], [f"Làm việc", 40]]
-            self.columnChart()
-            self.circleChart()
+        self.time, self.totalTime, self.detailTime = self.file.dataChart(self.curentChoose)
+        self.columnChart()
+        self.circleChart()
 
     def columnChart(self):
         self.colData = QBarSet("Tổng thời gian tập trung")
