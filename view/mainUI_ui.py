@@ -540,7 +540,7 @@ class Ui_Studious(object):
         self.page_m_5.setObjectName(u"page_m_5")
         self.tB_5_breath = QTextBrowser(self.page_m_5)
         self.tB_5_breath.setObjectName(u"tB_5_breath")
-        self.tB_5_breath.setGeometry(QRect(40, 30, 701, 431))
+        self.tB_5_breath.setGeometry(QRect(40, 30, 704, 432))
         self.tB_5_breath.setStyleSheet(u"color: white;")
         self.btn_5_start = QPushButton(self.page_m_5)
         self.btn_5_start.setObjectName(u"btn_5_start")
@@ -697,8 +697,27 @@ class Ui_Studious(object):
         self.page_m_7.setObjectName(u"page_m_7")
         self.tB_7_about = QTextBrowser(self.page_m_7)
         self.tB_7_about.setObjectName(u"tB_7_about")
-        self.tB_7_about.setGeometry(QRect(50, 30, 691, 501))
+        self.tB_7_about.setGeometry(QRect(40, 30, 704, 432))
         self.tB_7_about.setStyleSheet(u"color: white;")
+        self.btn_7_community = QPushButton(self.page_m_7)
+        self.btn_7_community.setObjectName(u"btn_7_community")
+        self.btn_7_community.setGeometry(QRect(290, 480, 221, 51))
+        self.btn_7_community.setMinimumSize(QSize(0, 32))
+        self.btn_7_community.setStyleSheet(u"QPushButton{\n"
+"    background-color: rgba(52, 22, 85, 70%);\n"
+"    color: rgb(249, 245, 246);\n"
+"    font: 24pt \"Arial\";\n"
+"    border-radius: 5px;\n"
+"    text-align: left;\n"
+"    padding: 2px 7px;\n"
+"}\n"
+"QPushButton:hover{\n"
+"    background-color: rgba(52, 22, 85, 100%);\n"
+"}")
+        icon19 = QIcon()
+        icon19.addFile(u"assert/community.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_7_community.setIcon(icon19)
+        self.btn_7_community.setIconSize(QSize(32, 32))
         self.sW_main.addWidget(self.page_m_7)
         self.Background = QLabel(self.centralwidget)
         self.Background.setObjectName(u"Background")
@@ -879,6 +898,7 @@ class Ui_Studious(object):
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'Arial'; font-size:18pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:transparent;\"><br /></p></body></html>", None))
+        self.btn_7_community.setText(QCoreApplication.translate("Studious", u"  C\u1ed8NG \u0110\u1ed2NG", None))
         self.Background.setText("")
         self.pushButton.setText("")
     # retranslateUi

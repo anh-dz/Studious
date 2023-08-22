@@ -519,7 +519,7 @@ class Ui_Studious(object):
         self.page_m_5 = QtWidgets.QWidget()
         self.page_m_5.setObjectName("page_m_5")
         self.tB_5_breath = QtWidgets.QTextBrowser(parent=self.page_m_5)
-        self.tB_5_breath.setGeometry(QtCore.QRect(40, 30, 701, 431))
+        self.tB_5_breath.setGeometry(QtCore.QRect(40, 30, 704, 432))
         self.tB_5_breath.setStyleSheet("color: white;")
         self.tB_5_breath.setObjectName("tB_5_breath")
         self.btn_5_start = QtWidgets.QPushButton(parent=self.page_m_5)
@@ -674,9 +674,28 @@ class Ui_Studious(object):
         self.page_m_7 = QtWidgets.QWidget()
         self.page_m_7.setObjectName("page_m_7")
         self.tB_7_about = QtWidgets.QTextBrowser(parent=self.page_m_7)
-        self.tB_7_about.setGeometry(QtCore.QRect(50, 30, 691, 501))
+        self.tB_7_about.setGeometry(QtCore.QRect(40, 30, 704, 432))
         self.tB_7_about.setStyleSheet("color: white;")
         self.tB_7_about.setObjectName("tB_7_about")
+        self.btn_7_community = QtWidgets.QPushButton(parent=self.page_m_7)
+        self.btn_7_community.setGeometry(QtCore.QRect(290, 480, 221, 51))
+        self.btn_7_community.setMinimumSize(QtCore.QSize(0, 32))
+        self.btn_7_community.setStyleSheet("QPushButton{\n"
+"    background-color: rgba(52, 22, 85, 70%);\n"
+"    color: rgb(249, 245, 246);\n"
+"    font: 24pt \"Arial\";\n"
+"    border-radius: 5px;\n"
+"    text-align: left;\n"
+"    padding: 2px 7px;\n"
+"}\n"
+"QPushButton:hover{\n"
+"    background-color: rgba(52, 22, 85, 100%);\n"
+"}")
+        icon19 = QtGui.QIcon()
+        icon19.addPixmap(QtGui.QPixmap("assert/community.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btn_7_community.setIcon(icon19)
+        self.btn_7_community.setIconSize(QtCore.QSize(32, 32))
+        self.btn_7_community.setObjectName("btn_7_community")
         self.sW_main.addWidget(self.page_m_7)
         self.Background = QtWidgets.QLabel(parent=self.centralwidget)
         self.Background.setEnabled(True)
@@ -843,3 +862,4 @@ class Ui_Studious(object):
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'Arial\'; font-size:18pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:transparent;\"><br /></p></body></html>"))
+        self.btn_7_community.setText(_translate("Studious", "  CỘNG ĐỒNG"))

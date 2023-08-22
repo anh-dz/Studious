@@ -19,8 +19,8 @@ class ViewControl(QMainWindow):
         self.blur_effect.setBlurRadius(0)
         self.ui.Background.setGraphicsEffect(self.blur_effect)
 
-        self.ui.btn_lB_1.clicked.connect(lambda: self.ui.sW_main.setCurrentIndex(0) or self.blur_effect.setBlurRadius(0))
-        self.ui.btn_lB_2.clicked.connect(lambda: self.ui.sW_main.setCurrentIndex(1) or self.blur_effect.setBlurRadius(12))
+        self.ui.btn_lB_1.clicked.connect(lambda: self.ui.sW_main.setCurrentIndex(0) or self.blur_effect.setBlurRadius(0) or self.ui.btn_lB_1.setStyleSheet("QPushButton{background-color: rgb(60, 30, 100)}"))
+        self.ui.btn_lB_2.clicked.connect(lambda: self.ui.sW_main.setCurrentIndex(1) or self.blur_effect.setBlurRadius(12) or self.ui.btn_lB_2.setStyleSheet("QPushButton{background-color: rgb(60, 30, 100)}"))
         self.ui.btn_lB_3.clicked.connect(lambda: self.ui.sW_main.setCurrentIndex(2) or self.blur_effect.setBlurRadius(12))
         self.ui.btn_lB_4.clicked.connect(lambda: self.ui.sW_main.setCurrentIndex(3) or self.blur_effect.setBlurRadius(12))
         self.ui.btn_lB_5.clicked.connect(lambda: self.ui.sW_main.setCurrentIndex(4) or self.blur_effect.setBlurRadius(12))
