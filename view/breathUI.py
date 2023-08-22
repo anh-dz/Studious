@@ -10,6 +10,7 @@ class BreathingCircleAnimation(QWidget):
         self.setWindowTitle("Breathing Circle")
         self.setWindowState(Qt.WindowState.WindowFullScreen)  # Set full-screen mode
         self.setWindowFlags(Qt.WindowType.FramelessWindowHint)  # Hide window frame
+        self.setStyleSheet("font: 18pt")
 
         layout = QVBoxLayout(self)
         layout.setContentsMargins(0, 0, 0, 0)
