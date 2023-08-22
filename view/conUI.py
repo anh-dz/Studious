@@ -19,13 +19,7 @@ class ViewControl(QMainWindow):
         self.blur_effect.setBlurRadius(0)
         self.ui.Background.setGraphicsEffect(self.blur_effect)
 
-        self.ui.btn_lB_1.clicked.connect(lambda: self.ui.sW_main.setCurrentIndex(0) or self.blur_effect.setBlurRadius(0) or self.ui.btn_lB_1.setStyleSheet("QPushButton{background-color: rgb(60, 30, 100)}"))
-        self.ui.btn_lB_2.clicked.connect(lambda: self.ui.sW_main.setCurrentIndex(1) or self.blur_effect.setBlurRadius(12) or self.ui.btn_lB_2.setStyleSheet("QPushButton{background-color: rgb(60, 30, 100)}"))
-        self.ui.btn_lB_3.clicked.connect(lambda: self.ui.sW_main.setCurrentIndex(2) or self.blur_effect.setBlurRadius(12))
-        self.ui.btn_lB_4.clicked.connect(lambda: self.ui.sW_main.setCurrentIndex(3) or self.blur_effect.setBlurRadius(12))
-        self.ui.btn_lB_5.clicked.connect(lambda: self.ui.sW_main.setCurrentIndex(4) or self.blur_effect.setBlurRadius(12))
-        self.ui.btn_lB_6.clicked.connect(lambda: self.ui.sW_main.setCurrentIndex(5) or self.blur_effect.setBlurRadius(12))
-        self.ui.btn_lB_7.clicked.connect(lambda: self.ui.sW_main.setCurrentIndex(6) or self.blur_effect.setBlurRadius(12))
+        self.ui.btn_7_community.clicked.connect(lambda: QDesktopServices.openUrl(QUrl("https://www.facebook.com/groups/803129063825326")))
 
         self.ui.btn_6_nextPage.clicked.connect(self.nextPage)
         self.pageInt = 0
@@ -35,6 +29,52 @@ class ViewControl(QMainWindow):
         self.setupHTMLText()
 
         self.testComboBoxColor()
+    
+        self.buttons = [
+            self.ui.btn_lB_1,
+            self.ui.btn_lB_2,
+            self.ui.btn_lB_3,
+            self.ui.btn_lB_4,
+            self.ui.btn_lB_5,
+            self.ui.btn_lB_6,
+            self.ui.btn_lB_7
+        ]
+
+        # Connect each button's clicked signal to the slot function
+        for button in self.buttons:
+            button.clicked.connect(self.buttonClicked)
+
+    def buttonClicked(self):
+        # Get the sender of the clicked signal (the button that was clicked)
+        clicked_button = self.sender()
+
+        if clicked_button == self.ui.btn_lB_1:
+            self.blur_effect.setBlurRadius(0)
+        else:
+            self.blur_effect.setBlurRadius(12)
+
+        # Change the background color of the clicked button
+        clicked_button.setStyleSheet("background-color: rgb(60, 30, 100);")
+
+        # Change the background color of other buttons back to the original color
+        for button in self.buttons:
+            if button != clicked_button:
+                button.setStyleSheet("")
+
+        if clicked_button == self.ui.btn_lB_1:
+            self.ui.sW_main.setCurrentIndex(0)
+        elif clicked_button == self.ui.btn_lB_2:
+            self.ui.sW_main.setCurrentIndex(1)
+        elif clicked_button == self.ui.btn_lB_3:
+            self.ui.sW_main.setCurrentIndex(2)
+        elif clicked_button == self.ui.btn_lB_4:
+            self.ui.sW_main.setCurrentIndex(3)
+        elif clicked_button == self.ui.btn_lB_5:
+            self.ui.sW_main.setCurrentIndex(4)
+        elif clicked_button == self.ui.btn_lB_6:
+            self.ui.sW_main.setCurrentIndex(5)
+        elif clicked_button == self.ui.btn_lB_7:
+            self.ui.sW_main.setCurrentIndex(6)
     
     def nextPage(self):
         if self.pageInt:
