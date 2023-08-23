@@ -223,7 +223,7 @@ class StudiousFunc:
             else:
                 self.combo = comboCompanies(wgs.tW_3_todoToday)
                 wgs.tW_3_todoToday.setCellWidget(j, 1, self.combo)
-                wgs.tW_3_todoToday.item(j, 0).setText(f"{self.file._table_data[i][day_left]}")
+                wgs.tW_3_todoToday.setItem(j, 0, QTableWidgetItem(f"{self.file._table_data[i][day_left]}"))
                 j += 1
 
 class audioFunc(QThread):
