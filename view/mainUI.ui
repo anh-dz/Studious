@@ -924,7 +924,8 @@ font: 18pt &quot;Arial&quot;;</string>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">font: 24pt;</string>
+       <string notr="true">font: 24pt;
+font-weight: bold;</string>
       </property>
       <property name="text">
        <string>Thứ 2, ngày 20/08/2023</string>
@@ -1251,13 +1252,14 @@ QPushButton:hover{
       <property name="geometry">
        <rect>
         <x>130</x>
-        <y>50</y>
+        <y>40</y>
         <width>191</width>
-        <height>61</height>
+        <height>71</height>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">font: 48pt;</string>
+       <string notr="true">font: 50pt;
+font-weight: bold;</string>
       </property>
       <property name="text">
        <string>Cài đặt</string>
@@ -1386,7 +1388,7 @@ QPushButton:hover{
        </widget>
       </widget>
       <widget class="QWidget" name="page_2">
-       <widget class="QTableWidget" name="tableWidget">
+       <widget class="QTableWidget" name="tW_6">
         <property name="geometry">
          <rect>
           <x>70</x>

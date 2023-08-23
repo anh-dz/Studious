@@ -26,9 +26,9 @@ class ViewControl(QMainWindow):
 
         self.ui.btn_lB_menu.clicked.connect(self.toggleSideMenu)
 
-        self.setupHTMLText()
+        self.ui.btn_lB_1.setStyleSheet("background-color: rgb(60, 30, 100);")
 
-        self.testComboBoxColor()
+        self.setupHTMLText()
     
         self.buttons = [
             self.ui.btn_lB_1,
@@ -39,10 +39,17 @@ class ViewControl(QMainWindow):
             self.ui.btn_lB_6,
             self.ui.btn_lB_7
         ]
+        
+        self.colorTask = getColorTask()
+
+        for row in range(7):
+            self.setColorRowTable(self.ui.tW_6, row, self.colorTask[row])
 
         # Connect each button's clicked signal to the slot function
         for button in self.buttons:
             button.clicked.connect(self.buttonClicked)
+
+        self.testComboBoxColor()
 
     def buttonClicked(self):
         # Get the sender of the clicked signal (the button that was clicked)
@@ -109,7 +116,13 @@ class ViewControl(QMainWindow):
         self.ui.cB_m_task.clear()
         self.ui.cB_m_task.addItem(create_colored_icon(QColor('blue')), "Học Toán")
         self.ui.cB_m_task.addItem(create_colored_icon(QColor('green')), "Học IELTS")
-        self.ui.cB_m_task.addItem(create_colored_icon(QColor('red')), "Làm việc")       
+        self.ui.cB_m_task.addItem(create_colored_icon(QColor('red')), "Làm việc")
+        # self.ui.tW_6.setItem(0, 0, QTableWidgetItem(create_colored_icon(QColor("blue")), "Hello World"))
+    
+    def setColorRowTable(self, table, row, color):
+        for j in range(3): #table.columnCount()
+            table.item(row, j).setBackground(QColor(color))
+
     
     def setupHTMLText(self):
         with open("data/breath.html", "r", encoding="utf-8") as f:
