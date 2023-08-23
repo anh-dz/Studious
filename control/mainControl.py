@@ -5,6 +5,7 @@ from PyQt6.QtGui import *
 from PyQt6.QtMultimedia import *
 from PyQt6.QtCharts import *
 from random import choice
+import datetime
 import requests
 from main import *
 from view import *
@@ -30,13 +31,11 @@ class StudiousFunc:
         self.countdown = countdown(self.wtime, self.rtime)
         self.box = QMessageBox()
 
-        self.combo = comboCompanies(wgs.tW_3_todoToday)
-        wgs.tW_3_todoToday.setCellWidget(0, 1, self.combo)
-        wgs.tW_3_todoToday.item(0, 0).setText("Học Toán")
-
         self.create_media_player()
         self.create_chart()
         self.chatBot()
+        self.file.readTableData()
+        self.setDataWork()
 
     def initialize_ui(self):
         wgs.lb_m_quote.setText(self.qoutes)
@@ -53,6 +52,7 @@ class StudiousFunc:
         wgs.btn_m_delChart.clicked.connect(self.delChartcheck)
         wgs.btn_3_edit.clicked.connect(self.start_weekDialog)
         wgs.btn_5_start.clicked.connect(self.start_breath)
+        wgs.btn_4_send.clicked.connect(self.chat.run)
 
     def create_media_player(self):
         self.bg_music = QUrl.fromLocalFile('assert/music/music.mp3')
@@ -209,7 +209,22 @@ class StudiousFunc:
         self.breath.show()
     
     def chatBot(self):
-        self.chat = chatBot()
+        self.chat = chatBot(QThread)
+
+    def setDataWork(self):
+        date_format = "%d/%m/%Y"
+        start_date_obj = datetime.datetime.strptime(self.file._table_data[0][0], date_format)
+        end_date_obj = datetime.datetime.strptime(self.file.ntime, date_format)
+        delta = end_date_obj - start_date_obj
+        day_left = delta.days + 1
+        j = 0
+        for i in range(1, 8):
+            if self.file._table_data[i][day_left] == '':    pass
+            else:
+                self.combo = comboCompanies(wgs.tW_3_todoToday)
+                wgs.tW_3_todoToday.setCellWidget(j, 1, self.combo)
+                wgs.tW_3_todoToday.item(j, 0).setText(f"{self.file._table_data[i][day_left]}")
+                j += 1
 
 class audioFunc(QThread):
     finished = pyqtSignal()
@@ -268,9 +283,13 @@ class weekDialogFunc:
     def __init__(self, file) -> None:
         self.file = file
         self.wgt = Week_Dialog()
-        self.wgt.buttonBox.accepted.connect(lambda: self.file.writeTableData(self.wgt))
+        self.wgt.buttonBox.accepted.connect(self.updateData)
+        self.file.readTableData()
         self.file.setTableData(self.wgt)
         self.wgt.show()
+    
+    def updateData(self):
+        self.file.writeTableData(self.wgt)
 
 class countdown:
     def __init__(self, work_time:int, rest_time:int):
@@ -329,9 +348,12 @@ class KeyboardWidget(QWidget):
     def keyPressEvent(self, keyEvent):
         self.keyPressed.emit(keyEvent.text())
 
-class chatBot:
-    def __init__(self) -> None:
-        wgs.btn_4_send.clicked.connect(self.handle_input)
+class chatBot(QThread):
+    finished = pyqtSignal()
+    progress = pyqtSignal(int)
+
+    def __init__(self, parent: QObject) -> None:
+        super().__init__()
         self.api = 'dc5f122151msh883ed682cbadc9cp113b09jsn67cb02e5ab7d'
         self.api_url = 'https://chatgpt-best-price.p.rapidapi.com/v1/chat/completions'
         
@@ -343,7 +365,7 @@ class chatBot:
 
         self.model.appendMessage("Chào bạn, để sử dụng không giới hạn chức năng này, hãy mua Premium.", "chatbot")
 
-    def handle_input(self):
+    def run(self):
         user_input = wgs.PtE_chatBot.toPlainText()
         self.model.appendMessage(user_input, "user")
         wgs.PtE_chatBot.clear()

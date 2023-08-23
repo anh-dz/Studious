@@ -12,6 +12,7 @@ class fileDataControl:
     def __init__(self):
         self._ntime = datetime.datetime.now()
         self.ntime = self._ntime.strftime("%d/%m/%Y")
+        self.monday = (self._ntime - datetime.timedelta(days=self._ntime.weekday())).strftime("%d/%m/%Y")
         if self.create_folder():  self.default_data()
         self.readDataTime()
         self.lb = list(self.dataTimeJson[self.ntime].keys())
@@ -37,10 +38,26 @@ class fileDataControl:
     def default_data(self):
         dataTime = {f"{self.ntime}":{"Học Toán":0, "Học IELTS":0, "Làm việc":0}}
 
+        Wdata = [[self.monday,'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'],
+                 ['', '', '', '', '', '', '', ''],
+                 ['', '', '', '', '', '', '', ''],
+                 ['', '', '', '', '', '', '', ''],
+                 ['', '', '', '', '', '', '', ''],
+                 ['', '', '', '', '', '', '', ''],
+                 ['', '', '', '', '', '', '', ''],
+                 ['', '', '', '', '', '', '', '']]
+
         self.dataTimeJson = dataTime
 
         with open('data/time.json', 'w', newline='', encoding="utf-8") as jsonfile:
             json.dump(dataTime, jsonfile,  ensure_ascii=False)
+
+        with open("data/tableWeek.csv", "w", encoding="utf-8", newline='') as csv_file:
+            writer = csv.writer(csv_file)
+            
+            # Write each row of data to the CSV file
+            for row in Wdata:
+                writer.writerow(row)
 
 
     def readDataTime(self):
@@ -163,24 +180,24 @@ class fileDataControl:
         num_rows = wgt.tableWidget.rowCount()
         num_cols = wgt.tableWidget.columnCount()
 
-        self.table_data = [['Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun']]
+        self._table_data = [[self.monday,'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun']]
 
         for i in range(num_rows):
-            row_data = []
+            row_data = ['']
             for j in range(num_cols):
                 item = wgt.tableWidget.item(i, j)
                 if item is not None:
                     row_data.append(item.text())
                 else:
-                    row_data.append("")  # Handle empty cells
-            self.table_data.append(row_data)
+                    row_data.append('')  # Handle empty cells
+            self._table_data.append(row_data)
 
         
         with open("data/tableWeek.csv" , mode="w", newline="", encoding="utf-8") as csv_file:
             writer = csv.writer(csv_file)
             
             # Write each row of data to the CSV file
-            for row in self.table_data:
+            for row in self._table_data:
                 writer.writerow(row)
 
     def readTableData(self):
@@ -194,10 +211,11 @@ class fileDataControl:
 
     def setTableData(self, wgt):
         self.readTableData()
-        if self._table_data == "":
-            pass
-        else:
-            for i, row in enumerate(self._table_data):
+        for i, row in enumerate(self._table_data):
+            if i == 0:  pass
+            else:
                 for j, column in enumerate(row):
-                    item = QTableWidgetItem(column)
-                    wgt.tableWidget.setItem(i, j, item)
+                    if j == 0:  pass
+                    else:
+                        item = QTableWidgetItem(column)
+                        wgt.tableWidget.setItem(i-1, j-1, item)
