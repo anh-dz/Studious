@@ -52,7 +52,7 @@ class StudiousFunc:
         wgs.btn_m_delChart.clicked.connect(self.delChartcheck)
         wgs.btn_3_edit.clicked.connect(self.start_weekDialog)
         wgs.btn_5_start.clicked.connect(self.start_breath)
-        wgs.btn_4_send.clicked.connect(self.chat.run)
+        wgs.btn_4_send.clicked.connect(lambda: self.chat.start())
 
     def create_media_player(self):
         self.bg_music = QUrl.fromLocalFile('assert/music/music.mp3')
@@ -201,7 +201,7 @@ class StudiousFunc:
         Fwgs.cB_task.setEnabled(not self.clock_onoff)
 
     def start_weekDialog(self):
-        self.wDialog = weekDialogFunc(self.file)
+        self.wDialog = weekDialogFunc(self.file, self.setDataWork)
 
 
     def start_breath(self):
@@ -209,7 +209,7 @@ class StudiousFunc:
         self.breath.show()
     
     def chatBot(self):
-        self.chat = chatBot(QThread)
+        self.chat = chatBot()
 
     def setDataWork(self):
         date_format = "%d/%m/%Y"
@@ -280,16 +280,18 @@ class fullScreenFunc(StudiousFS):
         return super().event(event)
     
 class weekDialogFunc:
-    def __init__(self, file) -> None:
+    def __init__(self, file, fn) -> None:
         self.file = file
         self.wgt = Week_Dialog()
         self.wgt.buttonBox.accepted.connect(self.updateData)
         self.file.readTableData()
         self.file.setTableData(self.wgt)
         self.wgt.show()
+        self.fn = fn
     
     def updateData(self):
         self.file.writeTableData(self.wgt)
+        self.fn()
 
 class countdown:
     def __init__(self, work_time:int, rest_time:int):
@@ -352,8 +354,8 @@ class chatBot(QThread):
     finished = pyqtSignal()
     progress = pyqtSignal(int)
 
-    def __init__(self, parent: QObject) -> None:
-        super().__init__()
+    def __init__(self) -> None:
+        super(chatBot, self).__init__()
         self.api = 'dc5f122151msh883ed682cbadc9cp113b09jsn67cb02e5ab7d'
         self.api_url = 'https://chatgpt-best-price.p.rapidapi.com/v1/chat/completions'
         
@@ -369,10 +371,7 @@ class chatBot(QThread):
         user_input = wgs.PtE_chatBot.toPlainText()
         self.model.appendMessage(user_input, "user")
         wgs.PtE_chatBot.clear()
-        response = self.get_chatbot_response(user_input)
-        self.model.appendMessage(response, "chatbot")
 
-    def get_chatbot_response(self, user_input):
         headers = {
             "content-type": "application/json",
             "X-RapidAPI-Key": self.api,
@@ -389,8 +388,11 @@ class chatBot(QThread):
 	    ]
         }
 
-        response = requests.post(self.api_url, json=data, headers=headers)
-        return response.json()["choices"][0]["message"]["content"]
+        res = requests.post(self.api_url, json=data, headers=headers)
+        response = res.json()["choices"][0]["message"]["content"]
+        self.model.appendMessage(response, "chatbot")
+
+
 
 class chart:
     def __init__(self, file) -> None:
