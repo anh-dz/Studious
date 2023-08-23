@@ -782,8 +782,6 @@ class Ui_Studious(object):
         item.setText(_translate("Studious", "Trạng thái"))
         __sortingEnabled = self.tW_3_todoToday.isSortingEnabled()
         self.tW_3_todoToday.setSortingEnabled(False)
-        item = self.tW_3_todoToday.item(0, 0)
-        item.setText(_translate("Studious", "Học Toán"))
         self.tW_3_todoToday.setSortingEnabled(__sortingEnabled)
         self.lb_4_complete.setText(_translate("Studious", "     Tổng cộng: 7 Đã hoàn thành: 0 Chưa hoàn thành: 1 Đang làm: 0"))
         self.PtE_chatBot.setPlaceholderText(_translate("Studious", "Nhập nội dung"))

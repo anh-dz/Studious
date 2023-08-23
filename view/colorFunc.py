@@ -3,7 +3,7 @@ from PyQt6.QtWidgets import *
 from PyQt6.QtGui import *
 
 def getColorTask(): # return 7 color of Task sort by priority
-    return ['#C51605', '#F94C10', '#F94C10', '#1A5D1A', '#0C356A', '#35155D', '#352F44']
+    return ['#C51605', '#B85C38', '#8B8000', '#1A5D1A', '#0C356A', '#35155D', '#352F44']
 
 def create_colored_icon(color, radius=8):
     pixmap = QPixmap(16, 16)
