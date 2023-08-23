@@ -20,9 +20,11 @@ class fileDataControl:
     def create_folder(self) -> bool:
         if not path.exists("data"):
             makedirs("data")
-            with open(f"data/time.json", "w") as f:
+            with open("data/time.json", "w") as f:
                 pass
-            with open(f"data/tableWeek.csv", "w") as f:
+            with open("data/tableWeek.csv", "w") as f:
+                pass
+            with open("data/describeItem.csv", "w") as f:
                 pass
             return True
         else:
@@ -31,6 +33,9 @@ class fileDataControl:
                     pass
             if not path.exists("data/tableWeek.csv"):
                 with open("data/tableWeek.csv", 'w') as f:
+                    pass
+            if not path.exists("data/describeItem.csv"):
+                with open("data/describeItem.txt", 'w') as f:
                     pass
                 return True
         return False
@@ -47,6 +52,8 @@ class fileDataControl:
                  ['', '', '', '', '', '', '', ''],
                  ['', '', '', '', '', '', '', '']]
 
+        describeData = [['']*7]*7
+
         self.dataTimeJson = dataTime
 
         with open('data/time.json', 'w', newline='', encoding="utf-8") as jsonfile:
@@ -57,6 +64,13 @@ class fileDataControl:
             
             # Write each row of data to the CSV file
             for row in Wdata:
+                writer.writerow(row)
+
+        with open('data/describeItem.csv', 'w', newline='', encoding="utf-8") as csv_file:
+            writer = csv.writer(csv_file)
+            
+            # Write each row of data to the CSV file
+            for row in describeData:
                 writer.writerow(row)
 
 
@@ -219,3 +233,21 @@ class fileDataControl:
                     else:
                         item = QTableWidgetItem(column)
                         wgt.tableWidget.setItem(i-1, j-1, item)
+
+    def writeDescribeData(self, data):
+        with open('data/describeItem.csv', 'w', newline='', encoding="utf-8") as csv_file:
+            writer = csv.writer(csv_file)
+            
+            # Write each row of data to the CSV file
+            for row in data:
+                writer.writerow(row)
+    
+    def readDescribeData(self):
+        data = []
+        with open('data/describeItem.csv', 'r', newline='', encoding="utf-8") as csv_file:
+            reader = csv.reader(csv_file)
+            
+            # Read each row of data from the CSV file
+            for row in reader:
+                data.append(row)
+        return data

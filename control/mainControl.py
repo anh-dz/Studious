@@ -225,6 +225,10 @@ class StudiousFunc:
                 wgs.tW_3_todoToday.setCellWidget(j, 1, self.combo)
                 wgs.tW_3_todoToday.setItem(j, 0, QTableWidgetItem(f"{self.file._table_data[i][day_left]}"))
                 j += 1
+    
+    def showDescribeWork(self):
+        data = self.file.readDescribeData
+        
 
 class audioFunc(QThread):
     finished = pyqtSignal()
@@ -283,16 +287,41 @@ class weekDialogFunc:
     def __init__(self, file, fn) -> None:
         self.file = file
         self.wgt = Week_Dialog()
+
+        self.describeData = self.file.readDescribeData()
+        print(self.describeData)
         self.wgt.buttonBox.accepted.connect(self.updateData)
+        self.wgt.tableWidget.itemClicked.connect(self.getDescribeItem)
         self.file.readTableData()
         self.file.setTableData(self.wgt)
+        self.wgt.plainTextEdit.setReadOnly(True)
         self.wgt.show()
         self.fn = fn
+        self.row, self.col = 0, 0
+        self.edit = False
     
     def updateData(self):
+        self.describeData[self.row][self.col] = self.wgt.plainTextEdit.toPlainText()
+        self.file.writeDescribeData(self.describeData)
         self.file.writeTableData(self.wgt)
         self.fn()
 
+    def getDescribeItem(self, item):
+        self.wgt.plainTextEdit.setReadOnly(False)
+        if not self.edit:
+            self.row = item.row()
+            self.col = item.column()
+            self.wgt.plainTextEdit.setPlainText(self.describeData[self.row][self.col])
+            print(self.describeData, self.row, self.col)
+            self.edit = True
+        else:
+            self.describeData[self.row][self.col] = self.wgt.plainTextEdit.toPlainText()
+            self.wgt.plainTextEdit.clear()
+            self.row = item.row()
+            self.col = item.column()
+            print(self.describeData[self.row][self.col], self.row, self.col)
+            self.wgt.plainTextEdit.setPlainText(self.describeData[self.row][self.col])
+                     
 class countdown:
     def __init__(self, work_time:int, rest_time:int):
         self.wtime = work_time
