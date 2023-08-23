@@ -369,10 +369,7 @@ class chatBot(QThread):
         user_input = wgs.PtE_chatBot.toPlainText()
         self.model.appendMessage(user_input, "user")
         wgs.PtE_chatBot.clear()
-        response = self.get_chatbot_response(user_input)
-        self.model.appendMessage(response, "chatbot")
 
-    def get_chatbot_response(self, user_input):
         headers = {
             "content-type": "application/json",
             "X-RapidAPI-Key": self.api,
@@ -389,8 +386,11 @@ class chatBot(QThread):
 	    ]
         }
 
-        response = requests.post(self.api_url, json=data, headers=headers)
-        return response.json()["choices"][0]["message"]["content"]
+        res = requests.post(self.api_url, json=data, headers=headers)
+        response = res.json()["choices"][0]["message"]["content"]
+        self.model.appendMessage(response, "chatbot")
+
+
 
 class chart:
     def __init__(self, file) -> None:
