@@ -115,3 +115,6 @@ class ViewControl(QMainWindow):
         with open("data/breath.html", "r", encoding="utf-8") as f:
             breathHTML = f.read()
             self.ui.tB_5_breath.setHtml(breathHTML)
+        with open("data/about.html", "r", encoding="utf-8") as f:
+            about = f.read()
+            self.ui.tB_7_about.setHtml(about)
