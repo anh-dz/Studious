@@ -250,4 +250,4 @@ class fileDataControl:
             # Read each row of data from the CSV file
             for row in reader:
                 data.append(row)
-        return data
+        return list(data)

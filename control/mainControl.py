@@ -28,6 +28,7 @@ class StudiousFunc:
         self.clock_onoff = False
         self.music_onoff = True
         self.wtime, self.rtime = 25, 5
+        self.dotoCurrent = "Chưa hoàn thành"
         self.countdown = countdown(self.wtime, self.rtime)
         self.box = QMessageBox()
 
@@ -53,6 +54,7 @@ class StudiousFunc:
         wgs.btn_3_edit.clicked.connect(self.start_weekDialog)
         wgs.btn_5_start.clicked.connect(self.start_breath)
         wgs.btn_4_send.clicked.connect(lambda: self.chat.start())
+        wgs.tW_3_todoToday.itemClicked.connect(self.showDescribeWork)
 
     def create_media_player(self):
         self.bg_music = QUrl.fromLocalFile('assert/music/music.mp3')
@@ -216,19 +218,34 @@ class StudiousFunc:
         start_date_obj = datetime.datetime.strptime(self.file._table_data[0][0], date_format)
         end_date_obj = datetime.datetime.strptime(self.file.ntime, date_format)
         delta = end_date_obj - start_date_obj
-        day_left = delta.days + 1
-        j = 0
+        self.day_left = delta.days + 1
+        self.todoDay = 0
+        self.combo = []
         for i in range(1, 8):
-            if self.file._table_data[i][day_left] == '':    pass
+            if self.file._table_data[i][self.day_left] == '':    pass
             else:
-                self.combo = comboCompanies(wgs.tW_3_todoToday)
-                wgs.tW_3_todoToday.setCellWidget(j, 1, self.combo)
-                wgs.tW_3_todoToday.setItem(j, 0, QTableWidgetItem(f"{self.file._table_data[i][day_left]}"))
-                j += 1
+                self.combo.append(comboCompanies(wgs.tW_3_todoToday))
+                wgs.tW_3_todoToday.setCellWidget(self.todoDay, 1, self.combo[-1])
+                wgs.tW_3_todoToday.setItem(self.todoDay, 0, QTableWidgetItem(f"{self.file._table_data[i][self.day_left]}"))
+                self.combo[-1].currentIndexChanged.connect(self.todoDoneTask)
+                self.todoDay += 1
+        wgs.lb_4_complete.setText(f"     Tổng cộng: {self.todoDay} Đã hoàn thành: 0 Chưa hoàn thành: {self.todoDay} Đang làm: 0")
     
-    def showDescribeWork(self):
-        data = self.file.readDescribeData
-        
+    def showDescribeWork(self, item):
+        self.row = item.row()
+        self.col = self.day_left - 1
+        data = self.file.readDescribeData()
+        wgs.textBrowser_3_des.setPlainText(data[self.row][self.col])
+
+    def todoDoneTask(self):
+        check = []
+        for i in self.combo:
+            if i == []: pass
+            else:
+                check.append(i.currentText())
+        done = check.count("Đã hoàn thành")
+        doing = check.count("Đang làm")
+        wgs.lb_4_complete.setText(f"     Tổng cộng: {self.todoDay} Đã hoàn thành: {done} Chưa hoàn thành: {self.todoDay - done - doing} Đang làm: {doing}")
 
 class audioFunc(QThread):
     finished = pyqtSignal()
@@ -289,7 +306,6 @@ class weekDialogFunc:
         self.wgt = Week_Dialog()
 
         self.describeData = self.file.readDescribeData()
-        print(self.describeData)
         self.wgt.buttonBox.accepted.connect(self.updateData)
         self.wgt.tableWidget.itemClicked.connect(self.getDescribeItem)
         self.file.readTableData()
@@ -312,14 +328,12 @@ class weekDialogFunc:
             self.row = item.row()
             self.col = item.column()
             self.wgt.plainTextEdit.setPlainText(self.describeData[self.row][self.col])
-            print(self.describeData, self.row, self.col)
             self.edit = True
         else:
             self.describeData[self.row][self.col] = self.wgt.plainTextEdit.toPlainText()
             self.wgt.plainTextEdit.clear()
             self.row = item.row()
             self.col = item.column()
-            print(self.describeData[self.row][self.col], self.row, self.col)
             self.wgt.plainTextEdit.setPlainText(self.describeData[self.row][self.col])
                      
 class countdown:
