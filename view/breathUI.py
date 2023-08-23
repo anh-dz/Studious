@@ -10,7 +10,7 @@ class BreathingCircleAnimation(QWidget):
         self.setWindowTitle("Breathing Circle")
         self.setWindowState(Qt.WindowState.WindowFullScreen)  # Set full-screen mode
         self.setWindowFlags(Qt.WindowType.FramelessWindowHint)  # Hide window frame
-        self.setStyleSheet("font: 18pt")
+        self.setStyleSheet("background: black; font: 18pt")
 
         layout = QVBoxLayout(self)
         layout.setContentsMargins(0, 0, 0, 0)
@@ -56,7 +56,7 @@ class BreathingCircleAnimation(QWidget):
 
         self.inhale = True
         self.radius = 100
-        self.breath_duration = 4000  # Time in milliseconds for inhale/exhale
+        self.breath_duration = 5000  # Time in milliseconds for inhale/exhale
         self.elapsed_time = 0
         self.breath_count = 0  # Initialize breath count
         self.timer = QTimer(self)
@@ -65,7 +65,7 @@ class BreathingCircleAnimation(QWidget):
 
         self.script_index = 0
         self.scripts = [
-            "Nhìn vào hơi thở của bạn và cảm nhận",
+            "Cảm nhận chút không khí trong lành nào",
             "Thở ra một hơi thật dài và sẵn sàng",
             "Từ từ nhắm mắt lại và hít thở thật sâu. Cảm nhận không khí lấp đầy phổi của bạn",
             "Giữ hơi thở một lúc, sau đó chậm rãi thở ra bằng miệng. Hãy để những căng thẳng trôi ra cùng hơi thở bạn",
@@ -99,15 +99,9 @@ class BreathingCircleAnimation(QWidget):
                 self.script_index = (self.script_index + 1) % len(self.scripts)
                 self.script_label.setText(self.scripts[self.script_index])
 
-        if self.radius >= 140:
+        if self.radius >= 150:
             self.inhale = False
         elif self.radius <= 100:
             self.inhale = True
 
         self.circle.setRect(-self.radius, -self.radius, 2 * self.radius, 2 * self.radius)
-
-# if __name__ == "__main__":
-#     app = QApplication(sys.argv)
-#     window = BreathingCircleAnimation()
-#     window.show()
-#     sys.exit(app.exec())
