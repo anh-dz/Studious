@@ -9,21 +9,13 @@ class ChatLogModel(QAbstractListModel):
         self.chat_messages = []
 
     def rowCount(self, index):
-        """Necessary to include rowCount() when subclassing QAbstractListModel. 
-        For this program, we only need to update the the number of rows in the model,
-        which is based on the length of chat_messages."""
         return len(self.chat_messages)
 
     def data(self, index, role=Qt.ItemDataRole.DisplayRole):
-        """Necessary to include data() when subclassing QAbstractListModel. Retrieves 
-        items from the list and returns data specified by the role, which in this case 
-        is displayed as text."""
         if role == Qt.ItemDataRole.DisplayRole:
             return self.chat_messages[index.row()]
 
     def appendMessage(self, user_input, user_or_chatbot):
-        """First, append new messages to chat_messages. Doing so will update the number
-        of rows and indexes in the model (rowCount()), which will then update the data()."""
         self.chat_messages.append([user_input, user_or_chatbot])
         # Emit signal to indicate that the layout of items in the model has changed
         self.layoutChanged.emit()
@@ -40,9 +32,6 @@ class DrawSpeechBubbleDelegate(QStyledItemDelegate):
         self.text_side_offset, self.text_top_offset = 90, 20
 
     def paint(self, painter, option, index):
-        """Reimplement the delegate's paint() function. Renders the delegate using the specified QPainter 
-        (painter) and QStyleOptionViewItem (option) for the item being drawn at given index (the row value).
-        This function paints the item."""
         text, user_or_chatbot = index.model().data(index, Qt.ItemDataRole.DisplayRole)
         image, image_rect = QImage(), QRect() # Initialize objects for the user and chahbot icons
         color, bubble_margins = QColor(), QMargins() # Initialize objects for drawing speech bubbles
@@ -84,8 +73,6 @@ class DrawSpeechBubbleDelegate(QStyledItemDelegate):
         painter.drawText(option.rect.marginsRemoved(text_margins), Qt.AlignmentFlag.AlignVCenter | Qt.TextFlag.TextWordWrap, text)
 
     def sizeHint(self, option, index):
-        """Reimplement to figure out the size of the item displayed at the given index.
-        Uses option to figure out the style information, in this case, the margins of the speech bubble."""
         text, user_or_chatbot = index.model().data(index, Qt.ItemDataRole.DisplayRole)
         font_size = QFontMetrics(QFont("Arial", 18))
         text_margins = QMargins(self.text_side_offset, self.text_top_offset, self.text_side_offset, self.text_top_offset)

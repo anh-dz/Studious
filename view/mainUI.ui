@@ -1122,6 +1122,9 @@ color: rgb(255, 196, 54);</string>
       <property name="styleSheet">
        <string notr="true"/>
       </property>
+      <property name="placeholderText">
+       <string>Nhập nội dung</string>
+      </property>
      </widget>
      <widget class="QToolButton" name="btn_4_send">
       <property name="geometry">

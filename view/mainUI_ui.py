@@ -815,6 +815,7 @@ class Ui_Studious(object):
 
         self.lb_4_complete.setText(QCoreApplication.translate("Studious", u"     T\u1ed5ng c\u1ed9ng: 7 \u0110\u00e3 ho\u00e0n th\u00e0nh: 0 Ch\u01b0a ho\u00e0n th\u00e0nh: 1 \u0110ang l\u00e0m: 0", None))
         self.btn_3_edit.setText("")
+        self.PtE_chatBot.setPlaceholderText(QCoreApplication.translate("Studious", u"Nh\u1eadp n\u1ed9i dung", None))
         self.btn_4_send.setText("")
         self.BTN_ICONUSER.setText("")
         self.tB_5_breath.setHtml(QCoreApplication.translate("Studious", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
