@@ -169,7 +169,11 @@ class StudiousFunc:
             Pwgs.lb_task.setText(selected_option)
     
     def start_dialog(self):
-        self.diaLog = DialogFunc()
+        if isPwgsOn:
+            self.diaLog.closeEvent("close")
+        else:
+            self.diaLog = DialogFunc()
+            wgs.btn_m_pin.setIcon(QIcon("assert/unpin.png"))
         if not self.countdown.work_or_rest:
             Pwgs.lb_time.setStyleSheet('color: rgb(251, 238, 172)')
         Pwgs.lb_time.setText(f"{self.countdown.mtime}:00")
@@ -266,10 +270,11 @@ class DialogFunc:
         Pwgs.lb_task.setText(wgs.cB_m_task.currentText())
         Pwgs.show()
         isPwgsOn = True
-    
+
     def closeEvent(self, event):
         global isPwgsOn
         isPwgsOn = False
+        wgs.btn_m_pin.setIcon(QIcon("assert/pin.png"))
         Pwgs.close()
 
 class fullScreenFunc(StudiousFS):

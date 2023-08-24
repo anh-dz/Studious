@@ -16,7 +16,7 @@ class Week_Dialog(QtWidgets.QDialog):
 
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(790, 461)
+        Dialog.setFixedSize(790, 461)
         Dialog.setStyleSheet("* {\n"
 "    background-color: rgb(255, 245, 224);\n"
 "    color: rgb(20, 30, 70);\n"
