@@ -2,6 +2,26 @@ from PyQt6.QtWidgets import *
 from PyQt6.QtGui import *
 from PyQt6.QtCore import *
 
+class CustomMessageBox(QMessageBox):
+    def __init__(self, text="Bạn có chắc chắn?", type=1, parent=None):
+        super().__init__(parent)
+        self.setWindowTitle("Studious")
+        self.setText(text)
+        self.setStyleSheet(
+            "QLabel#qt_msgbox_label { font-size: 16px; }"
+            "QLabel#qt_msgbox_icon { margin-right: 20px; }"
+            "QPushButton { padding: 8px 16px; font-size: 14px; }"
+            "QPushButton#buttonY { background-color: #4286f4; color: white; }"
+            "QPushButton#buttonN { background-color: #cccccc; color: black; }"
+        )
+
+        self.buttonY = self.addButton("Đồng ý", QMessageBox.ButtonRole.YesRole)
+        self.buttonN = self.addButton("Huỷ", QMessageBox.ButtonRole.RejectRole)
+        self.buttonY.setObjectName("qt_msgbox_buttonrole")
+        self.buttonN.setObjectName("qt_msgbox_buttoncancel")
+
+
+
 class ChatLogModel(QAbstractListModel):
 
     def __init__(self):

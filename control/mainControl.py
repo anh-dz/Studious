@@ -30,8 +30,7 @@ class StudiousFunc:
         self.wtime, self.rtime = 25, 5
         self.dotoCurrent = "Chưa hoàn thành"
         self.countdown = countdown(self.wtime, self.rtime)
-        self.box = QMessageBox()
-
+        self.box = CustomMessageBox()
         self.create_media_player()
         self.create_chart()
         self.chatBot()
@@ -71,15 +70,9 @@ class StudiousFunc:
         wgs.cB_chooseDate.currentIndexChanged.connect(self.chart.dataChange)
 
     def delChartcheck(self):
-        self.box.setText("Bạn có chắc chắn?")
-        self.box.setStandardButtons(QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
-        buttonY = self.box.button(QMessageBox.StandardButton.Yes)
-        buttonY.setText('Có')
-        buttonN = self.box.button(QMessageBox.StandardButton.No)
-        buttonN.setText('Không')
         self.box.exec()
 
-        if self.box.clickedButton() == buttonY:
+        if self.box.clickedButton() == self.box.buttonY:
             self.file.default_data()
             self.chart.dataChange()
         
