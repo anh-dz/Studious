@@ -4,6 +4,7 @@ from PyQt6.QtGui import *
 from .mainUI import Ui_Studious
 from .colorFunc import *
 from .chatmessage import *
+from .hdsd import *
 
 class ViewControl(QMainWindow):
     def __init__(self):
@@ -48,6 +49,8 @@ class ViewControl(QMainWindow):
         # Connect each button's clicked signal to the slot function
         for button in self.buttons:
             button.clicked.connect(self.buttonClicked)
+        
+        self.ui.btn_lB_ques.clicked.connect(self.checkQues)
 
         # self.testComboBoxColor()
 
@@ -82,6 +85,12 @@ class ViewControl(QMainWindow):
             self.ui.sW_main.setCurrentIndex(5)
         elif clicked_button == self.ui.btn_lB_7:
             self.ui.sW_main.setCurrentIndex(6)
+    
+    def checkQues(self):
+        w = self.ui.sW_main.currentIndex()
+        self.image_app = ImageDisplayApp()
+        self.image_app.load_image(f"assert/hdsd/{w}.png")
+        self.image_app.show()
     
     def nextPage(self):
         if self.pageInt:

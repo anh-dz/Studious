@@ -73,13 +73,16 @@ class StudiousFunc:
         if wgs.checkBox_autosession.isChecked():    self.start_clock()
 
     def changeTaskLabel(self, item):
-        self.settings.data = self.file.readSettingData()
-        self.settings.setSettingsData()
         self.file.checkLabelTask(self.settings.labelTask)
         self.file.readDataTime()
         self.file.lb = list(self.file.dataTimeJson[self.file.ntime].keys())
+        self.settings.setSettingsData()
         self.setTaskLable()
-        self.on_combobox_changed()
+        for i in self.settings.labelTask:
+            if i[0] == wgs.cB_m_task.currentText():
+                print(i[1])
+                self.countdown = countdown(int(i[1]), int(i[2]), self.work_or_rest)
+                break
 
     def create_media_player(self):
         self.bg_music = QUrl.fromLocalFile('assert/music/music.mp3')
@@ -595,6 +598,7 @@ class Settings:
         wgs.tW_6.itemChanged.connect(self.changeTaskLabel)
 
     def setSettingsData(self):
+        self.labelTask = []
         wgs.cB_6_select.setCurrentIndex(self.data['settings']['musicType'])
         wgs.checkBox_space.setChecked(self.data['settings']['space'])
         wgs.checkBox_autosession.setChecked(self.data['settings']['autosession'])
@@ -616,6 +620,11 @@ class Settings:
 
         self.data['tasks'][str(row+1)][dt[col]] = item.text()
         self.file.WriteSettingData(self.data)
+        for i in range(len(self.labelTask)):
+            if self.labelTask[i][0] == self.data['tasks'][str(row+1)]['combo']:
+                self.labelTask[i][1] = self.data['tasks'][str(row+1)]['work']
+                self.labelTask[i][2] = self.data['tasks'][str(row+1)]['rest']
+
 
 
     def changeMusic(self):

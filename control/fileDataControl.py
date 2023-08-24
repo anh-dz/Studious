@@ -295,12 +295,10 @@ class fileDataControl:
             if i in default:    pass
             else:   
                 default.append(i)
-                print("a")
                 check = True
         for i in default:
             if i in current_key:    pass
             else:   
-                print("b")
                 default.remove(i)
                 check = True
 
