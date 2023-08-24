@@ -27,7 +27,7 @@ class StudiousFunc:
         self.qoutes = choice(list_quotes)
         self.clock_onoff = False
         self.music_onoff = True
-        self.wtime, self.rtime = 1, 5
+        self.wtime, self.rtime = 25, 5
         self.countdown = countdown(self.wtime, self.rtime)
         self.box = CustomMessageBox()
         self.create_media_player()
