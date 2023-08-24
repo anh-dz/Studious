@@ -30,4 +30,4 @@ QLabel{qproperty-alignment: \'AlignCenter\';qproperty-margin: auto;}
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Studious - Pin Task "))
+        Dialog.setWindowTitle(_translate("Dialog", "Studious - Pin Task"))
