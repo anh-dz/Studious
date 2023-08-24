@@ -27,7 +27,7 @@ class StudiousFunc:
         self.qoutes = choice(list_quotes)
         self.clock_onoff = False
         self.music_onoff = True
-        self.wtime, self.rtime = 1, 5
+        self.wtime, self.rtime = 25, 5
         self.countdown = countdown(self.wtime, self.rtime)
         self.box = CustomMessageBox()
         self.create_media_player()
@@ -35,6 +35,9 @@ class StudiousFunc:
         self.chat = chatBot()
         self.file.readTableData()
         self.setDataWork()
+        self.file.checkLabelTask(self.settings.labelTask)
+        self.file.readDataTime()
+        self.file.lb = list(self.file.dataTimeJson[self.file.ntime].keys())
 
     def initialize_ui(self):
         wgs.lb_m_quote.setText(self.qoutes)
@@ -42,6 +45,7 @@ class StudiousFunc:
         wgs.lb_m_time.setText(f"{self.wtime}:00")
         if self.day_left != 7:  wgs.lb_3_date.setText(f"Thứ {self.day_left + 1}, ngày {self.file.ntime}")
         else:   wgs.lb_3_date.setText(f"Chủ nhật, ngày {self.file.ntime}")
+        self.setTaskLable()
 
     def initialize_events(self):
         wgs.btn_m_startstop.clicked.connect(self.start_clock)
@@ -95,6 +99,11 @@ class StudiousFunc:
             self.chart.dataChange()
         
         return False
+    
+    def setTaskLable(self):
+        wgs.cB_m_task.clear()
+        for i in self.settings.labelTask:
+            wgs.cB_m_task.addItem(create_colored_icon(QColor(i[-1])), i[0])
 
     #Func control app
     def start_clock(self):
@@ -495,7 +504,7 @@ class chart:
         self.circleChart()
 
     def columnChart(self):
-        self.colData = QBarSet("Tổng thời gian tập trung")
+        self.colData = QBarSet("Tổng thời gian tập trung (giờ)")
         self.colData.setLabelFont(QFont("Arial", 12))
         self.colData.append(self.totalTime)
 
@@ -515,7 +524,7 @@ class chart:
         self.colSerise.attachAxis(self.colChart.axis_x)
 
         self.colChart.axis_y = QValueAxis()
-        self.colChart.axis_y.setRange(0, max(self.totalTime)+3)
+        self.colChart.axis_y.setRange(0, round(max(1, max(self.totalTime)+max(self.totalTime)*0.2)))
         self.colChart.addAxis(self.colChart.axis_y, Qt.AlignmentFlag.AlignLeft)
         self.colSerise.attachAxis(self.colChart.axis_y)
 
@@ -563,6 +572,7 @@ class Settings:
     def __init__(self, file) -> None:
         self.file = file
         self.data = self.file.readSettingData()
+        self.labelTask = []
         self.setSettingsData()
         self.init_trigger()
 
@@ -584,6 +594,9 @@ class Settings:
             wgs.tW_6.item(i, 0).setText(self.data['tasks'][str(i+1)]['combo'])
             wgs.tW_6.item(i, 1).setText(str(self.data['tasks'][str(i+1)]['work']))
             wgs.tW_6.item(i, 2).setText(str(self.data['tasks'][str(i+1)]['rest']))
+            if self.data['tasks'][str(i+1)]['combo'] != '':
+                self.labelTask.append([self.data['tasks'][str(i+1)]['combo'], str(self.data['tasks'][str(i+1)]['work']), str(self.data['tasks'][str(i+1)]['rest']), getColorTask()[i]])
+
 
     def changeTaskLebel(self, item):
         dt = {0: 'combo', 1: 'work', 2: 'rest'}

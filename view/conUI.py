@@ -49,7 +49,7 @@ class ViewControl(QMainWindow):
         for button in self.buttons:
             button.clicked.connect(self.buttonClicked)
 
-        self.testComboBoxColor()
+        # self.testComboBoxColor()
 
     def buttonClicked(self):
         # Get the sender of the clicked signal (the button that was clicked)
