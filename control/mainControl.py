@@ -7,7 +7,6 @@ from PyQt6.QtGui import *
 from PyQt6.QtMultimedia import *
 from PyQt6.QtCharts import *
 from random import choice
-from main import *
 from view import *
 from .fileDataControl import *
 

@@ -15,12 +15,9 @@ class Ui_Dialog(QtWidgets.QDialog):
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("assert/logo.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         Dialog.setWindowIcon(icon)
-        Dialog.setStyleSheet("background-color: rgb(33, 37, 43);\n"
-"color: rgb(249, 245, 246);\n"
-"font: 20pt \"Arial\";\n"
-"qproperty-alignment: \'AlignCenter\';\n"
-"qproperty-margin: auto;\n"
-"")
+        Dialog.setStyleSheet('''* {background-color: rgb(33, 37, 43);color: rgb(249, 245, 246);font: 20pt \"Arial\";}
+QLabel{qproperty-alignment: \'AlignCenter\';qproperty-margin: auto;}
+''')
         self.lb_task = QtWidgets.QLabel(parent=Dialog)
         self.lb_task.setGeometry(QtCore.QRect(0, -2, 240, 96))
         self.lb_task.setObjectName("lb_task")
