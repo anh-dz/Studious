@@ -438,8 +438,6 @@ class chatBot(QThread):
         response = res.json()["choices"][0]["message"]["content"]
         self.model.appendMessage(response, "chatbot")
 
-
-
 class chart:
     def __init__(self, file) -> None:
         self.file = file
