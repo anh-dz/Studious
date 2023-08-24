@@ -5,6 +5,7 @@ from PyQt6.QtGui import *
 from PyQt6.QtMultimedia import *
 from PyQt6.QtCharts import *
 from random import choice
+import datetime
 import requests
 from main import *
 from view import *
@@ -27,16 +28,14 @@ class StudiousFunc:
         self.clock_onoff = False
         self.music_onoff = True
         self.wtime, self.rtime = 25, 5
+        self.dotoCurrent = "Chưa hoàn thành"
         self.countdown = countdown(self.wtime, self.rtime)
-        self.box = QMessageBox()
-
-        self.combo = comboCompanies(wgs.tW_3_todoToday)
-        wgs.tW_3_todoToday.setCellWidget(0, 1, self.combo)
-        wgs.tW_3_todoToday.item(0, 0).setText("Học Toán")
-
+        self.box = CustomMessageBox()
         self.create_media_player()
         self.create_chart()
         self.chatBot()
+        self.file.readTableData()
+        self.setDataWork()
 
     def initialize_ui(self):
         wgs.lb_m_quote.setText(self.qoutes)
@@ -53,6 +52,8 @@ class StudiousFunc:
         wgs.btn_m_delChart.clicked.connect(self.delChartcheck)
         wgs.btn_3_edit.clicked.connect(self.start_weekDialog)
         wgs.btn_5_start.clicked.connect(self.start_breath)
+        wgs.btn_4_send.clicked.connect(lambda: self.chat.start())
+        wgs.tW_3_todoToday.itemClicked.connect(self.showDescribeWork)
 
     def create_media_player(self):
         self.bg_music = QUrl.fromLocalFile('assert/music/music.mp3')
@@ -67,19 +68,14 @@ class StudiousFunc:
     def create_chart(self):
         self.chart = chart(self.file)
         wgs.cB_chooseDate.currentIndexChanged.connect(self.chart.dataChange)
-        wgs.btn_m_delChart.clicked.connect(self.delChartcheck)
 
     def delChartcheck(self):
-        self.box.setText("Bạn có chắc chắn?")
-        self.box.setStandardButtons(QMessageBox.StandardButton.Yes|QMessageBox.StandardButton.No)
-        buttonY = self.box.button(QMessageBox.StandardButton.Yes)
-        buttonY.setText('Có')
-        buttonN = self.box.button(QMessageBox.StandardButton.No)
-        buttonN.setText('Không')
         self.box.exec()
-        if self.box.clickedButton() == buttonY:
+
+        if self.box.clickedButton() == self.box.buttonY:
             self.file.default_data()
             self.chart.dataChange()
+        
         return False
 
     #Func control app
@@ -201,7 +197,8 @@ class StudiousFunc:
         Fwgs.cB_task.setEnabled(not self.clock_onoff)
 
     def start_weekDialog(self):
-        self.wDialog = weekDialogFunc()
+        self.wDialog = weekDialogFunc(self.file, self.setDataWork)
+
 
     def start_breath(self):
         self.breath = BreathingCircleAnimation()
@@ -209,6 +206,40 @@ class StudiousFunc:
     
     def chatBot(self):
         self.chat = chatBot()
+
+    def setDataWork(self):
+        date_format = "%d/%m/%Y"
+        start_date_obj = datetime.datetime.strptime(self.file._table_data[0][0], date_format)
+        end_date_obj = datetime.datetime.strptime(self.file.ntime, date_format)
+        delta = end_date_obj - start_date_obj
+        self.day_left = delta.days + 1
+        self.todoDay = 0
+        self.combo = []
+        for i in range(1, 8):
+            if self.file._table_data[i][self.day_left] == '':    pass
+            else:
+                self.combo.append(comboCompanies(wgs.tW_3_todoToday))
+                wgs.tW_3_todoToday.setCellWidget(self.todoDay, 1, self.combo[-1])
+                wgs.tW_3_todoToday.setItem(self.todoDay, 0, QTableWidgetItem(f"{self.file._table_data[i][self.day_left]}"))
+                self.combo[-1].currentIndexChanged.connect(self.todoDoneTask)
+                self.todoDay += 1
+        wgs.lb_4_complete.setText(f"     Tổng cộng: {self.todoDay} Đã hoàn thành: 0 Chưa hoàn thành: {self.todoDay} Đang làm: 0")
+    
+    def showDescribeWork(self, item):
+        self.row = item.row()
+        self.col = self.day_left - 1
+        data = self.file.readDescribeData()
+        wgs.textBrowser_3_des.setPlainText(data[self.row][self.col])
+
+    def todoDoneTask(self):
+        check = []
+        for i in self.combo:
+            if i == []: pass
+            else:
+                check.append(i.currentText())
+        done = check.count("Đã hoàn thành")
+        doing = check.count("Đang làm")
+        wgs.lb_4_complete.setText(f"     Tổng cộng: {self.todoDay} Đã hoàn thành: {done} Chưa hoàn thành: {self.todoDay - done - doing} Đang làm: {doing}")
 
 class audioFunc(QThread):
     finished = pyqtSignal()
@@ -264,10 +295,41 @@ class fullScreenFunc(StudiousFS):
         return super().event(event)
     
 class weekDialogFunc:
-    def __init__(self) -> None:
+    def __init__(self, file, fn) -> None:
+        self.file = file
         self.wgt = Week_Dialog()
-        self.wgt.show()
 
+        self.describeData = self.file.readDescribeData()
+        self.wgt.buttonBox.accepted.connect(self.updateData)
+        self.wgt.tableWidget.itemClicked.connect(self.getDescribeItem)
+        self.file.readTableData()
+        self.file.setTableData(self.wgt)
+        self.wgt.plainTextEdit.setReadOnly(True)
+        self.wgt.show()
+        self.fn = fn
+        self.row, self.col = 0, 0
+        self.edit = False
+    
+    def updateData(self):
+        self.describeData[self.row][self.col] = self.wgt.plainTextEdit.toPlainText()
+        self.file.writeDescribeData(self.describeData)
+        self.file.writeTableData(self.wgt)
+        self.fn()
+
+    def getDescribeItem(self, item):
+        self.wgt.plainTextEdit.setReadOnly(False)
+        if not self.edit:
+            self.row = item.row()
+            self.col = item.column()
+            self.wgt.plainTextEdit.setPlainText(self.describeData[self.row][self.col])
+            self.edit = True
+        else:
+            self.describeData[self.row][self.col] = self.wgt.plainTextEdit.toPlainText()
+            self.wgt.plainTextEdit.clear()
+            self.row = item.row()
+            self.col = item.column()
+            self.wgt.plainTextEdit.setPlainText(self.describeData[self.row][self.col])
+                     
 class countdown:
     def __init__(self, work_time:int, rest_time:int):
         self.wtime = work_time
@@ -325,9 +387,12 @@ class KeyboardWidget(QWidget):
     def keyPressEvent(self, keyEvent):
         self.keyPressed.emit(keyEvent.text())
 
-class chatBot:
+class chatBot(QThread):
+    finished = pyqtSignal()
+    progress = pyqtSignal(int)
+
     def __init__(self) -> None:
-        wgs.btn_4_send.clicked.connect(self.handle_input)
+        super(chatBot, self).__init__()
         self.api = 'dc5f122151msh883ed682cbadc9cp113b09jsn67cb02e5ab7d'
         self.api_url = 'https://chatgpt-best-price.p.rapidapi.com/v1/chat/completions'
         
@@ -339,14 +404,11 @@ class chatBot:
 
         self.model.appendMessage("Chào bạn, để sử dụng không giới hạn chức năng này, hãy mua Premium.", "chatbot")
 
-    def handle_input(self):
+    def run(self):
         user_input = wgs.PtE_chatBot.toPlainText()
         self.model.appendMessage(user_input, "user")
         wgs.PtE_chatBot.clear()
-        response = self.get_chatbot_response(user_input)
-        self.model.appendMessage(response, "chatbot")
 
-    def get_chatbot_response(self, user_input):
         headers = {
             "content-type": "application/json",
             "X-RapidAPI-Key": self.api,
@@ -358,13 +420,16 @@ class chatBot:
             "messages": [
 		{
 			"role": "user",
-			"content": "Hello, how are you?"
+			"content": user_input
 		}
 	    ]
         }
 
-        response = requests.post(self.api_url, json=data, headers=headers)
-        return response.json()["choices"][0]["message"]["content"]
+        res = requests.post(self.api_url, json=data, headers=headers)
+        response = res.json()["choices"][0]["message"]["content"]
+        self.model.appendMessage(response, "chatbot")
+
+
 
 class chart:
     def __init__(self, file) -> None:

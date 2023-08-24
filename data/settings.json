@@ -1,7 +1,7 @@
 {
   "main": {
     "sound": true,
-    "label": "blue"
+    "label": "3"
   },
   "settings": {
     "musicType" : 1,
@@ -9,5 +9,34 @@
     "noti": false,
     "autosession": false,
     "space": false
+  },
+  "tasks": {
+    "1": {
+      "combo": "Học Toán",
+      "work": 25,
+      "rest": 5
+    },
+    "2": {
+      "combo": "Học Tiếng Anh",
+      "work": 30,
+      "rest": 5
+    },
+    "3": {
+      "combo": "Làm việc",
+      "work": 60,
+      "rest": 10
+    },
+    "4": {
+
+    },
+    "5": {
+
+    },
+    "6": {
+
+    },
+    "7": {
+
+    }
   }
 }
