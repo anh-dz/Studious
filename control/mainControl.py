@@ -69,19 +69,20 @@ class StudiousFunc:
     def create_chart(self):
         self.chart = chart(self.file)
         wgs.cB_chooseDate.currentIndexChanged.connect(self.chart.dataChange)
-        wgs.btn_m_delChart.clicked.connect(self.delChartcheck)
 
     def delChartcheck(self):
         self.box.setText("Bạn có chắc chắn?")
-        self.box.setStandardButtons(QMessageBox.StandardButton.Yes|QMessageBox.StandardButton.No)
+        self.box.setStandardButtons(QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
         buttonY = self.box.button(QMessageBox.StandardButton.Yes)
         buttonY.setText('Có')
         buttonN = self.box.button(QMessageBox.StandardButton.No)
         buttonN.setText('Không')
         self.box.exec()
+
         if self.box.clickedButton() == buttonY:
             self.file.default_data()
             self.chart.dataChange()
+        
         return False
 
     #Func control app
