@@ -1,3 +1,5 @@
+import datetime
+import requests
 from PyQt6.QtCore import *
 from PyQt6.QtCore import QObject
 from PyQt6.QtWidgets import *
@@ -5,8 +7,6 @@ from PyQt6.QtGui import *
 from PyQt6.QtMultimedia import *
 from PyQt6.QtCharts import *
 from random import choice
-import datetime
-import requests
 from main import *
 from view import *
 from .fileDataControl import *
