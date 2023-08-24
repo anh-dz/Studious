@@ -1,3 +1,5 @@
+import datetime
+import requests
 from PyQt6.QtCore import *
 from PyQt6.QtCore import QObject
 from PyQt6.QtWidgets import *
@@ -5,9 +7,6 @@ from PyQt6.QtGui import *
 from PyQt6.QtMultimedia import *
 from PyQt6.QtCharts import *
 from random import choice
-import datetime
-import requests
-from main import *
 from view import *
 from .fileDataControl import *
 
@@ -30,11 +29,10 @@ class StudiousFunc:
         self.music_onoff = True
         self.wtime, self.rtime = 1, 5
         self.countdown = countdown(self.wtime, self.rtime)
-        self.box = QMessageBox()
-
+        self.box = CustomMessageBox()
         self.create_media_player()
         self.create_chart()
-        self.chatBot()
+        self.chat = chatBot()
         self.file.readTableData()
         self.setDataWork()
 
@@ -88,19 +86,14 @@ class StudiousFunc:
     def create_chart(self):
         self.chart = chart(self.file)
         wgs.cB_chooseDate.currentIndexChanged.connect(self.chart.dataChange)
-        wgs.btn_m_delChart.clicked.connect(self.delChartcheck)
 
     def delChartcheck(self):
-        self.box.setText("Bạn có chắc chắn?")
-        self.box.setStandardButtons(QMessageBox.StandardButton.Yes|QMessageBox.StandardButton.No)
-        buttonY = self.box.button(QMessageBox.StandardButton.Yes)
-        buttonY.setText('Có')
-        buttonN = self.box.button(QMessageBox.StandardButton.No)
-        buttonN.setText('Không')
         self.box.exec()
-        if self.box.clickedButton() == buttonY:
+
+        if self.box.clickedButton() == self.box.buttonY:
             self.file.default_data()
             self.chart.dataChange()
+        
         return False
 
     #Func control app
@@ -195,7 +188,11 @@ class StudiousFunc:
             Pwgs.lb_task.setText(selected_option)
     
     def start_dialog(self):
-        self.diaLog = DialogFunc()
+        if isPwgsOn:
+            self.diaLog.close()
+        else:
+            self.diaLog = DialogFunc()
+            wgs.btn_m_pin.setIcon(QIcon("assert/unpin.png"))
         if not self.countdown.work_or_rest:
             Pwgs.lb_time.setStyleSheet('color: rgb(251, 238, 172)')
         Pwgs.lb_time.setText(f"{self.countdown.mtime}:00")
@@ -229,9 +226,6 @@ class StudiousFunc:
     def start_breath(self):
         self.breath = BreathingCircleAnimation()
         self.breath.show()
-    
-    def chatBot(self):
-        self.chat = chatBot()
 
     def setDataWork(self):
         date_format = "%d/%m/%Y"
@@ -292,18 +286,21 @@ class audioFunc(QThread):
         self._media_player.setSource(self._media_content)
         self._media_player.play()
 
-class DialogFunc:
+class DialogFunc(Ui_Dialog):
     def __init__(self):
         global Pwgs, isPwgsOn
-        Pwgs = Ui_Dialog()
+        super().__init__()
+        Pwgs = self
+        Pwgs.setupUi(self)
         Pwgs.setWindowFlag(Qt.WindowType.WindowStaysOnTopHint)
         Pwgs.lb_task.setText(wgs.cB_m_task.currentText())
         Pwgs.show()
         isPwgsOn = True
-    
+
     def closeEvent(self, event):
         global isPwgsOn
         isPwgsOn = False
+        wgs.btn_m_pin.setIcon(QIcon("assert/pin.png"))
         Pwgs.close()
 
 class fullScreenFunc(StudiousFS):
@@ -328,10 +325,13 @@ class fullScreenFunc(StudiousFS):
 
         return super().event(event)
     
-class weekDialogFunc:
-    def __init__(self, file, fn) -> None:
+class weekDialogFunc(Week_Dialog):
+    def __init__(self, file, fn):
+        super().__init__()
+        self.wgt = self
+        self.wgt.setupUi(self)
+        
         self.file = file
-        self.wgt = Week_Dialog()
 
         self.describeData = self.file.readDescribeData()
         self.wgt.buttonBox.accepted.connect(self.updateData)
@@ -339,10 +339,11 @@ class weekDialogFunc:
         self.file.readTableData()
         self.file.setTableData(self.wgt)
         self.wgt.plainTextEdit.setReadOnly(True)
-        self.wgt.show()
         self.fn = fn
         self.row, self.col = 0, 0
         self.edit = False
+
+        self.wgt.show()
     
     def updateData(self):
         self.describeData[self.row][self.col] = self.wgt.plainTextEdit.toPlainText()
@@ -444,10 +445,14 @@ class chatBot(QThread):
         message_delegate = DrawSpeechBubbleDelegate()
         wgs.LV_chatView.setItemDelegate(message_delegate)
 
-        self.model.appendMessage("Chào bạn, để sử dụng không giới hạn chức năng này, hãy mua Premium.", "chatbot")
+        self.model.appendMessage("Chào bạn, tôi là Studious. Liệu tôi có thể giúp gì cho bạn?", "chatbot")
 
     def run(self):
         user_input = wgs.PtE_chatBot.toPlainText()
+        if user_input.translate(str.maketrans('', '', '''
+     
+ 
+''')) in ["", None]: return
         self.model.appendMessage(user_input, "user")
         wgs.PtE_chatBot.clear()
 
@@ -467,11 +472,12 @@ class chatBot(QThread):
 	    ]
         }
 
-        res = requests.post(self.api_url, json=data, headers=headers)
-        response = res.json()["choices"][0]["message"]["content"]
+        try:
+            res = requests.post(self.api_url, json=data, headers=headers)
+            response = res.json()["choices"][0]["message"]["content"]
+        except:
+            response = "Không có kết nối Internet, vui lòng thử lại!"
         self.model.appendMessage(response, "chatbot")
-
-
 
 class chart:
     def __init__(self, file) -> None:
