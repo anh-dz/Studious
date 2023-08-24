@@ -1,3 +1,5 @@
+import datetime
+import requests
 from PyQt6.QtCore import *
 from PyQt6.QtCore import QObject
 from PyQt6.QtWidgets import *
@@ -5,9 +7,6 @@ from PyQt6.QtGui import *
 from PyQt6.QtMultimedia import *
 from PyQt6.QtCharts import *
 from random import choice
-import datetime
-import requests
-from main import *
 from view import *
 from .fileDataControl import *
 
@@ -24,16 +23,16 @@ class StudiousFunc:
         isFwgsOn = False
         isPwgsOn = False
         self.file = fileDataControl()
+        self.settings = Settings(self.file)
         self.qoutes = choice(list_quotes)
         self.clock_onoff = False
         self.music_onoff = True
         self.wtime, self.rtime = 25, 5
-        self.dotoCurrent = "Chưa hoàn thành"
         self.countdown = countdown(self.wtime, self.rtime)
         self.box = CustomMessageBox()
         self.create_media_player()
         self.create_chart()
-        self.chatBot()
+        self.chat = chatBot()
         self.file.readTableData()
         self.setDataWork()
 
@@ -41,6 +40,8 @@ class StudiousFunc:
         wgs.lb_m_quote.setText(self.qoutes)
         wgs.label.setText(self.file.totalTimeDay())
         wgs.lb_m_time.setText(f"{self.wtime}:00")
+        if self.day_left != 7:  wgs.lb_3_date.setText(f"Thứ {self.day_left + 1}, ngày {self.file.ntime}")
+        else:   wgs.lb_3_date.setText(f"Chủ nhật, ngày {self.file.ntime}")
 
     def initialize_events(self):
         wgs.btn_m_startstop.clicked.connect(self.start_clock)
@@ -54,6 +55,23 @@ class StudiousFunc:
         wgs.btn_5_start.clicked.connect(self.start_breath)
         wgs.btn_4_send.clicked.connect(lambda: self.chat.start())
         wgs.tW_3_todoToday.itemClicked.connect(self.showDescribeWork)
+        # wgs.PtE_chatBot.eventFilter(self.ui.PtE_chatBot)
+
+        # wgs.cB_6_select.currentIndexChanged.connect(self.changeMusic)
+        # wgs.checkBox_space.toggled.connect(self.changeSpace)
+        # wgs.checkBox_autosession.toggled.connect(self.changeAutosession)
+        # wgs.checkBox_autostart.toggled.connect(self.changeAutostart)
+        # wgs.checkBox_noti.toggled.connect(self.changeNoti)
+        # wgs.tW_6.itemChanged.connect(self.changeTaskLebel)
+
+    def eventFilter(self, obj, event):
+        if event.type() == event.KeyPress and event.key() == Qt.Key_Space:
+            print("Spacebar pressed")
+        return super().eventFilter(obj, event)
+
+    def autoStartClock(self):
+        print(wgs.checkBox_autosession.isChecked())
+        if wgs.checkBox_autosession.isChecked():    self.start_clock()
 
     def create_media_player(self):
         self.bg_music = QUrl.fromLocalFile('assert/music/music.mp3')
@@ -144,6 +162,7 @@ class StudiousFunc:
         if isFwgsOn:
             Fwgs.lb_time.setText(f"{self.countdown.mtime}:00")
         self.chart.dataChange()
+        self.autoStartClock()
 
     def onoff_audio(self):
         if self.music_onoff:
@@ -169,7 +188,11 @@ class StudiousFunc:
             Pwgs.lb_task.setText(selected_option)
     
     def start_dialog(self):
-        self.diaLog = DialogFunc()
+        if isPwgsOn:
+            self.diaLog.close()
+        else:
+            self.diaLog = DialogFunc()
+            wgs.btn_m_pin.setIcon(QIcon("assert/unpin.png"))
         if not self.countdown.work_or_rest:
             Pwgs.lb_time.setStyleSheet('color: rgb(251, 238, 172)')
         Pwgs.lb_time.setText(f"{self.countdown.mtime}:00")
@@ -203,20 +226,20 @@ class StudiousFunc:
     def start_breath(self):
         self.breath = BreathingCircleAnimation()
         self.breath.show()
-    
-    def chatBot(self):
-        self.chat = chatBot()
 
     def setDataWork(self):
         date_format = "%d/%m/%Y"
         start_date_obj = datetime.datetime.strptime(self.file._table_data[0][0], date_format)
         end_date_obj = datetime.datetime.strptime(self.file.ntime, date_format)
         delta = end_date_obj - start_date_obj
+        self.file.readTableData()
         self.day_left = delta.days + 1
         self.todoDay = 0
         self.combo = []
         for i in range(1, 8):
-            if self.file._table_data[i][self.day_left] == '':    pass
+            if self.file._table_data[i][self.day_left] == '':
+                wgs.tW_3_todoToday.setItem(self.todoDay, 0, QTableWidgetItem(f"{self.file._table_data[i][self.day_left]}"))
+                wgs.tW_3_todoToday.setItem(self.todoDay, 1, QTableWidgetItem(""))
             else:
                 self.combo.append(comboCompanies(wgs.tW_3_todoToday))
                 wgs.tW_3_todoToday.setCellWidget(self.todoDay, 1, self.combo[-1])
@@ -229,7 +252,12 @@ class StudiousFunc:
         self.row = item.row()
         self.col = self.day_left - 1
         data = self.file.readDescribeData()
-        wgs.textBrowser_3_des.setPlainText(data[self.row][self.col])
+        if item.text() != "":
+            if self.row <= self.todoDay:
+                wgs.textBrowser_3_des.setPlainText(data[self.row][self.col])
+            else:
+                wgs.textBrowser_3_des.setPlainText("")
+        else:   wgs.textBrowser_3_des.setPlainText("")
 
     def todoDoneTask(self):
         check = []
@@ -258,18 +286,21 @@ class audioFunc(QThread):
         self._media_player.setSource(self._media_content)
         self._media_player.play()
 
-class DialogFunc:
+class DialogFunc(Ui_Dialog):
     def __init__(self):
         global Pwgs, isPwgsOn
-        Pwgs = Ui_Dialog()
+        super().__init__()
+        Pwgs = self
+        Pwgs.setupUi(self)
         Pwgs.setWindowFlag(Qt.WindowType.WindowStaysOnTopHint)
         Pwgs.lb_task.setText(wgs.cB_m_task.currentText())
         Pwgs.show()
         isPwgsOn = True
-    
+
     def closeEvent(self, event):
         global isPwgsOn
         isPwgsOn = False
+        wgs.btn_m_pin.setIcon(QIcon("assert/pin.png"))
         Pwgs.close()
 
 class fullScreenFunc(StudiousFS):
@@ -294,10 +325,13 @@ class fullScreenFunc(StudiousFS):
 
         return super().event(event)
     
-class weekDialogFunc:
-    def __init__(self, file, fn) -> None:
+class weekDialogFunc(Week_Dialog):
+    def __init__(self, file, fn):
+        super().__init__()
+        self.wgt = self
+        self.wgt.setupUi(self)
+        
         self.file = file
-        self.wgt = Week_Dialog()
 
         self.describeData = self.file.readDescribeData()
         self.wgt.buttonBox.accepted.connect(self.updateData)
@@ -305,10 +339,11 @@ class weekDialogFunc:
         self.file.readTableData()
         self.file.setTableData(self.wgt)
         self.wgt.plainTextEdit.setReadOnly(True)
-        self.wgt.show()
         self.fn = fn
         self.row, self.col = 0, 0
         self.edit = False
+
+        self.wgt.show()
     
     def updateData(self):
         self.describeData[self.row][self.col] = self.wgt.plainTextEdit.toPlainText()
@@ -317,7 +352,10 @@ class weekDialogFunc:
         self.fn()
 
     def getDescribeItem(self, item):
-        self.wgt.plainTextEdit.setReadOnly(False)
+        if item.text() == "":
+            self.wgt.tableWidget.itemChanged.connect(self.onItemChanged)
+            self.describeData[item.row()][item.column()] = ""
+        else:   self.wgt.plainTextEdit.setReadOnly(False)
         if not self.edit:
             self.row = item.row()
             self.col = item.column()
@@ -329,7 +367,12 @@ class weekDialogFunc:
             self.row = item.row()
             self.col = item.column()
             self.wgt.plainTextEdit.setPlainText(self.describeData[self.row][self.col])
-                     
+
+    def onItemChanged(self, item):
+        if item.text() == '':
+            self.wgt.plainTextEdit.setReadOnly(True)
+        else:   self.wgt.plainTextEdit.setReadOnly(False)
+    
 class countdown:
     def __init__(self, work_time:int, rest_time:int):
         self.wtime = work_time
@@ -402,10 +445,14 @@ class chatBot(QThread):
         message_delegate = DrawSpeechBubbleDelegate()
         wgs.LV_chatView.setItemDelegate(message_delegate)
 
-        self.model.appendMessage("Chào bạn, để sử dụng không giới hạn chức năng này, hãy mua Premium.", "chatbot")
+        self.model.appendMessage("Chào bạn, tôi là Studious. Liệu tôi có thể giúp gì cho bạn?", "chatbot")
 
     def run(self):
         user_input = wgs.PtE_chatBot.toPlainText()
+        if user_input.translate(str.maketrans('', '', '''
+     
+ 
+''')) in ["", None]: return
         self.model.appendMessage(user_input, "user")
         wgs.PtE_chatBot.clear()
 
@@ -425,11 +472,12 @@ class chatBot(QThread):
 	    ]
         }
 
-        res = requests.post(self.api_url, json=data, headers=headers)
-        response = res.json()["choices"][0]["message"]["content"]
+        try:
+            res = requests.post(self.api_url, json=data, headers=headers)
+            response = res.json()["choices"][0]["message"]["content"]
+        except:
+            response = "Không có kết nối Internet, vui lòng thử lại!"
         self.model.appendMessage(response, "chatbot")
-
-
 
 class chart:
     def __init__(self, file) -> None:
@@ -510,3 +558,67 @@ class chart:
 
         self.addChart = True
         wgs.pieChart.layout().addWidget(self._chart_view)
+
+class Settings:
+    def __init__(self, file) -> None:
+        self.file = file
+        self.data = self.file.readSettingData()
+        self.setSettingsData()
+        self.init_trigger()
+
+    def init_trigger(self):
+        wgs.cB_6_select.currentIndexChanged.connect(self.changeMusic)
+        wgs.checkBox_space.toggled.connect(self.changeSpace)
+        wgs.checkBox_autosession.toggled.connect(self.changeAutosession)
+        wgs.checkBox_autostart.toggled.connect(self.changeAutostart)
+        wgs.checkBox_noti.toggled.connect(self.changeNoti)
+        wgs.tW_6.itemChanged.connect(self.changeTaskLebel)
+
+    def setSettingsData(self):
+        wgs.cB_6_select.setCurrentIndex(self.data['settings']['musicType'])
+        wgs.checkBox_space.setChecked(self.data['settings']['space'])
+        wgs.checkBox_autosession.setChecked(self.data['settings']['autosession'])
+        wgs.checkBox_autostart.setChecked(self.data['settings']['autostart'])
+        wgs.checkBox_noti.setChecked(self.data['settings']['noti'])
+        for i in range(len(self.data['tasks'])):
+            wgs.tW_6.item(i, 0).setText(self.data['tasks'][str(i+1)]['combo'])
+            wgs.tW_6.item(i, 1).setText(str(self.data['tasks'][str(i+1)]['work']))
+            wgs.tW_6.item(i, 2).setText(str(self.data['tasks'][str(i+1)]['rest']))
+
+    def changeTaskLebel(self, item):
+        dt = {0: 'combo', 1: 'work', 2: 'rest'}
+
+        row = item.row()
+        col = item.column()
+
+        self.data['tasks'][str(row+1)][dt[col]] = item.text()
+        self.file.WriteSettingData(self.data)
+
+
+    def changeMusic(self):
+        self.data['settings']['musicType'] = wgs.cB_6_select.currentIndex()
+        self.file.WriteSettingData(self.data)
+
+    def changeSpace(self, checked):
+        if checked:  self.data['settings']['space'] = True
+        else:   self.data['settings']['space'] = False
+        self.file.WriteSettingData(self.data)
+
+    def changeAutosession(self, checked):
+        if checked:  
+            self.data['settings']['autosession'] = True
+        else:   self.data['settings']['autosession'] = False
+        self.file.WriteSettingData(self.data)
+        
+
+    def changeAutostart(self, checked):
+        if checked:  self.data['settings']['autostart'] = True
+        else:   self.data['settings']['autostart'] = False
+        self.file.WriteSettingData(self.data)
+
+    def changeNoti(self, checked):
+        if checked:  self.data['settings']['noti'] = True
+        else:   self.data['settings']['noti'] = False
+        self.file.WriteSettingData(self.data)
+
+

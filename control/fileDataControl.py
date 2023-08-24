@@ -251,3 +251,13 @@ class fileDataControl:
             for row in reader:
                 data.append(row)
         return list(data)
+    
+    def readSettingData(self):
+        data = dict()
+        with open("data/settings.json", 'r', newline="", encoding="utf-8") as jsonfile:
+            data = json.load(jsonfile)
+        return data
+    
+    def WriteSettingData(self, data):
+        with open("data/settings.json", 'w', newline="", encoding="utf-8") as jsonfile:
+            json.dump(data, jsonfile,  ensure_ascii=False)
