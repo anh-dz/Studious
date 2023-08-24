@@ -407,10 +407,14 @@ class chatBot(QThread):
         message_delegate = DrawSpeechBubbleDelegate()
         wgs.LV_chatView.setItemDelegate(message_delegate)
 
-        self.model.appendMessage("Chào bạn, để sử dụng không giới hạn chức năng này, hãy mua Premium.", "chatbot")
+        self.model.appendMessage("Chào bạn, tôi là Studious. Liệu tôi có thể giúp gì cho bạn?", "chatbot")
 
     def run(self):
         user_input = wgs.PtE_chatBot.toPlainText()
+        if user_input.translate(str.maketrans('', '', '''
+     
+ 
+''')) in ["", None]: return
         self.model.appendMessage(user_input, "user")
         wgs.PtE_chatBot.clear()
 
