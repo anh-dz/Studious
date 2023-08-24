@@ -170,7 +170,7 @@ class StudiousFunc:
     
     def start_dialog(self):
         if isPwgsOn:
-            self.diaLog.closeEvent("close")
+            self.diaLog.close()
         else:
             self.diaLog = DialogFunc()
             wgs.btn_m_pin.setIcon(QIcon("assert/unpin.png"))
@@ -262,10 +262,12 @@ class audioFunc(QThread):
         self._media_player.setSource(self._media_content)
         self._media_player.play()
 
-class DialogFunc:
+class DialogFunc(Ui_Dialog):
     def __init__(self):
         global Pwgs, isPwgsOn
-        Pwgs = Ui_Dialog()
+        super().__init__()
+        Pwgs = self
+        Pwgs.setupUi(self)
         Pwgs.setWindowFlag(Qt.WindowType.WindowStaysOnTopHint)
         Pwgs.lb_task.setText(wgs.cB_m_task.currentText())
         Pwgs.show()
@@ -299,10 +301,13 @@ class fullScreenFunc(StudiousFS):
 
         return super().event(event)
     
-class weekDialogFunc:
-    def __init__(self, file, fn) -> None:
+class weekDialogFunc(Week_Dialog):
+    def __init__(self, file, fn):
+        super().__init__()
+        self.wgt = self
+        self.wgt.setupUi(self)
+        
         self.file = file
-        self.wgt = Week_Dialog()
 
         self.describeData = self.file.readDescribeData()
         self.wgt.buttonBox.accepted.connect(self.updateData)
@@ -310,10 +315,11 @@ class weekDialogFunc:
         self.file.readTableData()
         self.file.setTableData(self.wgt)
         self.wgt.plainTextEdit.setReadOnly(True)
-        self.wgt.show()
         self.fn = fn
         self.row, self.col = 0, 0
         self.edit = False
+
+        self.wgt.show()
     
     def updateData(self):
         self.describeData[self.row][self.col] = self.wgt.plainTextEdit.toPlainText()
