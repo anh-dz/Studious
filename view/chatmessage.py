@@ -20,8 +20,6 @@ class CustomMessageBox(QMessageBox):
         self.buttonY.setObjectName("qt_msgbox_buttonrole")
         self.buttonN.setObjectName("qt_msgbox_buttoncancel")
 
-
-
 class ChatLogModel(QAbstractListModel):
 
     def __init__(self):
