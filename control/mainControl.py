@@ -32,7 +32,7 @@ class StudiousFunc:
         self.box = CustomMessageBox()
         self.create_media_player()
         self.create_chart()
-        self.chatBot()
+        self.chat = chatBot()
         self.file.readTableData()
         self.setDataWork()
 
@@ -206,9 +206,6 @@ class StudiousFunc:
     def start_breath(self):
         self.breath = BreathingCircleAnimation()
         self.breath.show()
-    
-    def chatBot(self):
-        self.chat = chatBot()
 
     def setDataWork(self):
         date_format = "%d/%m/%Y"
@@ -439,8 +436,11 @@ class chatBot(QThread):
 	    ]
         }
 
-        res = requests.post(self.api_url, json=data, headers=headers)
-        response = res.json()["choices"][0]["message"]["content"]
+        try:
+            res = requests.post(self.api_url, json=data, headers=headers)
+            response = res.json()["choices"][0]["message"]["content"]
+        except:
+            response = "Không có kết nối Internet, vui lòng thử lại!"
         self.model.appendMessage(response, "chatbot")
 
 class chart:
