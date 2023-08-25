@@ -28,7 +28,7 @@ class StudiousFunc:
         self.clock_onoff = False
         self.music_onoff = True
         self.box = CustomMessageBox()
-        self.create_media_player()
+        self.Mmusic = self.create_media_player('assert/music/music.mp3')
         self.create_chart()
         self.chat = chatBot()
         self.file.readTableData()
@@ -46,6 +46,7 @@ class StudiousFunc:
         if self.day_left != 7:  wgs.lb_3_date.setText(f"Thứ {self.day_left + 1}, ngày {self.file.ntime}")
         else:   wgs.lb_3_date.setText(f"Chủ nhật, ngày {self.file.ntime}")
         self.setTaskLable()
+        wgs.cB_m_task.setCurrentIndex(int(self.settings.data["main"]["label"]))
 
     def initialize_events(self):
         wgs.btn_m_startstop.clicked.connect(self.start_clock)
@@ -60,6 +61,7 @@ class StudiousFunc:
         wgs.btn_4_send.clicked.connect(lambda: self.chat.start())
         wgs.tW_3_todoToday.itemClicked.connect(self.showDescribeWork)
         wgs.tW_6.itemChanged.connect(self.changeTaskLabel)
+        wgs.cB_6_select.currentIndexChanged.connect(self.changeMusic)
         # wgs.PtE_chatBot.eventFilter(self.ui.PtE_chatBot)
 
         # wgs.cB_6_select.currentIndexChanged.connect(self.changeMusic)
@@ -73,6 +75,7 @@ class StudiousFunc:
         if wgs.checkBox_autosession.isChecked():    self.start_clock()
 
     def changeTaskLabel(self, item):
+        self.settings.setSettingsData()
         self.file.checkLabelTask(self.settings.labelTask)
         self.file.readDataTime()
         self.file.lb = list(self.file.dataTimeJson[self.file.ntime].keys())
@@ -80,12 +83,11 @@ class StudiousFunc:
         self.setTaskLable()
         for i in self.settings.labelTask:
             if i[0] == wgs.cB_m_task.currentText():
-                print(i[1])
                 self.countdown = countdown(int(i[1]), int(i[2]), self.work_or_rest)
                 break
 
-    def create_media_player(self):
-        self.bg_music = QUrl.fromLocalFile('assert/music/music.mp3')
+    def create_media_player(self, file:path):
+        self.bg_music = QUrl.fromLocalFile(file)
         self.media_player = QMediaPlayer()
         self.audio = QAudioOutput()
         self.audio.setVolume(1)
@@ -93,6 +95,10 @@ class StudiousFunc:
         self.media_player.setSource(self.bg_music)
         self.media_player.setLoops(24)
         self.onoff_audio()
+
+    def changeMusic(self):
+        # self.Mmusic = self.create_media_player(self.settings.music)
+        pass
         
     def create_chart(self):
         self.chart = chart(self.file)
@@ -111,6 +117,8 @@ class StudiousFunc:
         wgs.cB_m_task.clear()
         for i in self.settings.labelTask:
             wgs.cB_m_task.addItem(create_colored_icon(QColor(i[-1])), i[0])
+        if isFwgsOn:
+            self.setTaskLableFs()
 
     #Func control app
     def start_clock(self):
@@ -147,6 +155,7 @@ class StudiousFunc:
         self.qthread.start()
         if self.countdown.work_or_rest: 
             wgs.lb_m_time.setStyleSheet('color: rgb(251, 238, 172)')
+            self.file.readDataTime()
             self.file.dataTimeJson[self.file.ntime][wgs.cB_m_task.currentText()] += round((self.countdown.wtime-self.countdown.time_left/60)/60, 1)
             self.file.writeDataTime()
             wgs.label.setText(self.file.totalTimeDay())
@@ -204,7 +213,6 @@ class StudiousFunc:
             Pwgs.lb_task.setText(selected_option)
         for i in self.settings.labelTask:
             if i[0] == wgs.cB_m_task.currentText():
-                print(i[1])
                 self.countdown = countdown(int(i[1]), int(i[2]), self.work_or_rest)
                 break
     
@@ -220,6 +228,7 @@ class StudiousFunc:
 
     def start_fs(self):
         self.fs = fullScreenFunc()
+        self.setTaskLableFs()
         Fwgs.cB_task.currentIndexChanged.connect(self.on_combobox_changed)
         if not self.countdown.work_or_rest:
             Fwgs.lb_time.setStyleSheet("font: 128pt \"Arial\";\n"
@@ -239,6 +248,11 @@ class StudiousFunc:
         Fwgs.btn_exit.clicked.connect(lambda: Fwgs.close())
         Fwgs.bottomQuote.setText(self.qoutes)
         Fwgs.cB_task.setEnabled(not self.clock_onoff)
+
+    def setTaskLableFs(self):
+        Fwgs.cB_task.clear()
+        for i in self.settings.labelTask:
+            Fwgs.cB_task.addItem(create_colored_icon(QColor(i[-1])), i[0])
 
     def start_weekDialog(self):
         self.wDialog = weekDialogFunc(self.file, self.setDataWork)
@@ -585,8 +599,10 @@ class Settings:
     def __init__(self, file) -> None:
         self.file = file
         self.data = self.file.readSettingData()
+        self.music = "1"
         self.labelTask = []
         self.setSettingsData()
+        self.musicType()
         self.init_trigger()
 
     def init_trigger(self):
@@ -625,10 +641,16 @@ class Settings:
                 self.labelTask[i][1] = self.data['tasks'][str(row+1)]['work']
                 self.labelTask[i][2] = self.data['tasks'][str(row+1)]['rest']
 
+    def musicType(self):
+        self.music = self.data['settings']['musicType']
 
+    def changeMainTask(self):
+        self.data['main']['label'] = wgs.cB_m_task.currentIndex()
+        self.file.WriteSettingData(self.data)
 
     def changeMusic(self):
         self.data['settings']['musicType'] = wgs.cB_6_select.currentIndex()
+        self.music = self.data['settings']['musicType']
         self.file.WriteSettingData(self.data)
 
     def changeSpace(self, checked):
