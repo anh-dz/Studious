@@ -61,10 +61,10 @@ class StudiousFunc:
         wgs.btn_3_edit.clicked.connect(self.start_weekDialog)
         wgs.btn_5_start.clicked.connect(self.start_breath)
         wgs.btn_4_send.clicked.connect(lambda: self.chat.start())
+        wgs.btn_4_send.setShortcut("Ctrl+Return")
         wgs.tW_3_todoToday.itemClicked.connect(self.showDescribeWork)
         wgs.tW_6.itemChanged.connect(self.changeTaskLabel)
         wgs.cB_6_select.currentIndexChanged.connect(self.changeMusic)
-        # wgs.PtE_chatBot.eventFilter(self.ui.PtE_chatBot)
 
         # wgs.cB_6_select.currentIndexChanged.connect(self.changeMusic)
         # wgs.checkBox_space.toggled.connect(self.changeSpace)
@@ -98,7 +98,7 @@ class StudiousFunc:
             self.bg_musi.start()
 
         # self.Mmusic = self.create_media_player(self.settings.music)
-        
+
     def create_chart(self):
         self.chart = chart(self.file)
         wgs.cB_chooseDate.currentIndexChanged.connect(self.chart.dataChange)
@@ -118,6 +118,9 @@ class StudiousFunc:
             wgs.cB_m_task.addItem(create_colored_icon(QColor(i[-1])), i[0])
         if isFwgsOn:
             self.setTaskLableFs()
+
+    def turnOffSpace(self):
+        self.tom._media_player.stop()
 
     #Func control app
     def start_clock(self):
@@ -144,14 +147,18 @@ class StudiousFunc:
             wgs.btn_m_startstop.setIcon(QIcon("assert/start.png"))
             if isFwgsOn:
                 Fwgs.btn_startstop.setIcon(QIcon("assert/start.png"))
-            self.countdown.stop_timer()    
+            self.countdown.stop_timer()  
+        try:
+            self.turnOffSpace()
+        except:
+            pass
 
     def next_clock(self):
         wgs.btn_m_startstop.setIcon(QIcon("assert/start.png"))
         if isFwgsOn:
             Fwgs.btn_startstop.setIcon(QIcon("assert/start.png"))
-        self.qthread = audioFunc(QThread,'assert/music/end.mp3')
-        self.qthread.start()
+        self.tom = audioFunc(QThread,'assert/music/clock.mp3')
+        self.tom.start()
         if self.countdown.work_or_rest: 
             wgs.lb_m_time.setStyleSheet('color: rgb(251, 238, 172)')
             self.file.readDataTime()
@@ -187,6 +194,9 @@ class StudiousFunc:
             Fwgs.lb_time.setText(f"{self.countdown.mtime}:00")
         self.chart.dataChange()
         self.autoStartClock()
+        if wgs.checkBox_space.isChecked():
+            self.tom._media_player.setLoops(1000)
+
 
     def onoff_audio(self):
         if self.music_onoff:
@@ -346,6 +356,7 @@ class fullScreenFunc(StudiousFS):
         Fwgs.setWindowFlag(Qt.WindowType.WindowStaysOnTopHint)
         Fwgs.setWindowFlag(Qt.WindowType.FramelessWindowHint)
         Fwgs.show()
+        Fwgs.btn_startstop.setShortcut("Ctrl+Space")
         isFwgsOn = True
 
     def closeEvent(self, event):
