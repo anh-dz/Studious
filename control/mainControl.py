@@ -22,14 +22,12 @@ class StudiousFunc:
         global isFwgsOn, isPwgsOn
         isFwgsOn = False
         isPwgsOn = False
-        self.bg_musi = None
         self.file = fileDataControl()
         self.settings = Settings(self.file)
+        self.bg_musi = None
         self.qoutes = choice(list_quotes)
         self.clock_onoff = False
-        self.music_onoff = False
         self.box = CustomMessageBox()
-        self.changeMusic()
         self.onoff_audio
         self.create_chart()
         self.chat = chatBot()
@@ -49,6 +47,10 @@ class StudiousFunc:
         else:   wgs.lb_3_date.setText(f"Chủ nhật, ngày {self.file.ntime}")
         self.setTaskLable()
         wgs.cB_m_task.setCurrentIndex(int(self.settings.data["main"]["label"]))
+        if self.settings.data["main"]["sound"]:
+            self.changeMusic()
+        else:
+            wgs.btn_m_audio.setIcon(QIcon("assert/audio-off.png"))
 
     def initialize_events(self):
         wgs.btn_m_startstop.clicked.connect(self.start_clock)
@@ -90,8 +92,8 @@ class StudiousFunc:
 
     def changeMusic(self):
         if self.bg_musi != None:
-            self.bg_musi._media_player.stop()
             self.bg_musi = audioFunc(QThread, self.settings.music)
+            self.bg_musi._media_player.stop()
             self.bg_musi.start()
         else:
             self.bg_musi = audioFunc(QThread, self.settings.music)
@@ -197,20 +199,20 @@ class StudiousFunc:
         if wgs.checkBox_space.isChecked():
             self.tom._media_player.setLoops(1000)
 
-
     def onoff_audio(self):
-        if self.music_onoff:
-            self.bg_musi._media_player.play()
+        if self.settings.data["main"]["sound"]:
+            try:
+                self.bg_musi._media_player.play()
+            except:
+                self.changeMusic()
             wgs.btn_m_audio.setIcon(QIcon("assert/audio-on.png"))
             if isFwgsOn:
                 Fwgs.btn_audio.setIcon(QIcon("assert/audio-on.png"))
-            self.music_onoff = False
-        elif self.music_onoff == False:
+        else:
             self.bg_musi._media_player.pause()
             wgs.btn_m_audio.setIcon(QIcon("assert/audio-off.png"))
             if isFwgsOn:
                 Fwgs.btn_audio.setIcon(QIcon("assert/audio-off.png"))
-            self.music_onoff = True
     
     def on_combobox_changed(self):
         if isFwgsOn:
@@ -247,7 +249,7 @@ class StudiousFunc:
                                     "qproperty-margin: auto;")
         if self.clock_onoff:
             Fwgs.btn_startstop.setIcon(QIcon("assert/pause.png"))
-        if self.music_onoff:
+        if self.settings.data["main"]["sound"]:
             Fwgs.btn_audio.setIcon(QIcon("assert/audio-off.png"))
         Fwgs.lb_time.setText(f"{self.countdown.mtime}:00")
         Fwgs.btn_startstop.clicked.connect(self.start_clock)
@@ -265,7 +267,6 @@ class StudiousFunc:
 
     def start_weekDialog(self):
         self.wDialog = weekDialogFunc(self.file, self.setDataWork)
-
 
     def start_breath(self):
         self.breath = BreathingCircleAnimation()
@@ -621,6 +622,7 @@ class Settings:
         wgs.checkBox_autosession.toggled.connect(self.changeAutosession)
         wgs.checkBox_autostart.toggled.connect(self.changeAutostart)
         wgs.checkBox_noti.toggled.connect(self.changeNoti)
+        wgs.btn_m_audio.clicked.connect(self.changeAudioStatus)
         wgs.tW_6.itemChanged.connect(self.changeTaskLabel)
 
     def setSettingsData(self):
@@ -636,7 +638,6 @@ class Settings:
             wgs.tW_6.item(i, 2).setText(str(self.data['tasks'][str(i+1)]['rest']))
             if self.data['tasks'][str(i+1)]['combo'] != '':
                 self.labelTask.append([self.data['tasks'][str(i+1)]['combo'], str(self.data['tasks'][str(i+1)]['work']), str(self.data['tasks'][str(i+1)]['rest']), getColorTask()[i]])
-
 
     def changeTaskLabel(self, item):
         dt = {0: 'combo', 1: 'work', 2: 'rest'}
@@ -664,6 +665,10 @@ class Settings:
         self.data['settings']['musicType'] = int(wgs.cB_6_select.currentIndex())
         self.music = dt[self.data['settings']['musicType']]
         self.file.WriteSettingData(self.data)
+    
+    def changeAudioStatus(self):
+        self.data['main']['sound'] = not self.data['main']['sound']
+        self.file.WriteSettingData(self.data)
 
     def changeSpace(self, checked):
         if checked:  self.data['settings']['space'] = True
@@ -671,11 +676,9 @@ class Settings:
         self.file.WriteSettingData(self.data)
 
     def changeAutosession(self, checked):
-        if checked:  
-            self.data['settings']['autosession'] = True
+        if checked:  self.data['settings']['autosession'] = True
         else:   self.data['settings']['autosession'] = False
         self.file.WriteSettingData(self.data)
-        
 
     def changeAutostart(self, checked):
         if checked:  self.data['settings']['autostart'] = True
