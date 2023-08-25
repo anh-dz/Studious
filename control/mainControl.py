@@ -22,13 +22,15 @@ class StudiousFunc:
         global isFwgsOn, isPwgsOn
         isFwgsOn = False
         isPwgsOn = False
+        self.bg_musi = None
         self.file = fileDataControl()
         self.settings = Settings(self.file)
         self.qoutes = choice(list_quotes)
         self.clock_onoff = False
-        self.music_onoff = True
+        self.music_onoff = False
         self.box = CustomMessageBox()
-        self.Mmusic = self.create_media_player('assert/music/music.mp3')
+        self.changeMusic()
+        self.onoff_audio
         self.create_chart()
         self.chat = chatBot()
         self.file.readTableData()
@@ -86,19 +88,16 @@ class StudiousFunc:
                 self.countdown = countdown(int(i[1]), int(i[2]), self.work_or_rest)
                 break
 
-    def create_media_player(self, file:path):
-        self.bg_music = QUrl.fromLocalFile(file)
-        self.media_player = QMediaPlayer()
-        self.audio = QAudioOutput()
-        self.audio.setVolume(1)
-        self.media_player.setAudioOutput(self.audio)
-        self.media_player.setSource(self.bg_music)
-        self.media_player.setLoops(24)
-        self.onoff_audio()
-
     def changeMusic(self):
+        if self.bg_musi != None:
+            self.bg_musi._media_player.stop()
+            self.bg_musi = audioFunc(QThread, self.settings.music)
+            self.bg_musi.start()
+        else:
+            self.bg_musi = audioFunc(QThread, self.settings.music)
+            self.bg_musi.start()
+
         # self.Mmusic = self.create_media_player(self.settings.music)
-        pass
         
     def create_chart(self):
         self.chart = chart(self.file)
@@ -191,13 +190,13 @@ class StudiousFunc:
 
     def onoff_audio(self):
         if self.music_onoff:
-            self.media_player.play()
+            self.bg_musi._media_player.play()
             wgs.btn_m_audio.setIcon(QIcon("assert/audio-on.png"))
             if isFwgsOn:
                 Fwgs.btn_audio.setIcon(QIcon("assert/audio-on.png"))
             self.music_onoff = False
         elif self.music_onoff == False:
-            self.media_player.pause()
+            self.bg_musi._media_player.pause()
             wgs.btn_m_audio.setIcon(QIcon("assert/audio-off.png"))
             if isFwgsOn:
                 Fwgs.btn_audio.setIcon(QIcon("assert/audio-off.png"))
@@ -642,15 +641,17 @@ class Settings:
                 self.labelTask[i][2] = self.data['tasks'][str(row+1)]['rest']
 
     def musicType(self):
-        self.music = self.data['settings']['musicType']
+        dt = {0: 'assert/music/baroque.mp3', 1: 'assert/music/classical.mp3', 2: 'assert/music/melody.mp3'}
+        self.music = dt[self.data['settings']['musicType']]
 
     def changeMainTask(self):
         self.data['main']['label'] = wgs.cB_m_task.currentIndex()
         self.file.WriteSettingData(self.data)
 
     def changeMusic(self):
-        self.data['settings']['musicType'] = wgs.cB_6_select.currentIndex()
-        self.music = self.data['settings']['musicType']
+        dt = {0: 'assert/music/baroque.mp3', 1: 'assert/music/classical.mp3', 2: 'assert/music/melody.mp3'}
+        self.data['settings']['musicType'] = int(wgs.cB_6_select.currentIndex())
+        self.music = dt[self.data['settings']['musicType']]
         self.file.WriteSettingData(self.data)
 
     def changeSpace(self, checked):
