@@ -52,7 +52,7 @@ class ViewControl(QMainWindow):
         
         self.ui.btn_lB_ques.clicked.connect(self.checkQues)
 
-        self.testComboBoxColor()
+        # self.testComboBoxColor()
 
     def buttonClicked(self):
         # Get the sender of the clicked signal (the button that was clicked)

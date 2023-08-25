@@ -3,6 +3,8 @@ import csv
 from os import path, remove, makedirs
 import datetime
 from PyQt6.QtWidgets import *
+import sys
+sys.stdout.reconfigure(encoding='utf-8')
 
 with open("data/quotes.txt", "r", encoding="utf-8") as f:
     res = f.readlines()
@@ -15,7 +17,6 @@ class fileDataControl:
         self.monday = (self._ntime - datetime.timedelta(days=self._ntime.weekday())).strftime("%d/%m/%Y")
         if self.create_folder():  self.default_data()
         self.readDataTime()
-        self.lb = list(self.dataTimeJson[self.ntime].keys())
         
     def create_folder(self) -> bool:
         if not path.exists("data"):
@@ -31,17 +32,23 @@ class fileDataControl:
             if not path.exists("data/time.json"):
                 with open("data/time.json", 'w') as f:
                     pass
+                return True
             if not path.exists("data/tableWeek.csv"):
                 with open("data/tableWeek.csv", 'w') as f:
                     pass
+                return True
             if not path.exists("data/describeItem.csv"):
                 with open("data/describeItem.txt", 'w') as f:
+                    pass
+                return True
+            if not path.exists("data/describeItem.csv"):
+                with open("data/settings.json", 'w') as f:
                     pass
                 return True
         return False
 
     def default_data(self):
-        dataTime = {f"{self.ntime}":{"Học Toán":0, "Học IELTS":0, "Làm việc":0}}
+        dataTime = {f"{self.ntime}":{}}
 
         Wdata = [[self.monday,'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'],
                  ['', '', '', '', '', '', '', ''],
@@ -52,12 +59,21 @@ class fileDataControl:
                  ['', '', '', '', '', '', '', ''],
                  ['', '', '', '', '', '', '', '']]
 
+        dataSettings = {"main": {"sound": True, "label": "3"}, 
+                        "settings": {"musicType": 1, "autostart": False, "noti": False, "autosession": False, "space": False}, 
+                        "tasks": {"1": {"combo": "", "work": 25, "rest": 5}, "2": {"combo": "", "work": 25, "rest": 5}, "3": {"combo": "", "work": "25", "rest": 5}, 
+                                  "4": {"combo": "", "work": 25, "rest": 5}, "5": {"combo": "", "work": 25, "rest": 5}, "6": {"combo": "", "work": 25, "rest": 5}, 
+                                  "7": {"combo": "", "work": 25, "rest": 5}}}
+
         describeData = [['']*7]*7
 
         self.dataTimeJson = dataTime
 
         with open('data/time.json', 'w', newline='', encoding="utf-8") as jsonfile:
             json.dump(dataTime, jsonfile,  ensure_ascii=False)
+
+        with open('data/settings.json', 'w', newline='', encoding="utf-8") as jsonfile:
+            json.dump(dataSettings, jsonfile,  ensure_ascii=False)
 
         with open("data/tableWeek.csv", "w", encoding="utf-8", newline='') as csv_file:
             writer = csv.writer(csv_file)
@@ -79,7 +95,7 @@ class fileDataControl:
             self.dataTimeJson = json.load(jsonfile)
         if self.ntime not in self.dataTimeJson:
             with open("data/time.json", "w", encoding="utf-8") as jsonfile:
-                    self.dataTimeJson[f"{self.ntime}"] = {"Học Toán":0, "Học IELTS":0, "Làm việc":0}
+                    self.dataTimeJson[f"{self.ntime}"] = {}
                     json.dump(self.dataTimeJson, jsonfile,  ensure_ascii=False)
 
     def writeDataTime(self):
@@ -117,7 +133,8 @@ class fileDataControl:
                 last_day = self._ntime - datetime.timedelta(days=i)
                 temp = []
                 for x in range(len(key)):
-                    _t = datachart[last_day.strftime('%d/%m/%Y')][key[x]]
+                    try:_t = datachart[last_day.strftime('%d/%m/%Y')][key[x]]
+                    except: _t = 0
                     detailTime[x][1] += _t
                     temp.append(_t)
                     
@@ -131,7 +148,8 @@ class fileDataControl:
                 last_day = self._ntime - datetime.timedelta(days=i)
                 temp = []
                 for x in range(len(key)):
-                    _t = datachart[last_day.strftime('%d/%m/%Y')][key[x]]
+                    try:_t = datachart[last_day.strftime('%d/%m/%Y')][key[x]]
+                    except: _t = 0
                     detailTime[x][1] += _t
                     temp.append(_t)
                     
@@ -144,7 +162,8 @@ class fileDataControl:
             for i in range(int(days.split(" ")[0])-3, -1, -1):
                 last_day = self._ntime - datetime.timedelta(days=i)
                 for x in range(len(key)):
-                    _t = datachart[last_day.strftime('%d/%m/%Y')][key[x]]
+                    try:_t = datachart[last_day.strftime('%d/%m/%Y')][key[x]]
+                    except: _t = 0
                     detailTime[x][1] += _t
                     temp.append(_t)
                 
@@ -160,7 +179,8 @@ class fileDataControl:
             for i in range(int(days.split(" ")[0])-1, -1, -1):
                 last_day = self._ntime - datetime.timedelta(days=i)
                 for x in range(len(key)):
-                    _t = datachart[last_day.strftime('%d/%m/%Y')][key[x]]
+                    try:_t = datachart[last_day.strftime('%d/%m/%Y')][key[x]]
+                    except: _t = 0
                     detailTime[x][1] += _t
                     temp.append(_t)
                 
@@ -176,7 +196,8 @@ class fileDataControl:
             for i in range(int(days.split(" ")[0])-6, -1, -1):
                 last_day = self._ntime - datetime.timedelta(days=i)
                 for x in range(len(key)):
-                    _t = datachart[last_day.strftime('%d/%m/%Y')][key[x]]
+                    try:_t = datachart[last_day.strftime('%d/%m/%Y')][key[x]]
+                    except: _t = 0
                     detailTime[x][1] += _t
                     temp.append(_t)
                 
@@ -261,3 +282,31 @@ class fileDataControl:
     def WriteSettingData(self, data):
         with open("data/settings.json", 'w', newline="", encoding="utf-8") as jsonfile:
             json.dump(data, jsonfile,  ensure_ascii=False)
+
+    def checkLabelTask(self, data):
+        check = False
+        current_key = []
+        default = list(self.dataTimeJson[f"{self.ntime}"].keys())
+        ndata = {}
+        for i in data:
+            current_key.append(i[0])
+
+        for i in current_key:
+            if i in default:    pass
+            else:   
+                default.append(i)
+                check = True
+        for i in default:
+            if i in current_key:    pass
+            else:   
+                default.remove(i)
+                check = True
+
+        for i in default:
+            ndata.update({i:0})
+
+
+        if check:
+            dataTime = {f"{self.ntime}":ndata}
+            with open('data/time.json', 'w', newline='', encoding="utf-8") as jsonfile:
+                json.dump(dataTime, jsonfile,  ensure_ascii=False)

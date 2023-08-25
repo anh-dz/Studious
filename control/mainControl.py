@@ -22,26 +22,33 @@ class StudiousFunc:
         global isFwgsOn, isPwgsOn
         isFwgsOn = False
         isPwgsOn = False
+        self.bg_musi = None
         self.file = fileDataControl()
         self.settings = Settings(self.file)
         self.qoutes = choice(list_quotes)
         self.clock_onoff = False
-        self.music_onoff = True
-        self.wtime, self.rtime = 25, 5
-        self.countdown = countdown(self.wtime, self.rtime)
+        self.music_onoff = False
         self.box = CustomMessageBox()
-        self.create_media_player()
+        self.changeMusic()
+        self.onoff_audio
         self.create_chart()
         self.chat = chatBot()
         self.file.readTableData()
         self.setDataWork()
+        self.file.checkLabelTask(self.settings.labelTask)
+        self.file.readDataTime()
+        self.file.lb = list(self.file.dataTimeJson[self.file.ntime].keys())
+        self.work_or_rest = True
+        self.countdown = countdown(int(self.settings.labelTask[0][1]), int(self.settings.labelTask[0][2]), self.work_or_rest)
 
     def initialize_ui(self):
         wgs.lb_m_quote.setText(self.qoutes)
         wgs.label.setText(self.file.totalTimeDay())
-        wgs.lb_m_time.setText(f"{self.wtime}:00")
+        wgs.lb_m_time.setText(f"{self.settings.labelTask[0][1]}:00")
         if self.day_left != 7:  wgs.lb_3_date.setText(f"Thứ {self.day_left + 1}, ngày {self.file.ntime}")
         else:   wgs.lb_3_date.setText(f"Chủ nhật, ngày {self.file.ntime}")
+        self.setTaskLable()
+        wgs.cB_m_task.setCurrentIndex(int(self.settings.data["main"]["label"]))
 
     def initialize_events(self):
         wgs.btn_m_startstop.clicked.connect(self.start_clock)
@@ -54,8 +61,10 @@ class StudiousFunc:
         wgs.btn_3_edit.clicked.connect(self.start_weekDialog)
         wgs.btn_5_start.clicked.connect(self.start_breath)
         wgs.btn_4_send.clicked.connect(lambda: self.chat.start())
+        wgs.btn_4_send.setShortcut("Ctrl+Return")
         wgs.tW_3_todoToday.itemClicked.connect(self.showDescribeWork)
-        # wgs.PtE_chatBot.eventFilter(self.ui.PtE_chatBot)
+        wgs.tW_6.itemChanged.connect(self.changeTaskLabel)
+        wgs.cB_6_select.currentIndexChanged.connect(self.changeMusic)
 
         # wgs.cB_6_select.currentIndexChanged.connect(self.changeMusic)
         # wgs.checkBox_space.toggled.connect(self.changeSpace)
@@ -64,25 +73,32 @@ class StudiousFunc:
         # wgs.checkBox_noti.toggled.connect(self.changeNoti)
         # wgs.tW_6.itemChanged.connect(self.changeTaskLebel)
 
-    def eventFilter(self, obj, event):
-        if event.type() == event.KeyPress and event.key() == Qt.Key_Space:
-            print("Spacebar pressed")
-        return super().eventFilter(obj, event)
-
     def autoStartClock(self):
-        print(wgs.checkBox_autosession.isChecked())
         if wgs.checkBox_autosession.isChecked():    self.start_clock()
 
-    def create_media_player(self):
-        self.bg_music = QUrl.fromLocalFile('assert/music/music.mp3')
-        self.media_player = QMediaPlayer()
-        self.audio = QAudioOutput()
-        self.audio.setVolume(1)
-        self.media_player.setAudioOutput(self.audio)
-        self.media_player.setSource(self.bg_music)
-        self.media_player.setLoops(24)
-        self.onoff_audio()
-        
+    def changeTaskLabel(self, item):
+        self.settings.setSettingsData()
+        self.file.checkLabelTask(self.settings.labelTask)
+        self.file.readDataTime()
+        self.file.lb = list(self.file.dataTimeJson[self.file.ntime].keys())
+        self.settings.setSettingsData()
+        self.setTaskLable()
+        for i in self.settings.labelTask:
+            if i[0] == wgs.cB_m_task.currentText():
+                self.countdown = countdown(int(i[1]), int(i[2]), self.work_or_rest)
+                break
+
+    def changeMusic(self):
+        if self.bg_musi != None:
+            self.bg_musi._media_player.stop()
+            self.bg_musi = audioFunc(QThread, self.settings.music)
+            self.bg_musi.start()
+        else:
+            self.bg_musi = audioFunc(QThread, self.settings.music)
+            self.bg_musi.start()
+
+        # self.Mmusic = self.create_media_player(self.settings.music)
+
     def create_chart(self):
         self.chart = chart(self.file)
         wgs.cB_chooseDate.currentIndexChanged.connect(self.chart.dataChange)
@@ -95,6 +111,16 @@ class StudiousFunc:
             self.chart.dataChange()
         
         return False
+    
+    def setTaskLable(self):
+        wgs.cB_m_task.clear()
+        for i in self.settings.labelTask:
+            wgs.cB_m_task.addItem(create_colored_icon(QColor(i[-1])), i[0])
+        if isFwgsOn:
+            self.setTaskLableFs()
+
+    def turnOffSpace(self):
+        self.tom._media_player.stop()
 
     #Func control app
     def start_clock(self):
@@ -121,16 +147,21 @@ class StudiousFunc:
             wgs.btn_m_startstop.setIcon(QIcon("assert/start.png"))
             if isFwgsOn:
                 Fwgs.btn_startstop.setIcon(QIcon("assert/start.png"))
-            self.countdown.stop_timer()    
+            self.countdown.stop_timer()  
+        try:
+            self.turnOffSpace()
+        except:
+            pass
 
     def next_clock(self):
         wgs.btn_m_startstop.setIcon(QIcon("assert/start.png"))
         if isFwgsOn:
             Fwgs.btn_startstop.setIcon(QIcon("assert/start.png"))
-        self.qthread = audioFunc(QThread,'assert/music/end.mp3')
-        self.qthread.start()
+        self.tom = audioFunc(QThread,'assert/music/clock.mp3')
+        self.tom.start()
         if self.countdown.work_or_rest: 
             wgs.lb_m_time.setStyleSheet('color: rgb(251, 238, 172)')
+            self.file.readDataTime()
             self.file.dataTimeJson[self.file.ntime][wgs.cB_m_task.currentText()] += round((self.countdown.wtime-self.countdown.time_left/60)/60, 1)
             self.file.writeDataTime()
             wgs.label.setText(self.file.totalTimeDay())
@@ -163,16 +194,19 @@ class StudiousFunc:
             Fwgs.lb_time.setText(f"{self.countdown.mtime}:00")
         self.chart.dataChange()
         self.autoStartClock()
+        if wgs.checkBox_space.isChecked():
+            self.tom._media_player.setLoops(1000)
+
 
     def onoff_audio(self):
         if self.music_onoff:
-            self.media_player.play()
+            self.bg_musi._media_player.play()
             wgs.btn_m_audio.setIcon(QIcon("assert/audio-on.png"))
             if isFwgsOn:
                 Fwgs.btn_audio.setIcon(QIcon("assert/audio-on.png"))
             self.music_onoff = False
         elif self.music_onoff == False:
-            self.media_player.pause()
+            self.bg_musi._media_player.pause()
             wgs.btn_m_audio.setIcon(QIcon("assert/audio-off.png"))
             if isFwgsOn:
                 Fwgs.btn_audio.setIcon(QIcon("assert/audio-off.png"))
@@ -186,6 +220,10 @@ class StudiousFunc:
         wgs.cB_m_task.setCurrentText(selected_option)
         if isPwgsOn:
             Pwgs.lb_task.setText(selected_option)
+        for i in self.settings.labelTask:
+            if i[0] == wgs.cB_m_task.currentText():
+                self.countdown = countdown(int(i[1]), int(i[2]), self.work_or_rest)
+                break
     
     def start_dialog(self):
         if isPwgsOn:
@@ -199,6 +237,7 @@ class StudiousFunc:
 
     def start_fs(self):
         self.fs = fullScreenFunc()
+        self.setTaskLableFs()
         Fwgs.cB_task.currentIndexChanged.connect(self.on_combobox_changed)
         if not self.countdown.work_or_rest:
             Fwgs.lb_time.setStyleSheet("font: 128pt \"Arial\";\n"
@@ -218,6 +257,11 @@ class StudiousFunc:
         Fwgs.btn_exit.clicked.connect(lambda: Fwgs.close())
         Fwgs.bottomQuote.setText(self.qoutes)
         Fwgs.cB_task.setEnabled(not self.clock_onoff)
+
+    def setTaskLableFs(self):
+        Fwgs.cB_task.clear()
+        for i in self.settings.labelTask:
+            Fwgs.cB_task.addItem(create_colored_icon(QColor(i[-1])), i[0])
 
     def start_weekDialog(self):
         self.wDialog = weekDialogFunc(self.file, self.setDataWork)
@@ -312,6 +356,7 @@ class fullScreenFunc(StudiousFS):
         Fwgs.setWindowFlag(Qt.WindowType.WindowStaysOnTopHint)
         Fwgs.setWindowFlag(Qt.WindowType.FramelessWindowHint)
         Fwgs.show()
+        Fwgs.btn_startstop.setShortcut("Ctrl+Space")
         isFwgsOn = True
 
     def closeEvent(self, event):
@@ -374,10 +419,12 @@ class weekDialogFunc(Week_Dialog):
         else:   self.wgt.plainTextEdit.setReadOnly(False)
     
 class countdown:
-    def __init__(self, work_time:int, rest_time:int):
+    def __init__(self, work_time:int, rest_time:int, work_or_rest):
         self.wtime = work_time
         self.rtime = rest_time
-        self.work_or_rest = True
+        self.work_or_rest = work_or_rest
+        if self.work_or_rest:   wgs.lb_m_time.setText(f"{self.wtime}:00")
+        else:   wgs.lb_m_time.setText(f"{self.rtime}:00")
         self.mtime = self.wtime
         self.time_left = self.mtime*60
         self.timer = QTimer()
@@ -451,8 +498,7 @@ class chatBot(QThread):
         user_input = wgs.PtE_chatBot.toPlainText()
         if user_input.translate(str.maketrans('', '', '''
      
- 
-''')) in ["", None]: return
+ ''')) in ["", None]: return
         self.model.appendMessage(user_input, "user")
         wgs.PtE_chatBot.clear()
 
@@ -495,7 +541,7 @@ class chart:
         self.circleChart()
 
     def columnChart(self):
-        self.colData = QBarSet("Tổng thời gian tập trung")
+        self.colData = QBarSet("Tổng thời gian tập trung (giờ)")
         self.colData.setLabelFont(QFont("Arial", 12))
         self.colData.append(self.totalTime)
 
@@ -515,7 +561,7 @@ class chart:
         self.colSerise.attachAxis(self.colChart.axis_x)
 
         self.colChart.axis_y = QValueAxis()
-        self.colChart.axis_y.setRange(0, max(self.totalTime)+3)
+        self.colChart.axis_y.setRange(0, round(max(1, max(self.totalTime)+max(self.totalTime)*0.2)))
         self.colChart.addAxis(self.colChart.axis_y, Qt.AlignmentFlag.AlignLeft)
         self.colSerise.attachAxis(self.colChart.axis_y)
 
@@ -532,14 +578,14 @@ class chart:
         self.pieSerise = QPieSeries()
         for i in self.detailTime:
             self.pieSerise.append(i[0], i[1])
-        colors = [QColor("#66b266"), QColor("#3366cc"), QColor("#ff5050"), QColor("#ffff66")]
+        colors = ['#C51605', '#B85C38', '#8B8000', '#1A5D1A', '#0C356A', '#35155D', '#352F44']
         font = QFont("Arial", 10)
         self.pieSerise.setLabelsPosition(QPieSlice.LabelPosition.LabelInsideNormal)
         for i, slice in enumerate(self.pieSerise.slices()):
             slice.setLabel("{:.2f}%".format(100 * slice.percentage()))
-            slice.setColor(colors[i])
+            slice.setColor(QColor(colors[i]))
             slice.setLabelFont(font)
-            slice.setLabelColor(QColor("#000000"))
+            slice.setLabelColor(QColor("#ffffff"))
 
         self.pieChart = QChart()
         self.pieChart.legend()
@@ -563,7 +609,10 @@ class Settings:
     def __init__(self, file) -> None:
         self.file = file
         self.data = self.file.readSettingData()
+        self.music = "1"
+        self.labelTask = []
         self.setSettingsData()
+        self.musicType()
         self.init_trigger()
 
     def init_trigger(self):
@@ -572,9 +621,10 @@ class Settings:
         wgs.checkBox_autosession.toggled.connect(self.changeAutosession)
         wgs.checkBox_autostart.toggled.connect(self.changeAutostart)
         wgs.checkBox_noti.toggled.connect(self.changeNoti)
-        wgs.tW_6.itemChanged.connect(self.changeTaskLebel)
+        wgs.tW_6.itemChanged.connect(self.changeTaskLabel)
 
     def setSettingsData(self):
+        self.labelTask = []
         wgs.cB_6_select.setCurrentIndex(self.data['settings']['musicType'])
         wgs.checkBox_space.setChecked(self.data['settings']['space'])
         wgs.checkBox_autosession.setChecked(self.data['settings']['autosession'])
@@ -584,8 +634,11 @@ class Settings:
             wgs.tW_6.item(i, 0).setText(self.data['tasks'][str(i+1)]['combo'])
             wgs.tW_6.item(i, 1).setText(str(self.data['tasks'][str(i+1)]['work']))
             wgs.tW_6.item(i, 2).setText(str(self.data['tasks'][str(i+1)]['rest']))
+            if self.data['tasks'][str(i+1)]['combo'] != '':
+                self.labelTask.append([self.data['tasks'][str(i+1)]['combo'], str(self.data['tasks'][str(i+1)]['work']), str(self.data['tasks'][str(i+1)]['rest']), getColorTask()[i]])
 
-    def changeTaskLebel(self, item):
+
+    def changeTaskLabel(self, item):
         dt = {0: 'combo', 1: 'work', 2: 'rest'}
 
         row = item.row()
@@ -593,10 +646,23 @@ class Settings:
 
         self.data['tasks'][str(row+1)][dt[col]] = item.text()
         self.file.WriteSettingData(self.data)
+        for i in range(len(self.labelTask)):
+            if self.labelTask[i][0] == self.data['tasks'][str(row+1)]['combo']:
+                self.labelTask[i][1] = self.data['tasks'][str(row+1)]['work']
+                self.labelTask[i][2] = self.data['tasks'][str(row+1)]['rest']
 
+    def musicType(self):
+        dt = {0: 'assert/music/baroque.mp3', 1: 'assert/music/classical.mp3', 2: 'assert/music/melody.mp3'}
+        self.music = dt[self.data['settings']['musicType']]
+
+    def changeMainTask(self):
+        self.data['main']['label'] = wgs.cB_m_task.currentIndex()
+        self.file.WriteSettingData(self.data)
 
     def changeMusic(self):
-        self.data['settings']['musicType'] = wgs.cB_6_select.currentIndex()
+        dt = {0: 'assert/music/baroque.mp3', 1: 'assert/music/classical.mp3', 2: 'assert/music/melody.mp3'}
+        self.data['settings']['musicType'] = int(wgs.cB_6_select.currentIndex())
+        self.music = dt[self.data['settings']['musicType']]
         self.file.WriteSettingData(self.data)
 
     def changeSpace(self, checked):
