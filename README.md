@@ -2,10 +2,10 @@
 Tương thích hệ điều hành: Windows, MacOS, Linux <br>
 <br>
 <b>Yêu cầu:</b> <br>
-<ol>
- <li>Cài đặt Python 3.10</li>
- <li>Cài đặt các thư viện yêu cầu trong requirement.txt. Câu lệnh cài đặt: `pip install requirements.txt`</li>
-</ol>
+
+ Cài đặt Python 3.10
+ Cài đặt các thư viện yêu cầu trong requirement.txt. Câu lệnh cài đặt: `pip install requirements.txt`
+
 <br>
 <b>Cách chạy ứng dụng:</b> <br>
 <i>-> File main.py là file khởi chạy chương trình</i> <br>
