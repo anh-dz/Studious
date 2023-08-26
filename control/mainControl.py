@@ -1,6 +1,5 @@
 import typing
 from PyQt6.QtCore import *
-from PyQt6.QtCore import QObject
 from PyQt6.QtWidgets import *
 from PyQt6.QtGui import *
 from PyQt6.QtMultimedia import *
@@ -29,7 +28,7 @@ class StudiousFunc:
         wgs.lb_m_quote.setText(self.qoutes)
 
         #connect start/stop button with clock
-        self.wtime, self.rtime = 1, 5
+        self.wtime, self.rtime = 25, 5
         wgs.lb_m_time.setText(f"{self.wtime}:00")
         wgs.btn_m_startstop.clicked.connect(self.start_clock)
         self.countdown = countdown(self.wtime, self.rtime)
@@ -307,7 +306,6 @@ class chart:
                 last_day = current_date - delta
                 self.time.append(last_day.strftime('%d/%m'))
             self.totalTime = [4, 3, 5]
-            sum_percentrage = sum(self.totalTime)/100
             self.detailTime = [[f"Học Toán", 6], [f"Học IELTS", 1], [f"Làm việc", 5]]
             self.columnChart()
             self.circleChart()
@@ -319,7 +317,6 @@ class chart:
                 last_day = current_date - delta
                 self.time.append(last_day.strftime('%d/%m'))
             self.totalTime = [4, 3, 5, 6, 2, 4, 5]
-            sum_percentrage = sum(self.totalTime)/100
             self.detailTime = [[f"Học Toán", 11], [f"Học IELTS", 8], [f"Làm việc", 10]]
             self.columnChart()
             self.circleChart()
@@ -332,7 +329,6 @@ class chart:
                 self.time.append(f"{last_day.strftime('%d/%m')} - {(last_day + datetime.timedelta(days=7)).strftime('%d/%m')}")
                 print(f"{last_day.strftime('%d/%m')} - {(last_day + datetime.timedelta(days=7)).strftime('%d/%m')}")
             self.totalTime = [25, 16, 20, 13]
-            sum_percentrage = sum(self.totalTime)/100
             self.detailTime = [[f"Học Toán", 27], [f"Học IELTS", 17], [f"Làm việc", 40]]
             self.columnChart()
             self.circleChart()
