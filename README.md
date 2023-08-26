@@ -1,12 +1,11 @@
 # Studious
 Tương thích hệ điều hành: Windows, MacOS, Linux <br>
 <br>
-<b>Yêu cầu:</b> <br>
+<b>Yêu cầu:</b>
 
  - Cài đặt Python 3.10
  - Cài đặt các thư viện yêu cầu trong requirement.txt. Câu lệnh cài đặt: `pip install requirements.txt`
 
-<br>
 <b>Cách chạy ứng dụng:</b> <br>
 <i>-> File main.py là file khởi chạy chương trình</i> <br>
 Trỏ vào thư mục Studious sau khi clone code về <br>
