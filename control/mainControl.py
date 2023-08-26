@@ -53,6 +53,7 @@ class StudiousFunc:
 
     def initialize_events(self):
         wgs.btn_m_startstop.clicked.connect(self.start_clock)
+        wgs.btn_m_startstop.setShortcut("Ctrl+Space")
         wgs.btn_m_next.clicked.connect(self.next_clock)
         wgs.btn_m_audio.clicked.connect(self.onoff_audio)
         wgs.btn_m_pin.clicked.connect(self.start_dialog)

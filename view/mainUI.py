@@ -792,7 +792,7 @@ class Ui_Studious(object):
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:transparent;\"><br /></p></body></html>"))
         self.btn_5_start.setText(_translate("Studious", "  Bắt đầu hít thở"))
         self.LB_2.setText(_translate("Studious", "Cài đặt"))
-        self.checkBox_space.setText(_translate("Studious", "  Nhấn Ctrl+Space để bắt đầu phiên tiếp"))
+        self.checkBox_space.setText(_translate("Studious", "  Chuông kêu kết thúc phiên liên tục"))
         self.checkBox_autosession.setText(_translate("Studious", "  Tự bắt đầu phiên tiếp"))
         self.checkBox_autostart.setText(_translate("Studious", "  Tự khởi động cùng hệ thống"))
         self.cB_6_select.setItemText(0, _translate("Studious", "Baroque"))
