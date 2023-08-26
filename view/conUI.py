@@ -120,14 +120,7 @@ class ViewControl(QMainWindow):
         self.animation2.start()
 
         self.ui.pushButton.setVisible(target_width > 44)
-    
-    def testComboBoxColor(self):
-        self.ui.cB_m_task.clear()
-        self.ui.cB_m_task.addItem(create_colored_icon(QColor('blue')), "Học Toán")
-        self.ui.cB_m_task.addItem(create_colored_icon(QColor('green')), "Học IELTS")
-        self.ui.cB_m_task.addItem(create_colored_icon(QColor('red')), "Làm việc")
-        # self.ui.tW_6.setItem(0, 0, QTableWidgetItem(create_colored_icon(QColor("blue")), "Hello World"))
-    
+
     def setColorRowTable(self, table, row, color):
         for j in range(3): #table.columnCount()
             table.item(row, j).setBackground(QColor(color))

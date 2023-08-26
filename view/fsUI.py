@@ -54,7 +54,7 @@ class StudiousFS(QWidget):
         self.cB_task.setObjectName("self.cB_task")
 
         self.lb_time = QLabel(self)
-        self.lb_time.setStyleSheet("font: 128pt \"Arial\";\n"
+        self.lb_time.setStyleSheet("font: 132pt \"Arial\";\n"
 "color: rgb(249, 245, 246);\n"
 "border: 0px;\n"
 "qproperty-alignment: \'AlignCenter\';\n"
@@ -88,16 +88,6 @@ class StudiousFS(QWidget):
 
         # Set the layout for the main widget
         self.setLayout(layout)
-
-        self.bottomQuote = QLabel("bottomQuote", self)
-        self.bottomQuote.setStyleSheet("font: 26pt \"Arial\";\n"
-"color: rgb(249, 245, 246);\n"
-"border: 0px;\n"
-"qproperty-alignment: \'AlignCenter\';\n"
-"qproperty-margin: auto;")
-        self.bottomQuote.setWordWrap(True)
-
-        self.bottomQuote.setGeometry(QRect(10, self.y-200, self.x-20, 180))
 
         self.btn_exit = QToolButton(self)
         self.btn_exit.setGeometry(self.x - 80, self.y-80, 75, 75)

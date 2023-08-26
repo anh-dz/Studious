@@ -559,7 +559,7 @@ class Ui_Studious(object):
 "    background-color: rgba(52, 22, 85, 100%);\n"
 "}")
         self.btn_5_start.setIcon(icon6)
-        self.btn_5_start.setIconSize(QSize(23, 23))
+        self.btn_5_start.setIconSize(QSize(32, 32))
         self.sW_main.addWidget(self.page_m_5)
         self.page_m_6 = QWidget()
         self.page_m_6.setObjectName(u"page_m_6")
@@ -576,7 +576,7 @@ class Ui_Studious(object):
         self.page.setObjectName(u"page")
         self.checkBox_space = QCheckBox(self.page)
         self.checkBox_space.setObjectName(u"checkBox_space")
-        self.checkBox_space.setGeometry(QRect(50, 310, 421, 50))
+        self.checkBox_space.setGeometry(QRect(50, 310, 461, 50))
         self.checkBox_space.setStyleSheet(u"font: 24pt;")
         self.checkBox_autosession = QCheckBox(self.page)
         self.checkBox_autosession.setObjectName(u"checkBox_autosession")
@@ -682,6 +682,10 @@ class Ui_Studious(object):
         self.tW_6.verticalHeader().setMinimumSectionSize(30)
         self.tW_6.verticalHeader().setDefaultSectionSize(30)
         self.tW_6.verticalHeader().setStretchLastSection(True)
+        self.LB_4 = QLabel(self.page_2)
+        self.LB_4.setObjectName(u"LB_4")
+        self.LB_4.setGeometry(QRect(130, 290, 411, 61))
+        self.LB_4.setStyleSheet(u"font: italic 15pt \"Arial\";")
         self.sW_setting.addWidget(self.page_2)
         self.btn_6_nextPage = QPushButton(self.page_m_6)
         self.btn_6_nextPage.setObjectName(u"btn_6_nextPage")
@@ -825,9 +829,9 @@ class Ui_Studious(object):
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'Arial'; font-size:18pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:transparent;\"><br /></p></body></html>", None))
-        self.btn_5_start.setText(QCoreApplication.translate("Studious", u"  B\u1eaft \u0111\u1ea7u h\u00edt th\u1edf", None))
+        self.btn_5_start.setText(QCoreApplication.translate("Studious", u" B\u1eaft \u0111\u1ea7u h\u00edt th\u1edf", None))
         self.LB_2.setText(QCoreApplication.translate("Studious", u"C\u00e0i \u0111\u1eb7t", None))
-        self.checkBox_space.setText(QCoreApplication.translate("Studious", u"  Nh\u1ea5n Space \u0111\u1ec3 b\u1eaft \u0111\u1ea7u phi\u00ean ti\u1ebfp", None))
+        self.checkBox_space.setText(QCoreApplication.translate("Studious", u"  K\u00eau chu\u00f4ng \u0111\u1ebfn khi b\u1eaft \u0111\u1ea7u phi\u00ean ti\u1ebfp", None))
         self.checkBox_autosession.setText(QCoreApplication.translate("Studious", u"  T\u1ef1 b\u1eaft \u0111\u1ea7u phi\u00ean ti\u1ebfp", None))
         self.checkBox_autostart.setText(QCoreApplication.translate("Studious", u"  T\u1ef1 kh\u1edfi \u0111\u1ed9ng c\u00f9ng h\u1ec7 th\u1ed1ng", None))
         self.cB_6_select.setItemText(0, QCoreApplication.translate("Studious", u"Baroque", None))
@@ -895,13 +899,14 @@ class Ui_Studious(object):
         ___qtablewidgetitem36.setText(QCoreApplication.translate("Studious", u"5", None));
         self.tW_6.setSortingEnabled(__sortingEnabled1)
 
+        self.LB_4.setText(QCoreApplication.translate("Studious", u"L\u01b0u \u00fd: H\u1ea1n ch\u1ebf ch\u1ec9nh s\u1eeda \u0111\u1ec3 c\u00f3 \u0111\u01b0\u1ee3c d\u1eef li\u1ec7u tr\u1ef1c quan nh\u1ea5t", None))
         self.btn_6_nextPage.setText(QCoreApplication.translate("Studious", u"\ud83d\udc49", None))
         self.tB_7_about.setHtml(QCoreApplication.translate("Studious", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'Arial'; font-size:18pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:transparent;\"><br /></p></body></html>", None))
-        self.btn_7_community.setText(QCoreApplication.translate("Studious", u"  C\u1ed8NG \u0110\u1ed2NG", None))
+        self.btn_7_community.setText(QCoreApplication.translate("Studious", u" C\u1ed8NG \u0110\u1ed2NG", None))
         self.Background.setText("")
         self.pushButton.setText("")
     # retranslateUi

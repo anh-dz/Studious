@@ -1,7 +1,6 @@
 import datetime
 import requests
 from PyQt6.QtCore import *
-from PyQt6.QtCore import QObject
 from PyQt6.QtWidgets import *
 from PyQt6.QtGui import *
 from PyQt6.QtMultimedia import *
@@ -22,14 +21,12 @@ class StudiousFunc:
         global isFwgsOn, isPwgsOn
         isFwgsOn = False
         isPwgsOn = False
-        self.bg_musi = None
         self.file = fileDataControl()
         self.settings = Settings(self.file)
+        self.bg_musi = None
         self.qoutes = choice(list_quotes)
         self.clock_onoff = False
-        self.music_onoff = False
         self.box = CustomMessageBox()
-        self.changeMusic()
         self.onoff_audio
         self.create_chart()
         self.chat = chatBot()
@@ -49,9 +46,14 @@ class StudiousFunc:
         else:   wgs.lb_3_date.setText(f"Chủ nhật, ngày {self.file.ntime}")
         self.setTaskLable()
         wgs.cB_m_task.setCurrentIndex(int(self.settings.data["main"]["label"]))
+        if self.settings.data["main"]["sound"]:
+            self.changeMusic()
+        else:
+            wgs.btn_m_audio.setIcon(QIcon("assert/audio-off.png"))
 
     def initialize_events(self):
         wgs.btn_m_startstop.clicked.connect(self.start_clock)
+        wgs.btn_m_startstop.setShortcut("Ctrl+Space")
         wgs.btn_m_next.clicked.connect(self.next_clock)
         wgs.btn_m_audio.clicked.connect(self.onoff_audio)
         wgs.btn_m_pin.clicked.connect(self.start_dialog)
@@ -147,7 +149,7 @@ class StudiousFunc:
             wgs.btn_m_startstop.setIcon(QIcon("assert/start.png"))
             if isFwgsOn:
                 Fwgs.btn_startstop.setIcon(QIcon("assert/start.png"))
-            self.countdown.stop_timer()  
+            self.countdown.stop_timer()
         try:
             self.turnOffSpace()
         except:
@@ -197,20 +199,20 @@ class StudiousFunc:
         if wgs.checkBox_space.isChecked():
             self.tom._media_player.setLoops(1000)
 
-
     def onoff_audio(self):
-        if self.music_onoff:
-            self.bg_musi._media_player.play()
+        if self.settings.data["main"]["sound"]:
+            try:
+                self.bg_musi._media_player.play()
+            except:
+                self.changeMusic()
             wgs.btn_m_audio.setIcon(QIcon("assert/audio-on.png"))
             if isFwgsOn:
                 Fwgs.btn_audio.setIcon(QIcon("assert/audio-on.png"))
-            self.music_onoff = False
-        elif self.music_onoff == False:
+        else:
             self.bg_musi._media_player.pause()
             wgs.btn_m_audio.setIcon(QIcon("assert/audio-off.png"))
             if isFwgsOn:
                 Fwgs.btn_audio.setIcon(QIcon("assert/audio-off.png"))
-            self.music_onoff = True
     
     def on_combobox_changed(self):
         if isFwgsOn:
@@ -239,6 +241,8 @@ class StudiousFunc:
         self.fs = fullScreenFunc()
         self.setTaskLableFs()
         Fwgs.cB_task.currentIndexChanged.connect(self.on_combobox_changed)
+        if not self.settings.data["main"]["sound"]:
+            Fwgs.btn_audio.setIcon(QIcon("assert/audio-off.png"))
         if not self.countdown.work_or_rest:
             Fwgs.lb_time.setStyleSheet("font: 128pt \"Arial\";\n"
                                     "color: rgb(251, 238, 172);\n"
@@ -247,7 +251,7 @@ class StudiousFunc:
                                     "qproperty-margin: auto;")
         if self.clock_onoff:
             Fwgs.btn_startstop.setIcon(QIcon("assert/pause.png"))
-        if self.music_onoff:
+        if self.settings.data["main"]["sound"]:
             Fwgs.btn_audio.setIcon(QIcon("assert/audio-off.png"))
         Fwgs.lb_time.setText(f"{self.countdown.mtime}:00")
         Fwgs.btn_startstop.clicked.connect(self.start_clock)
@@ -255,7 +259,6 @@ class StudiousFunc:
         Fwgs.btn_audio.clicked.connect(self.onoff_audio)
         Fwgs.cB_task.setCurrentText(wgs.cB_m_task.currentText())
         Fwgs.btn_exit.clicked.connect(lambda: Fwgs.close())
-        Fwgs.bottomQuote.setText(self.qoutes)
         Fwgs.cB_task.setEnabled(not self.clock_onoff)
 
     def setTaskLableFs(self):
@@ -265,7 +268,6 @@ class StudiousFunc:
 
     def start_weekDialog(self):
         self.wDialog = weekDialogFunc(self.file, self.setDataWork)
-
 
     def start_breath(self):
         self.breath = BreathingCircleAnimation()
@@ -353,10 +355,10 @@ class fullScreenFunc(StudiousFS):
         super().__init__()
         global Fwgs
         Fwgs = self
-        Fwgs.setWindowFlag(Qt.WindowType.WindowStaysOnTopHint)
-        Fwgs.setWindowFlag(Qt.WindowType.FramelessWindowHint)
-        Fwgs.show()
-        Fwgs.btn_startstop.setShortcut("Ctrl+Space")
+        self.setWindowFlag(Qt.WindowType.WindowStaysOnTopHint)
+        self.setWindowFlag(Qt.WindowType.FramelessWindowHint)
+        self.btn_startstop.setShortcut("Ctrl+Space")
+        self.show()
         isFwgsOn = True
 
     def closeEvent(self, event):
@@ -621,6 +623,7 @@ class Settings:
         wgs.checkBox_autosession.toggled.connect(self.changeAutosession)
         wgs.checkBox_autostart.toggled.connect(self.changeAutostart)
         wgs.checkBox_noti.toggled.connect(self.changeNoti)
+        wgs.btn_m_audio.clicked.connect(self.changeAudioStatus)
         wgs.tW_6.itemChanged.connect(self.changeTaskLabel)
 
     def setSettingsData(self):
@@ -636,7 +639,6 @@ class Settings:
             wgs.tW_6.item(i, 2).setText(str(self.data['tasks'][str(i+1)]['rest']))
             if self.data['tasks'][str(i+1)]['combo'] != '':
                 self.labelTask.append([self.data['tasks'][str(i+1)]['combo'], str(self.data['tasks'][str(i+1)]['work']), str(self.data['tasks'][str(i+1)]['rest']), getColorTask()[i]])
-
 
     def changeTaskLabel(self, item):
         dt = {0: 'combo', 1: 'work', 2: 'rest'}
@@ -664,6 +666,10 @@ class Settings:
         self.data['settings']['musicType'] = int(wgs.cB_6_select.currentIndex())
         self.music = dt[self.data['settings']['musicType']]
         self.file.WriteSettingData(self.data)
+    
+    def changeAudioStatus(self):
+        self.data['main']['sound'] = not self.data['main']['sound']
+        self.file.WriteSettingData(self.data)
 
     def changeSpace(self, checked):
         if checked:  self.data['settings']['space'] = True
@@ -671,11 +677,9 @@ class Settings:
         self.file.WriteSettingData(self.data)
 
     def changeAutosession(self, checked):
-        if checked:  
-            self.data['settings']['autosession'] = True
+        if checked:  self.data['settings']['autosession'] = True
         else:   self.data['settings']['autosession'] = False
         self.file.WriteSettingData(self.data)
-        
 
     def changeAutostart(self, checked):
         if checked:  self.data['settings']['autostart'] = True
