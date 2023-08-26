@@ -1,6 +1,5 @@
-import sys
-from PyQt6.QtWidgets import QLabel, QWidget, QVBoxLayout, QWidget, QSizePolicy
-from PyQt6.QtCore import Qt
+from PyQt6.QtWidgets import QLabel, QWidget, QVBoxLayout, QHBoxLayout, QWidget, QSizePolicy, QPushButton
+from PyQt6.QtCore import Qt, QRect
 from PyQt6.QtGui import QPixmap
 
 class ImageDisplayApp(QWidget):
@@ -20,3 +19,11 @@ class ImageDisplayApp(QWidget):
         pixmap = pixmap.scaled(750, 470, aspectRatioMode=Qt.AspectRatioMode.KeepAspectRatio)  # Scale the pixmap
         self.image_label.setPixmap(pixmap)
         self.image_label.setScaledContents(True)  # Resize image to fit label
+
+    def next_image(self):
+        self.current_image_index = (self.current_image_index + 1) % len(self.image_paths)
+        self.load_image(self.image_paths[self.current_image_index])
+
+    def previous_image(self):
+        self.current_image_index = (self.current_image_index - 1) % len(self.image_paths)
+        self.load_image(self.image_paths[self.current_image_index])

@@ -241,6 +241,8 @@ class StudiousFunc:
         self.fs = fullScreenFunc()
         self.setTaskLableFs()
         Fwgs.cB_task.currentIndexChanged.connect(self.on_combobox_changed)
+        if not self.settings.data["main"]["sound"]:
+            Fwgs.btn_audio.setIcon(QIcon("assert/audio-off.png"))
         if not self.countdown.work_or_rest:
             Fwgs.lb_time.setStyleSheet("font: 128pt \"Arial\";\n"
                                     "color: rgb(251, 238, 172);\n"
@@ -257,7 +259,6 @@ class StudiousFunc:
         Fwgs.btn_audio.clicked.connect(self.onoff_audio)
         Fwgs.cB_task.setCurrentText(wgs.cB_m_task.currentText())
         Fwgs.btn_exit.clicked.connect(lambda: Fwgs.close())
-        Fwgs.bottomQuote.setText(self.qoutes)
         Fwgs.cB_task.setEnabled(not self.clock_onoff)
 
     def setTaskLableFs(self):
@@ -354,10 +355,10 @@ class fullScreenFunc(StudiousFS):
         super().__init__()
         global Fwgs
         Fwgs = self
-        Fwgs.setWindowFlag(Qt.WindowType.WindowStaysOnTopHint)
-        Fwgs.setWindowFlag(Qt.WindowType.FramelessWindowHint)
-        Fwgs.show()
-        Fwgs.btn_startstop.setShortcut("Ctrl+Space")
+        self.setWindowFlag(Qt.WindowType.WindowStaysOnTopHint)
+        self.setWindowFlag(Qt.WindowType.FramelessWindowHint)
+        self.btn_startstop.setShortcut("Ctrl+Space")
+        self.show()
         isFwgsOn = True
 
     def closeEvent(self, event):
