@@ -1,24 +1,19 @@
 import sys, os
 from PyQt6.QtWidgets import QApplication
 from view import *
-from control import *
-import os
-# import ctypes
-
-# if sys.platform == 'win32':
-#     myappid = 'thedreamteam.studious.app' # arbitrary string
-#     ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
-
-os.environ["QT_FONT_DPI"] = "72" # FIX Problem for High DPI and Scale above 100%
+from control.mainControl import *
+os.environ["QT_FONT_DPI"] = "72" # DPI MACOS
 os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"
 
-class MainApp(QApplication):
-    def __init__(self, argv):
-        super().__init__(argv)
-        main_window = ViewControl()
-        model_obj = StudiousFunc(main_window.ui)
-        main_window.show()
-        sys.exit(self.exec())
+def main():
+    app = QApplication(sys.argv)
+    main_window = ViewControl()
+    model_obj = StudiousFunc(main_window.ui)
+    main_window.show()
+    app.exec()
+    if model_obj.countdown.work_or_rest:
+        model_obj.file.dataTimeJson[model_obj.file.ntime][main_window.ui.cB_m_task.currentText()] += round((model_obj.countdown.wtime-model_obj.countdown.time_left/60)/60, 1)
+    model_obj.file.writeDataTime()
 
 if __name__ == '__main__':
-    app = MainApp(sys.argv)
+    main()
