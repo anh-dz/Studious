@@ -92,8 +92,8 @@ class StudiousFunc:
 
     def changeMusic(self):
         if self.bg_musi != None:
-            self.bg_musi = audioFunc(QThread, self.settings.music)
             self.bg_musi._media_player.stop()
+            self.bg_musi = audioFunc(QThread, self.settings.music)
             self.bg_musi.start()
         else:
             self.bg_musi = audioFunc(QThread, self.settings.music)
