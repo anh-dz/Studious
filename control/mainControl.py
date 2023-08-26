@@ -149,7 +149,7 @@ class StudiousFunc:
             wgs.btn_m_startstop.setIcon(QIcon("assert/start.png"))
             if isFwgsOn:
                 Fwgs.btn_startstop.setIcon(QIcon("assert/start.png"))
-            self.countdown.stop_timer()  
+            self.countdown.stop_timer()
         try:
             self.turnOffSpace()
         except:
