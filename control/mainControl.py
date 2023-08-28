@@ -292,7 +292,7 @@ class StudiousFunc:
                 wgs.tW_3_todoToday.setItem(self.todoDay, 0, QTableWidgetItem(f"{self.file._table_data[i][self.day_left]}"))
                 self.combo[-1].currentIndexChanged.connect(self.todoDoneTask)
                 self.todoDay += 1
-        wgs.lb_4_complete.setText(f"     Tổng cộng: {self.todoDay} Đã hoàn thành: 0 Chưa hoàn thành: {self.todoDay} Đang làm: 0")
+        wgs.lb_4_complete.setText(f"     Tổng cộng: {self.todoDay}  Đã hoàn thành: 0  Chưa hoàn thành: {self.todoDay}  Đang làm: 0")
     
     def showDescribeWork(self, item):
         self.row = item.row()
@@ -313,7 +313,7 @@ class StudiousFunc:
                 check.append(i.currentText())
         done = check.count("Đã hoàn thành")
         doing = check.count("Đang làm")
-        wgs.lb_4_complete.setText(f"     Tổng cộng: {self.todoDay} Đã hoàn thành: {done} Chưa hoàn thành: {self.todoDay - done - doing} Đang làm: {doing}")
+        wgs.lb_4_complete.setText(f"     Tổng cộng: {self.todoDay}  Đã hoàn thành: {done}  Chưa hoàn thành: {self.todoDay - done - doing}  Đang làm: {doing}")
 
 class audioFunc(QThread):
     finished = pyqtSignal()
