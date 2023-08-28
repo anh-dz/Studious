@@ -11,18 +11,22 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 
 class Ui_Dialog(QtWidgets.QDialog):
     def setupUi(self, Dialog):
-        Dialog.setFixedSize(480, 88)
+        Dialog.setObjectName("Dialog")
+        Dialog.setFixedSize(318, 55)
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("assert/logo.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         Dialog.setWindowIcon(icon)
-        Dialog.setStyleSheet('''* {background-color: rgb(33, 37, 43);color: rgb(249, 245, 246);font: 20pt \"Arial\";}
-QLabel{qproperty-alignment: \'AlignCenter\';qproperty-margin: auto;}
-''')
+        Dialog.setStyleSheet("background-color: rgb(33, 37, 43);\n"
+"color: rgb(249, 245, 246);\n"
+"font: 18pt \"Arial\";\n"
+"qproperty-alignment: \'AlignCenter\';\n"
+"")
         self.lb_task = QtWidgets.QLabel(parent=Dialog)
-        self.lb_task.setGeometry(QtCore.QRect(0, -2, 240, 96))
+        self.lb_task.setGeometry(QtCore.QRect(0, 0, 200, 60))
+        self.lb_task.setLayoutDirection(QtCore.Qt.LayoutDirection.LeftToRight)
         self.lb_task.setObjectName("lb_task")
         self.lb_time = QtWidgets.QLabel(parent=Dialog)
-        self.lb_time.setGeometry(QtCore.QRect(240, -2, 240, 96))
+        self.lb_time.setGeometry(QtCore.QRect(200, 0, 120, 60))
         self.lb_time.setObjectName("lb_time")
 
         self.retranslateUi(Dialog)
@@ -30,4 +34,6 @@ QLabel{qproperty-alignment: \'AlignCenter\';qproperty-margin: auto;}
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Studious - Pin Task"))
+        Dialog.setWindowTitle(_translate("Dialog", "Studious - Pin Task "))
+        self.lb_task.setText(_translate("Dialog", "TASK"))
+        self.lb_time.setText(_translate("Dialog", "TIME"))
