@@ -88,9 +88,10 @@ class ViewControl(QMainWindow):
     
     def checkQues(self):
         w = self.ui.sW_main.currentIndex()
-        self.image_app = ImageDisplayApp()
-        self.image_app.load_image(f"assert/hdsd/{w}.png")
-        self.image_app.show()
+        if w != 6:
+            self.image_app = ImageDisplayApp()
+            self.image_app.load_image(f"assert/hdsd/{w}.png")
+            self.image_app.show()
     
     def nextPage(self):
         if self.pageInt:
