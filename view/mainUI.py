@@ -538,7 +538,7 @@ class Ui_Studious(object):
 "    background-color: rgba(52, 22, 85, 100%);\n"
 "}")
         self.btn_5_start.setIcon(icon6)
-        self.btn_5_start.setIconSize(QtCore.QSize(23, 23))
+        self.btn_5_start.setIconSize(QtCore.QSize(32, 32))
         self.btn_5_start.setObjectName("btn_5_start")
         self.sW_main.addWidget(self.page_m_5)
         self.page_m_6 = QtWidgets.QWidget()
@@ -555,7 +555,7 @@ class Ui_Studious(object):
         self.page = QtWidgets.QWidget()
         self.page.setObjectName("page")
         self.checkBox_space = QtWidgets.QCheckBox(parent=self.page)
-        self.checkBox_space.setGeometry(QtCore.QRect(50, 310, 460, 50))
+        self.checkBox_space.setGeometry(QtCore.QRect(50, 310, 461, 50))
         self.checkBox_space.setStyleSheet("font: 24pt;")
         self.checkBox_space.setObjectName("checkBox_space")
         self.checkBox_autosession = QtWidgets.QCheckBox(parent=self.page)
@@ -660,6 +660,10 @@ class Ui_Studious(object):
         self.tW_6.verticalHeader().setDefaultSectionSize(30)
         self.tW_6.verticalHeader().setMinimumSectionSize(30)
         self.tW_6.verticalHeader().setStretchLastSection(True)
+        self.LB_4 = QtWidgets.QLabel(parent=self.page_2)
+        self.LB_4.setGeometry(QtCore.QRect(130, 290, 411, 61))
+        self.LB_4.setStyleSheet("font: italic 15pt \"Arial\";")
+        self.LB_4.setObjectName("LB_4")
         self.sW_setting.addWidget(self.page_2)
         self.btn_6_nextPage = QtWidgets.QPushButton(parent=self.page_m_6)
         self.btn_6_nextPage.setGeometry(QtCore.QRect(710, 499, 61, 51))
@@ -782,17 +786,19 @@ class Ui_Studious(object):
         item.setText(_translate("Studious", "Trạng thái"))
         __sortingEnabled = self.tW_3_todoToday.isSortingEnabled()
         self.tW_3_todoToday.setSortingEnabled(False)
+        item = self.tW_3_todoToday.item(0, 0)
+        item.setText(_translate("Studious", "Học Toán"))
         self.tW_3_todoToday.setSortingEnabled(__sortingEnabled)
-        self.lb_4_complete.setText(_translate("Studious", "     Tổng cộng: 7 Đã hoàn thành: 0 Chưa hoàn thành: 1 Đang làm: 0"))
+        self.lb_4_complete.setText(_translate("Studious", "     Tổng cộng: 7  Đã hoàn thành: 0  Chưa hoàn thành: 1  Đang làm: 0"))
         self.PtE_chatBot.setPlaceholderText(_translate("Studious", "Nhập nội dung"))
         self.tB_5_breath.setHtml(_translate("Studious", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'Arial\'; font-size:18pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:transparent;\"><br /></p></body></html>"))
-        self.btn_5_start.setText(_translate("Studious", "  Bắt đầu hít thở"))
+        self.btn_5_start.setText(_translate("Studious", " Bắt đầu hít thở"))
         self.LB_2.setText(_translate("Studious", "Cài đặt"))
-        self.checkBox_space.setText(_translate("Studious", "  Nhấn Ctrl+Space để bắt đầu phiên tiếp"))
+        self.checkBox_space.setText(_translate("Studious", "  Kêu chuông đến khi bắt đầu phiên tiếp"))
         self.checkBox_autosession.setText(_translate("Studious", "  Tự bắt đầu phiên tiếp"))
         self.checkBox_autostart.setText(_translate("Studious", "  Tự khởi động cùng hệ thống"))
         self.cB_6_select.setItemText(0, _translate("Studious", "Baroque"))
@@ -857,10 +863,11 @@ class Ui_Studious(object):
         item = self.tW_6.item(6, 2)
         item.setText(_translate("Studious", "5"))
         self.tW_6.setSortingEnabled(__sortingEnabled)
+        self.LB_4.setText(_translate("Studious", "Lưu ý: Hạn chế chỉnh sửa để có được dữ liệu trực quan nhất"))
         self.btn_6_nextPage.setText(_translate("Studious", "👉"))
         self.tB_7_about.setHtml(_translate("Studious", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'Arial\'; font-size:18pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:transparent;\"><br /></p></body></html>"))
-        self.btn_7_community.setText(_translate("Studious", "  CỘNG ĐỒNG"))
+        self.btn_7_community.setText(_translate("Studious", " CỘNG ĐỒNG"))

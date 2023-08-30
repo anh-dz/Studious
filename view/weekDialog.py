@@ -12,11 +12,14 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Week_Dialog(QtWidgets.QDialog):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.setFixedSize(790, 461)
+        Dialog.resize(790, 461)
         Dialog.setStyleSheet("* {\n"
-"    background-color: rgb(255, 245, 224);\n"
-"    color: rgb(20, 30, 70);\n"
+"    background-color: rgb(33, 37, 43);\n"
+"    color: rgb(249, 245, 246);\n"
 "    font: 18pt \"Arial\";\n"
+"}\n"
+"QLabel{\n"
+"    font-weight: bold;\n"
 "}\n"
 "QPlainTextEdit{\n"
 "    border: 1px solid #bdbdbd;\n"
@@ -27,7 +30,7 @@ class Week_Dialog(QtWidgets.QDialog):
 "    border-radius: 5px;\n"
 "}\n"
 "QTableWidget {\n"
-"    background-color: #F8F6F4;\n"
+"    background-color: rgb(55, 60, 65);\n"
 "    border: 1px solid #bdbdbd;\n"
 "}\n"
 "QTableWidget::item {\n"
@@ -38,7 +41,7 @@ class Week_Dialog(QtWidgets.QDialog):
 "    color: #000000;\n"
 "}\n"
 "QHeaderView::section {\n"
-"    background-color: #2196f3;\n"
+"    background-color: #793FDF;\n"
 "    color: white;\n"
 "    font-weight: bold;\n"
 "    padding: 5px;\n"

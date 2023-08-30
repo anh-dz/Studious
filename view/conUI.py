@@ -88,9 +88,10 @@ class ViewControl(QMainWindow):
     
     def checkQues(self):
         w = self.ui.sW_main.currentIndex()
-        self.image_app = ImageDisplayApp()
-        self.image_app.load_image(f"assert/hdsd/{w}.png")
-        self.image_app.show()
+        if w != 6:
+            self.image_app = ImageDisplayApp()
+            self.image_app.load_image(f"assert/hdsd/{w}.png")
+            self.image_app.show()
     
     def nextPage(self):
         if self.pageInt:
@@ -120,14 +121,7 @@ class ViewControl(QMainWindow):
         self.animation2.start()
 
         self.ui.pushButton.setVisible(target_width > 44)
-    
-    def testComboBoxColor(self):
-        self.ui.cB_m_task.clear()
-        self.ui.cB_m_task.addItem(create_colored_icon(QColor('blue')), "Học Toán")
-        self.ui.cB_m_task.addItem(create_colored_icon(QColor('green')), "Học IELTS")
-        self.ui.cB_m_task.addItem(create_colored_icon(QColor('red')), "Làm việc")
-        # self.ui.tW_6.setItem(0, 0, QTableWidgetItem(create_colored_icon(QColor("blue")), "Hello World"))
-    
+
     def setColorRowTable(self, table, row, color):
         for j in range(3): #table.columnCount()
             table.item(row, j).setBackground(QColor(color))

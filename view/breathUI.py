@@ -43,9 +43,9 @@ class BreathingCircleAnimation(QWidget):
 
         self.button_layout = QHBoxLayout()
 
-        self.close_button = QPushButton("X")
-        self.close_button.setFixedSize(30, 30)
-        self.close_button.setStyleSheet("QPushButton { background-color: #e74c3c; color: white; border-radius: 15px; font-size: 18px; }")
+        self.close_button = QPushButton("ĐÓNG")
+        self.close_button.setFixedSize(56, 30)
+        self.close_button.setStyleSheet("QPushButton{background-color: #e74c3c; color: white; border-radius: 5px; font-size: 18px;}")
         self.close_button.clicked.connect(self.close)
         self.button_layout.addWidget(self.close_button)
 

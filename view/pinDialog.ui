@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>480</width>
-    <height>88</height>
+    <width>318</width>
+    <height>55</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -22,7 +22,6 @@
 color: rgb(249, 245, 246);
 font: 18pt &quot;Arial&quot;;
 qproperty-alignment: 'AlignCenter';
-qproperty-margin: auto;
 </string>
   </property>
   <widget class="QLabel" name="lb_task">
@@ -30,9 +29,12 @@ qproperty-margin: auto;
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>240</width>
-     <height>90</height>
+     <width>200</width>
+     <height>60</height>
     </rect>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::LeftToRight</enum>
    </property>
    <property name="text">
     <string>TASK</string>
@@ -41,10 +43,10 @@ qproperty-margin: auto;
   <widget class="QLabel" name="lb_time">
    <property name="geometry">
     <rect>
-     <x>240</x>
+     <x>200</x>
      <y>0</y>
-     <width>240</width>
-     <height>90</height>
+     <width>120</width>
+     <height>60</height>
     </rect>
    </property>
    <property name="text">

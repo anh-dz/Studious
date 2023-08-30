@@ -15,9 +15,12 @@
   </property>
   <property name="styleSheet">
    <string notr="true">* {
-	background-color: rgb(255, 245, 224);
-	color: rgb(20, 30, 70);
+	background-color: rgb(33, 37, 43);
+	color: rgb(249, 245, 246);
 	font: 18pt &quot;Arial&quot;;
+}
+QLabel{
+	font-weight: bold;
 }
 QPlainTextEdit{
 	border: 1px solid #bdbdbd;
@@ -28,7 +31,7 @@ QPushButton{
 	border-radius: 5px;
 }
 QTableWidget {
-    background-color: #F8F6F4;
+    background-color: rgb(55, 60, 65);
     border: 1px solid #bdbdbd;
 }
 QTableWidget::item {
@@ -39,7 +42,7 @@ QTableWidget::item:selected {
     color: #000000;
 }
 QHeaderView::section {
-    background-color: #2196f3;
+    background-color: #793FDF;
     color: white;
     font-weight: bold;
     padding: 5px;
