@@ -27,10 +27,12 @@ class ViewControl(QMainWindow):
 
         self.ui.btn_lB_menu.clicked.connect(self.toggleSideMenu)
 
-        self.ui.btn_lB_1.setStyleSheet("background-color: rgb(60, 30, 100);")
+        self.ui.btn_lB_1.setStyleSheet("background-color: rgb(70, 40, 110);")
 
         self.setupHTMLText()
-    
+
+        self.isMenuOpen = False
+
         self.buttons = [
             self.ui.btn_lB_1,
             self.ui.btn_lB_2,
@@ -64,7 +66,7 @@ class ViewControl(QMainWindow):
             self.blur_effect.setBlurRadius(12)
 
         # Change the background color of the clicked button
-        clicked_button.setStyleSheet("background-color: rgb(60, 30, 100);")
+        clicked_button.setStyleSheet("background-color: rgb(70, 40, 110);")
 
         # Change the background color of other buttons back to the original color
         for button in self.buttons:
@@ -85,6 +87,9 @@ class ViewControl(QMainWindow):
             self.ui.sW_main.setCurrentIndex(5)
         elif clicked_button == self.ui.btn_lB_7:
             self.ui.sW_main.setCurrentIndex(6)
+        
+        if self.isMenuOpen:
+            self.ui.btn_lB_menu.click()
     
     def checkQues(self):
         w = self.ui.sW_main.currentIndex()
@@ -104,6 +109,7 @@ class ViewControl(QMainWindow):
             self.pageInt = 1
 
     def toggleSideMenu(self):
+        self.isMenuOpen = not self.isMenuOpen
         target_width = 150 if self.ui.wg_leftBar.width() <= 70 else 44
 
         self.animation1 = QPropertyAnimation(self.ui.wg_leftBar, b"maximumWidth")

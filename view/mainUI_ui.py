@@ -60,7 +60,7 @@ class Ui_Studious(object):
 "	padding: 2px 7px;\n"
 "}\n"
 "QPushButton:hover{\n"
-"	background-color: rgba(52, 22, 85, 100%);\n"
+"	background-color: rgba(60, 30, 90, 100%);\n"
 "}")
         self.btn_lB_menu = QPushButton(self.wg_leftBar)
         self.btn_lB_menu.setObjectName(u"btn_lB_menu")

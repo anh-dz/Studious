@@ -49,7 +49,7 @@ class Ui_Studious(object):
 "    padding: 2px 7px;\n"
 "}\n"
 "QPushButton:hover{\n"
-"    background-color: rgba(52, 22, 85, 100%);\n"
+"    background-color: rgba(60, 30, 90, 100%);\n"
 "}")
         self.wg_leftBar.setObjectName("wg_leftBar")
         self.btn_lB_menu = QtWidgets.QPushButton(parent=self.wg_leftBar)
@@ -789,7 +789,7 @@ class Ui_Studious(object):
         item = self.tW_3_todoToday.item(0, 0)
         item.setText(_translate("Studious", "Học Toán"))
         self.tW_3_todoToday.setSortingEnabled(__sortingEnabled)
-        self.lb_4_complete.setText(_translate("Studious", "     Tổng cộng: 7  Đã hoàn thành: 0  Chưa hoàn thành: 1  Đang làm: 0"))
+        self.lb_4_complete.setText(_translate("Studious", "     Tổng cộng: 7 Đã hoàn thành: 0 Chưa hoàn thành: 1 Đang làm: 0"))
         self.PtE_chatBot.setPlaceholderText(_translate("Studious", "Nhập nội dung"))
         self.tB_5_breath.setHtml(_translate("Studious", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
