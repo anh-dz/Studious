@@ -13,7 +13,6 @@ class StudiousFS(QWidget):
         self.x = QApplication.primaryScreen().size().width()
         self.y = QApplication.primaryScreen().size().height()
 
-        self.setWindowTitle("Studious Full Screen")
         self.setStyleSheet("QToolButton{border: 0px}")
 
         background_image = QPixmap("assert/background.jpg")
