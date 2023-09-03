@@ -99,7 +99,7 @@ class StudiousFS(QWidget):
         self.btn_audio = QToolButton(self)
         self.btn_audio.setGeometry(self.x - 80, 5, 75, 75)
         audioIcon = QIcon()
-        audioIcon.addPixmap(QPixmap("assert/audio-on.png"), QIcon.Mode.Normal, QIcon.State.Off)
+        audioIcon.addPixmap(QPixmap("assert/audio-off.png"), QIcon.Mode.Normal, QIcon.State.Off)
         self.btn_audio.setIcon(audioIcon)
         self.btn_audio.setIconSize(QSize(72, 72))
 
