@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 import sys, os
 from PyQt6.QtWidgets import QApplication
 from view import *
