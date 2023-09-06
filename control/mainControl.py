@@ -27,7 +27,7 @@ class StudiousFunc:
         self.qoutes = choice(list_quotes)
         self.clock_onoff = False
         self.box = CustomMessageBox()
-        self.onoff_audio
+        self.onoff_audio()
         self.create_chart()
         self.chat = chatBot()
         self.file.readTableData()
@@ -46,10 +46,6 @@ class StudiousFunc:
         else:   wgs.lb_3_date.setText(f"Chủ nhật, ngày {self.file.ntime}")
         self.setTaskLable()
         wgs.cB_m_task.setCurrentIndex(int(self.settings.data["main"]["label"]))
-        if self.settings.data["main"]["sound"]:
-            self.changeMusic()
-        else:
-            wgs.btn_m_audio.setIcon(QIcon("assert/audio-off.png"))
 
     def initialize_events(self):
         wgs.btn_m_startstop.clicked.connect(self.start_clock)
@@ -209,7 +205,10 @@ class StudiousFunc:
             if isFwgsOn:
                 Fwgs.btn_audio.setIcon(QIcon("assert/audio-on.png"))
         else:
-            self.bg_musi._media_player.pause()
+            try:
+                self.bg_musi._media_player.pause()
+            except:
+                pass
             wgs.btn_m_audio.setIcon(QIcon("assert/audio-off.png"))
             if isFwgsOn:
                 Fwgs.btn_audio.setIcon(QIcon("assert/audio-off.png"))
@@ -241,8 +240,6 @@ class StudiousFunc:
         self.fs = fullScreenFunc()
         self.setTaskLableFs()
         Fwgs.cB_task.currentIndexChanged.connect(self.on_combobox_changed)
-        if not self.settings.data["main"]["sound"]:
-            Fwgs.btn_audio.setIcon(QIcon("assert/audio-off.png"))
         if not self.countdown.work_or_rest:
             Fwgs.lb_time.setStyleSheet("font: 128pt \"Arial\";\n"
                                     "color: rgb(251, 238, 172);\n"
@@ -252,11 +249,11 @@ class StudiousFunc:
         if self.clock_onoff:
             Fwgs.btn_startstop.setIcon(QIcon("assert/pause.png"))
         if self.settings.data["main"]["sound"]:
-            Fwgs.btn_audio.setIcon(QIcon("assert/audio-off.png"))
+            Fwgs.btn_audio.setIcon(QIcon("assert/audio-on.png"))
         Fwgs.lb_time.setText(f"{self.countdown.mtime}:00")
         Fwgs.btn_startstop.clicked.connect(self.start_clock)
         Fwgs.btn_next.clicked.connect(self.next_clock)
-        Fwgs.btn_audio.clicked.connect(self.onoff_audio)
+        Fwgs.btn_audio.clicked.connect(lambda: wgs.btn_m_audio.click())
         Fwgs.cB_task.setCurrentText(wgs.cB_m_task.currentText())
         Fwgs.btn_exit.clicked.connect(lambda: Fwgs.close())
         Fwgs.cB_task.setEnabled(not self.clock_onoff)
@@ -278,10 +275,10 @@ class StudiousFunc:
         start_date_obj = datetime.datetime.strptime(self.file._table_data[0][0], date_format)
         end_date_obj = datetime.datetime.strptime(self.file.ntime, date_format)
         delta = end_date_obj - start_date_obj
-        self.file.readTableData()
-        self.day_left = delta.days + 1
+        self.day_left = (delta.days + 1)%7
         self.todoDay = 0
         self.combo = []
+        self.file.readTableData()  
         for i in range(1, 8):
             if self.file._table_data[i][self.day_left] == '':
                 wgs.tW_3_todoToday.setItem(self.todoDay, 0, QTableWidgetItem(f"{self.file._table_data[i][self.day_left]}"))

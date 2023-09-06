@@ -235,6 +235,23 @@ class fileDataControl:
             for row in self._table_data:
                 writer.writerow(row)
 
+    def writeDefaultTableData(self):
+        Wdata = [[self.monday,'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'],
+            ['', '', '', '', '', '', '', ''],
+            ['', '', '', '', '', '', '', ''],
+            ['', '', '', '', '', '', '', ''],
+            ['', '', '', '', '', '', '', ''],
+            ['', '', '', '', '', '', '', ''],
+            ['', '', '', '', '', '', '', ''],
+            ['', '', '', '', '', '', '', '']]
+        
+        with open("data/tableWeek.csv", "w", encoding="utf-8", newline='') as csv_file:
+            writer = csv.writer(csv_file)
+            
+            # Write each row of data to the CSV file
+            for row in Wdata:
+                writer.writerow(row)
+
     def readTableData(self):
         self._table_data = []
         with open("data/tableWeek.csv" , mode="r", encoding="utf-8") as csv_file:
