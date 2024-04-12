@@ -102,6 +102,6 @@ class StudiousFS(QWidget):
         self.btn_audio.setIcon(audioIcon)
         self.btn_audio.setIconSize(QSize(72, 72))
 
-        self.cB_task.addItem(create_colored_icon(QColor('blue')), "Học Toán")
-        self.cB_task.addItem(create_colored_icon(QColor('green')), "Học IELTS")
-        self.cB_task.addItem(create_colored_icon(QColor('red')), "Làm việc")
+        # self.cB_task.addItem(create_colored_icon(QColor('blue')), "Học Toán")
+        # self.cB_task.addItem(create_colored_icon(QColor('green')), "Học IELTS")
+        # self.cB_task.addItem(create_colored_icon(QColor('red')), "Làm việc")
