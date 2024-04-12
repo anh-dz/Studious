@@ -223,7 +223,7 @@ class StudiousFunc:
             Pwgs.lb_task.setText(selected_option)
         for i in self.settings.labelTask:
             if i[0] == wgs.cB_m_task.currentText():
-                self.countdown = countdown(int(i[1]), int(i[2]), self.work_or_rest)
+                self.countdown.update_time(int(i[1]), int(i[2]))
                 break
     
     def start_dialog(self):
@@ -427,6 +427,11 @@ class countdown:
         self.mtime = self.wtime
         self.time_left = self.mtime*60
         self.timer = QTimer()
+
+    def update_time(self, w, r):
+        self.wtime = w
+        self.rtime = r
+        self.mtime = w
 
     def start_timer(self):
         self.timer.timeout.connect(self.update_countdown)
