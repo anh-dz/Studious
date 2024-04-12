@@ -393,6 +393,7 @@ class weekDialogFunc(Week_Dialog):
         self.describeData[self.row][self.col] = self.wgt.plainTextEdit.toPlainText()
         self.file.writeDescribeData(self.describeData)
         self.file.writeTableData(self.wgt)
+        wgs.tW_3_todoToday.clearContents()
         self.fn()
 
     def getDescribeItem(self, item):
@@ -432,6 +433,8 @@ class countdown:
         self.wtime = w
         self.rtime = r
         self.mtime = w
+        if self.work_or_rest:   self.time_left = self.mtime*60
+        wgs.lb_m_time.setText(f"{self.mtime}:00")
 
     def start_timer(self):
         self.timer.timeout.connect(self.update_countdown)
