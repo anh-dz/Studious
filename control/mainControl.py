@@ -5,10 +5,13 @@ from PyQt6.QtWidgets import *
 from PyQt6.QtGui import *
 from PyQt6.QtMultimedia import *
 from PyQt6.QtCharts import *
+from sys import platform
 from random import choice
 from view import *
 from .fileDataControl import *
-
+from .noti import notify
+if platform == "win32":
+    from win10toast import ToastNotifier
 class StudiousFunc:
     def __init__(self, widgets):
         global wgs
@@ -445,6 +448,21 @@ class countdown:
 
     def update_countdown(self):
         self.time_left -= 1
+
+        #ONLY WORK WITH MACOS
+        if self.time_left == 299:
+            if platform == "darwin":
+                if wgs.checkBox_noti.isChecked():
+                    notify("STUDIOUS", "CÒN 5 PHÚT")
+            elif platform == "win32":
+                if wgs.checkBox_noti.isChecked():
+                    toast = ToastNotifier()
+                    toast.show_toast(
+                        "STUDIOUS",
+                        "CÒN 5 PHÚT",
+                        icon_path = "assert/logo.png",
+                        threaded = True,
+                    )
 
         if self.time_left >= 0:
             # Format the remaining time as MM:SS

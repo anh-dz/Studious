@@ -48,7 +48,7 @@ class fileDataControl:
         return False
 
     def default_data(self):
-        dataTime = {f"{self.ntime}":{}}
+        dataTime = {f"{self.ntime}":{"Học Toán": 0.0, "Học Văn": 0.0, "Học Tiếng Anh": 0.0}}
 
         Wdata = [[self.monday,'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'],
                  ['', '', '', '', '', '', '', ''],

@@ -20,7 +20,7 @@ class ViewControl(QMainWindow):
         self.blur_effect.setBlurRadius(0)
         self.ui.Background.setGraphicsEffect(self.blur_effect)
 
-        self.ui.btn_7_community.clicked.connect(lambda: QDesktopServices.openUrl(QUrl("https://www.facebook.com/groups/803129063825326")))
+        # self.ui.btn_7_community.clicked.connect(lambda: QDesktopServices.openUrl(QUrl("https://www.facebook.com/groups/803129063825326")))
 
         self.ui.btn_6_nextPage.clicked.connect(self.nextPage)
         self.pageInt = 0
