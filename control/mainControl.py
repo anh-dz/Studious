@@ -22,6 +22,7 @@ if platform == "win32":
         def run(self):
             while True:
                 os.system('taskkill /im chrome.exe')
+                os.system('taskkill /im msedge.exe')
                 self.sleep(1)  # Adjust the sleep time as needed
 
 class StudiousFunc:
