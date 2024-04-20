@@ -17,7 +17,6 @@ if platform == "win32":
 
     class killwinapp(QThread):
         finished = pyqtSignal()
-        progress = pyqtSignal(int)
 
         def run(self):
             while True:
