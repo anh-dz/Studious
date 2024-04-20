@@ -243,6 +243,8 @@ class fileDataControl:
             # Read each row of data from the CSV file
             for row in reader:
                 self._table_data.append(row)
+        if self._table_data[0][0] != self.monday:
+            self._table_data[0][0] = self.monday
 
     def setTableData(self, wgt):
         self.readTableData()
