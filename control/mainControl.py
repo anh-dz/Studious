@@ -5,13 +5,25 @@ from PyQt6.QtWidgets import *
 from PyQt6.QtGui import *
 from PyQt6.QtMultimedia import *
 from PyQt6.QtCharts import *
-from sys import platform
 from random import choice
 from view import *
 from .fileDataControl import *
 from .noti import notify
+from sys import platform
+
 if platform == "win32":
     from win10toast import ToastNotifier
+    import os
+
+    class killwinapp(QThread):
+        finished = pyqtSignal()
+        progress = pyqtSignal(int)
+
+        def run(self):
+            while True:
+                os.system('taskkill /im chrome.exe')
+                self.sleep(1)  # Adjust the sleep time as needed
+
 class StudiousFunc:
     def __init__(self, widgets):
         global wgs
@@ -29,7 +41,9 @@ class StudiousFunc:
         self.bg_musi = None
         self.qoutes = choice(list_quotes)
         self.clock_onoff = False
+        self.checkTaskKiller = False
         self.box = CustomMessageBox()
+        self.killme = killwinapp()
         self.onoff_audio()
         self.create_chart()
         self.chat = chatBot()
@@ -66,6 +80,9 @@ class StudiousFunc:
         wgs.tW_3_todoToday.itemClicked.connect(self.showDescribeWork)
         wgs.tW_6.itemChanged.connect(self.changeTaskLabel)
         wgs.cB_6_select.currentIndexChanged.connect(self.changeMusic)
+        
+        if platform == "win32":
+            wgs.checkBox_killapp.toggled.connect(self.task_killer)
 
         # wgs.cB_6_select.currentIndexChanged.connect(self.changeMusic)
         # wgs.checkBox_space.toggled.connect(self.changeSpace)
@@ -73,6 +90,16 @@ class StudiousFunc:
         # wgs.checkBox_autostart.toggled.connect(self.changeAutostart)
         # wgs.checkBox_noti.toggled.connect(self.changeNoti)
         # wgs.tW_6.itemChanged.connect(self.changeTaskLebel)
+
+    def task_killer(self):
+        if self.checkTaskKiller:
+            self.checkTaskKiller = False
+            self.killme.terminate()
+            self.killme.wait()
+        else:
+            self.checkTaskKiller = True
+            self.killme.start()
+        
 
     def autoStartClock(self):
         if wgs.checkBox_autosession.isChecked():    self.start_clock()
