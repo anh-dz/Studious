@@ -20,9 +20,22 @@ if platform == "win32":
 
         def run(self):
             while True:
+                os.system('taskkill /im arc.exe')
                 os.system('taskkill /im chrome.exe')
                 os.system('taskkill /im msedge.exe')
                 self.sleep(1)  # Adjust the sleep time as needed
+else:
+    import subprocess
+    class killwinapp(QThread):
+        finished = pyqtSignal()
+
+        def run(self):
+            while True:
+                subprocess.Popen("osascript -e 'quit app \"Arc\"'", shell=True)
+                subprocess.Popen("osascript -e 'quit app \"Chrome\"'", shell=True)
+                subprocess.Popen("osascript -e 'quit app \"msedge\"'", shell=True)
+                self.sleep(1)  # Adjust the sleep time as needed
+
 
 class StudiousFunc:
     def __init__(self, widgets):
@@ -41,8 +54,8 @@ class StudiousFunc:
         self.bg_musi = None
         self.qoutes = choice(list_quotes)
         self.clock_onoff = False
-        self.checkTaskKiller = False
         self.box = CustomMessageBox()
+        self.checkTaskKiller = False
         self.killme = killwinapp()
         self.onoff_audio()
         self.create_chart()
@@ -81,8 +94,7 @@ class StudiousFunc:
         wgs.tW_6.itemChanged.connect(self.changeTaskLabel)
         wgs.cB_6_select.currentIndexChanged.connect(self.changeMusic)
         
-        if platform == "win32":
-            wgs.checkBox_killapp.toggled.connect(self.task_killer)
+        wgs.checkBox_killapp.toggled.connect(self.task_killer)
 
         # wgs.cB_6_select.currentIndexChanged.connect(self.changeMusic)
         # wgs.checkBox_space.toggled.connect(self.changeSpace)

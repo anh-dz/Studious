@@ -561,11 +561,10 @@ class Ui_Studious(object):
         self.checkBox_space.setObjectName("checkBox_space")
 
         #ME EDIT
-        if platform == "win32":
-                self.checkBox_killapp = QtWidgets.QCheckBox(parent=self.page)
-                self.checkBox_killapp.setGeometry(QtCore.QRect(50, 380, 461, 50))
-                self.checkBox_killapp.setStyleSheet("font: 24pt;")
-                self.checkBox_killapp.setObjectName("checkBox_killapp")
+        self.checkBox_killapp = QtWidgets.QCheckBox(parent=self.page)
+        self.checkBox_killapp.setGeometry(QtCore.QRect(50, 380, 461, 50))
+        self.checkBox_killapp.setStyleSheet("font: 24pt;")
+        self.checkBox_killapp.setObjectName("checkBox_killapp")
 
         self.checkBox_autosession = QtWidgets.QCheckBox(parent=self.page)
         self.checkBox_autosession.setGeometry(QtCore.QRect(50, 240, 391, 51))
@@ -807,8 +806,7 @@ class Ui_Studious(object):
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:transparent;\"><br /></p></body></html>"))
         self.btn_5_start.setText(_translate("Studious", " Bắt đầu hít thở"))
         self.LB_2.setText(_translate("Studious", "Cài đặt"))
-        if platform == "win32":
-             self.checkBox_killapp.setText(_translate("Studious", "  Tắt Chrome/Edge"))
+        self.checkBox_killapp.setText(_translate("Studious", "  Tắt Chrome/Edge"))
         self.checkBox_space.setText(_translate("Studious", "  Kêu chuông đến khi bắt đầu phiên tiếp"))
         self.checkBox_autosession.setText(_translate("Studious", "  Tự bắt đầu phiên tiếp"))
         self.checkBox_autostart.setText(_translate("Studious", "  Tự khởi động cùng hệ thống"))
