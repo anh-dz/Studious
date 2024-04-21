@@ -806,7 +806,7 @@ class Ui_Studious(object):
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:transparent;\"><br /></p></body></html>"))
         self.btn_5_start.setText(_translate("Studious", " Bắt đầu hít thở"))
         self.LB_2.setText(_translate("Studious", "Cài đặt"))
-        self.checkBox_killapp.setText(_translate("Studious", "  Tắt Chrome/Edge"))
+        self.checkBox_killapp.setText(_translate("Studious", "  Chặn trình duyệt"))
         self.checkBox_space.setText(_translate("Studious", "  Kêu chuông đến khi bắt đầu phiên tiếp"))
         self.checkBox_autosession.setText(_translate("Studious", "  Tự bắt đầu phiên tiếp"))
         self.checkBox_autostart.setText(_translate("Studious", "  Tự khởi động cùng hệ thống"))

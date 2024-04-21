@@ -34,6 +34,7 @@ else:
                 subprocess.Popen("osascript -e 'quit app \"Arc\"'", shell=True)
                 subprocess.Popen("osascript -e 'quit app \"Chrome\"'", shell=True)
                 subprocess.Popen("osascript -e 'quit app \"msedge\"'", shell=True)
+                subprocess.Popen("osascript -e 'quit app \"Safari\"'", shell=True)
                 self.sleep(1)  # Adjust the sleep time as needed
 
 
