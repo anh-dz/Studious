@@ -67,7 +67,9 @@ class StudiousFunc:
         self.file.readDataTime()
         self.file.lb = list(self.file.dataTimeJson[self.file.ntime].keys())
         self.work_or_rest = True
+        self.sync = sync(-1)
         self.countdown = countdown(int(self.settings.labelTask[0][1]), int(self.settings.labelTask[0][2]), self.work_or_rest)
+        self.sync.startcountdown(int(self.settings.labelTask[0][1]))
 
     def initialize_ui(self):
         wgs.lb_m_quote.setText(self.qoutes)
@@ -167,6 +169,7 @@ class StudiousFunc:
     def start_clock(self):
         if self.clock_onoff == False:
             self.clock_onoff = True
+            self.sync.startstopcountdown(self.clock_onoff)
             self.qthread = audioFunc(QThread,'assert/music/pause.mp3')
             self.qthread.start()
             self.countdown.start_timer()
@@ -183,6 +186,7 @@ class StudiousFunc:
                     Fwgs.cB_task.setEnabled(not self.countdown.work_or_rest)
         else:
             self.clock_onoff = False
+            self.sync.startstopcountdown(self.clock_onoff)
             self.qthread = audioFunc(QThread,'assert/music/unpause.mp3')
             self.qthread.start()
             wgs.btn_m_startstop.setIcon(QIcon("assert/start.png"))
@@ -227,6 +231,7 @@ class StudiousFunc:
             if isPwgsOn:
                 Pwgs.lb_time.setStyleSheet('rgb(249, 245, 246)')
         self.countdown.next_timer()
+        self.sync.startcountdown(self.countdown.mtime)
         self.clock_onoff = False
         wgs.lb_m_time.setText(f"{self.countdown.mtime}:00")
         if isPwgsOn:
@@ -267,6 +272,7 @@ class StudiousFunc:
         for i in self.settings.labelTask:
             if i[0] == wgs.cB_m_task.currentText():
                 self.countdown.update_time(int(i[1]), int(i[2]))
+                self.sync.startcountdown(int(i[1]))
                 break
     
     def start_dialog(self):
@@ -754,4 +760,33 @@ class Settings:
         else:   self.data['settings']['noti'] = False
         self.file.WriteSettingData(self.data)
 
+class sync:
+    def __init__(self, id:int) -> None:
+        if id == -1:
+            self.api_url = "http://127.0.0.1:5000/"
+        if id >= 1:
+            self.api_url = f"http://127.0.0.1:5000/{id}/"
+    
+    def startcountdown(self, time:int):
+        headers = {
+            "content-type": "application/json"
+        }
+        data = {
+            "seconds": f"{time*60}"
+        }
+        requests.post(self.api_url+"start_countdown", json=data, headers=headers)
+        requests.post(self.api_url+"stop_countdown", json=data, headers=headers)
 
+    def startstopcountdown(self, status:bool):
+        if not status:
+            headers = {
+                "content-type": "application/json"
+            }
+            data = {}
+            requests.post(self.api_url+"stop_countdown", json=data, headers=headers)
+        else:
+            headers = {
+                "content-type": "application/json"
+            }
+            data = {}
+            requests.post(self.api_url+"continue_countdown", json=data, headers=headers)

@@ -4,6 +4,7 @@ from os import path, remove, makedirs
 import datetime
 from PyQt6.QtWidgets import *
 import sys
+import requests
 sys.stdout.reconfigure(encoding='utf-8')
 
 with open("data/quotes.txt", "r", encoding="utf-8") as f:
@@ -15,6 +16,7 @@ class fileDataControl:
         self._ntime = datetime.datetime.now()
         self.ntime = self._ntime.strftime("%d/%m/%Y")
         self.monday = (self._ntime - datetime.timedelta(days=self._ntime.weekday())).strftime("%d/%m/%Y")
+        self.fsync = fsync(-1)
         if self.create_folder():  self.default_data()
         self.readDataTime()
         
@@ -101,6 +103,7 @@ class fileDataControl:
     def writeDataTime(self):
         with open('data/time.json', 'w', newline='', encoding="utf-8") as jsonfile:
             json.dump(self.dataTimeJson, jsonfile,  ensure_ascii=False)
+        self.fsync.synctime(self.dataTimeJson)
 
     def totalTimeDay(self):
         _temp = []
@@ -234,6 +237,8 @@ class fileDataControl:
             # Write each row of data to the CSV file
             for row in self._table_data:
                 writer.writerow(row)
+        
+        self.fsync.synctable(self.readTableData())
 
     def readTableData(self):
         self._table_data = []
@@ -245,6 +250,7 @@ class fileDataControl:
                 self._table_data.append(row)
         if self._table_data[0][0] != self.monday:
             self._table_data[0][0] = self.monday
+        return self._table_data
 
     def setTableData(self, wgt):
         self.readTableData()
@@ -264,6 +270,7 @@ class fileDataControl:
             # Write each row of data to the CSV file
             for row in data:
                 writer.writerow(row)
+        self.fsync.syncdescribeitem(data)
     
     def readDescribeData(self):
         data = []
@@ -284,6 +291,7 @@ class fileDataControl:
     def WriteSettingData(self, data):
         with open("data/settings.json", 'w', newline="", encoding="utf-8") as jsonfile:
             json.dump(data, jsonfile,  ensure_ascii=False)
+        self.fsync.syncsetting(data)
 
     def checkLabelTask(self, data):
         check = False
@@ -312,3 +320,35 @@ class fileDataControl:
             dataTime = {f"{self.ntime}":ndata}
             with open('data/time.json', 'w', newline='', encoding="utf-8") as jsonfile:
                 json.dump(dataTime, jsonfile,  ensure_ascii=False)
+
+
+class fsync:
+    def __init__(self, id:int) -> None:
+        if id == -1:
+            self.api_url = "http://127.0.0.1:5000/"
+        if id >= 1:
+            self.api_url = f"http://127.0.0.1:5000/{id}/"
+
+    def synctable(self, data):
+        headers = {
+            "content-type": "application/json"
+        }
+        requests.post(self.api_url+"sync_tableweek", json=data, headers=headers)
+
+    def synctime(self, data):
+        headers = {
+            "content-type": "application/json"
+        }
+        requests.post(self.api_url+"sync_time", json=data, headers=headers)
+
+    def syncsetting(self, data):
+        headers = {
+            "content-type": "application/json"
+        }
+        requests.post(self.api_url+"sync_setting", json=data, headers=headers)
+
+    def syncdescribeitem(self, data):
+        headers = {
+            "content-type": "application/json"
+        }
+        requests.post(self.api_url+"sync_describeitem", json=data, headers=headers)
