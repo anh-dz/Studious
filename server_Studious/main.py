@@ -70,6 +70,7 @@ def get_tasks():
 def get_time():
     global file
     w = file.readDataTime()
+    w = dict((key[:5], int(sum(w[key].values()))) for (key, value) in w.items())
     if len(w)>7:
         w = w[:7]
     return w
@@ -80,10 +81,10 @@ def get_sum_data():
     global file
     w = file.readDataTime()
     fs = w[next(iter(w))]
-    sum_data = [0 for _ in fs]
+    sum_data = {subject: 0 for subject in fs}
     for day in w:
-        for key, subject in enumerate(w[day]):
-            sum_data[key]+=int(w[day][subject]) 
+        for subject in w[day]:
+            sum_data[subject]+=w[day][subject]
     return sum_data
 
 #export tableweek data
