@@ -69,7 +69,22 @@ def get_tasks():
 @app.route('/get_time', methods=['GET'])
 def get_time():
     global file
-    return file.readDataTime()
+    w = file.readDataTime()
+    if len(w)>7:
+        w = w[:7]
+    return w
+
+#export sum data
+@app.route('/get_sum_data', methods=['GET'])
+def get_sum_data():
+    global file
+    w = file.readDataTime()
+    fs = w[next(iter(w))]
+    sum_data = [0 for _ in fs]
+    for day in w:
+        for key, subject in enumerate(w[day]):
+            sum_data[key]+=int(w[day][subject]) 
+    return sum_data
 
 #export tableweek data
 @app.route('/get_tableweek', methods=['GET'])
