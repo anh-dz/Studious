@@ -70,7 +70,7 @@ def get_tasks():
 def get_time():
     global file
     w = file.readDataTime()
-    w = dict((key[:5], int(sum(w[key].values()))) for (key, value) in w.items())
+    w = dict((key[:5], sum(w[key].values())) for (key, value) in w.items())
     if len(w)>7:
         w = w[:7]
     return w
