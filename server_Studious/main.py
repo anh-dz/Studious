@@ -57,6 +57,14 @@ def get_setting():
     global file
     return file.readSettingData()
 
+#export only task
+@app.route('/get_tasks', methods=['GET'])
+def get_tasks():
+    global file
+    data = file.readSettingData()['tasks']
+    data = {k: v for k, v in data.items() if v["combo"]}
+    return data
+
 #export time data
 @app.route('/get_time', methods=['GET'])
 def get_time():
