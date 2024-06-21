@@ -27,7 +27,7 @@ class BreathingCircleAnimation(QWidget):
         self.label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         layout.addWidget(self.label)
 
-        self.script_label = QLabel("Close your eyes and take a deep breath in through your nose. Feel the air filling your lungs.")
+        self.script_label = QLabel("Nhắm mắt lại và hít một hơi thật sâu bằng mũi. Cảm nhận không khí tràn ngập phổi của bạn.")
         self.script_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.script_label.setWordWrap(True)
         layout.addWidget(self.script_label)
@@ -91,7 +91,7 @@ class BreathingCircleAnimation(QWidget):
             self.progress_bar.setValue(0)
             if not self.inhale:
                 self.breath_count += 1
-                self.count_label.setText(f"Breaths: {self.breath_count}")
+                self.count_label.setText(f"Thực hiện: {self.breath_count} lần")
 
                 # Switch to the next guided meditation script
                 self.script_index = (self.script_index + 1) % len(self.scripts)
