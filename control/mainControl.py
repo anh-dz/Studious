@@ -69,7 +69,8 @@ class StudiousFunc:
         self.work_or_rest = True
         self.sync = sync(-1)
         self.countdown = countdown(int(self.settings.labelTask[0][1]), int(self.settings.labelTask[0][2]), self.work_or_rest)
-        self.sync.startcountdown(int(self.settings.labelTask[0][1]))
+        self.sync.start()
+        self.sync.startcountdown(int(self.settings.labelTask[0][1]), wgs.cB_m_task.currentText())
 
     def initialize_ui(self):
         wgs.lb_m_quote.setText(self.qoutes)
@@ -169,6 +170,7 @@ class StudiousFunc:
     def start_clock(self):
         if self.clock_onoff == False:
             self.clock_onoff = True
+            self.sync.start()
             self.sync.startstopcountdown(self.clock_onoff)
             self.qthread = audioFunc(QThread,'assert/music/pause.mp3')
             self.qthread.start()
@@ -186,6 +188,7 @@ class StudiousFunc:
                     Fwgs.cB_task.setEnabled(not self.countdown.work_or_rest)
         else:
             self.clock_onoff = False
+            self.sync.start()
             self.sync.startstopcountdown(self.clock_onoff)
             self.qthread = audioFunc(QThread,'assert/music/unpause.mp3')
             self.qthread.start()
@@ -231,7 +234,8 @@ class StudiousFunc:
             if isPwgsOn:
                 Pwgs.lb_time.setStyleSheet('rgb(249, 245, 246)')
         self.countdown.next_timer()
-        self.sync.startcountdown(self.countdown.mtime)
+        self.sync.start()
+        self.sync.startcountdown(self.countdown.mtime, wgs.cB_m_task.currentText())
         self.clock_onoff = False
         wgs.lb_m_time.setText(f"{self.countdown.mtime}:00")
         if isPwgsOn:
@@ -272,7 +276,8 @@ class StudiousFunc:
         for i in self.settings.labelTask:
             if i[0] == wgs.cB_m_task.currentText():
                 self.countdown.update_time(int(i[1]), int(i[2]))
-                self.sync.startcountdown(int(i[1]))
+                self.sync.start()
+                self.sync.startcountdown(int(i[1]), i[0])
                 break
     
     def start_dialog(self):
@@ -760,22 +765,29 @@ class Settings:
         else:   self.data['settings']['noti'] = False
         self.file.WriteSettingData(self.data)
 
-class sync:
+class sync(QThread):
+    update_label = pyqtSignal(str)
     def __init__(self, id:int) -> None:
+        super().__init__()
         if id == -1:
             self.api_url = "http://127.0.0.1:5000/"
         if id >= 1:
             self.api_url = f"http://127.0.0.1:5000/{id}/"
     
-    def startcountdown(self, time:int):
+    def startcountdown(self, time:int, combo):
         headers = {
             "content-type": "application/json"
         }
         data = {
-            "seconds": f"{time*60}"
+            "seconds": f"{time*60}",
+            "current_task": f"{combo}"
         }
-        requests.post(self.api_url+"start_countdown", json=data, headers=headers)
-        requests.post(self.api_url+"stop_countdown", json=data, headers=headers)
+        try:
+            requests.post(self.api_url+"start_countdown", json=data, headers=headers)
+            self.update_label.emit("Countdown started")
+            requests.post(self.api_url+"stop_countdown", json=data, headers=headers)
+            self.update_label.emit("Countdown stopped")
+        except: self.update_label.emit("Kết nối mạng để đồng bộ")
 
     def startstopcountdown(self, status:bool):
         if not status:
@@ -783,10 +795,20 @@ class sync:
                 "content-type": "application/json"
             }
             data = {}
-            requests.post(self.api_url+"stop_countdown", json=data, headers=headers)
+            try:
+                requests.post(self.api_url+"stop_countdown", json=data, headers=headers)
+                self.update_label.emit("Countdown stopped")
+            except: self.update_label.emit("Kết nối mạng để đồng bộ")
         else:
             headers = {
                 "content-type": "application/json"
             }
             data = {}
-            requests.post(self.api_url+"continue_countdown", json=data, headers=headers)
+            try:
+                requests.post(self.api_url+"continue_countdown", json=data, headers=headers)
+                self.update_label.emit("Countdown continued")
+            except: self.update_label.emit("Kết nối mạng để đồng bộ")
+
+        
+        def run(self):
+            pass

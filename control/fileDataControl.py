@@ -333,22 +333,30 @@ class fsync:
         headers = {
             "content-type": "application/json"
         }
-        requests.post(self.api_url+"sync_tableweek", json=data, headers=headers)
+        try:
+            requests.post(self.api_url+"sync_tableweek", json=data, headers=headers)
+        except: print("Kết nối mạng để đồng bộ")
 
     def synctime(self, data):
         headers = {
             "content-type": "application/json"
         }
-        requests.post(self.api_url+"sync_time", json=data, headers=headers)
+        try:
+            requests.post(self.api_url+"sync_time", json=data, headers=headers)
+        except: print("Kết nối mạng để đồng bộ")
 
     def syncsetting(self, data):
         headers = {
             "content-type": "application/json"
         }
-        requests.post(self.api_url+"sync_setting", json=data, headers=headers)
+        try:
+            requests.post(self.api_url+"sync_setting", json=data, headers=headers)
+        except: print("Kết nối mạng để đồng bộ")
 
     def syncdescribeitem(self, data):
         headers = {
             "content-type": "application/json"
         }
-        requests.post(self.api_url+"sync_describeitem", json=data, headers=headers)
+        try:
+            requests.post(self.api_url+"sync_describeitem", json=data, headers=headers)
+        except: print("Kết nối mạng để đồng bộ")
