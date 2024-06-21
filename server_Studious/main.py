@@ -24,7 +24,7 @@ def start_countdown():
     current_task = data.get("current_task", 0)
     countdown_end = datetime.now() + timedelta(seconds=seconds)
     remaining_time = None
-    return jsonify({"status": "Countdown started", "end_time": countdown_end.isoformat(), "current_task": f"{current_task}"})
+    return jsonify({"status": "Countdown started", "end_time": countdown_end.isoformat()})
 
 @app.route('/stop_countdown', methods=['POST'])
 def stop_countdown():
@@ -32,7 +32,7 @@ def stop_countdown():
     if countdown_end:
         remaining_time = round((countdown_end - datetime.now()).total_seconds())
         countdown_end = None
-    return jsonify({"status": "Countdown stopped", "remaining_time": round(remaining_time), "current_task": f"{current_task}"})
+    return jsonify({"status": "Countdown stopped", "remaining_time": round(remaining_time)})
 
 @app.route('/continue_countdown', methods=['POST'])
 def continue_countdown():
@@ -40,18 +40,18 @@ def continue_countdown():
     if remaining_time:
         countdown_end = datetime.now() + timedelta(seconds=remaining_time)
         remaining_time = None
-    return jsonify({"status": "Countdown continued", "end_time": countdown_end.isoformat(), "current_task": f"{current_task}"})
+    return jsonify({"status": "Countdown continued", "end_time": countdown_end.isoformat()})
 
 @app.route('/get_countdown', methods=['GET'])
 def get_countdown():
     global countdown_end, remaining_time, current_task
     if countdown_end:
         time_left = (countdown_end - datetime.now()).total_seconds()
-        return jsonify({"status": "Countdown running", "time_left": round(time_left), "current_task": f"{current_task}"})
+        return jsonify({"status": "Countdown running", "time_left": round(time_left)})
     elif remaining_time:
-        return jsonify({"status": "Countdown stopped", "remaining_time": remaining_time, "current_task": f"{current_task}"})
+        return jsonify({"status": "Countdown stopped", "remaining_time": remaining_time})
     else:
-        return jsonify({"status": "No countdown set", "current_task": "No task set"})
+        return jsonify({"status": "No countdown set"})
     
 #export setting data
 @app.route('/get_setting', methods=['GET'])
@@ -66,6 +66,11 @@ def get_tasks():
     data = file.readSettingData()['tasks']
     data = {k: v for k, v in data.items() if v["combo"]}
     return data
+
+#export current task
+@app.route("/get_current_tasks", methods=['GET'])
+def get_current_task():
+    return current_task
 
 #export time data
 @app.route('/get_time', methods=['GET'])
