@@ -59,11 +59,35 @@ def get_setting():
     global file
     return file.readSettingData()
 
+#export only task
+@app.route('/get_tasks', methods=['GET'])
+def get_tasks():
+    global file
+    data = file.readSettingData()['tasks']
+    data = {k: v for k, v in data.items() if v["combo"]}
+    return data
+
 #export time data
 @app.route('/get_time', methods=['GET'])
 def get_time():
     global file
-    return file.readDataTime()
+    w = file.readDataTime()
+    w = dict((key[:5], sum(w[key].values())) for (key, value) in w.items())
+    if len(w)>7:
+        w = w[:7]
+    return w
+
+#export sum data
+@app.route('/get_sum_data', methods=['GET'])
+def get_sum_data():
+    global file
+    w = file.readDataTime()
+    fs = w[next(iter(w))]
+    sum_data = {subject: 0 for subject in fs}
+    for day in w:
+        for subject in w[day]:
+            sum_data[subject]+=w[day][subject]
+    return sum_data
 
 #export tableweek data
 @app.route('/get_tableweek', methods=['GET'])
