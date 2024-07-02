@@ -127,6 +127,13 @@ def sync_describeitem():
     data = request.json
     return file.writeDescribeData(data)
 
+@app.route('/sync_timeData', methods=['POST'])
+def receive_post():
+    #Data trả về sẽ có dạng: ["Học toán", 5]
+    data = request.get_json()
+    print(data)
+    return [data[0], data[1]]
+
 #run
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
