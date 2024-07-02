@@ -1,5 +1,9 @@
 import datetime
 import requests
+import uuid
+import hashlib
+import qrcode
+from PyQt6 import QtGui, QtWidgets
 from PyQt6.QtCore import *
 from PyQt6.QtWidgets import *
 from PyQt6.QtGui import *
@@ -68,6 +72,7 @@ class StudiousFunc:
         self.file.readDataTime()
         self.file.lb = list(self.file.dataTimeJson[self.file.ntime].keys())
         self.work_or_rest = True
+        self.gen_QR_id_from_mac()
         self.sync = sync(self.id)
         self.countdown = countdown(int(self.settings.labelTask[0][1]), int(self.settings.labelTask[0][2]), self.work_or_rest)
         self.sync.start()
@@ -98,7 +103,6 @@ class StudiousFunc:
         wgs.tW_3_todoToday.itemClicked.connect(self.showDescribeWork)
         wgs.tW_6.itemChanged.connect(self.changeTaskLabel)
         wgs.cB_6_select.currentIndexChanged.connect(self.changeMusic)
-        
         wgs.checkBox_killapp.toggled.connect(self.task_killer)
 
         # wgs.cB_6_select.currentIndexChanged.connect(self.changeMusic)
@@ -366,6 +370,46 @@ class StudiousFunc:
         done = check.count("Đã hoàn thành")
         doing = check.count("Đang làm")
         wgs.lb_4_complete.setText(f"     Tổng cộng: {self.todoDay}  Đã hoàn thành: {done}  Chưa hoàn thành: {self.todoDay - done - doing}  Đang làm: {doing}")
+    
+    def gen_QR_id_from_mac(self):
+        mac = uuid.getnode()
+        # Ensure it's a valid MAC address
+        if (mac >> 40) % 2:
+            raise ValueError("Invalid MAC address")
+        else:
+            # Get the MAC address as a string
+            mac_address = f"{mac:012x}"
+            # Create a SHA256 hash of the MAC address
+            hash_object = hashlib.sha256(mac_address.encode())
+            # Convert the hash to a 24-character string
+            unique_id = hash_object.hexdigest()[:24]
+
+        #Gen QR code
+        qr = qrcode.QRCode(
+            version=1,  # controls the size of the QR Code
+            error_correction=qrcode.constants.ERROR_CORRECT_L,  # controls the error correction used for the QR Code
+            box_size=10,  # controls how many pixels each “box” of the QR code is
+            border=4,  # controls how many boxes thick the border should be
+        )
+        # Add data to the QR code
+        qr.add_data(unique_id)
+        qr.make(fit=True)
+
+        # Create an image from the QR Code instance
+        img = qr.make_image(fill_color="black", back_color="white")
+        img.save("assert/QR_id.png")
+
+        # Load the image
+        pixmap = QtGui.QPixmap("assert/QR_id.png")
+        image_label = QtWidgets.QLabel(wgs.qrWidget)
+        image_label.setPixmap(pixmap)
+        # Set the size of the QLabel to match the image
+        scaled_pixmap = pixmap.scaled(wgs.qrWidget.size(), Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
+        image_label.setPixmap(scaled_pixmap)
+        # Show the QLabel
+        image_label.show()
+
+            
 
 class audioFunc(QThread):
     finished = pyqtSignal()

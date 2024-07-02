@@ -5,3 +5,4 @@ PyQt6-Charts-Qt6 == 6.4.0
 requests == 2.31.0
 Flask == 3.0.3
 win10toast == 0.9
+qrcode[pil] == 7.4.2
