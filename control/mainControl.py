@@ -55,6 +55,7 @@ class StudiousFunc:
         isFwgsOn = False
         isPwgsOn = False
         self.id = "abc" #id user
+        self.gen_QR_id_from_mac()
         self.file = fileDataControl(self.id)
         self.settings = Settings(self.file)
         self.bg_musi = None
@@ -72,7 +73,6 @@ class StudiousFunc:
         self.file.readDataTime()
         self.file.lb = list(self.file.dataTimeJson[self.file.ntime].keys())
         self.work_or_rest = True
-        self.gen_QR_id_from_mac()
         self.sync = sync(self.id)
         self.countdown = countdown(int(self.settings.labelTask[0][1]), int(self.settings.labelTask[0][2]), self.work_or_rest)
         self.sync.start()
