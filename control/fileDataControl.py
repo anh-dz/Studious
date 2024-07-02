@@ -12,11 +12,11 @@ with open("data/quotes.txt", "r", encoding="utf-8") as f:
     list_quotes = [i.strip() for i in res]
 
 class fileDataControl:
-    def __init__(self):
+    def __init__(self, id:str):
         self._ntime = datetime.datetime.now()
         self.ntime = self._ntime.strftime("%d/%m/%Y")
         self.monday = (self._ntime - datetime.timedelta(days=self._ntime.weekday())).strftime("%d/%m/%Y")
-        self.fsync = fsync(-1)
+        self.fsync = fsync(f"{id}")
         if self.create_folder():  self.default_data()
         self.readDataTime()
         
@@ -28,6 +28,8 @@ class fileDataControl:
             with open("data/tableWeek.csv", "w") as f:
                 pass
             with open("data/describeItem.csv", "w") as f:
+                pass
+            with open("data/settings.json", 'w') as f:
                 pass
             return True
         else:
@@ -43,7 +45,7 @@ class fileDataControl:
                 with open("data/describeItem.txt", 'w') as f:
                     pass
                 return True
-            if not path.exists("data/describeItem.csv"):
+            if not path.exists("data/settings.json"):
                 with open("data/settings.json", 'w') as f:
                     pass
                 return True
@@ -323,14 +325,13 @@ class fileDataControl:
 
 
 class fsync:
-    def __init__(self, id:int) -> None:
-        if id == -1:
-            self.api_url = "http://127.0.0.1:5000/"
-        if id >= 1:
-            self.api_url = f"http://127.0.0.1:5000/{id}/"
+    def __init__(self, id:str) -> None:
+        self.api_url = "http://127.0.0.1:5000/"
+        self.user = id
 
     def synctable(self, data):
         headers = {
+            "user": f"{self.user}",
             "content-type": "application/json"
         }
         try:
@@ -339,6 +340,7 @@ class fsync:
 
     def synctime(self, data):
         headers = {
+            "user": f"{self.user}",
             "content-type": "application/json"
         }
         try:
@@ -347,6 +349,7 @@ class fsync:
 
     def syncsetting(self, data):
         headers = {
+            "user": f"{self.user}",
             "content-type": "application/json"
         }
         try:
@@ -355,6 +358,7 @@ class fsync:
 
     def syncdescribeitem(self, data):
         headers = {
+            "user": f"{self.user}",
             "content-type": "application/json"
         }
         try:

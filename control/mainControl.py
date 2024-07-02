@@ -50,7 +50,8 @@ class StudiousFunc:
         global isFwgsOn, isPwgsOn
         isFwgsOn = False
         isPwgsOn = False
-        self.file = fileDataControl()
+        self.id = "abc" #id user
+        self.file = fileDataControl(self.id)
         self.settings = Settings(self.file)
         self.bg_musi = None
         self.qoutes = choice(list_quotes)
@@ -67,7 +68,7 @@ class StudiousFunc:
         self.file.readDataTime()
         self.file.lb = list(self.file.dataTimeJson[self.file.ntime].keys())
         self.work_or_rest = True
-        self.sync = sync(-1)
+        self.sync = sync(self.id)
         self.countdown = countdown(int(self.settings.labelTask[0][1]), int(self.settings.labelTask[0][2]), self.work_or_rest)
         self.sync.start()
         self.sync.startcountdown(int(self.settings.labelTask[0][1]), wgs.cB_m_task.currentText())
@@ -767,15 +768,27 @@ class Settings:
 
 class sync(QThread):
     update_label = pyqtSignal(str)
-    def __init__(self, id:int) -> None:
+    def __init__(self, id:str) -> None:
         super().__init__()
-        if id == -1:
-            self.api_url = "http://127.0.0.1:5000/"
-        if id >= 1:
-            self.api_url = f"http://127.0.0.1:5000/{id}/"
+        self.api_url = "http://127.0.0.1:5000/"
+        self.user = id
+
+        headers = {
+            "user": f"{self.user}",
+            "content-type": "application/json"
+        }
+        data = {
+        }
+        try:
+            requests.post(self.api_url+"connect", json=data, headers=headers)
+            self.update_label.emit("Countdown started")
+            requests.post(self.api_url+"connect", json=data, headers=headers)
+            self.update_label.emit("Countdown stopped")
+        except: self.update_label.emit("Kết nối mạng để đồng bộ")
     
     def startcountdown(self, time:int, combo):
         headers = {
+            "user": f"{self.user}",
             "content-type": "application/json"
         }
         data = {
@@ -792,6 +805,7 @@ class sync(QThread):
     def startstopcountdown(self, status:bool):
         if not status:
             headers = {
+                "user": f"{self.user}",
                 "content-type": "application/json"
             }
             data = {}
@@ -801,6 +815,7 @@ class sync(QThread):
             except: self.update_label.emit("Kết nối mạng để đồng bộ")
         else:
             headers = {
+                "user": f"{self.user}",
                 "content-type": "application/json"
             }
             data = {}

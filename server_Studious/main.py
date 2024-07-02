@@ -4,79 +4,81 @@ from fileDataControl import fileDataControl
 
 app = Flask(__name__)
 
-#connect to local server file
-file = fileDataControl()
-
-#handle countdown time
-countdown_end = None
-remaining_time = None
-current_task = None
+#User info
+Users = {}
 
 @app.route('/')
 def index():
     return jsonify({"message": "Countdown API is running!"})
 
+@app.route("/connect", methods=['POST'])
+def connect():
+    user = request.headers.get('user')
+    Users[f'{user}'] = controlFunc(f'{user}')
+    return "Success"
+
 @app.route('/start_countdown', methods=['POST'])
 def start_countdown():
-    global countdown_end, remaining_time, current_task
+    user = request.headers.get('user')
     data = request.json
     seconds = int(data.get('seconds', 0))
     current_task = data.get("current_task", 0)
-    countdown_end = datetime.now() + timedelta(seconds=seconds)
-    remaining_time = None
-    return jsonify({"status": "Countdown started", "end_time": countdown_end.isoformat()})
+    try:    Users[f'{user}']
+    except: Users[f'{user}'] = controlFunc(f'{user}')
+    return Users[f'{user}'].start_countdown(seconds, current_task)
 
 @app.route('/stop_countdown', methods=['POST'])
 def stop_countdown():
-    global countdown_end, remaining_time, current_task
-    if countdown_end:
-        remaining_time = round((countdown_end - datetime.now()).total_seconds())
-        countdown_end = None
-    return jsonify({"status": "Countdown stopped", "remaining_time": round(remaining_time)})
+    user = request.headers.get('user')
+    if Users[f'{user}'].countdown_end:
+        Users[f'{user}'].remaining_time = round((Users[f'{user}'].countdown_end - datetime.now()).total_seconds())
+        Users[f'{user}'].countdown_end = None
+    return jsonify({"status": "Countdown stopped", "remaining_time": round( Users[f'{user}'].remaining_time)})
 
 @app.route('/continue_countdown', methods=['POST'])
 def continue_countdown():
-    global countdown_end, remaining_time, current_task
-    if remaining_time:
-        countdown_end = datetime.now() + timedelta(seconds=remaining_time)
-        remaining_time = None
-    return jsonify({"status": "Countdown continued", "end_time": countdown_end.isoformat()})
+    user = request.headers.get('user')
+    if  Users[f'{user}'].remaining_time:
+        Users[f'{user}'].countdown_end = datetime.now() + timedelta(seconds=Users[f'{user}'].remaining_time)
+        Users[f'{user}'].remaining_time = None
+    return jsonify({"status": "Countdown continued", "end_time": Users[f'{user}'].countdown_end.isoformat()})
 
 @app.route('/get_countdown', methods=['GET'])
 def get_countdown():
-    global countdown_end, remaining_time, current_task
-    if countdown_end:
-        time_left = (countdown_end - datetime.now()).total_seconds()
+    user = request.headers.get('user')
+    if Users[f'{user}'].countdown_end != None:
+        time_left = (Users[f'{user}'].countdown_end - datetime.now()).total_seconds()
         return jsonify({"status": "Countdown running", "time_left": round(time_left)})
-    elif remaining_time:
-        return jsonify({"status": "Countdown stopped", "remaining_time": remaining_time})
+    elif Users[f'{user}'].remaining_time:
+        return jsonify({"status": "Countdown stopped", "remaining_time": Users[f'{user}'].remaining_time})
     else:
         return jsonify({"status": "No countdown set"})
     
 #export setting data
 @app.route('/get_setting', methods=['GET'])
 def get_setting():
-    global file
-    return file.readSettingData()
+    user = request.headers.get('user')
+    return Users[f"{user}"].file.readSettingData()
 
 #export only task
 @app.route('/get_tasks', methods=['GET'])
 def get_tasks():
-    global file
-    data = file.readSettingData()['tasks']
+    user = request.headers.get('user')
+    data = Users[f"{user}"].file.readSettingData()['tasks']
     data = {k: v for k, v in data.items() if v["combo"]}
     return data
 
 #export current task
 @app.route("/get_current_tasks", methods=['GET'])
 def get_current_task():
-    return current_task
+    user = request.headers.get('user')
+    return Users[f'{user}'].current_task
 
 #export time data
 @app.route('/get_time', methods=['GET'])
 def get_time():
-    global file
-    w = file.readDataTime()
+    user = request.headers.get('user')
+    w = Users[f"{user}"].file.readDataTime()
     w = dict((key[:5], sum(w[key].values())) for (key, value) in w.items())
     if len(w)>7:
         w = w[:7]
@@ -85,8 +87,8 @@ def get_time():
 #export sum data
 @app.route('/get_sum_data', methods=['GET'])
 def get_sum_data():
-    global file
-    w = file.readDataTime()
+    user = request.headers.get('user')
+    w = Users[f"{user}"].file.readDataTime()
     fs = w[next(iter(w))]
     sum_data = {subject: 0 for subject in fs}
     for day in w:
@@ -97,44 +99,66 @@ def get_sum_data():
 #export tableweek data
 @app.route('/get_tableweek', methods=['GET'])
 def get_tableweek():
-    global file
-    return file.readTableData()
+    user = request.headers.get('user')
+    return Users[f"{user}"].file.readTableData()
 
 #export describeitem data
 @app.route('/get_describeitem', methods=['GET'])
 def get_describeitem():
-    global file
-    return file.readDescribeData()
+    user = request.headers.get('user')
+    return Users[f"{user}"].file.readDescribeData()
 
 #Sync data multiplatform
 @app.route('/sync_time', methods=['POST'])
 def sync_time():
     data = request.json
-    return file.writeDataTime(data)
+    user = request.headers.get('user')
+    Users[f"{user}"].file.writeDataTime(data)
+    return "success"
     
 @app.route('/sync_setting', methods=['POST'])
 def sync_setting():
     data = request.json
-    return file.WriteSettingData(data)
+    user = request.headers.get('user')
+    Users[f"{user}"].file.WriteSettingData(data)
+    return "success"
 
 @app.route('/sync_tableweek', methods=['POST'])
 def sync_tableweek():
     data = request.json
-    return file.writeTableData(data)
+    user = request.headers.get('user')
+    Users[f"{user}"].file.writeTableData(data)
+    return "success"
 
 @app.route('/sync_describeitem', methods=['POST'])
 def sync_describeitem():
     data = request.json
-    return file.writeDescribeData(data)
+    user = request.headers.get('user')
+    Users[f"{user}"].file.writeDescribeData(data)
+    return "success"
 
 @app.route('/sync_timeData', methods=['POST'])
 def receive_post():
     #Data trả về sẽ có dạng: ["Học toán", 5]
     data = request.get_json()
-    file.readDataTime()
-    file.dataTimeJson[file.ntime][data[0]] += round((data[1]/60)/60, 1)
-    file.writeDataTime()
+    user = request.headers.get('user')
+    Users[f"{user}"].file.readDataTime()
+    Users[f"{user}"].file.dataTimeJson[Users[f"{user}"].file.ntime][data[0]] += round((data[1]/60)/60, 1)
+    Users[f"{user}"].file.writeDataTime()
     return "Success"
+
+class controlFunc:
+    def __init__(self, id:str) -> None:
+        self.user = id
+        self.file = fileDataControl(id)
+        self.countdown_end = None
+        self.remaining_time = None
+        self.current_task = None
+    def start_countdown(self, seconds, current_task):
+        self.current_task = current_task
+        self.countdown_end = datetime.now() + timedelta(seconds=seconds)
+        self.remaining_time = None
+        return jsonify({"status": "Countdown started", "end_time": self.countdown_end.isoformat()})
 
 #run
 if __name__ == '__main__':

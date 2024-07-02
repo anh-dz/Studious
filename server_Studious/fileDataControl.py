@@ -7,7 +7,8 @@ import sys
 sys.stdout.reconfigure(encoding='utf-8')
 
 class fileDataControl:
-    def __init__(self):
+    def __init__(self, id:str):
+        self.user = id
         self._ntime = datetime.datetime.now()
         self.ntime = self._ntime.strftime("%d/%m/%Y")
         self.monday = (self._ntime - datetime.timedelta(days=self._ntime.weekday())).strftime("%d/%m/%Y")
@@ -17,28 +18,32 @@ class fileDataControl:
     def create_folder(self) -> bool:
         if not path.exists("data"):
             makedirs("data")
-            with open("data/time.json", "w") as f:
+        if not path.exists(f"data/{self.user}_data"):
+            makedirs(f"data/{self.user}_data")
+            with open(f"data/{self.user}_data/time.json", "w") as f:
                 pass
-            with open("data/tableWeek.csv", "w") as f:
+            with open(f"data/{self.user}_data/tableWeek.csv", "w") as f:
                 pass
-            with open("data/describeItem.csv", "w") as f:
+            with open(f"data/{self.user}_data/describeItem.csv", "w") as f:
+                pass
+            with open(f"data/{self.user}_data/settings.json", 'w') as f:
                 pass
             return True
         else:
-            if not path.exists("data/time.json"):
-                with open("data/time.json", 'w') as f:
+            if not path.exists(f"data/{self.user}_data/time.json"):
+                with open(f"data/{self.user}_data/time.json", 'w') as f:
                     pass
                 return True
-            if not path.exists("data/tableWeek.csv"):
-                with open("data/tableWeek.csv", 'w') as f:
+            if not path.exists(f"data/{self.user}_data/tableWeek.csv"):
+                with open(f"data/{self.user}_data/tableWeek.csv", 'w') as f:
                     pass
                 return True
-            if not path.exists("data/describeItem.csv"):
-                with open("data/describeItem.txt", 'w') as f:
+            if not path.exists(f"data/{self.user}_data/describeItem.csv"):
+                with open(f"data/{self.user}_data/describeItem.txt", 'w') as f:
                     pass
                 return True
-            if not path.exists("data/describeItem.csv"):
-                with open("data/settings.json", 'w') as f:
+            if not path.exists(f"data/{self.user}_data/settings.json"):
+                with open(f"data/{self.user}_data/settings.json", 'w') as f:
                     pass
                 return True
         return False
@@ -65,20 +70,20 @@ class fileDataControl:
 
         self.dataTimeJson = dataTime
 
-        with open('data/time.json', 'w', newline='', encoding="utf-8") as jsonfile:
+        with open(f'data/{self.user}_data/time.json', 'w', newline='', encoding="utf-8") as jsonfile:
             json.dump(dataTime, jsonfile,  ensure_ascii=False)
 
-        with open('data/settings.json', 'w', newline='', encoding="utf-8") as jsonfile:
+        with open(f'data/{self.user}_data/settings.json', 'w', newline='', encoding="utf-8") as jsonfile:
             json.dump(dataSettings, jsonfile,  ensure_ascii=False)
 
-        with open("data/tableWeek.csv", "w", encoding="utf-8", newline='') as csv_file:
+        with open(f"data/{self.user}_data/tableWeek.csv", "w", encoding="utf-8", newline='') as csv_file:
             writer = csv.writer(csv_file)
             
             # Write each row of data to the CSV file
             for row in Wdata:
                 writer.writerow(row)
 
-        with open('data/describeItem.csv', 'w', newline='', encoding="utf-8") as csv_file:
+        with open(f'data/{self.user}_data/describeItem.csv', 'w', newline='', encoding="utf-8") as csv_file:
             writer = csv.writer(csv_file)
             
             # Write each row of data to the CSV file
@@ -87,16 +92,16 @@ class fileDataControl:
 
 
     def readDataTime(self):
-        with open("data/time.json", "r", encoding="utf-8") as jsonfile:
+        with open(f"data/{self.user}_data/time.json", "r", encoding="utf-8") as jsonfile:
             self.dataTimeJson = json.load(jsonfile)
         if self.ntime not in self.dataTimeJson:
-            with open("data/time.json", "w", encoding="utf-8") as jsonfile:
+            with open(f"data/{self.user}_data/time.json", "w", encoding="utf-8") as jsonfile:
                     self.dataTimeJson[f"{self.ntime}"] = {}
                     json.dump(self.dataTimeJson, jsonfile,  ensure_ascii=False)
         return self.dataTimeJson
 
     def writeDataTime(self, data):
-        with open('data/time.json', 'w', newline='', encoding="utf-8") as jsonfile:
+        with open(f'data/{self.user}_data/time.json', 'w', newline='', encoding="utf-8") as jsonfile:
             json.dump(data, jsonfile,  ensure_ascii=False)
 
     def totalTimeDay(self):
@@ -114,7 +119,7 @@ class fileDataControl:
         totalTime = []
         detailTime = []
         
-        with open("data/time.json", "r", encoding="utf-8") as jsonfile:
+        with open(f"data/{self.user}_data/time.json", "r", encoding="utf-8") as jsonfile:
             datachart = json.load(jsonfile)
             key =  list(datachart[self.ntime].keys())
             for k in key:   detailTime.append([k, 0])
@@ -211,7 +216,7 @@ class fileDataControl:
     def writeTableData(self, data):
 
         self._table_data = data
-        with open("data/tableWeek.csv" , mode="w", newline="", encoding="utf-8") as csv_file:
+        with open(f"data/{self.user}_data/tableWeek.csv" , mode="w", newline="", encoding="utf-8") as csv_file:
             writer = csv.writer(csv_file)
             
             # Write each row of data to the CSV file
@@ -220,7 +225,7 @@ class fileDataControl:
 
     def readTableData(self):
         self._table_data = []
-        with open("data/tableWeek.csv" , mode="r", encoding="utf-8") as csv_file:
+        with open(f"data/{self.user}_data/tableWeek.csv" , mode="r", encoding="utf-8") as csv_file:
             reader = csv.reader(csv_file)
             
             # Read each row of data from the CSV file
@@ -242,7 +247,7 @@ class fileDataControl:
                         wgt.tableWidget.setItem(i-1, j-1, item)
 
     def writeDescribeData(self, data):
-        with open('data/describeItem.csv', 'w', newline='', encoding="utf-8") as csv_file:
+        with open(f'data/{self.user}_data/describeItem.csv', 'w', newline='', encoding="utf-8") as csv_file:
             writer = csv.writer(csv_file)
             
             # Write each row of data to the CSV file
@@ -251,7 +256,7 @@ class fileDataControl:
     
     def readDescribeData(self):
         data = []
-        with open('data/describeItem.csv', 'r', newline='', encoding="utf-8") as csv_file:
+        with open(f'data/{self.user}_data/describeItem.csv', 'r', newline='', encoding="utf-8") as csv_file:
             reader = csv.reader(csv_file)
             
             # Read each row of data from the CSV file
@@ -261,12 +266,12 @@ class fileDataControl:
     
     def readSettingData(self):
         data = dict()
-        with open("data/settings.json", 'r', newline="", encoding="utf-8") as jsonfile:
+        with open(f"data/{self.user}_data/settings.json", 'r', newline="", encoding="utf-8") as jsonfile:
             data = json.load(jsonfile)
         return data
     
     def WriteSettingData(self, data):
-        with open("data/settings.json", 'w', newline="", encoding="utf-8") as jsonfile:
+        with open(f"data/{self.user}_data/settings.json", 'w', newline="", encoding="utf-8") as jsonfile:
             json.dump(data, jsonfile,  ensure_ascii=False)
 
     def checkLabelTask(self, data):
@@ -294,5 +299,5 @@ class fileDataControl:
 
         if check:
             dataTime = {f"{self.ntime}":ndata}
-            with open('data/time.json', 'w', newline='', encoding="utf-8") as jsonfile:
+            with open(f'data/{self.user}_data/time.json', 'w', newline='', encoding="utf-8") as jsonfile:
                 json.dump(dataTime, jsonfile,  ensure_ascii=False)
