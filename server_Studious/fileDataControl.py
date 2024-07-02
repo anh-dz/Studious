@@ -62,7 +62,7 @@ class fileDataControl:
 
         dataSettings = {"main": {"sound": True, "label": "0"}, 
                         "settings": {"musicType": 0, "autostart": False, "noti": False, "autosession": False, "space": False}, 
-                        "tasks": {"1": {"combo": "Học Toán", "work": 25, "rest": 5}, "2": {"combo": "Học Văn", "work": 25, "rest": 5}, "3": {"combo": "Học Tiếng Anh", "work": "25", "rest": 5}, 
+                        "tasks": {"1": {"combo": "Học Toán", "work": 25, "rest": 5}, "2": {"combo": "Học Văn", "work": 25, "rest": 5}, "3": {"combo": "Học Tiếng Anh", "work": 25, "rest": 5}, 
                                   "4": {"combo": "", "work": 25, "rest": 5}, "5": {"combo": "", "work": 25, "rest": 5}, "6": {"combo": "", "work": 25, "rest": 5}, 
                                   "7": {"combo": "", "work": 25, "rest": 5}}}
 
