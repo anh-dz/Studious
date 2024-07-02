@@ -383,7 +383,7 @@ class StudiousFunc:
             hash_object = hashlib.sha256(mac_address.encode())
             # Convert the hash to a 24-character string
             unique_id = hash_object.hexdigest()[:24]
-        self.id = mac
+        self.id = unique_id
 
         #Gen QR code
         qr = qrcode.QRCode(
