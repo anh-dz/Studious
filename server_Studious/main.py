@@ -144,7 +144,7 @@ def receive_post():
     user = request.headers.get('user')
     Users[f"{user}"].file.readDataTime()
     Users[f"{user}"].file.dataTimeJson[Users[f"{user}"].file.ntime][data[0]] += round((data[1]/60)/60, 1)
-    Users[f"{user}"].file.writeDataTime()
+    Users[f"{user}"].file.writeDataTime(Users[f"{user}"].file.dataTimeJson)
     return "Success"
 
 class controlFunc:
