@@ -40,7 +40,8 @@ class ViewControl(QMainWindow):
             self.ui.btn_lB_4,
             self.ui.btn_lB_5,
             self.ui.btn_lB_6,
-            self.ui.btn_lB_7
+            self.ui.btn_lB_7,
+            self.ui.btn_lB_8
         ]
         
         self.colorTask = getColorTask()
@@ -86,6 +87,8 @@ class ViewControl(QMainWindow):
         elif clicked_button == self.ui.btn_lB_6:
             self.ui.sW_main.setCurrentIndex(5)
         elif clicked_button == self.ui.btn_lB_7:
+            self.ui.sW_main.setCurrentIndex(7)
+        elif clicked_button == self.ui.btn_lB_8:
             self.ui.sW_main.setCurrentIndex(6)
         
         if self.isMenuOpen:
@@ -93,7 +96,7 @@ class ViewControl(QMainWindow):
     
     def checkQues(self):
         w = self.ui.sW_main.currentIndex()
-        if w != 6:
+        if w != 6 and w != 7:
             self.image_app = ImageDisplayApp()
             self.image_app.load_image(f"assert/hdsd/{w}.png")
             self.image_app.show()
