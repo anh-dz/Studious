@@ -131,8 +131,10 @@ def sync_describeitem():
 def receive_post():
     #Data trả về sẽ có dạng: ["Học toán", 5]
     data = request.get_json()
-    print(data)
-    return [data[0], data[1]]
+    file.readDataTime()
+    file.dataTimeJson[file.ntime][data[0]] += round((data[1]/60)/60, 1)
+    file.writeDataTime()
+    return "Success"
 
 #run
 if __name__ == '__main__':
