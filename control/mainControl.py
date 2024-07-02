@@ -74,6 +74,7 @@ class StudiousFunc:
         self.file.lb = list(self.file.dataTimeJson[self.file.ntime].keys())
         self.work_or_rest = True
         self.sync = sync(self.id)
+        self.sync.start()
         self.countdown = countdown(int(self.settings.labelTask[0][1]), int(self.settings.labelTask[0][2]), self.work_or_rest)
         self.sync.start()
         self.sync.startcountdown(int(self.settings.labelTask[0][1]), wgs.cB_m_task.currentText())
@@ -384,20 +385,21 @@ class StudiousFunc:
             # Convert the hash to a 24-character string
             unique_id = hash_object.hexdigest()[:24]
         self.id = unique_id
+        wgs.tB_showQRKey.setText(self.id)
 
         #Gen QR code
         qr = qrcode.QRCode(
-            version=1,  # controls the size of the QR Code
+            version=2,  # controls the size of the QR Code
             error_correction=qrcode.constants.ERROR_CORRECT_L,  # controls the error correction used for the QR Code
-            box_size=10,  # controls how many pixels each “box” of the QR code is
-            border=4,  # controls how many boxes thick the border should be
+            box_size=20,  # controls how many pixels each “box” of the QR code is
+            border=1,  # controls how many boxes thick the border should be
         )
         # Add data to the QR code
         qr.add_data(unique_id)
         qr.make(fit=True)
 
         # Create an image from the QR Code instance
-        img = qr.make_image(fill_color="black", back_color="white")
+        img = qr.make_image(fill_color="#6600CC", back_color="white")
         img.save("assert/QR_id.png")
 
         # Load the image
@@ -871,4 +873,5 @@ class sync(QThread):
 
         
         def run(self):
-            pass
+            while True:
+                pass
