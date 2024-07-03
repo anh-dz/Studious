@@ -16,9 +16,13 @@ class fileDataControl:
         self._ntime = datetime.datetime.now()
         self.ntime = self._ntime.strftime("%d/%m/%Y")
         self.monday = (self._ntime - datetime.timedelta(days=self._ntime.weekday())).strftime("%d/%m/%Y")
-        self.fsync = fsync(f"{id}")
         if self.create_folder():  self.default_data()
         self.readDataTime()
+        self.fsync = fsync(f"{id}")
+        self.fsync.syncdescribeitem(self.readDescribeData())
+        self.fsync.syncsetting(self.readSettingData())
+        self.fsync.synctable(self.readTableData())
+        self.fsync.synctime(self.readDataTime())
         
     def create_folder(self) -> bool:
         if not path.exists("data"):
@@ -101,6 +105,7 @@ class fileDataControl:
             with open("data/time.json", "w", encoding="utf-8") as jsonfile:
                     self.dataTimeJson[f"{self.ntime}"] = {}
                     json.dump(self.dataTimeJson, jsonfile,  ensure_ascii=False)
+        return self.dataTimeJson
 
     def writeDataTime(self):
         with open('data/time.json', 'w', newline='', encoding="utf-8") as jsonfile:

@@ -57,8 +57,8 @@ class StudiousFunc:
         isPwgsOn = False
         self.id = "abc" #id user
         self.gen_QR_id_from_mac()
-        self.file = fileDataControl(self.id)
         self.sync = sync(self.id)
+        self.file = fileDataControl(self.id)
         QThread.sleep(1)
         self.settings = Settings(self.file)
         self.bg_musi = None
