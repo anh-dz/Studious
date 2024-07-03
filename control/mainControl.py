@@ -82,7 +82,7 @@ class StudiousFunc:
     def initialize_ui(self):
         wgs.lb_m_quote.setText(self.qoutes)
         wgs.label.setText(self.file.totalTimeDay())
-        wgs.lb_m_time.setText(f"{self.settings.labelTask[0][1]}:00")
+        wgs.lb_m_time.setText(f"{self.settings.labelTask[0][1]:02}:00")
         if self.day_left != 7:  wgs.lb_3_date.setText(f"Thứ {self.day_left + 1}, ngày {self.file.ntime}")
         else:   wgs.lb_3_date.setText(f"Chủ nhật, ngày {self.file.ntime}")
         self.setTaskLable()
@@ -240,11 +240,11 @@ class StudiousFunc:
         self.countdown.next_timer()
         self.sync.startcountdown(self.countdown.mtime, wgs.cB_m_task.currentText())
         self.clock_onoff = False
-        wgs.lb_m_time.setText(f"{self.countdown.mtime}:00")
+        wgs.lb_m_time.setText(f"{self.countdown.mtime:02}:00")
         if isPwgsOn:
-            Pwgs.lb_time.setText(f"{self.countdown.mtime}:00")
+            Pwgs.lb_time.setText(f"{self.countdown.mtime:02}:00")
         if isFwgsOn:
-            Fwgs.lb_time.setText(f"{self.countdown.mtime}:00")
+            Fwgs.lb_time.setText(f"{self.countdown.mtime:02}:00")
         self.chart.dataChange()
         self.autoStartClock()
         if wgs.checkBox_space.isChecked():
@@ -290,7 +290,7 @@ class StudiousFunc:
             wgs.btn_m_pin.setIcon(QIcon("assert/unpin.png"))
         if not self.countdown.work_or_rest:
             Pwgs.lb_time.setStyleSheet('color: rgb(251, 238, 172)')
-        Pwgs.lb_time.setText(f"{self.countdown.mtime}:00")
+        Pwgs.lb_time.setText(f"{self.countdown.mtime:02}:00")
 
     def start_fs(self):
         self.fs = fullScreenFunc()
@@ -306,7 +306,7 @@ class StudiousFunc:
             Fwgs.btn_startstop.setIcon(QIcon("assert/pause.png"))
         if self.settings.data["main"]["sound"]:
             Fwgs.btn_audio.setIcon(QIcon("assert/audio-on.png"))
-        Fwgs.lb_time.setText(f"{self.countdown.mtime}:00")
+        Fwgs.lb_time.setText(f"{self.countdown.mtime:02}:00")
         Fwgs.btn_startstop.clicked.connect(self.start_clock)
         Fwgs.btn_next.clicked.connect(self.next_clock)
         Fwgs.btn_audio.clicked.connect(lambda: wgs.btn_m_audio.click())
@@ -521,8 +521,8 @@ class countdown:
         self.wtime = work_time
         self.rtime = rest_time
         self.work_or_rest = work_or_rest
-        if self.work_or_rest:   wgs.lb_m_time.setText(f"{self.wtime}:00")
-        else:   wgs.lb_m_time.setText(f"{self.rtime}:00")
+        if self.work_or_rest:   wgs.lb_m_time.setText(f"{self.wtime:02}:00")
+        else:   wgs.lb_m_time.setText(f"{self.rtime:02}:00")
         self.mtime = self.wtime
         self.time_left = self.mtime*60
         self.timer = QTimer()
@@ -532,7 +532,7 @@ class countdown:
         self.rtime = r
         self.mtime = w
         if self.work_or_rest:   self.time_left = self.mtime*60
-        wgs.lb_m_time.setText(f"{self.mtime}:00")
+        wgs.lb_m_time.setText(f"{self.mtime:02}:00")
 
     def start_timer(self):
         self.timer.timeout.connect(self.update_countdown)
