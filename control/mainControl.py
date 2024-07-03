@@ -60,6 +60,7 @@ class StudiousFunc:
         self.sync = sync(self.id)
         self.file = fileDataControl(self.id)
         QThread.sleep(1)
+        self.file.sync_all_data()
         self.settings = Settings(self.file)
         self.bg_musi = None
         self.qoutes = choice(list_quotes)
@@ -856,9 +857,14 @@ class connect_sync(QThread):
         }
         data = {
         }
-        try:
-            requests.post(self.api_url+"connect", json=data, headers=headers)
-        except: print("Kết nối mạng để đồng bộ")
+        while True:
+            try:
+                requests.post(self.api_url+"connect", json=data, headers=headers)
+                wgs.label_3.setText("Trạng thái: Online 🟢")
+            except: 
+                print("Kết nối mạng để đồng bộ")
+                wgs.label_3.setText("Trạng thái: Offline 🔴")
+            self.sleep(2)
 
 class startcountdown_sync(QThread):
     update_label_signal = pyqtSignal(str)

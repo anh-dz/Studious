@@ -19,10 +19,6 @@ class fileDataControl:
         if self.create_folder():  self.default_data()
         self.readDataTime()
         self.fsync = fsync(f"{id}")
-        self.fsync.syncdescribeitem(self.readDescribeData())
-        self.fsync.syncsetting(self.readSettingData())
-        self.fsync.synctable(self.readTableData())
-        self.fsync.synctime(self.readDataTime())
         
     def create_folder(self) -> bool:
         if not path.exists("data"):
@@ -327,6 +323,12 @@ class fileDataControl:
             dataTime = {f"{self.ntime}":ndata}
             with open('data/time.json', 'w', newline='', encoding="utf-8") as jsonfile:
                 json.dump(dataTime, jsonfile,  ensure_ascii=False)
+
+    def sync_all_data(self):
+        self.fsync.syncdescribeitem(self.readDescribeData())
+        self.fsync.syncsetting(self.readSettingData())
+        self.fsync.synctable(self.readTableData())
+        self.fsync.synctime(self.readDataTime())
 
 
 class fsync:
