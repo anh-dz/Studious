@@ -1,4 +1,5 @@
 import datetime
+from PyQt6.QtCore import QObject
 import requests
 import uuid
 import hashlib
@@ -57,6 +58,8 @@ class StudiousFunc:
         self.id = "abc" #id user
         self.gen_QR_id_from_mac()
         self.file = fileDataControl(self.id)
+        self.sync = sync(self.id)
+        QThread.sleep(1)
         self.settings = Settings(self.file)
         self.bg_musi = None
         self.qoutes = choice(list_quotes)
@@ -73,10 +76,7 @@ class StudiousFunc:
         self.file.readDataTime()
         self.file.lb = list(self.file.dataTimeJson[self.file.ntime].keys())
         self.work_or_rest = True
-        self.sync = sync(self.id)
-        self.sync.start()
         self.countdown = countdown(int(self.settings.labelTask[0][1]), int(self.settings.labelTask[0][2]), self.work_or_rest)
-        self.sync.start()
         self.sync.startcountdown(int(self.settings.labelTask[0][1]), wgs.cB_m_task.currentText())
 
     def initialize_ui(self):
@@ -176,7 +176,6 @@ class StudiousFunc:
     def start_clock(self):
         if self.clock_onoff == False:
             self.clock_onoff = True
-            self.sync.start()
             self.sync.startstopcountdown(self.clock_onoff)
             self.qthread = audioFunc(QThread,'assert/music/pause.mp3')
             self.qthread.start()
@@ -194,7 +193,6 @@ class StudiousFunc:
                     Fwgs.cB_task.setEnabled(not self.countdown.work_or_rest)
         else:
             self.clock_onoff = False
-            self.sync.start()
             self.sync.startstopcountdown(self.clock_onoff)
             self.qthread = audioFunc(QThread,'assert/music/unpause.mp3')
             self.qthread.start()
@@ -240,7 +238,6 @@ class StudiousFunc:
             if isPwgsOn:
                 Pwgs.lb_time.setStyleSheet('rgb(249, 245, 246)')
         self.countdown.next_timer()
-        self.sync.start()
         self.sync.startcountdown(self.countdown.mtime, wgs.cB_m_task.currentText())
         self.clock_onoff = False
         wgs.lb_m_time.setText(f"{self.countdown.mtime}:00")
@@ -282,7 +279,6 @@ class StudiousFunc:
         for i in self.settings.labelTask:
             if i[0] == wgs.cB_m_task.currentText():
                 self.countdown.update_time(int(i[1]), int(i[2]))
-                self.sync.start()
                 self.sync.startcountdown(int(i[1]), i[0])
                 break
     
@@ -813,13 +809,47 @@ class Settings:
         else:   self.data['settings']['noti'] = False
         self.file.WriteSettingData(self.data)
 
-class sync(QThread):
-    update_label = pyqtSignal(str)
+class sync(QObject):
+    update_label_signal = pyqtSignal(str)
+
     def __init__(self, id:str) -> None:
         super().__init__()
         self.api_url = "http://127.0.0.1:5000/"
         self.user = id
+        self.connect = connect_sync(self.user, self.api_url)
+        self.connect.start()
+        self.b_startcountdown = False
+        self.b_startstopcountdown = False
+    
+    def startcountdown(self, time:int, combo):
+        if not self.b_startcountdown:
+            self._startcountdown = startcountdown_sync(self.user, time, combo, self.api_url)
+            self._startcountdown.start()
+            self.b_startcountdown = True
+        else:
+            self._startcountdown.time = time
+            self._startcountdown.combo = combo
+            self._startcountdown.start()
 
+
+    def startstopcountdown(self, status:bool):
+        if not self.b_startstopcountdown:
+            self._startstopcountdown = startstopcountdown_sync(self.user, status, self.api_url)
+            self._startstopcountdown.start()
+            self.b_startstopcountdown = True
+        else:
+            self._startstopcountdown.status = status
+            self._startstopcountdown.start()
+
+class connect_sync(QThread):
+    update_label_signal = pyqtSignal(str)
+
+    def __init__(self, user, api) -> None:
+        super().__init__()
+        self.api_url = api
+        self.user = user
+
+    def run(self):
         headers = {
             "user": f"{self.user}",
             "content-type": "application/json"
@@ -828,29 +858,40 @@ class sync(QThread):
         }
         try:
             requests.post(self.api_url+"connect", json=data, headers=headers)
-            self.update_label.emit("Countdown started")
-            requests.post(self.api_url+"connect", json=data, headers=headers)
-            self.update_label.emit("Countdown stopped")
-        except: self.update_label.emit("Kết nối mạng để đồng bộ")
-    
-    def startcountdown(self, time:int, combo):
+        except: print("Kết nối mạng để đồng bộ")
+
+class startcountdown_sync(QThread):
+    update_label_signal = pyqtSignal(str)
+    def __init__(self, user, time:int, combo, api) -> None:
+        super().__init__()
+        self.api_url = api
+        self.time = time
+        self.combo = combo
+        self.user = user
+
+    def run(self):
         headers = {
             "user": f"{self.user}",
             "content-type": "application/json"
         }
         data = {
-            "seconds": f"{time*60}",
-            "current_task": f"{combo}"
+            "seconds": f"{self.time*60}",
+            "current_task": f"{self.combo}"
         }
         try:
             requests.post(self.api_url+"start_countdown", json=data, headers=headers)
-            self.update_label.emit("Countdown started")
             requests.post(self.api_url+"stop_countdown", json=data, headers=headers)
-            self.update_label.emit("Countdown stopped")
-        except: self.update_label.emit("Kết nối mạng để đồng bộ")
+        except: print("Kết nối mạng để đồng bộ")
 
-    def startstopcountdown(self, status:bool):
-        if not status:
+class startstopcountdown_sync(QThread):
+    update_label_signal = pyqtSignal(str)
+    def __init__(self, user, status:bool, api) -> None:
+        super().__init__()
+        self.api_url = api
+        self.status = status
+        self.user = user
+    def run(self):
+        if not self.status:
             headers = {
                 "user": f"{self.user}",
                 "content-type": "application/json"
@@ -858,8 +899,7 @@ class sync(QThread):
             data = {}
             try:
                 requests.post(self.api_url+"stop_countdown", json=data, headers=headers)
-                self.update_label.emit("Countdown stopped")
-            except: self.update_label.emit("Kết nối mạng để đồng bộ")
+            except: print("Kết nối mạng để đồng bộ")
         else:
             headers = {
                 "user": f"{self.user}",
@@ -868,10 +908,4 @@ class sync(QThread):
             data = {}
             try:
                 requests.post(self.api_url+"continue_countdown", json=data, headers=headers)
-                self.update_label.emit("Countdown continued")
-            except: self.update_label.emit("Kết nối mạng để đồng bộ")
-
-        
-        def run(self):
-            while True:
-                pass
+            except: print("Kết nối mạng để đồng bộ")
