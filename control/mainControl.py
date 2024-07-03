@@ -763,8 +763,8 @@ class Settings:
 
         row = item.row()
         col = item.column()
-
-        self.data['tasks'][str(row+1)][dt[col]] = item.text()
+        if dt[col] == 'combo':  self.data['tasks'][str(row+1)][dt[col]] = item.text()
+        else:  self.data['tasks'][str(row+1)][dt[col]] = int(item.text())
         self.file.WriteSettingData(self.data)
         for i in range(len(self.labelTask)):
             if self.labelTask[i][0] == self.data['tasks'][str(row+1)]['combo']:
