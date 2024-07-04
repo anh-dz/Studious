@@ -18,6 +18,7 @@ def connect():
         if Users[f'{user}'].user == user:   pass
     except:
         Users[f'{user}'] = controlFunc(f'{user}')
+    print("a")
     return "Success"
 
 @app.route('/start_countdown', methods=['POST'])
