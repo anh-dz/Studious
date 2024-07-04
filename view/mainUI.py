@@ -675,9 +675,41 @@ class Ui_Studious(object):
         self.tW_6.verticalHeader().setMinimumSectionSize(30)
         self.tW_6.verticalHeader().setStretchLastSection(True)
         self.LB_4 = QtWidgets.QLabel(parent=self.page_2)
-        self.LB_4.setGeometry(QtCore.QRect(130, 290, 411, 61))
+        self.LB_4.setGeometry(QtCore.QRect(130, 290, 411, 71))
         self.LB_4.setStyleSheet("font: italic 15pt \"Arial\";")
         self.LB_4.setObjectName("LB_4")
+        self.btn_6_changeBg = QtWidgets.QPushButton(parent=self.page_2)
+        self.btn_6_changeBg.setGeometry(QtCore.QRect(80, 390, 141, 32))
+        self.btn_6_changeBg.setMinimumSize(QtCore.QSize(0, 32))
+        self.btn_6_changeBg.setStyleSheet("QPushButton{\n"
+"    background-color: rgb(5, 5, 65);\n"
+"    color: rgb(249, 245, 246);\n"
+"    font: 18pt \"Arial\";\n"
+"    border-radius: 5px;\n"
+"    text-align: left;\n"
+"    padding: 2px 7px;\n"
+"}\n"
+"QPushButton:hover{\n"
+"    background-color: rgb(52, 22, 85);\n"
+"}")
+        self.btn_6_changeBg.setIconSize(QtCore.QSize(32, 32))
+        self.btn_6_changeBg.setObjectName("btn_6_changeBg")
+        self.btn_6_resetBg = QtWidgets.QPushButton(parent=self.page_2)
+        self.btn_6_resetBg.setGeometry(QtCore.QRect(230, 390, 61, 32))
+        self.btn_6_resetBg.setMinimumSize(QtCore.QSize(0, 32))
+        self.btn_6_resetBg.setStyleSheet("QPushButton{\n"
+"    background-color: rgb(5, 5, 65);\n"
+"    color: rgb(249, 245, 246);\n"
+"    font: 18pt \"Arial\";\n"
+"    border-radius: 5px;\n"
+"    text-align: left;\n"
+"    padding: 2px 7px;\n"
+"}\n"
+"QPushButton:hover{\n"
+"    background-color: rgb(52, 22, 85);\n"
+"}")
+        self.btn_6_resetBg.setIconSize(QtCore.QSize(32, 32))
+        self.btn_6_resetBg.setObjectName("btn_6_resetBg")
         self.sW_setting.addWidget(self.page_2)
         self.btn_6_nextPage = QtWidgets.QPushButton(parent=self.page_m_6)
         self.btn_6_nextPage.setGeometry(QtCore.QRect(710, 499, 61, 51))
@@ -897,7 +929,11 @@ class Ui_Studious(object):
         item = self.tW_6.item(6, 2)
         item.setText(_translate("Studious", "5"))
         self.tW_6.setSortingEnabled(__sortingEnabled)
-        self.LB_4.setText(_translate("Studious", "Lưu ý: Hạn chế chỉnh sửa để có được dữ liệu trực quan nhất"))
+        self.LB_4.setText(_translate("Studious", "Lưu ý:\n"
+"1) Hạn chế chỉnh sửa để có được dữ liệu trực quan nhất\n"
+"2) Đổi background màu tối vì chữ hiển thị màu trắng"))
+        self.btn_6_changeBg.setText(_translate("Studious", "Đổi background"))
+        self.btn_6_resetBg.setText(_translate("Studious", "Reset"))
         self.btn_6_nextPage.setText(_translate("Studious", "👉"))
         self.label_2.setText(_translate("Studious", "Quét mã QR bên dưới để đồng bộ"))
         self.label_3.setText(_translate("Studious", "Trạng thái: Online 🟢"))
