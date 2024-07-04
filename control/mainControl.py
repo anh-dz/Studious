@@ -383,6 +383,7 @@ class StudiousFunc:
             unique_id = hash_object.hexdigest()[:24]
         self.id = unique_id
         wgs.tB_showQRKey.setText(self.id)
+        wgs.tB_showQRKey.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         #Gen QR code
         qr = qrcode.QRCode(

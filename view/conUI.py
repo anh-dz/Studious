@@ -28,6 +28,7 @@ class ViewControl(QMainWindow):
         self.ui.btn_lB_menu.clicked.connect(self.toggleSideMenu)
 
         self.ui.btn_lB_1.setStyleSheet("background-color: rgb(70, 40, 110);")
+        # self.ui.Background.setStyleSheet("border-image: url(assert/background.jpg);")
 
         self.setupHTMLText()
 
@@ -54,6 +55,9 @@ class ViewControl(QMainWindow):
             button.clicked.connect(self.buttonClicked)
         
         self.ui.btn_lB_ques.clicked.connect(self.checkQues)
+
+        self.ui.btn_6_changeBg.clicked.connect(self.changeBg)
+        self.ui.btn_6_resetBg.clicked.connect(lambda: self.ui.Background.setStyleSheet("border-image: url(assert/background.jpg);"))
 
         # self.testComboBoxColor()
 
@@ -93,6 +97,15 @@ class ViewControl(QMainWindow):
         
         if self.isMenuOpen:
             self.ui.btn_lB_menu.click()
+    
+    def changeBg(self):
+        fname = QFileDialog.getOpenFileName(
+            self,
+            "Open File",
+            "${HOME}",
+            "Images (*.png *.jpeg *.jpg)",
+        )
+        self.ui.Background.setStyleSheet(f"border-image: url({fname[0]});")
     
     def checkQues(self):
         w = self.ui.sW_main.currentIndex()
