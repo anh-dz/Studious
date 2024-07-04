@@ -14,7 +14,10 @@ def index():
 @app.route("/connect", methods=['POST'])
 def connect():
     user = request.headers.get('user')
-    Users[f'{user}'] = controlFunc(f'{user}')
+    try:
+        if Users[f'{user}'].user == user:   pass
+    except:
+        Users[f'{user}'] = controlFunc(f'{user}')
     return "Success"
 
 @app.route('/start_countdown', methods=['POST'])
